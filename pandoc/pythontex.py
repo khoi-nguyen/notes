@@ -42,9 +42,12 @@ def complete_square(expr):
     solution = latex(solution.subs(dict(zip([alpha, h, k], sols))))
     return display(exercise, solution)
 
+domain = '-9:9'
+
 def plot(function, color='darkblue'):
+    global domain
     function = function.replace('x', '(\\x)')
-    return '\\plotfunction[' + color + ']{-9:9}{' + function + '}'
+    return '\\plotfunction[' + color + ']{' + domain + '}{' + function + '}'
 
 def tikz_plot(contents, opt):
     options = {
@@ -55,6 +58,7 @@ def tikz_plot(contents, opt):
         't': 6,
     }
     options.update(opt)
+    global domain
     domain = '{}:{}'.format(options['l'], options['r'])
 
     lines = []
