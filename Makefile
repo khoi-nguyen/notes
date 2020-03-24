@@ -5,7 +5,7 @@ BEAMER := @pandoc -t beamer --pdf-engine=lualatex\
 	--template=./pandoc/beamer.tex\
 	--filter ./pandoc/pythontex.py\
 	--filter ./pandoc/beamer.py\
-	--filter ./pandoc/beamer2.py\
+	--filter ./pandoc/multicols.py
 
 all: $(TARGETS)
 
