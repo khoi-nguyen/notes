@@ -10,7 +10,7 @@ Complete the square `complete_square('2*x^2 - 3*x + 1')`
 :::
 
 ::: Remark
-Every quadratic equation can be written under the form
+Every quadratic equation can be written in the form
 $$a \br{x - \alpha}^2 + \beta$$
 :::
 
@@ -29,7 +29,7 @@ plot('-1/5*(x + 2)^2 - 1', 'gray')
 
 # Graphing $x^2$
 
-~~~ {.graph b="-1" t="9"}
+~~~ {.graph b=-1 t=9}
 plot('x^2')
 ~~~
 
@@ -96,7 +96,7 @@ What happens if $\beta$ changes?
 Differences
 : - $y$-coordinate of turning point
 
-Similarities:
+Similarities
 : - Line of symmetry
 - Curvature
 - Convexity
