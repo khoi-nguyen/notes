@@ -46,10 +46,27 @@ def plot(function, color='darkblue'):
     function = function.replace('x', '(\\x)')
     return '\\plotfunction[' + color + ']{-9:9}{' + function + '}'
 
-def tikz_plot(contents):
-    instructions = contents.split('\n')
+def tikz_plot(contents, opt):
+    options = {
+        'size': 0.5,
+        'b': -6,
+        'l': -9,
+        'r': 9,
+        't': 6,
+    }
+    options.update(opt)
+    domain = '{}:{}'.format(options['l'], options['r'])
+
     lines = []
-    lines.append('\\begin{plot}{0.5}{-9}{-6}{9}{6}')
+    lines.append('\\begin{{plot}}{{{}}}{{{}}}{{{}}}{{{}}}{{{}}}'.format(
+        options['size'],
+        options['l'],
+        options['b'],
+        options['r'],
+        options['t']
+    ))
+
+    instructions = contents.split('\n')
     for l in instructions:
         lines.append(eval(l))
     lines.append('\\end{plot}')
@@ -61,7 +78,7 @@ def main(key, value, fmt, meta):
         return eval(contents)
     if key == 'CodeBlock' and fmt == 'beamer':
         [[ident, classes, keyvals], contents] = value
-        return blatex(tikz_plot(contents))
+        return blatex(tikz_plot(contents, dict(keyvals)))
 
 if __name__ == '__main__':
     toJSONFilter(main)

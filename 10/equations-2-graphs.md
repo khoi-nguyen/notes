@@ -27,6 +27,12 @@ plot('-1/9*(x + 2)^2 - 1', 'darkorange')
 plot('-1/5*(x + 2)^2 - 1', 'gray')
 ~~~
 
+# Graphing $x^2$
+
+~~~ {.graph b="-1" t="9"}
+plot('x^2')
+~~~
+
 # Role of $a$ in $a \br{x - \alpha}^2 + \beta$
 
 ::: Question
