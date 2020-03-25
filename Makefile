@@ -1,4 +1,4 @@
-MARKDOWN := $(shell find * -name '*.md' | grep -v '^\(env\|node\)')
+MARKDOWN := $(shell find * -name '*.md' | grep -v '^\(env\|node\|www\)')
 DEPENDENCIES := Makefile $(shell find pandoc/*)
 TARGETS := $(MARKDOWN:.md=.pdf) $(MARKDOWN:.md=.handout.pdf)
 BEAMER := @pandoc -t beamer --pdf-engine=lualatex\
@@ -8,6 +8,13 @@ BEAMER := @pandoc -t beamer --pdf-engine=lualatex\
 	--filter ./pandoc/multicols.py
 
 all: $(TARGETS)
+
+deploy: all Makefile
+	python ./data.py
+	rm -fR www/*
+	parcel build index.html --out-dir www --public-url ./ --no-cache
+	ls -d */ | grep '^[0-9]' | xargs -I {} cp -R {} www
+	rsync -avu --delete www/ khoi@nguyen.me.uk:~/www
 
 clean:
 	rm $(TARGETS)

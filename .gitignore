@@ -1,2 +1,6 @@
+dist/
+node_modules/
+www/
 __pycache__/
+data.json
 *.pdf
