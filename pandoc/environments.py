@@ -67,7 +67,7 @@ def environment(ident, env, keyvals, contents, count):
     return [blatex(pause + begin)] + contents + [blatex(end)]
 
 def main(key, value, fmt, meta):
-    global envcount, first_env
+    global envcount, first_env, environments
     if key == 'Span':
         envcount += 1
         [[ident, classes, keyvals], contents] = value
@@ -76,11 +76,12 @@ def main(key, value, fmt, meta):
         envcount = 1
         first_env = True
     if key == 'Div':
-        if not first_env:
-            envcount += 1
-        first_env = False
         [[ident, classes, keyvals], contents] = value
-        return environment(ident, classes[0], dict(keyvals), contents, envcount)
+        if len(set(classes) & set(environments.keys())) > 0:
+            if not first_env:
+                envcount += 1
+            first_env = False
+            return environment(ident, classes[0], dict(keyvals), contents, envcount)
 
 if __name__ == '__main__':
     toJSONFilter(main)
