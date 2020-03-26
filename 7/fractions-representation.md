@@ -1,4 +1,4 @@
-
+---
 title: Fractions
 subtitle: Representing fractions
 ...
@@ -27,7 +27,7 @@ Despite being cut differently, some cake quantities are the same:
 ::: {.cols n=4}
 `showfrac(3, 6)`
 `showfrac(1, 2)`
-`showfrac(5, 12)`
+`showfrac(6, 12)`
 `showfrac(12, 24)`
 :::
 
