@@ -2,11 +2,12 @@ from pandocfilters import toJSONFilter, attributes, Math, Span, RawInline, RawBl
 from sympy import *
 
 # Redefine some functions to automatically sympify
-s = lambda x: sympify(x) if isinstance(x, (str, int)) else x
-expand2, factor2, latex2 = expand, factor, latex
+s = lambda x: sympify(x, evaluate=False) if isinstance(x, (str, int)) else x
+expand2, factor2, simplify2, latex2 = expand, factor, simplify, latex
 del expand, factor, latex
 latex = lambda x: latex2(s(x))
 expand = lambda x: expand2(s(x))
+simplify = lambda x: simplify2(s(x))
 factor = lambda x: factor2(s(x))
 
 # Shortcuts
@@ -16,9 +17,12 @@ imath = lambda x: Math({'t': 'InlineMath'}, x)
 answer = lambda x: Span(attributes({'class': 'answer'}), [imath(x)])
 display = lambda ex, sol: [imath(ex), answer(sol)]
 
-def indexmult(base, exponent1, exponent2):
-    exercise = '{{{0}}}^{{{1}}} \\times {{{0}}}^{{{2}}}'.format(base, exponent1, exponent2)
-    solution = '{0}^{{{1}}}'.format(base, latex('{} + {}'.format(exponent1, exponent2)))
+def mult(*terms, **substitutions):
+    substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()]
+    exercise = [s(t).subs(substitutions) for t in terms]
+    exercise = ' \\times '.join([latex(t) for t in exercise])
+    solution = simplify('(' + ')*('.join([str(t) for t in terms]) + ')')
+    solution = latex(solution.subs(substitutions)).replace('cdot', 'times')
     return display(exercise, solution)
 
 def expandex(expr):
