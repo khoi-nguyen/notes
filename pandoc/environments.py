@@ -20,6 +20,11 @@ environments = {
         'prefix': '\\faPencilSquare',
         'env': 'exampleblock',
     },
+    'Hint': {
+        'title': 'Hint',
+        'prefix': '\\faLightbulbO',
+        'env': 'exampleblock',
+    },
     'Objective': {
         'title': 'Lesson Objective',
         'prefix': '\\faList\\ \\faPencilSquare',
@@ -53,6 +58,11 @@ environments = {
     'Theorem': {
         'title': 'Theorem',
         'prefix': '\\faBook\ \\faStar',
+        'env': 'block',
+    },
+    'Vocabulary': {
+        'title': 'Vocabulary',
+        'prefix': '\\faLanguage',
         'env': 'block',
     },
 }
