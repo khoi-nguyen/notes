@@ -1,5 +1,6 @@
 .cache/
 dist/
+env/
 node_modules/
 www/
 __pycache__/
