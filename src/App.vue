@@ -9,7 +9,7 @@ div
                         router-link.nav-link(to="/") Home
                     li.nav-item
                         router-link.nav-link(to="/teaching") Teaching resources
-    .container
+    div
         router-view
 </template>
 

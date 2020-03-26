@@ -1,32 +1,41 @@
 <template lang="pug">
 div
-    h1 Teaching resources
-    p.lead.
-        You will find my teaching resources on this page.
-        Feel free to use them.
-    table.table.table-striped.table-hover.table-bordered
-        thead.thead-dark
-            tr
-                th Year
-                th Title
-                th Last modification
-        tbody
-            tr(v-for="file in data")
-                td {{file.year}}
-                td
-                    h5 {{file.meta.title}}
-                    h6 {{file.meta.subtitle}}
-                    ul.list-group.list-group-horizontal
-                        li.list-group-item.
-                            #[font-awesome-icon(icon="file-alt")]
-                            #[router-link(v-bind:to="'/file/' + file.path") Source]
-                        li.list-group-item.
-                            #[font-awesome-icon(icon="file-pdf")]
-                            #[a(v-bind:href="'./' + file.pdf") Slides]
-                        li.list-group-item.
-                            #[font-awesome-icon(icon="file-pdf")]
-                            #[a(v-bind:href="'./' + file.handout") Handout]
-                td {{file.modified}}
+    .row
+        .col-md-2
+            h4 Latest commits
+            .list-group
+                span.list-group-item.list-gloup-item-action.flex-column.align-items-start(v-for="commit in commits")
+                    h5 {{commit.commit.message}}
+                    h6 {{commit.commit.author.name}}
+                    small {{commit.commit.author.date}}
+        .col-md-9
+            h1 Teaching resources
+            p.lead.
+                You will find my teaching resources on this page.
+                Feel free to use them.
+            table.table.table-striped.table-hover.table-bordered
+                thead.thead-dark
+                    tr
+                        th Year
+                        th Title
+                        th Last modification
+                tbody
+                    tr(v-for="file in data")
+                        td {{file.year}}
+                        td
+                            h5 {{file.meta.title}}
+                            h6 {{file.meta.subtitle}}
+                            ul.list-group.list-group-horizontal
+                                li.list-group-item.
+                                    #[font-awesome-icon(icon="file-alt")]
+                                    #[router-link(v-bind:to="'/file/' + file.path") Source]
+                                li.list-group-item.
+                                    #[font-awesome-icon(icon="file-pdf")]
+                                    #[a(v-bind:href="'./' + file.pdf") Slides]
+                                li.list-group-item.
+                                    #[font-awesome-icon(icon="file-pdf")]
+                                    #[a(v-bind:href="'./' + file.handout") Handout]
+                        td {{file.modified}}
 </template>
 
 <script>

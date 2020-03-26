@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+.container
     h1 Welcome
     p.lead.
         Hello! My name is Khoi Nguyen and

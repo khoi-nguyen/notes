@@ -6,7 +6,11 @@ div
     ul
         li(v-for="commit in commits") {{commit.commit.message}}
     h3 Source code
-    pre(v-html="contents")
+    .row
+        .col-md-6
+            pre(v-html="contents")
+        .col-md-6
+            object(:data="handout" type="application/pdf" width="100%" height="100%")
 </template>
 
 <script>
@@ -21,19 +25,23 @@ loadLanguages(markdown);
 export default {
     name: 'File',
     data() {
+        var path = this.$route.params.dir + '/' + this.$route.params.filename
+        var data = resources.filter(function (res) {
+            return res.path === path
+        });
+        var handout = data[0].handout;
+        var meta = data[0].meta;
         return {
             contents: '',
             commits: [],
-            meta: {title: '', subtitle: ''},
-            path: this.$route.params.dir + '/' + this.$route.params.filename,
+            handout: './' + handout,
+            meta: meta,
+            path: path,
         }
     },
     mounted() {
         var self = this;
         var url = 'https://api.github.com/repos/khoi-nguyen/notes/contents/';
-        this.meta = resources.filter(function (res) {
-            return res.path === self.path
-        })[0].meta;
         axios.get(url + this.path).then(function (response) {
             let code = atob(response['data']['content']);
             let contents = highlight(code, 'markdown');
