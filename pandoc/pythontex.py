@@ -76,6 +76,19 @@ def tikz_plot(contents, opt):
     lines.append('\\end{plot}')
     return '\n'.join(lines)
 
+def showfrac(num, den):
+    block = [ilatex('\\begin{tikzpicture}\n\\node at (0, 1.5) {')]
+    block.append(imath('\\frac {' + str(num) + '}{' + str(den) + '}'))
+    block.append(ilatex('};'))
+    lines = []
+    for i in range(0, den):
+        angle = 90+i*360/den
+        color = 'fraction' if i < num else 'white'
+        lines.append('\\draw[fill={3},thick] (0, 0) -- ({1}:{0}) arc ({1}:{2}:{0}) -- cycle;'.format('1cm', angle, angle + 360/den, color))
+    lines.append('\\end{tikzpicture}')
+    block.append(ilatex('\n'.join(lines)))
+    return block
+
 def main(key, value, fmt, meta):
     if key == 'Code':
         [[ident, classes, keyvals], contents] = value
