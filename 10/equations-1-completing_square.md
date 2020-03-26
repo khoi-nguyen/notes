@@ -84,4 +84,5 @@ Now that $x$ appears only **once**, we can **change the subject**.
 #) `equation('x^2 - 5*x + 6')`
 #) `equation('x^2 - 4*x - 3')`
 #) `equation('2*x^2 + 3*x - 1')`
+#) `equation('3*x^2 - 5*x + 2')`
 :::
