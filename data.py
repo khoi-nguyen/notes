@@ -7,7 +7,8 @@ import json
 
 data = []
 
-for path in Path('10').rglob('*.md'):
+files = [path for path in Path('.').rglob('*.md') if str(path)[0].isdigit()]
+for path in files:
     modified = path.stat().st_mtime
     path = str(path)
     cmd = 'pandoc -s {} -t markdown --template=pandoc/meta.json'.format(path)
