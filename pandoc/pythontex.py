@@ -16,6 +16,11 @@ imath = lambda x: Math({'t': 'InlineMath'}, x)
 answer = lambda x: Span(attributes({'class': 'answer'}), [imath(x)])
 display = lambda ex, sol: [imath(ex), answer(sol)]
 
+def indexmult(base, exponent1, exponent2):
+    exercise = '{{{0}}}^{{{1}}} \\times {{{0}}}^{{{2}}}'.format(base, exponent1, exponent2)
+    solution = '{0}^{{{1}}}'.format(base, latex('{} + {}'.format(exponent1, exponent2)))
+    return display(exercise, solution)
+
 def expandex(expr):
     exercise = latex(expr)
     solution = latex(expand(expr))
