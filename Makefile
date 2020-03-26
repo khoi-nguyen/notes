@@ -1,6 +1,7 @@
-MARKDOWN := $(shell find * -name '*.md' | grep -v '^\(env\|node\|www\)')
+MARKDOWN := $(shell find * -name '*.md' | grep -v '^\(env\|node\|www\|README\)')
 DEPENDENCIES := Makefile $(shell find pandoc/*)
-TARGETS := $(MARKDOWN:.md=.pdf) $(MARKDOWN:.md=.handout.pdf)
+TARGETS := $(MARKDOWN:.md=.pdf)
+HANDOUTS := $(MARKDOWN:.md=.handout.pdf)
 BEAMER := @pandoc -t beamer --pdf-engine=lualatex\
 	--template=./pandoc/beamer.tex\
 	--filter ./pandoc/pythontex.py\
@@ -9,7 +10,7 @@ BEAMER := @pandoc -t beamer --pdf-engine=lualatex\
 
 all: $(TARGETS)
 
-deploy: all Makefile
+deploy: all $(HANDOUTS)
 	python ./data.py
 	rm -fR www/*
 	parcel build index.html --out-dir www --public-url ./ --no-cache
