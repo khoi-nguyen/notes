@@ -109,10 +109,12 @@ def showfrac(num, den):
 def main(key, value, fmt, meta):
     if key == 'Code':
         [[ident, classes, keyvals], contents] = value
-        return eval(contents)
-    if key == 'CodeBlock' and fmt == 'beamer':
+        result = eval(contents)
+        return [imath(str(result))] if isinstance(result, (str, int)) else result
+    if key == 'CodeBlock':
         [[ident, classes, keyvals], contents] = value
-        return blatex(tikz_plot(contents, dict(keyvals)))
+        if 'plot' in classes and fmt == 'beamer':
+            return blatex(tikz_plot(contents, dict(keyvals)))
 
 if __name__ == '__main__':
     toJSONFilter(main)
