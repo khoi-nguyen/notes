@@ -1,11 +1,60 @@
 ---
 title: Indices
-subtitle: Multiplying with indices
 ...
 
-# Indices
+# Starter
+
+::: Starter
+Evaluate the following:
+
+#) `mult('3^2')`
+#) `mult('5^2')`
+#) `mult('2^3')`
+#) `mult('7^1')`
+#) `mult('3^3')`
+#) `mult('12^2')`
+#) `mult('4^3')`
+#) `mult('1^4')`
+:::
+
+::: {.Extension show=1}
+
+Write out $2^4 \times 2^3$ as a product of twos, then evaluate it - is there a quicker way to evaluate $2^4 \times 2^3$? [`2**7`]{.answer}
+:::
+
+# Multiplying Indices
+
+::: Example
+Simplify $2^4 \times 2^3$
+:::
+
+::: Solution
+$$2^4 \times 2^3 = \overbrace{\underbrace{2 \times 2 \times 2 \times 2}_{2^4} \times \underbrace{2 \times 2 \times 2}_{2^3}}^{\text{There are 7 twos in total}} = 2^7$$
+:::
+
+# Multiplying Indices
+
+::: Exercise
+Simplify the following:
+
+#) `mult('a^2', 'a^3', a=4)`
+#) `mult('a^4', 'a^2', a=10)`
+#) `mult('a^5', 'a^3', a=6)`
+#) `mult('x^2', 'x^4')`
+#) `mult('x^a', 'x^6')`
+:::
 
 ::: Question
+How could we spot the answer straight away?
+:::
+
+::: {.Formula t="First Law of Indices"}
+$$x^a \times x^b = x^{a + b}$$
+:::
+
+# Multiplying Indices
+
+::: Exercise
 Simplify the following indices:
 
 #) `mult('a^4', 'a^7', a=3)`
@@ -13,11 +62,12 @@ Simplify the following indices:
 #) `mult('a^4', 'a^-2', a=6)`
 #) `mult('a^-3', 'a^-9', a=5)`
 #) `mult('a', 'a^3', a=9)`
+:::
 
-::: Question
-Extension - Evaluate the following:
+::: {.Extension show=1}
+Evaluate the following:
 
 #) `mult('a^4', 'a^-4', a=10)`
-#) `mult('a^0', a=7)`
-#) `mult('x^0')`
+#) $7^0$ [1]{.answer}
+#) $x^0$ [1]{.answer}
 :::
