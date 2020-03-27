@@ -1,10 +1,18 @@
 <template lang="pug">
 div
-    h1 {{meta.title}}
-    h2 {{meta.subtitle}}
-    h3 Changelog
-    ul
-        li(v-for="commit in commits") {{commit.commit.message}}
+    .container
+        h1 {{meta.title}}
+        h2 {{meta.subtitle}}
+        hr
+        h3 Changelog
+        dl
+            div(v-for="commit in commits")
+                dt.
+                    #[span.text-muted {{commit.commit.author.date.substr(0, 10)}}]
+                    #[small by {{commit.commit.author.name}}]
+                dd.
+                    #[a(:href="commit.html_url") {{commit.commit.message}}]
+        hr
     h3 Source code
     .row
         .col-md-6
@@ -52,7 +60,7 @@ export default {
         url += '?path=' + this.path
         // Getting commits
         axios.get(url).then(function (response) {
-            self.commits = response['data'];
+            self.commits = response['data'].slice(0, 5);
         });
     },
 }

@@ -25,6 +25,14 @@ def mult(*terms, **substitutions):
     solution = latex(solution.subs(substitutions)).replace('cdot', 'times')
     return display(exercise, solution)
 
+def div(dividend, divisor, **substitutions):
+    substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()]
+    tr = lambda t: latex(s(t).subs(substitutions))
+    exercise = '{} \\div {}'.format(tr(dividend), tr(divisor))
+    solution = simplify('({})/({})'.format(dividend, divisor))
+    solution = latex(solution.subs(substitutions)).replace('cdot', 'times')
+    return display(exercise, solution)
+
 def expandex(expr):
     exercise = latex(expr)
     solution = latex(expand(expr))
@@ -101,10 +109,12 @@ def showfrac(num, den):
 def main(key, value, fmt, meta):
     if key == 'Code':
         [[ident, classes, keyvals], contents] = value
-        return eval(contents)
-    if key == 'CodeBlock' and fmt == 'beamer':
+        result = eval(contents)
+        return [imath(str(result))] if isinstance(result, (str, int)) else result
+    if key == 'CodeBlock':
         [[ident, classes, keyvals], contents] = value
-        return blatex(tikz_plot(contents, dict(keyvals)))
+        if 'graph' in classes and fmt == 'beamer':
+            return blatex(tikz_plot(contents, dict(keyvals)))
 
 if __name__ == '__main__':
     toJSONFilter(main)
