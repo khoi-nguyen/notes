@@ -99,9 +99,12 @@ def environment(ident, env, keyvals, contents, count):
 def main(key, value, fmt, meta):
     global envcount, first_env, environments
     if key == 'Span':
-        envcount += 1
         [[ident, classes, keyvals], contents] = value
-        return answer(contents, envcount)
+        if 'gap' in classes:
+            return ilatex('\\vspace{' + contents[0]['c'] + '}')
+        else:
+            envcount += 1
+            return answer(contents, envcount)
     if key == 'Header' and value[0] == 1:
         envcount = 1
         first_env = True
