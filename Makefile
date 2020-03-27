@@ -1,7 +1,7 @@
 MARKDOWN := $(shell find * -name '*.md' | grep -v '^\(env\|node\|www\|README\)')
 DEPENDENCIES := Makefile $(shell find pandoc/*)
-TARGETS := $(MARKDOWN:.md=.pdf)
-HANDOUTS := $(MARKDOWN:.md=.handout.pdf)
+TARGETS := $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.pdf)
+HANDOUTS := $(MARKDOWN:.md=.handout.tex) $(MARKDOWN:.md=.handout.pdf)
 BEAMER := @. env/bin/activate; pandoc -t beamer --pdf-engine=lualatex\
 	--template=./pandoc/beamer.tex\
 	--filter ./pandoc/pythontex.py\
@@ -18,7 +18,8 @@ deploy: all $(HANDOUTS)
 	rsync -avu --delete www/ khoi@nguyen.me.uk:~/www
 
 clean:
-	find [0-9]* -type f | grep -v 'md$$' | xargs rm
+	@echo Removing all temporary files
+	@find [0-9]* -type f | grep -v '\(md\|pdf\)$$' | xargs rm
 
 %.tex: %.md $(DEPENDENCIES)
 	@echo Generating $@...
