@@ -97,11 +97,13 @@ def main(key, value, fmt, meta):
         first_env = True
     if key == 'Div':
         [[ident, classes, keyvals], contents] = value
+        keyvals = dict(keyvals)
         if len(set(classes) & set(environments.keys())) > 0:
-            if not first_env:
+            if not first_env and not 'show' in keyvals:
                 envcount += 1
             first_env = False
-            return environment(ident, classes[0], dict(keyvals), contents, envcount)
+            count = keyvals['show'] if 'show' in keyvals else envcount
+            return environment(ident, classes[0], dict(keyvals), contents, count)
 
 if __name__ == '__main__':
     toJSONFilter(main)
