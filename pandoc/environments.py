@@ -60,6 +60,11 @@ environments = {
         'prefix': '\\faPencilSquareO \\faCheck',
         'env': 'exampleblock',
     },
+    'Starter': {
+        'title': 'Starter',
+        'prefix': '\\faBook \\faPencil \\faClockO',
+        'env': 'block',
+    },
     'Theorem': {
         'title': 'Theorem',
         'prefix': '\\faBook\ \\faStar',
