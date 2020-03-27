@@ -33,6 +33,14 @@ def div(dividend, divisor, **substitutions):
     solution = latex(solution.subs(substitutions)).replace('cdot', 'times')
     return display(exercise, solution)
 
+def frac(dividend, divisor, **substitutions):
+    substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()]
+    tr = lambda t: latex(s(t).subs(substitutions))
+    exercise = '\\frac {{{}}} {{{}}}'.format(tr(dividend), tr(divisor))
+    solution = simplify('({})/({})'.format(dividend, divisor))
+    solution = latex(solution.subs(substitutions)).replace('cdot', 'times')
+    return display(exercise, solution)
+
 def expandex(expr):
     exercise = latex(expr)
     solution = latex(expand(expr))
