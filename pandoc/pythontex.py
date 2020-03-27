@@ -113,7 +113,7 @@ def main(key, value, fmt, meta):
         return [imath(str(result))] if isinstance(result, (str, int)) else result
     if key == 'CodeBlock':
         [[ident, classes, keyvals], contents] = value
-        if 'plot' in classes and fmt == 'beamer':
+        if 'graph' in classes and fmt == 'beamer':
             return blatex(tikz_plot(contents, dict(keyvals)))
 
 if __name__ == '__main__':
