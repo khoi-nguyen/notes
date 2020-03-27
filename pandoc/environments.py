@@ -23,7 +23,7 @@ environments = {
     'Extension': {
         'title': 'Extension',
         'prefix': '\\faPlus',
-        'env': 'block',
+        'env': 'exampleblock',
     },
     'Hint': {
         'title': 'Hint',
