@@ -25,6 +25,11 @@ environments = {
         'prefix': '\\faPlus',
         'env': 'exampleblock',
     },
+    'Formula': {
+        'title': 'Formula',
+        'prefix': '\\faSuperscript',
+        'env': 'alertblock',
+    },
     'Hint': {
         'title': 'Hint',
         'prefix': '\\faLightbulbO',
@@ -54,6 +59,11 @@ environments = {
         'title': 'Remark',
         'prefix': '\\faPencil',
         'env': 'block',
+    },
+    'Remember': {
+        'title': 'Remember',
+        'prefix': '\\faDownload',
+        'env': 'alertblock',
     },
     'Solution': {
         'title': 'Solution',
