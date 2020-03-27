@@ -20,6 +20,11 @@ environments = {
         'prefix': '\\faPencilSquare',
         'env': 'exampleblock',
     },
+    'Extension': {
+        'title': 'Extension',
+        'prefix': '\\faPlus',
+        'env': 'block',
+    },
     'Hint': {
         'title': 'Hint',
         'prefix': '\\faLightbulbO',
