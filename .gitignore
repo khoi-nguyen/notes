@@ -5,4 +5,12 @@ node_modules/
 www/
 __pycache__/
 data.json
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
 *.pdf
+*.snm
+*.tex
+*.toc

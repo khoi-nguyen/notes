@@ -18,19 +18,19 @@ deploy: all $(HANDOUTS)
 	rsync -avu --delete www/ khoi@nguyen.me.uk:~/www
 
 clean:
-	rm $(TARGETS)
+	find [0-9]* -type f | grep -v 'md$$' | xargs rm
 
-%.handout.pdf: %.md $(DEPENDENCIES) env
+%.tex: %.md $(DEPENDENCIES)
+	@echo Generating $@...
+	$(BEAMER) -s $< -o $@
+
+%.handout.tex: %.md $(DEPENDENCIES)
 	@echo Building $@...
 	$(BEAMER) -s $< -o $@ -V handout=true
 
-%.tex: %.md $(DEPENDENCIES)
-	@echo Building $@...
-	$(BEAMER) -s $< -o $@
-
-%.pdf: %.md $(DEPENDENCIES) env
-	@echo Building $@...
-	$(BEAMER) -s $< -o $@
+%.pdf: %.tex
+	@echo Building $@ with LaTeX...
+	@latexmk -quiet -lualatex -cd $<
 
 env: env/bin/activate
 
