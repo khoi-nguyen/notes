@@ -144,6 +144,33 @@ Simplify the following:
 Simplify `power('a^3', 4, a=2)`
 :::
 
+::: Solution
+$$\br{2^3}^4 = 2^3 \times 2^3 \times 2^3 \times 2^3 = 2^{12}$$
+:::
+
 ::: {.Formula t="Third Law of Indices"}
 $$(x^a)^b = x^{ab}$$
+:::
+
+# Power of Indices
+
+::: Exercise
+Simplify the following:
+
+#) `power('a^3', 2, a=4)`
+#) `power('a^5', 3, a=10)`
+#) `power('x^7', 4)`
+#) `power('a^8', 6, a=9)`
+#) `power('y^2', 20)`
+#) `power('z^3', 'x')`
+#) `power('a^10', 10, a=10)`
+#) `power('a^y', 'b')`
+:::
+
+::: Extension
+Simplify the following:
+
+#) `power('a^-2', 4, a=5)`
+#) `power('a^3', -80, a=49)`
+#) TODO `power('x^-y', '-z')`
 :::
