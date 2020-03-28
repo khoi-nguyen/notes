@@ -7,6 +7,7 @@ title: Indices
 ::: Starter
 Evaluate the following:
 
+<<<<<<< HEAD
 #) `evaluate('3^2')`
 #) `evaluate('5^2')`
 #) `evaluate('2^3')`
@@ -15,6 +16,16 @@ Evaluate the following:
 #) `evaluate('12^2')`
 #) `evaluate('5^3')`
 #) `evaluate('1^4')`
+=======
+#) `simplify('3^2')`
+#) `simplify('5^2')`
+#) `simplify('2^3')`
+#) `simplify('7^1')`
+#) `simplify('3^3')`
+#) `simplify('12^2')`
+#) `simplify('4^3')`
+#) `simplify('1^4')`
+>>>>>>> 711f4cadfc2f9671eb7c90888c8ba55036025e03
 :::
 
 ::: {.Extension show=1}
