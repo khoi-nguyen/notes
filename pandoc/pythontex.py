@@ -41,6 +41,11 @@ def frac(dividend, divisor, **substitutions):
     solution = latex(solution.subs(substitutions)).replace('cdot', 'times')
     return display(exercise, solution)
 
+def evaluate(expr):
+    exercise = latex(expr)
+    solution = latex(simplify(expr))
+    return display(exercise, solution)
+
 def expandex(expr):
     exercise = latex(expr)
     solution = latex(expand(expr))
