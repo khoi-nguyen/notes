@@ -12,7 +12,7 @@ first_env = True
 environments = {
     'Definition': {
         'title': 'Definition',
-        'prefix': '\\faBook \\faStar',
+        'prefix': '\\faStar \\faBook',
         'env': 'alertblock',
     },
     'Exercise': {
