@@ -103,8 +103,13 @@ Evaluate the following:
 Simplify $2^5 \div 2^3$
 :::
 
-::: TO DO KHOI
-:::
+\begin{align*}
+2^5 \div 2^3
+= \frac {2^5} {2^3}
+= \frac {2 \times 2 \times \cancel 2 \times \cancel 2 \times \cancel 2}
+{\cancel 2 \times \cancel 2 \times \cancel 2}
+= 2^2
+\end{align*}
 
 ::: {.Formula t="Second Law of Indices"}
 $$x^a \div x^b = \frac {x^a} {x^b} = x^{a - b}$$
