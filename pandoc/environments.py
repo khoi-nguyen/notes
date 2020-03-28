@@ -10,6 +10,11 @@ first_env = True
 
 # {{{
 environments = {
+    'Definition': {
+        'title': 'Definition',
+        'prefix': '\\faQuoteLeft \\faQuoteRight',
+        'env': 'alertblock',
+    },
     'Exercise': {
         'title': 'Exercise',
         'prefix': '\\faBook \\faPencil',
