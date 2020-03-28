@@ -44,9 +44,14 @@ def div(dividend, divisor, **substitutions):
     return display(exercise, solution)
 
 def frac(dividend, divisor, **substitutions):
+    exercise = False
+    if  'l' in substitutions.keys():
+        exercise = substitutions['l']
+        del substitutions['l']
     substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()]
     tr = lambda t: latex(s(t).subs(substitutions))
-    exercise = '\\frac {{{}}} {{{}}}'.format(tr(dividend), tr(divisor))
+    if not exercise:
+        exercise = '\\frac {{{}}} {{{}}}'.format(tr(dividend), tr(divisor))
     solution = _simplify('({})/({})'.format(dividend, divisor))
     solution = latex(solution.subs(substitutions)).replace('cdot', 'times')
     return display(exercise, solution)
