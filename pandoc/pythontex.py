@@ -56,6 +56,13 @@ def frac(dividend, divisor, **substitutions):
     solution = latex(solution.subs(substitutions)).replace('cdot', 'times')
     return display(exercise, solution)
 
+def power(expr, power, **substitutions):
+    substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()]
+    exercise = '({})^{}'.format(latex(s(expr).subs(substitutions)), power)
+    expr = '({})^({})'.format(expr, power)
+    solution = latex(_simplify(s(expr)).subs(substitutions))
+    return display(exercise, solution)
+
 def simplify(expr, l=False):
     exercise = l if l else latex(expr)
     solution = latex(_simplify(expr))

@@ -141,10 +141,7 @@ Simplify the following:
 # Powers of indices
 
 ::: Example
-Simplify $(2^3)^4$
-:::
-
-::: TO DO KHOI
+Simplify `power('a^3', 4, a=2)`
 :::
 
 ::: {.Formula t="Third Law of Indices"}
