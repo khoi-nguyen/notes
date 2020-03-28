@@ -6,8 +6,8 @@ s = lambda x: sympify(x, evaluate=False) if isinstance(x, (str, int)) else x
 expand2, factor2, simplify2, latex2 = expand, factor, simplify, latex
 del expand, factor, latex
 latex = lambda x: latex2(s(x))
-expand = lambda x: expand2(s(x))
-simplify = lambda x: simplify2(s(x))
+_expand = lambda x: expand2(s(x))
+_simplify = lambda x: simplify2(s(x))
 factor = lambda x: factor2(s(x))
 
 # Shortcuts
@@ -21,7 +21,7 @@ def mult(*terms, **substitutions):
     substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()]
     exercise = [s(t).subs(substitutions) for t in terms]
     exercise = ' \\times '.join([latex(t) for t in exercise])
-    solution = simplify('(' + ')*('.join([str(t) for t in terms]) + ')')
+    solution = _simplify('(' + ')*('.join([str(t) for t in terms]) + ')')
     solution = latex(solution.subs(substitutions)).replace('cdot', 'times')
     return display(exercise, solution)
 
@@ -29,7 +29,7 @@ def div(dividend, divisor, **substitutions):
     substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()]
     tr = lambda t: latex(s(t).subs(substitutions))
     exercise = '{} \\div {}'.format(tr(dividend), tr(divisor))
-    solution = simplify('({})/({})'.format(dividend, divisor))
+    solution = _simplify('({})/({})'.format(dividend, divisor))
     solution = latex(solution.subs(substitutions)).replace('cdot', 'times')
     return display(exercise, solution)
 
@@ -37,22 +37,22 @@ def frac(dividend, divisor, **substitutions):
     substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()]
     tr = lambda t: latex(s(t).subs(substitutions))
     exercise = '\\frac {{{}}} {{{}}}'.format(tr(dividend), tr(divisor))
-    solution = simplify('({})/({})'.format(dividend, divisor))
+    solution = _simplify('({})/({})'.format(dividend, divisor))
     solution = latex(solution.subs(substitutions)).replace('cdot', 'times')
     return display(exercise, solution)
 
 def evaluate(expr):
     exercise = latex(expr)
-    solution = latex(simplify(expr))
+    solution = latex(_simplify(expr))
     return display(exercise, solution)
 
-def expandex(expr):
+def expand(expr):
     exercise = latex(expr)
-    solution = latex(expand(expr))
+    solution = latex(_expand(_simplify(expr)))
     return display(exercise, solution)
 
 def factorise(expr):
-    exercise = latex(expand(expr))
+    exercise = latex(_expand(expr))
     solution = latex(factor(expr))
     return display(exercise, solution)
 
