@@ -13,13 +13,20 @@ Evaluate the following:
 #) `evaluate('7^1')`
 #) `evaluate('3^3')`
 #) `evaluate('12^2')`
-#) `evaluate('4^3')`
+#) `evaluate('5^3')`
 #) `evaluate('1^4')`
 :::
 
 ::: {.Extension show=1}
+#) Write 64 as a power of 4
+#) Write 243 as a power of 3
+#) Write out $2^4 \times 2^3$ as a product of 2's, then rewrite it as a single index
+:::
 
-Write out $2^4 \times 2^3$ as a product of twos, then evaluate it - is there a quicker way to evaluate $2^4 \times 2^3$? [`2**7`]{.answer}
+# Index
+
+::: Definition
+Index: A number (called the base) that is raised to a power (called the exponent)
 :::
 
 # Multiplying Indices
@@ -29,7 +36,7 @@ Simplify $2^4 \times 2^3$
 :::
 
 ::: Solution
-$$2^4 \times 2^3 = \overbrace{\underbrace{2 \times 2 \times 2 \times 2}_{2^4} \times \underbrace{2 \times 2 \times 2}_{2^3}}^{\text{There are 7 twos in total}} = 2^7$$
+$$2^4 \times 2^3 = \overbrace{\underbrace{2 \times 2 \times 2 \times 2}_{2^4} \times \underbrace{2 \times 2 \times 2}_{2^3}}^{\text{2 appears 7 times}} = 2^7$$
 :::
 
 # Multiplying Indices
@@ -41,11 +48,12 @@ Simplify the following:
 #) `mult('a^4', 'a^2', a=10)`
 #) `mult('a^5', 'a^3', a=6)`
 #) `mult('x^2', 'x^4')`
-#) `mult('x^a', 'x^6')`
+#) `mult('y^5', 'y^4')`
+#) `mult('x', 'x^3')`
 :::
 
 ::: Question
-How could we spot the answer straight away?
+How could we spot the answer without writing the product out?
 :::
 
 ::: {.Formula t="First Law of Indices"}
