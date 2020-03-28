@@ -30,6 +30,19 @@ Index
 : A number (called the base) that is raised to a power (called the exponent)
 :::
 
+\begin{center}
+\begin{tikzpicture}
+\node (origin) at (0, 0) {\LARGE ${\color{darkblue} x}^{\color{darkred} a}$};
+\node[darkblue] (base) at (-1, -1) {base};
+\draw[darkblue,thick,->] (base) -- (origin.south west);
+\node[darkred] (exponent) at (1, 1) {exponent};
+\draw[darkred,thick,->] (exponent) -- (origin.north east);
+\draw[darkorange,thick] (0, 0) circle (0.7cm);
+\node[darkorange] (index) at (2, 0) {index};
+\draw[darkorange,thick,->] (0.8, 0) -- (index.west);
+\end{tikzpicture}
+\end{center}
+
 # Multiplying Indices
 
 ::: Example
