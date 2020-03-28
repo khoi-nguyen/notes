@@ -103,6 +103,9 @@ Evaluate the following:
 Simplify $2^5 \div 2^3$
 :::
 
+::: TO DO KHOI
+:::
+
 ::: {.Formula t="Second Law of Indices"}
 $$x^a \div x^b = \frac {x^a} {x^b} = x^{a - b}$$
 :::
@@ -113,19 +116,32 @@ $$x^a \div x^b = \frac {x^a} {x^b} = x^{a - b}$$
 Simplify the following:
 
 #) `div('a^7', 'a^2', a=3)`
-#) `div('a^6', 'a^4', a=7)`
+#) `frac('a^6', 'a^4', a=7)`
 #) `div('a^12', 'a^9', a=2)`
 #) `div('x^8', 'x^3')`
-#) `div('y^10', 'y^2')`
+#) `frac('y^10', 'y^2')`
 #) `div('z^a', 'z^7')`
 #) `div('a^20', 'a^19', a=13)`
-#) `div('x^45', 'x^27')`
+#) `frac('x^45', 'x^27')`
 :::
 
 ::: {.Extension show=1}
 Simplify the following:
 
 #) `div('a^4', 'a^-2', a=7)`
-#) `div('y^2', 'x^-5')`
-#) `div('a^14', 'a^-14', a=23)`
+#) `frac('y^2', 'y^-5')`
+#) `div('a^14', 'a^14', a=23)`
+:::
+
+# Powers of indices
+
+::: Example
+Simplify $(2^3)^4$
+:::
+
+::: TO DO KHOI
+:::
+
+::: {.Formula t="Third Law of Indices"}
+$$(x^a)^b = x^{ab}$$
 :::
