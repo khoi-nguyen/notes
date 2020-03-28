@@ -18,17 +18,27 @@ answer = lambda x: Span(attributes({'class': 'answer'}), [imath(x)])
 display = lambda ex, sol: [imath(ex), answer(sol)]
 
 def mult(*terms, **substitutions):
+    exercise = False
+    if  'l' in substitutions.keys():
+        exercise = substitutions['l']
+        del substitutions['l']
     substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()]
-    exercise = [s(t).subs(substitutions) for t in terms]
-    exercise = ' \\times '.join([latex(t) for t in exercise])
+    if not exercise:
+        exercise = [s(t).subs(substitutions) for t in terms]
+        exercise = ' \\times '.join([latex(t) for t in exercise])
     solution = _simplify('(' + ')*('.join([str(t) for t in terms]) + ')')
     solution = latex(solution.subs(substitutions)).replace('cdot', 'times')
     return display(exercise, solution)
 
 def div(dividend, divisor, **substitutions):
+    exercise = False
+    if  'l' in substitutions.keys():
+        exercise = substitutions['l']
+        del substitutions['l']
     substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()]
     tr = lambda t: latex(s(t).subs(substitutions))
-    exercise = '{} \\div {}'.format(tr(dividend), tr(divisor))
+    if not exercise:
+        exercise = '{} \\div {}'.format(tr(dividend), tr(divisor))
     solution = _simplify('({})/({})'.format(dividend, divisor))
     solution = latex(solution.subs(substitutions)).replace('cdot', 'times')
     return display(exercise, solution)
@@ -41,8 +51,8 @@ def frac(dividend, divisor, **substitutions):
     solution = latex(solution.subs(substitutions)).replace('cdot', 'times')
     return display(exercise, solution)
 
-def simplify(expr):
-    exercise = latex(expr)
+def simplify(expr, l=False):
+    exercise = l if l else latex(expr)
     solution = latex(_simplify(expr))
     return display(exercise, solution)
 
