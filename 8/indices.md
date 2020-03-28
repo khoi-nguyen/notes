@@ -93,7 +93,7 @@ Simplify the following indices:
 Evaluate the following:
 
 #) `mult('a^5', 'a^-3', a=6)`
-#) `mult('x^-2', 'x^7')`
+#) `mult('x^-2', 'x^7', l='x^{-2} \\times x^7')`
 #) `mult('a^13', 'a^-8', a=5)`
 :::
 
@@ -129,7 +129,7 @@ Simplify the following:
 Simplify the following:
 
 #) `div('a^4', 'a^-2', a=7)`
-#) `frac('y^2', 'y^-5')`
+#) `div('y^2', 'x^-5', l='y^2 \\div x^{-5}')`
 #) `div('a^14', 'a^14', a=23)`
 :::
 
