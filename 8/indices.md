@@ -7,14 +7,14 @@ title: Indices
 ::: Starter
 Evaluate the following:
 
-#) `evaluate('3^2')`
-#) `evaluate('5^2')`
-#) `evaluate('2^3')`
-#) `evaluate('7^1')`
-#) `evaluate('3^3')`
-#) `evaluate('12^2')`
-#) `evaluate('4^3')`
-#) `evaluate('1^4')`
+#) `simplify('3^2')`
+#) `simplify('5^2')`
+#) `simplify('2^3')`
+#) `simplify('7^1')`
+#) `simplify('3^3')`
+#) `simplify('12^2')`
+#) `simplify('4^3')`
+#) `simplify('1^4')`
 :::
 
 ::: {.Extension show=1}
