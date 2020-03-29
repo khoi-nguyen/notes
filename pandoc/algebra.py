@@ -8,7 +8,7 @@ latex = lambda x: latex2(s(x))
 _expand = lambda x: expand2(s(x))
 _simplify = lambda x: simplify2(s(x))
 factor = lambda x: factor2(s(x))
-display = lambda ex, sol: '${} \answer{{{}}}$'.format(ex, sol)
+display = lambda ex, sol: f'${ex} \answer{{{sol}}}$'
 
 def mult(*terms, **substitutions):
     exercise = False
@@ -31,8 +31,8 @@ def div(dividend, divisor, **substitutions):
     substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()]
     tr = lambda t: latex(s(t).subs(substitutions))
     if not exercise:
-        exercise = '{} \\div {}'.format(tr(dividend), tr(divisor))
-    solution = _simplify('({})/({})'.format(dividend, divisor))
+        exercise = f'{tr(dividend)} \\div {tr(divisor)}'
+    solution = _simplify(f'({dividend})/({divisor})')
     solution = latex(solution.subs(substitutions)).replace('cdot', 'times')
     return display(exercise, solution)
 
@@ -44,15 +44,15 @@ def frac(dividend, divisor, **substitutions):
     substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()]
     tr = lambda t: latex(s(t).subs(substitutions))
     if not exercise:
-        exercise = '\\frac {{{}}} {{{}}}'.format(tr(dividend), tr(divisor))
-    solution = _simplify('({})/({})'.format(dividend, divisor))
+        exercise = f'\\frac {{{tr(dividend)}}} {{{tr(divisor)}}}'
+    solution = _simplify(f'({dividend})/({divisor})')
     solution = latex(solution.subs(substitutions)).replace('cdot', 'times')
     return display(exercise, solution)
 
 def power(expr, power, **substitutions):
     substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()]
-    exercise = '\\br{{{}}}^{{{}}}'.format(latex(s(expr).subs(substitutions)), power)
-    expr = '({})^({})'.format(expr, power)
+    exercise = f'\\br{{{latex(s(expr).subs(substitutions))}}}^{{{power}}}'
+    expr = f'({expr})^({power})'
     solution = latex(powdenest(expr, force=True).subs(substitutions))
     return display(exercise, solution)
 
@@ -75,7 +75,7 @@ def equation(lhs, rhs = '0'):
     if isinstance(lhs, str) and '=' in lhs:
         lhs, rhs = lhs.split('=')
     lhs, rhs = s(lhs), s(rhs)
-    exercise = latex(lhs) + '=' + latex(rhs)
+    exercise = f'{latex(lhs)} = {latex(rhs)}'
     solution = ', '.join([latex(sol) for sol in solve(lhs-rhs)])
     return display(exercise, solution)
 
@@ -88,14 +88,12 @@ def complete_square(expr):
     return display(exercise, solution)
 
 def showfrac(num, den):
-    block = ['\\begin{tikzpicture}\n\\node at (0, 1.5) {']
-    block.append('$\\frac {' + str(num) + '}{' + str(den) + '}$')
-    block.append('};')
+    block = [f'\\begin{{tikzpicture}}\n\\node at (0, 1.5) {{$\\frac {{{num}}}{{{den}}}$}};']
     lines = []
     for i in range(0, den):
         angle = 90+i*360/den
         color = 'fraction' if i < num else 'white'
-        lines.append('\\draw[fill={3},thick] (0, 0) -- ({1}:{0}) arc ({1}:{2}:{0}) -- cycle;'.format('1cm', angle, angle + 360/den, color))
+        lines.append(f'\\draw[fill={color},thick] (0, 0) -- ({angle}:1cm) arc ({angle}:{angle + 360/den}:1cm) -- cycle;')
     lines.append('\\end{tikzpicture}')
     block.append('\n'.join(lines))
     return '\n'.join(block)
