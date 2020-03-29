@@ -12,14 +12,14 @@ all: $(TARGETS)
 
 deploy: all $(HANDOUTS)
 	. env/bin/activate; python ./data.py
-	rm -fR www/*
 	parcel build index.html --out-dir www --public-url ./ --no-cache
 	ls -d */ | grep '^[0-9]' | xargs -I {} cp -R {} www
 	rsync -avu --delete www/ khoi@nguyen.me.uk:~/www
+	rm -fR www/*
 
 clean:
 	@echo Removing all temporary files
-	@find [0-9]* -type f | grep -v '\(md\|pdf\)$$' | xargs rm
+	@find [0-9]* -type f | grep -v '\(md\)$$' | xargs rm
 
 %.tex: %.md $(DEPENDENCIES)
 	@echo Generating $@...
