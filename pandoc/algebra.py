@@ -56,20 +56,14 @@ def power(expr, power, **substitutions):
     solution = latex(powdenest(expr, force=True).subs(substitutions))
     return display(exercise, solution)
 
-def simplify(expr, l=False):
-    exercise = l if l else latex(expr)
-    solution = latex(_simplify(expr))
-    return display(exercise, solution)
-
-def expand(expr):
+def exercise(expr, callback):
     exercise = latex(expr)
-    solution = latex(_expand(_simplify(expr)))
+    solution = latex(callback(expr))
     return display(exercise, solution)
 
-def factorise(expr):
-    exercise = latex(_expand(expr))
-    solution = latex(factor(expr))
-    return display(exercise, solution)
+simplify = lambda expr: exercise(expr, _simplify)
+expand = lambda expr: exercise(expr, lambda x:_expand(_simplify(x)))
+factorise = lambda expr: exercise(expr, factor)
 
 def equation(lhs, rhs = '0'):
     if isinstance(lhs, str) and '=' in lhs:
