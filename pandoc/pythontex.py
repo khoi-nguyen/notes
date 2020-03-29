@@ -4,9 +4,8 @@ from algebra import *
 
 # Shortcuts
 blatex = lambda x: RawBlock('latex', x)
+ilatex = lambda x: RawInline('latex', x)
 imath = lambda x: Math({'t': 'InlineMath'}, x)
-answer = lambda x: Span(attributes({'class': 'answer'}), [imath(x)])
-display = lambda ex, sol: [imath(ex), answer(sol)]
 
 domain = '-9:9'
 
@@ -46,7 +45,7 @@ def main(key, value, fmt, meta):
     if key == 'Code':
         [[ident, classes, keyvals], contents] = value
         result = eval(contents)
-        return [imath(str(result))] if isinstance(result, (str, int)) else result
+        return [ilatex(str(result))] if isinstance(result, (str, int)) else result
     if key == 'CodeBlock':
         [[ident, classes, keyvals], contents] = value
         if 'graph' in classes and fmt == 'beamer':

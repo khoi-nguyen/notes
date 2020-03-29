@@ -1,4 +1,3 @@
-from pandocfilters import attributes, Math, Span, RawInline, RawBlock
 from sympy import *
 
 # Redefine some functions to automatically sympify
@@ -9,12 +8,7 @@ latex = lambda x: latex2(s(x))
 _expand = lambda x: expand2(s(x))
 _simplify = lambda x: simplify2(s(x))
 factor = lambda x: factor2(s(x))
-
-blatex = lambda x: RawBlock('latex', x)
-ilatex = lambda x: RawInline('latex', x)
-imath = lambda x: Math({'t': 'InlineMath'}, x)
-answer = lambda x: Span(attributes({'class': 'answer'}), [imath(x)])
-display = lambda ex, sol: [imath(ex), answer(sol)]
+display = lambda ex, sol: '${} \answer{{{}}}$'.format(ex, sol)
 
 def mult(*terms, **substitutions):
     exercise = False
@@ -94,14 +88,14 @@ def complete_square(expr):
     return display(exercise, solution)
 
 def showfrac(num, den):
-    block = [ilatex('\\begin{tikzpicture}\n\\node at (0, 1.5) {')]
-    block.append(imath('\\frac {' + str(num) + '}{' + str(den) + '}'))
-    block.append(ilatex('};'))
+    block = ['\\begin{tikzpicture}\n\\node at (0, 1.5) {']
+    block.append('$\\frac {' + str(num) + '}{' + str(den) + '}$')
+    block.append('};')
     lines = []
     for i in range(0, den):
         angle = 90+i*360/den
         color = 'fraction' if i < num else 'white'
         lines.append('\\draw[fill={3},thick] (0, 0) -- ({1}:{0}) arc ({1}:{2}:{0}) -- cycle;'.format('1cm', angle, angle + 360/den, color))
     lines.append('\\end{tikzpicture}')
-    block.append(ilatex('\n'.join(lines)))
-    return block
+    block.append('\n'.join(lines))
+    return '\n'.join(block)
