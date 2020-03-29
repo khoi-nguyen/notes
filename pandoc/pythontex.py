@@ -30,7 +30,13 @@ def main(key, value, fmt, meta):
     if key == 'Code':
         [[ident, classes, keyvals], contents] = value
         result = eval(contents)
-        return [ilatex(str(result))]
+        if isinstance(result, (str, int)):
+            return [ilatex(str(result))]
+        elif isinstance(result, tuple):
+            return [
+                imath(result[0]),
+                Span(attributes({'class': 'answer'}), [imath(result[1])])
+            ]
     if key == 'CodeBlock':
         [[ident, classes, keyvals], contents] = value
         if 'graph' in classes and fmt == 'beamer':
