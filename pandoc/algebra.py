@@ -57,7 +57,7 @@ def frac(dividend, divisor, **substitutions):
 
 def power(expr, power, **substitutions):
     substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()]
-    exercise = '\\br{{{}}})^{{{}}}'.format(latex(s(expr).subs(substitutions)), power)
+    exercise = '\\br{{{}}}^{{{}}}'.format(latex(s(expr).subs(substitutions)), power)
     expr = '({})^({})'.format(expr, power)
     solution = latex(_simplify(s(expr)).subs(substitutions))
     return display(exercise, solution)
