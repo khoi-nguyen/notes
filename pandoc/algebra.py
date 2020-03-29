@@ -8,7 +8,7 @@ latex = lambda x: latex2(s(x))
 _expand = lambda x: expand2(s(x))
 _simplify = lambda x: simplify2(s(x))
 factor = lambda x: factor2(s(x))
-display = lambda ex, sol: f'${ex} \answer{{{sol}}}$'
+display = lambda ex, sol: f'${ex} \\answer{{{sol}}}$'
 
 def mult(*terms, **substitutions):
     exercise = False
