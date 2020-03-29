@@ -5,10 +5,20 @@ s = lambda x: sympify(x, evaluate=False) if isinstance(x, (str, int)) else x
 expand2, factor2, simplify2, latex2 = expand, factor, simplify, latex
 del expand, factor, latex
 latex = lambda x: latex2(s(x))
-_expand = lambda x: expand2(s(x))
 _simplify = lambda x: simplify2(s(x))
+_expand = lambda x: expand2(_simplify(x))
 factor = lambda x: factor2(s(x))
 display = lambda ex, sol: f'${ex} \\answer{{{sol}}}$'
+
+def exercise(expr, callback_ex, callback_sol):
+    exercise = latex(callback_ex(expr))
+    solution = latex(callback_sol(expr))
+    return display(exercise, solution)
+
+_ = lambda x: x
+simplify = lambda expr: exercise(expr, _, _simplify)
+expand = lambda expr: exercise(expr, _, _expand)
+factorise = lambda expr: exercise(expr, _, factor)
 
 def mult(*terms, **substitutions):
     exercise = False
@@ -55,15 +65,6 @@ def power(expr, power, **substitutions):
     expr = f'({expr})^({power})'
     solution = latex(powdenest(expr, force=True).subs(substitutions))
     return display(exercise, solution)
-
-def exercise(expr, callback):
-    exercise = latex(expr)
-    solution = latex(callback(expr))
-    return display(exercise, solution)
-
-simplify = lambda expr: exercise(expr, _simplify)
-expand = lambda expr: exercise(expr, lambda x:_expand(_simplify(x)))
-factorise = lambda expr: exercise(expr, factor)
 
 def equation(lhs, rhs = '0'):
     if isinstance(lhs, str) and '=' in lhs:
