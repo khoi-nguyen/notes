@@ -172,5 +172,5 @@ Simplify the following:
 
 #) `power('a^-2', 4, a=5)`
 #) `power('a^3', -80, a=49)`
-#) TODO `power('x^-y', '-z')`
+#) `power('x^-y', '-z')`
 :::
