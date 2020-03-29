@@ -12,5 +12,6 @@ data.json
 *.nav
 *.pdf
 *.snm
+*.synctex.gz
 *.tex
 *.toc
