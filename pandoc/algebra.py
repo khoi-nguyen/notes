@@ -4,59 +4,35 @@ from sympy import *
 s = lambda x: sympify(x, evaluate=False) if isinstance(x, (str, int)) else x
 expand2, factor2, simplify2, latex2 = expand, factor, simplify, latex
 del expand, factor, latex
-latex = lambda x: latex2(s(x))
+latex = lambda x: latex2(s(x)).replace('cdot', 'times')
 _simplify = lambda x: simplify2(s(x))
 _expand = lambda x: expand2(_simplify(x))
 factor = lambda x: factor2(s(x))
 
-def exercise(expr, callback_ex, callback_sol):
-    exercise = latex(callback_ex(expr))
-    solution = latex(callback_sol(expr))
-    return (exercise, solution)
+def exercise(expr, callback_ex, callback_sol, **options):
+    substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in options.items() if t not in ['l']]
+    exercise = options['l'] if 'l' in options.keys() else callback_ex(expr).subs(substitutions)
+    solution = callback_sol(expr).subs(substitutions)
+    return (latex(exercise), latex(solution))
 
-_ = lambda x: x
-simplify = lambda expr: exercise(expr, _, _simplify)
-expand = lambda expr: exercise(expr, _, _expand)
-factorise = lambda expr: exercise(expr, _, factor)
+simplify = lambda expr, **options: exercise(expr, s, _simplify, **options)
+expand = lambda expr, **options: exercise(expr, s, _expand, **options)
+factorise = lambda expr, **options: exercise(expr, s, factor, **options)
 
-def mult(*terms, **substitutions):
-    exercise = False
-    if  'l' in substitutions.keys():
-        exercise = substitutions['l']
-        del substitutions['l']
-    substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()]
-    if not exercise:
-        exercise = [s(t).subs(substitutions) for t in terms]
-        exercise = ' \\times '.join([latex(t) for t in exercise])
-    solution = _simplify('(' + ')*('.join([str(t) for t in terms]) + ')')
-    solution = latex(solution.subs(substitutions)).replace('cdot', 'times')
-    return (exercise, solution)
+def _mult(join_ex, join_sol, terms, options):
+    substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in options.items() if t not in ['l']]
+    if 'l' in options.keys():
+        exercise = options['l']
+    else:
+        exercise = join_ex.join([latex(s(t).subs(substitutions)) for t in terms])
+        if join_ex == '}{':
+            exercise = f'\\frac{{{exercise}}}'
+    solution = _simplify(f'({join_sol.join([str(t) for t in terms])})').subs(substitutions)
+    return (exercise, latex(solution))
 
-def div(dividend, divisor, **substitutions):
-    exercise = False
-    if  'l' in substitutions.keys():
-        exercise = substitutions['l']
-        del substitutions['l']
-    substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()]
-    tr = lambda t: latex(s(t).subs(substitutions))
-    if not exercise:
-        exercise = f'{tr(dividend)} \\div {tr(divisor)}'
-    solution = _simplify(f'({dividend})/({divisor})')
-    solution = latex(solution.subs(substitutions)).replace('cdot', 'times')
-    return (exercise, solution)
-
-def frac(dividend, divisor, **substitutions):
-    exercise = False
-    if  'l' in substitutions.keys():
-        exercise = substitutions['l']
-        del substitutions['l']
-    substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()]
-    tr = lambda t: latex(s(t).subs(substitutions))
-    if not exercise:
-        exercise = f'\\frac {{{tr(dividend)}}} {{{tr(divisor)}}}'
-    solution = _simplify(f'({dividend})/({divisor})')
-    solution = latex(solution.subs(substitutions)).replace('cdot', 'times')
-    return (exercise, solution)
+mult = lambda *terms, **options: _mult('\\times ', ')*(', terms, options)
+div = lambda *terms, **options: _mult('\\div ', ')/(', terms, options)
+frac = lambda *terms, **options: _mult('}{', ')/(', terms, options)
 
 def power(expr, power, **substitutions):
     substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()]
