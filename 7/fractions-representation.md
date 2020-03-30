@@ -20,6 +20,34 @@ Numerator
 : Number of slices you eat
 :::
 
+# Numerator and denominator
+
+::: Vocabulary
+Numerator
+: Number at the top
+
+Denominator
+: Number at the bottom
+:::
+
+::: {.cols n=3}
+
+\begin{center}
+\begin{tikzpicture}
+\node (frac) at (0, 0) {\LARGE $\frac {\color{darkgreen} 2} {\color{darkred} 3}$};
+\node[darkgreen] (num) at (2, 1) {numerator};
+\draw[darkgreen,thick,->] (frac.north east) -- (num.west);
+\node[darkred] (den) at (2, -1) {denominator};
+\draw[darkred,thick,->] (frac.south east) -- (den.west);
+\draw[darkorange, thick] (0, 0) circle (0.7cm);
+\node[darkorange] at (1.5, 0) {fraction};
+\end{tikzpicture}
+\end{center}
+
+`showfrac(2, 3, False)`
+`rectfrac(2, 3, 1, 1, 2.5)`
+:::
+
 # Equivalent fractions
 
 Despite being cut differently, some cake quantities are the same:
