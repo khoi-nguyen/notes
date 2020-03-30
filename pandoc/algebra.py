@@ -58,12 +58,22 @@ def complete_square(expr):
     return (exercise, solution)
 
 def showfrac(num, den):
-    block = [f'\\begin{{tikzpicture}}\n\\node at (0, 1.5) {{$\\frac {{{num}}}{{{den}}}$}};']
-    lines = []
+    lines = [f'\\begin{{tikzpicture}}\n\\node at (0, 1.5) {{$\\frac {{{num}}}{{{den}}}$}};']
     for i in range(0, den):
         angle = 90+i*360/den
         color = 'fraction' if i < num else 'white'
         lines.append(f'\\draw[fill={color},thick] (0, 0) -- ({angle}:1cm) arc ({angle}:{angle + 360/den}:1cm) -- cycle;')
     lines.append('\\end{tikzpicture}')
-    block.append('\n'.join(lines))
-    return '\n'.join(block)
+    return '\n'.join(lines)
+
+def rectfrac(num, den, num2 = 1, den2 = 1):
+    side = 5
+    lines = ['\\begin{tikzpicture}']
+    lines.append(f'\\draw (0, 0) rectangle ({side}, {side});')
+    lines.append(f'\\draw[fill=fraction] (0, 0) rectangle ({num/den*side}, {num2/den2*side});')
+    for i in range(0, den):
+        lines.append(f'\\draw ({i*side/den}, 0) -- ({i*side/den}, {side});')
+    for i in range(0, den2):
+        lines.append(f'\\draw (0, {i*side/den2}) -- ({side}, {i*side/den2});')
+    lines.append('\\end{tikzpicture}')
+    return '\n'.join(lines)
