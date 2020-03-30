@@ -44,7 +44,7 @@ Denominator
 \end{tikzpicture}
 \end{center}
 
-`showfrac(2, 3, False)`
+`showfrac(2, 3)`
 `rectfrac(2, 3, 1, 1, 2.5)`
 :::
 
@@ -86,11 +86,15 @@ Which fractions are equivalent?
 
 # Adding fractions
 
+::: {.Hint t='Adding'}
+**Adding** is **combining**
+:::
+
 ::: {.cols n=4}
-`showsum(1, 4, 2, 4)`
-`showsum(1, 3, 1, 3)`
-`showsum(2, 5, 1, 5)`
-`showsum(1, 6, 2, 6)`
+`showfrac(1, 4, '+', 2, 4)`
+`showfrac(1, 3, '+', 1, 3)`
+`showfrac(2, 5, '+', 1, 5)`
+`showfrac(1, 6, '+', 2, 6)`
 :::
 
 . . .
@@ -106,10 +110,11 @@ When adding fractions with the **same denominator**:
 # Adding fractions with different denominators
 
 ::: {.cols n=4}
-`showsum(1, 4, 2, 3)`
-`showsum(1, 3, 1, 4)`
-`showsum(2, 5, 1, 3)`
-`showsum(1, 6, 2, 3)`
+`showfrac(1, 4, '+', 2, 3)`
+`showfrac(1, 3, '+', 1, 4)`
+`showfrac(2, 5, '+', 1, 3)`
+`showfrac(1, 6, '+', 2, 3)`
+`showfrac(3, 4, '-', 1, 3)`
 :::
 
 # Fraction multiplication
