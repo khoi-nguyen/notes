@@ -59,7 +59,8 @@ def complete_square(expr):
 
 def showfrac(num, den, latex=True):
     lines = ['\\begin{tikzpicture}']
-    lines.append(f'\node at (0, 1.5) {{$\\frac {{{num}}}{{{den}}}$}};')
+    if latex:
+        lines.append(f'\\node at (0, 1.5) {{$\\frac {{{num}}}{{{den}}}$}};')
     for i in range(0, den):
         angle = 90+i*360/den
         color = 'fraction' if i < num else 'white'
