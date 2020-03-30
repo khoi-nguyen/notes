@@ -68,6 +68,26 @@ def showfrac(num, den, latex=True):
     lines.append('\\end{tikzpicture}')
     return '\n'.join(lines)
 
+def showsum(num, den, num2, den2):
+    lines = ['\\begin{tikzpicture}']
+    lines.append('\\draw[thick] (0, 0) circle (1cm);')
+    if latex:
+        lines.append(f'\\node at (0, 1.5) {{$\\frac {{{num}}}{{{den}}} + \\frac {{{num2}}}{{{den2}}}$}};')
+    for i in range(0, num):
+        angle = 90 + i*360/den
+        color = 'fraction'
+        lines.append(f'\\draw[fill={color},thick] (0, 0) -- ({angle}:1cm) arc ({angle}:{angle + 360/den}:1cm) -- cycle;')
+    for i in range(0, num2):
+        angle = 90 - i*360/den2
+        color = 'fraction2'
+        lines.append(f'\\draw[fill={color},thick] (0, 0) -- ({angle}:1cm) arc ({angle}:{angle - 360/den2}:1cm) -- cycle;')
+    common_den = lcm(den, den2)
+    for i in range(0, common_den):
+        angle = 90 + i*360/common_den
+        lines.append(f'\\draw[ghtgray,dotted] (0, 0) -- ({angle}:1cm) arc ({angle}:{angle}:1cm) -- cycle;')
+    lines.append('\\end{tikzpicture}')
+    return '\n'.join(lines)
+
 def rectfrac(num, den, num2 = 1, den2 = 1, side = 5):
     lines = ['\\begin{tikzpicture}']
     lines.append(f'\\draw (0, 0) rectangle ({side}, {side});')
