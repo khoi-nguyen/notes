@@ -84,6 +84,34 @@ Which fractions are equivalent?
 
 # Equivalent fractions
 
+# Adding fractions
+
+::: {.cols n=4}
+`showsum(1, 4, 2, 4)`
+`showsum(1, 3, 1, 3)`
+`showsum(2, 5, 1, 5)`
+`showsum(1, 6, 2, 6)`
+:::
+
+. . .
+
+::: Method
+When adding fractions with the **same denominator**:
+
+- We **add** the **numerators**
+- We **keep** the **denominator**
+- **Simplify** the result
+:::
+
+# Adding fractions with different denominators
+
+::: {.cols n=4}
+`showsum(1, 4, 2, 3)`
+`showsum(1, 3, 1, 4)`
+`showsum(2, 5, 1, 3)`
+`showsum(1, 6, 2, 3)`
+:::
+
 # Fraction multiplication
 
 ::: Example
