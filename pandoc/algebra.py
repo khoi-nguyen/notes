@@ -57,8 +57,9 @@ def complete_square(expr):
     solution = latex(solution.subs(dict(zip([alpha, h, k], sols))))
     return (exercise, solution)
 
-def showfrac(num, den):
-    lines = [f'\\begin{{tikzpicture}}\n\\node at (0, 1.5) {{$\\frac {{{num}}}{{{den}}}$}};']
+def showfrac(num, den, latex=True):
+    lines = ['\\begin{tikzpicture}']
+    lines.append(f'\node at (0, 1.5) {{$\\frac {{{num}}}{{{den}}}$}};')
     for i in range(0, den):
         angle = 90+i*360/den
         color = 'fraction' if i < num else 'white'
@@ -66,8 +67,7 @@ def showfrac(num, den):
     lines.append('\\end{tikzpicture}')
     return '\n'.join(lines)
 
-def rectfrac(num, den, num2 = 1, den2 = 1):
-    side = 5
+def rectfrac(num, den, num2 = 1, den2 = 1, side = 5):
     lines = ['\\begin{tikzpicture}']
     lines.append(f'\\draw (0, 0) rectangle ({side}, {side});')
     lines.append(f'\\draw[fill=fraction] (0, 0) rectangle ({num/den*side}, {num2/den2*side});')
