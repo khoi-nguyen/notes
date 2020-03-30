@@ -31,7 +31,7 @@ clean:
 
 %.pdf: %.tex
 	@echo Building $@ with LaTeX...
-	@latexmk -silent -lualatex -cd $<
+	@latexmk -silent -lualatex -cd -f $<
 
 env: env/bin/activate
 
