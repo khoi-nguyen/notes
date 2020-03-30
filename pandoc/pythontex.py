@@ -2,6 +2,7 @@ from pandocfilters import toJSONFilter, attributes, Math, Span, RawInline, RawBl
 from sympy import *
 from algebra import *
 from analysis import *
+from statistics import *
 
 # Shortcuts
 blatex = lambda x: RawBlock('latex', x)
@@ -12,7 +13,7 @@ def main(key, value, fmt, meta):
     if key == 'Code':
         [[ident, classes, keyvals], contents] = value
         result = eval(contents)
-        if isinstance(result, (str, int)):
+        if isinstance(result, (str, int, float)):
             return [ilatex(str(result))]
         elif isinstance(result, tuple):
             return [
