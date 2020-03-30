@@ -29,6 +29,11 @@ environments = {
         'prefix': '\\faLightbulbO',
         'env': 'exampleblock',
     },
+    'Method': {
+        'title': 'Method',
+        'prefix': '\\faList \\faGears',
+        'env': 'block',
+    },
     'Objective': {
         'title': 'Lesson Objective',
         'prefix': '\\faList\\ \\faPencilSquare',
