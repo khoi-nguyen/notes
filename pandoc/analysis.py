@@ -1,3 +1,5 @@
+from sympy import Integral, symbols, latex, sympify
+
 domain = '-9:9'
 
 def plot(function, color='darkblue'):
@@ -16,3 +18,12 @@ def tikz_plot(contents, opt):
         lines.append(eval(l))
     lines.append('\\end{plot}')
     return '\n'.join(lines)
+
+def integrate(expr, a = False, b = False):
+    if a or b:
+        expr = Integral(sympify(expr), (symbols('x'), a, b))
+    else:
+        expr = Integral(sympify(expr))
+    exercise = latex(expr)
+    solution = latex(expr.doit())
+    return (exercise, solution)
