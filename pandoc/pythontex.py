@@ -2,7 +2,7 @@ from pandocfilters import toJSONFilter, attributes, Math, Span, RawInline, RawBl
 from sympy import *
 from algebra import *
 from analysis import *
-from statistics import *
+from stats import *
 
 # Shortcuts
 blatex = lambda x: RawBlock('latex', x)

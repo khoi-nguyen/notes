@@ -1,4 +1,5 @@
 from math import floor, ceil
+import statistics
 
 midval = lambda x: sum(x)/len(x) if isinstance(x, list) else x
 display_val = lambda x: f'{x[0]}-{x[1]}' if isinstance(x, list) else x
@@ -44,12 +45,10 @@ def frequencytable(data, show_cols = []):
 
 def mean(number_list):
     question = ", ".join([str(n) for n in number_list])
-    answer = sum(number_list) / len(number_list)
+    answer = statistics.fmean(number_list)
     return (question, str(answer))
 
 def median(number_list):
     question = ", ".join([str(n) for n in number_list])
-    pos = (len(number_list) + 1)/2 - 1
-    number_list.sort()
-    answer = mean([number_list[floor(pos)], number_list[ceil(pos)]])[1]
-    return (question, answer)
+    answer = statistics.median(number_list)
+    return (question, str(answer))
