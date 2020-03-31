@@ -52,3 +52,8 @@ def median(number_list):
     question = ", ".join([str(n) for n in number_list])
     answer = statistics.median(number_list)
     return (question, str(answer))
+
+def mode(number_list):
+    question = ", ".join([str(n) for n in number_list])
+    answer = statistics.multimode(number_list)
+    return (question, str(answer))
