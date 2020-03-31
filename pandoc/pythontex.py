@@ -1,5 +1,4 @@
 from pandocfilters import toJSONFilter, attributes, Math, Span, RawInline, RawBlock, Str
-from sympy import *
 from algebra import *
 from analysis import *
 from stats import *
