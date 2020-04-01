@@ -68,11 +68,11 @@ def showfrac(num, den, op = False, num2 = 1, den2 = 1):
     slices = [(num, den, 'fill=fraction,thick')]
     style = 'thick'
     if op:
-        op = 1 if op == '+' else -1
-        node += f'{"+" if op > 0 else "-"}\\frac {{{num2}}}{{{den2}}}'
-        slices.append(
-            (num2, -op*den2, f'fill=fraction{2 if op == 1 else 3},thick')
-        )
+        node += f'{op}\\frac {{{num2}}}{{{den2}}}'
+        if op == '+':
+            slices.append((num2, -den2, 'fill=fraction2,thick'))
+        else:
+            slices.append((num2, den2, 'color=darkred, pattern=north west lines, pattern color=darkred, thick'))
         if den != den2:
             style = 'gray, dotted'
     slices.append((common_den, common_den, style))
