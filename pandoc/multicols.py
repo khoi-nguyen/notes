@@ -1,12 +1,16 @@
 from pandocfilters import toJSONFilter, RawBlock, OrderedList
 
 blatex = lambda x: RawBlock('latex', x)
+bhtml = lambda x: RawBlock('html', x)
 
 def main(key, value, fmt, meta):
     if key == 'OrderedList':
-        [[ident, classes, keyvals], contents] = value
-        if len(contents) > 5:
+        contents = value[1]
+        if len(contents) > 5 and fmt == 'beamer':
             return [blatex('\\begin{multicols}{2}')] + [OrderedList(*value)] + [blatex('\\end{multicols}')]
+        elif len(contents) > 5 and fmt == 'revealjs':
+            #return Div(['', ['multicols'], []], OrderedList(*value))
+            return [bhtml('<div class="multicols">')] + [OrderedList(*value)] + [bhtml('</div>')]
     if key == 'Div':
         [[ident, classes, keyvals], contents] = value
         if 'cols' in classes:

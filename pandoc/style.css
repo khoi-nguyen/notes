@@ -2,6 +2,18 @@
     color: darkred;
     display: block;
     float: right;
-    margin-left: 2em;
-    text-align: right;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.multicols > ol {
+   -moz-column-count: 2;
+   -moz-column-gap: 20px;
+   -moz-column-fill: auto;
+   -webkit-column-count: 2;
+   -webkit-column-gap: 20px;
+   -webkit-column-fill: auto;
+   column-count: 2;
+   column-gap: 20px;
+   column-fill: auto;
 }

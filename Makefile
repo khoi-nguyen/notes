@@ -6,9 +6,11 @@ HTML := $(MARKDOWN:.md=.html)
 PANDOC := @. env/bin/activate; pandoc -s -t revealjs --mathjax\
 	--css ../pandoc/style.css\
 	-V theme=white\
+	-V width='"100%"'\
 	-V revealjs-url=https://revealjs.com\
 	--filter ./pandoc/pythontex.py\
-	--filter ./pandoc/environments.py
+	--filter ./pandoc/environments.py\
+	--filter ./pandoc/multicols.py
 BEAMER := @. env/bin/activate; pandoc -s -t beamer --pdf-engine=lualatex\
 	--template=./pandoc/beamer.tex\
 	--filter ./pandoc/pythontex.py\
