@@ -14,8 +14,9 @@ def environment(ident, env, keyvals, contents, count):
     data = environments[env]
     title = '{}: {}'.format(data['title'], keyvals['t'] if 't' in keyvals else '')
     pause = '\\onslide<{}->{{'.format(count)
-    begin = '\\begin{{{0}}}{{{1}\ {2}}}'.format(data['env'], data['prefix'], title)
-    end = '\\end{{{0}}}}}'.format(data['env'])
+    begin = f"\\begin{{colorenv}}[{data['bgcolor']}]{{{data['tcolor']}}}"
+    begin += f"{{{data['prefix']}\  {data['title']}}}{{{keyvals['t'] if 't' in keyvals else ''}}}"
+    end = '\\end{colorenv}}'
     return [blatex(pause + begin)] + contents + [blatex(end)]
 
 def main(key, value, fmt, meta):

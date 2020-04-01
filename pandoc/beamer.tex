@@ -77,6 +77,40 @@ $endif$
 }
 \newcommand{\plotfunction}[3][darkblue]{\draw[color=#1,line width=1.2pt,smooth,samples=200,domain=#2] plot (\x, {#3});}
 
+\usepackage[many]{tcolorbox}
+\usetikzlibrary{calc}
+\newtcolorbox{colorenv}[4][white]{%
+    breakable,
+    enhanced,
+    colback=#1,
+    colframe=#2,
+    arc=0pt,
+    outer arc=0pt,
+    title=#3,
+    fonttitle=\sffamily,
+    colbacktitle=#2,
+    attach boxed title to top left={},
+    bottomrule=0pt,
+    toprule=0pt,
+    rightrule=0pt,
+    boxed title style={%
+        arc=0pt,
+        outer arc = 0pt,
+        enhanced,
+        bottom=0pt,
+        interior style={fill=#2}
+    },
+    overlay unbroken and first={%
+        \path
+            let
+            \p1=(title.north east),
+            \p2=(frame.north east)
+            in
+            node[anchor=west,color=#2,text width=\x2-\x1]
+            at (title.east) {#4};
+    }
+}
+
 
 $if(title)$
 \title{$title$}
