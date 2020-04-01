@@ -1,4 +1,4 @@
-from sympy import Integral, symbols, latex, sympify
+from sympy import Integral, symbols, latex, sympify, Derivative
 
 domain = '-9:9'
 
@@ -27,3 +27,9 @@ def integrate(expr, a = False, b = False):
     exercise = latex(expr)
     solution = latex(expr.doit())
     return (exercise, solution)
+
+def diff(*args):
+    args = [sympify(a) if isinstance(a, str) else a for a in args]
+    exercise = Derivative(*args)
+    solution = exercise.doit()
+    return (latex(exercise), latex(solution))
