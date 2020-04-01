@@ -64,13 +64,16 @@ def showfrac(num, den, op = False, num2 = 1, den2 = 1):
     node = f'\\frac {{{num}}}{{{den}}}'
     common_den = lcm(den, den2)
     slices = [(num, den, 'fill=fraction,thick')]
+    style = 'thick'
     if op:
         op = 1 if op == '+' else -1
         node += f'{"+" if op > 0 else "-"}\\frac {{{num2}}}{{{den2}}}'
         slices.append(
             (num2, -op*den2, f'fill=fraction{2 if op == 1 else 3},thick')
         )
-    slices.append((common_den, common_den, 'gray, dotted'))
+        if den != den2:
+            style = 'gray, dotted'
+    slices.append((common_den, common_den, style))
     for (n, denominator, option) in slices:
         for i in range(0, n):
             angle = 90 + i*360/denominator
