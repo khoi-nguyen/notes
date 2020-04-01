@@ -45,7 +45,7 @@ def frequencytable(data, show_cols = []):
 
 def mean(number_list):
     question = ", ".join([str(n) for n in number_list])
-    answer = statistics.fmean(number_list)
+    answer = statistics.mean(number_list)
     return (question, answer)
 
 def median(number_list):
