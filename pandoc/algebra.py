@@ -82,7 +82,9 @@ def showfrac(num, den, op = False, num2 = 1, den2 = 1):
 def rectfrac(num, den, num2 = 1, den2 = 1, side = 5):
     lines = ['\\begin{tikzpicture}']
     lines.append(f'\\draw (0, 0) rectangle ({side}, {side});')
-    lines.append(f'\\draw[fill=fraction] (0, 0) rectangle ({num/den*side}, {num2/den2*side});')
+    if num2 != 1 or den2 != 1:
+        lines.append(f'\\draw[fill=lightblue] (0, 0) rectangle ({num/den*side}, {side});')
+    lines.append(f'\\draw[thick, color=darkblue, pattern=north west lines, pattern color=darkblue] (0, 0) rectangle ({num/den*side}, {num2/den2*side});')
     for i in range(0, den):
         lines.append(f'\\draw ({i*side/den}, 0) -- ({i*side/den}, {side});')
     for i in range(0, den2):

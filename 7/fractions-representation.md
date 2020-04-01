@@ -124,6 +124,5 @@ Represent `mult('1/4', '2/3')`
 :::
 
 ::: Solution
-`rectfrac(2, 3, 1, 1)`
 `rectfrac(2, 3, 1, 4)`
 :::
