@@ -23,7 +23,7 @@ def main(key, value, fmt, meta):
         [[ident, classes, keyvals], contents] = value
         if 'gap' in classes:
             return ilatex('\\vspace{' + contents[0]['c'] + '}')
-        else:
+        elif 'answer' in classes:
             envcount += 1
             return answer(contents, envcount)
     if key == 'Header' and value[0] == 1:

@@ -17,7 +17,7 @@ def main(key, value, fmt, meta):
         elif isinstance(result, tuple):
             return [
                 imath(result[0]),
-                Span(attributes({'class': 'answer'}), [imath(str(result[1]))])
+                Span(['', ['answer'], []], [imath(str(result[1]))])
             ]
     if key == 'CodeBlock':
         [[ident, classes, keyvals], contents] = value
