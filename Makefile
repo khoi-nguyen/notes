@@ -6,6 +6,7 @@ HTML := $(MARKDOWN:.md=.html)
 PANDOC := @. env/bin/activate; pandoc -s -t revealjs --mathjax\
 	--css ../pandoc/style.css\
 	-V theme=white\
+	-V height='"100%"'\
 	-V width='"100%"'\
 	-V revealjs-url=https://revealjs.com\
 	--filter ./pandoc/pythontex.py\

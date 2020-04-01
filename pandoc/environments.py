@@ -2,6 +2,7 @@ from pandocfilters import toJSONFilter, attributes, Math, Span, RawInline, RawBl
 from environment_list import environments
 
 blatex = lambda x: RawBlock('latex', x)
+bhtml = lambda x: RawBlock('html', x)
 ilatex = lambda x: RawInline('latex', x)
 imath = lambda x: Math({'t': 'InlineMath'}, x)
 answer = lambda x, c: [ilatex('\\answer[{}]{{'.format(c))] + x + [ilatex('}')]
@@ -33,6 +34,8 @@ def main(key, value, fmt, meta):
         [[ident, classes, keyvals], contents] = value
         keyvals = dict(keyvals)
         if len(set(classes) & set(environments.keys())) > 0:
+            if fmt == 'revealjs':
+                return [bhtml(f'<div><h4>{environments[classes[0]]["title"]}</h4>')] + contents + [bhtml('</div>')]
             if not first_env and not 'show' in keyvals:
                 envcount += 1
             first_env = False
