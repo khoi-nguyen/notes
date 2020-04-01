@@ -1,6 +1,5 @@
 ---
 title: Fractions
-subtitle: Representing fractions
 ...
 
 # Fractions

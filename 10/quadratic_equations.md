@@ -1,6 +1,5 @@
 ---
 title: Quadratic Equations
-subtitle: Completing the square
 ...
 
 # Starter
