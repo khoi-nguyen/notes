@@ -4,6 +4,7 @@ from math import copysign as sign
 # Redefine some functions to automatically sympify
 s = lambda x: sympify(x, evaluate=False) if isinstance(x, (str, int)) else x
 expand2, factor2, simplify2, latex2 = expand, factor, simplify, latex
+_lcm = lcm
 del expand, factor, latex
 latex = lambda x: latex2(s(x)).replace('cdot', 'times')
 _simplify = lambda x: simplify2(s(x))
@@ -34,6 +35,7 @@ def _mult(join_ex, join_sol, terms, options):
 mult = lambda *terms, **options: _mult('\\times ', ')*(', terms, options)
 div = lambda *terms, **options: _mult('\\div ', ')/(', terms, options)
 frac = lambda *terms, **options: _mult('}{', ')/(', terms, options)
+lcm = lambda *terms: (','.join([str(t) for t in terms]), _lcm(terms))
 
 def power(expr, power, **substitutions):
     substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()]
@@ -62,7 +64,7 @@ def showfrac(num, den, op = False, num2 = 1, den2 = 1):
     lines = ['\\begin{tikzpicture}']
     lines.append('\\draw[thick] (0, 0) circle (1cm);')
     node = f'\\frac {{{num}}}{{{den}}}'
-    common_den = lcm(den, den2)
+    common_den = _lcm(den, den2)
     slices = [(num, den, 'fill=fraction,thick')]
     style = 'thick'
     if op:
