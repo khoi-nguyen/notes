@@ -57,3 +57,8 @@ def mode(number_list):
     question = ", ".join([str(n) for n in number_list])
     answer = statistics.multimode(number_list)
     return (question, answer)
+
+def rnge(number_list):
+    question = ", ".join([str(n) for n in number_list])
+    answer = max(number_list) - min(number_list)
+    return (question, answer)
