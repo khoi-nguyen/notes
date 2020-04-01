@@ -8,6 +8,7 @@ data.json
 *.aux
 *.fdb_latexmk
 *.fls
+*.html
 *.log
 *.nav
 *.pdf

@@ -2,13 +2,20 @@ MARKDOWN := $(shell find * -name '*.md' | grep -v '^\(env\|node\|www\|README\)')
 DEPENDENCIES := Makefile $(shell find pandoc/*)
 TARGETS := $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.pdf)
 HANDOUTS := $(MARKDOWN:.md=.handout.tex) $(MARKDOWN:.md=.handout.pdf)
-BEAMER := @. env/bin/activate; pandoc -t beamer --pdf-engine=lualatex\
+HTML := $(MARKDOWN:.md=.html)
+PANDOC := @. env/bin/activate; pandoc -s -t revealjs --mathjax\
+	-css pandoc/style.css\
+	-V theme=white\
+	-V revealjs-url=https://revealjs.com\
+	--filter ./pandoc/pythontex.py\
+	--filter ./pandoc/environments.py
+BEAMER := @. env/bin/activate; pandoc -s -t beamer --pdf-engine=lualatex\
 	--template=./pandoc/beamer.tex\
 	--filter ./pandoc/pythontex.py\
 	--filter ./pandoc/environments.py\
 	--filter ./pandoc/multicols.py
 
-all: $(TARGETS)
+all: $(TARGETS) $(HTML)
 
 deploy: all $(HANDOUTS)
 	. env/bin/activate; python ./data.py
@@ -20,6 +27,10 @@ deploy: all $(HANDOUTS)
 clean:
 	@echo Removing all temporary files
 	@find [0-9]* -type f | grep -v '\(md\)$$' | xargs rm
+
+%.html: %.md $(DEPENDENCIES)
+	@echo Generating $@...
+	$(PANDOC) -s $< -o $@
 
 %.tex: %.md $(DEPENDENCIES)
 	@echo Generating $@...
