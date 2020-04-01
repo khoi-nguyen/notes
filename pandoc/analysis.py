@@ -33,3 +33,12 @@ def diff(*args):
     exercise = Derivative(*args)
     solution = exercise.doit()
     return (latex(exercise), latex(solution))
+
+def tangent(expr, a):
+    x, b = symbols('x b')
+    derivative = Derivative(sympify(expr), x).doit()
+    gradient = derivative.subs(x, a)
+    tangent = (gradient*(x - b) + sympify(expr).subs(x, a)).subs(b, a)
+    exercise = f"y = {latex(expr)} \\text{{ at }} x = {a}"
+    solution = f"y = {latex(tangent)}"
+    return(exercise, solution)
