@@ -4,7 +4,7 @@ TARGETS := $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.pdf)
 HANDOUTS := $(MARKDOWN:.md=.handout.tex) $(MARKDOWN:.md=.handout.pdf)
 HTML := $(MARKDOWN:.md=.html)
 PANDOC := @. env/bin/activate; pandoc -s -t revealjs --mathjax\
-	-css pandoc/style.css\
+	--css ../pandoc/style.css\
 	-V theme=white\
 	-V revealjs-url=https://revealjs.com\
 	--filter ./pandoc/pythontex.py\

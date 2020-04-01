@@ -1,4 +1,7 @@
 .answer {
-    margin-left: auto;
-    color: red;
+    color: darkred;
+    display: block;
+    float: right;
+    margin-left: 2em;
+    text-align: right;
 }
