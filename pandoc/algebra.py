@@ -21,6 +21,9 @@ simplify = lambda expr, **options: exercise(expr, s, _simplify, **options)
 expand = lambda expr, **options: exercise(expr, s, _expand, **options)
 factorise = lambda expr, **options: exercise(expr, s, factor, **options)
 
+def expindex(base, power):
+    return (f"{{{base}}}^{{{power}}}", " \\times ".join([str(base)] * power))
+
 def _mult(join_ex, join_sol, terms, options):
     substitutions = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in options.items() if t not in ['l']]
     if 'l' in options.keys():
