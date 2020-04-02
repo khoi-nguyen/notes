@@ -35,10 +35,9 @@ def diff(*args):
     return (latex(exercise), latex(solution))
 
 def tangent(expr, a):
-    x, b = symbols('x b')
-    derivative = Derivative(sympify(expr), x).doit()
-    gradient = derivative.subs(x, a)
-    tangent = (gradient*(x - b) + sympify(expr).subs(x, a)).subs(b, a)
+    x, expr = symbols('x'), sympify(expr)
     exercise = f"y = {latex(expr)} \\text{{ at }} x = {a}"
-    solution = f"y = {latex(tangent)}"
+    gradient = Derivative(expr, x).doit().subs(x, a)
+    solution = gradient*(x - a) + expr.subs(x, a)
+    solution = f"y = {latex(solution)}"
     return(exercise, solution)
