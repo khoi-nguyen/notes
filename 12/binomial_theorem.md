@@ -70,3 +70,32 @@ Find the value of the following binomial coefficients
 #) `binom('n', 1)`
 :::
 :::
+
+# Induction
+
+::: Question
+How do you find the value of $\binom 5 3$?
+:::
+
+If we **separate** the last character, a $5$-string with 3 $a$ is
+
+- a $4$-string with 2 $a$ followed by $a$: $\binom 4 2$
+- a $4$-string with 3 $a$ followed by $b$: $\binom 4 3$
+
+Therefore, $\binom 5 3 = \binom 4 2 + \binom 4 3$.
+
+# Pascal's property
+
+::: Question
+How do you find the value of $\binom n k$?
+:::
+
+If we **separate** the last character, an $n$-string with k $a$ is
+
+- a $(n - 1)$-string with $k - 1$ $a$ followed by $a$: $\binom {n - 1}
+  {k - 1}$
+- a $(n - 1)$-string with $k$ $a$ followed by $b$: $\binom {n - 1} k$
+
+::: {.Formula t="Pascal's property"}
+$$\binom n k = \binom {n - 1} {k - 1} + \binom {n - 1} k$$
+:::
