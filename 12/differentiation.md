@@ -157,3 +157,36 @@ $$(fg)'(x) = f'(x)g(x) + f(x) g'(x)$$
 #) `diff('cos(x)^2')`
 #) `diff('sin(x)^2')`
 :::
+
+# Chain rule
+
+Derivatives generalize **gradients**.
+
+::: {.Example t="Behaviour of gradients under composition"}
+\begin{align*}
+\begin{array}{l}
+y = \overbrace{m_1}^{\frac {dy} {dt}} t\\
+t = \underbrace{m_2}_{\frac {dt} {dx}} x
+\end{array}
+\implies y = \overbrace{\underbrace{m_1 m_2}_{\frac {dy} {dt} \frac {dt}
+{dx}}}^{\frac {dy} {dx}} t
+\implies \frac {dy} {dx} = \frac {dy} {dt} \frac {dt} {dx}
+\end{align*}
+:::
+
+::: {.Formula t="Chain Rule"}
+$$\frac {dy} {dx} = \frac {dy} {dt} \frac {dt} {dx}$$
+:::
+
+# Chain Rule: example
+
+::: {.Example t='Chain Rule'}
+Differentiate `diff('sin(x^2)')`
+:::
+
+::: Solution
+Let $y = \sin t$ and $t = x^2$.
+
+$$\frac {dy} {dx} = \frac {dy} {dt} \frac {dt} {dx}
+= (\cos t) (2x) = 2x \cos(x^2)$$
+:::

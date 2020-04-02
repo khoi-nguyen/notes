@@ -73,7 +73,7 @@ def integrate(expr, a = False, b = False):
 def diff(*args):
     args = [sympify(a) if isinstance(a, str) else a for a in args]
     if len(args) == 1 or isinstance(args[1], int):
-        args = [args[0], sympify('x')] + args[1:]
+        args.insert(1, symbols('x'))
     exercise = Derivative(*args)
     solution = simplify(exercise.doit())
     return (latex(exercise), latex(solution))
