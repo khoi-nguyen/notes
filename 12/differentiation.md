@@ -36,5 +36,5 @@ $\text{Gradient} = \lim_{x \to a} \frac {f(x) - f(a)} {x - a}$
 :::
 
 ::: {.Definition t='Derivative'}
-$$f'(a) = \lim_{x \to a} \frac {f(x) - f(a)} {x - a}$$
+$$f'(a) \defeq \lim_{x \to a} \frac {f(x) - f(a)} {x - a}$$
 :::
