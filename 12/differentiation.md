@@ -17,9 +17,10 @@ $$y = f'(a) (x - a) + f(a)$$
 # Definition
 
 ~~~ {.graph b=-2 l=-3 r=7}
-f = '0.2*x^2 + 1'
+f, x = '0.2*x^2 + 1', 2.5
 plot(f)
-showtangent(f, 2)
+showtangent(f, x)
+showcoordinates(f, x, 'a', 'f(a)')
 ~~~
 
 ::: {.Definition t='Derivative'}

@@ -15,6 +15,10 @@ def showtangent(function, a, color='darkgreen'):
     tangent = gradient*(x - a) + expr.subs(x, a)
     return plot(str(tangent), color)
 
+def showcoordinates(function, a, x_text, y_text):
+    y = sympify(function).subs(symbols('x'), a)
+    return f"\draw[dashed] ({a}, 0) node[below] {{${x_text}$}} -- ({a}, {y}) -- (0, {y}) node[left] {{${y_text}$}};"
+
 def tikz_plot(contents, opt):
     options = {'size': 0.5, 'b': -6, 'l': -9, 'r': 9, 't': 6}
     options.update(opt)
@@ -23,7 +27,7 @@ def tikz_plot(contents, opt):
 
     lines = [f"\\begin{{plot}}{{{options['size']}}}{{{options['l']}}}{{{options['b']}}}{{{options['r']}}}{{{options['t']}}}"]
     for l in contents.split('\n'):
-        if re.match('[a-zA-z_-]*\s*=', l):
+        if re.match('[a-zA-z_,\s]*=', l):
             exec(l)
         else:
             lines.append(eval(l))
