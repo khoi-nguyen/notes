@@ -7,7 +7,7 @@ import json
 
 data = []
 
-files = [path for path in Path('.').rglob('*.md') if str(path)[0].isdigit()]
+files = [path for path in sorted(Path('.').rglob('*.md')) if str(path)[0].isdigit()]
 for path in files:
     modified = path.stat().st_mtime
     path = str(path)
