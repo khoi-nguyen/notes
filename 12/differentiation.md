@@ -84,3 +84,22 @@ Differentiate from first principles
 
 #) `diff('x^3', 'x')`
 :::
+
+# Tangent
+
+~~~ {.graph b=-1.5 l=-3 r=7 t=4.5}
+f, a = '0.2*x^2 + 1', 2.5
+plot(f)
+showcoordinates(f, a, 'a', 'f(a)')
+showtangent(f, a)
+~~~
+
+Gradient
+: $f'(a)$
+
+Point
+: $(a, f(a))$
+
+::: {.Formula t="Tangent equation"}
+$$y = f'(a) (x - a) + f(a)$$
+:::
