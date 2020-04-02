@@ -3,6 +3,11 @@ import re
 
 domain = '-9:9'
 
+def gradient(x1, y1, x2, y2):
+    exercise = f"({x1}, {y1}), ({x2}, {y2})"
+    solution = latex(sympify(f"({y2} - {y1}) / ({x2} - {x1})"))
+    return (exercise, solution)
+
 def plot(function, color='darkblue'):
     global domain
     function = function.replace('x', '(\\x)')
