@@ -18,7 +18,7 @@ BEAMER := @. env/bin/activate; pandoc -s -t beamer --pdf-engine=lualatex\
 	--filter ./pandoc/environments.py\
 	--filter ./pandoc/multicols.py
 
-all: $(TARGETS) $(HTML)
+all: $(TARGETS)
 
 deploy: all $(HANDOUTS)
 	. env/bin/activate; python ./data.py
