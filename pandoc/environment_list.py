@@ -1,7 +1,7 @@
 environments = {
     'Definition': {
         'title': 'Definition',
-        'prefix': '\\faBook \\faStar',
+        'prefix': '\\faStar \\faBook',
         'tcolor': 'darkblue',
         'bgcolor': 'lightblue',
     },
