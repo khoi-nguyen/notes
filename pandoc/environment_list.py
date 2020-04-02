@@ -95,4 +95,10 @@ environments = {
         'tcolor': 'darkblue',
         'bgcolor': 'lightblue',
     },
+    'Warning': {
+        'title': 'Warning',
+        'prefix': '\\faWarning',
+        'tcolor': 'darkred',
+        'bgcolor': 'lightred',
+    },
 }
