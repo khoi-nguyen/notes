@@ -8,6 +8,13 @@ def plot(function, color='darkblue'):
     function = function.replace('x', '(\\x)')
     return f'\\plotfunction[{color}]{{{domain}}}{{{function}}}'
 
+def showsecant(function, a, b, color='darkred'):
+    global domain
+    x, expr = symbols('x'), sympify(function)
+    gradient = (expr.subs(x, b) - expr.subs(x, a)) / (b - a)
+    tangent = gradient*(x - a) + expr.subs(x, a)
+    return plot(str(tangent), color)
+
 def showtangent(function, a, color='darkgreen'):
     global domain
     x, expr = symbols('x'), sympify(function)
