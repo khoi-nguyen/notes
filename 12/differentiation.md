@@ -38,3 +38,31 @@ $\text{Gradient} = \lim_{x \to a} \frac {f(x) - f(a)} {x - a}$
 ::: {.Definition t='Derivative'}
 $$f'(a) \defeq \lim_{x \to a} \frac {f(x) - f(a)} {x - a}$$
 :::
+
+# Differentiation from first principles
+
+::: Example
+Differentiate $x^2$ from first principles at $a$.
+:::
+
+::: Solution
+$\lim_{x \to a} \frac {x^2 - a^2} {x - a}
+= \lim_{x \to a} \frac {\cancel{(x - a)} (x + a)} {\cancel{x - a}}
+= 2a$
+:::
+
+# Differentiation from first principles
+
+::: Example
+Differentiate $x$ from first principles at $a$.
+:::
+
+::: Solution
+$\lim_{x \to a} \frac {x - a} {x - a}
+= \lim_{x \to a} \frac {\cancel{(x - a)}} {\cancel{x - a}}
+= 1$
+:::
+
+~~~ {.graph b=-3 l=-3 r=3 t=3}
+plot('x')
+~~~
