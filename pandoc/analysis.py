@@ -7,6 +7,13 @@ def plot(function, color='darkblue'):
     function = function.replace('x', '(\\x)')
     return f'\\plotfunction[{color}]{{{domain}}}{{{function}}}'
 
+def showtangent(function, a, color='darkgreen'):
+    global domain
+    x, expr = symbols('x'), sympify(function)
+    gradient = Derivative(expr, x).doit().subs(x, a)
+    tangent = gradient*(x - a) + expr.subs(x, a)
+    return plot(str(tangent), color)
+
 def tikz_plot(contents, opt):
     options = {'size': 0.5, 'b': -6, 'l': -9, 'r': 9, 't': 6}
     options.update(opt)

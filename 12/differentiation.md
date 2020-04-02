@@ -16,6 +16,11 @@ $$y = f'(a) (x - a) + f(a)$$
 
 # Definition
 
+~~~ {.graph b=-2 l=-3 r=7}
+plot('0.2*x^2 + 1')
+showtangent('0.2*x^2 + 1', 2)
+~~~
+
 ::: {.Definition t='Derivative'}
 $$f'(a) = \lim_{x \to a} \frac {f(x) - f(a)} {x - a}$$
 :::
