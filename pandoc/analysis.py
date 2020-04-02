@@ -24,7 +24,10 @@ def showtangent(function, a, color='darkgreen'):
 
 def showcoordinates(function, a, x_text, y_text):
     y = sympify(function).subs(symbols('x'), a)
-    return f"\draw[dashed] ({a}, 0) node[below] {{${x_text}$}} -- ({a}, {y}) -- (0, {y}) node[left] {{${y_text}$}};"
+    return f"""
+    \draw[dashed] ({a}, 0) node[below] {{\\small ${x_text}$}} -- ({a}, {y}) -- (0, {y}) node[left] {{\\small ${y_text}$}};
+    \draw[fill=black] ({a}, {y}) circle (0.1);
+    """
 
 def tikz_plot(contents, opt):
     options = {'size': 0.5, 'b': -6, 'l': -9, 'r': 9, 't': 6}
