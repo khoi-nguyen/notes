@@ -4,14 +4,16 @@ title: Differentiation
 
 # Starter
 
-::: Starter
-#) Calculate `integrate('sin(x)', 0, pi)`
-#) Differentiate `diff('exp(x^2 + y^2)', 'x', 2, 'y')`
-#) Find the tangent of `tangent('x^x', 2)`
-:::
+::: {.Starter cols=2}
+Find the gradient of a line going through
 
-::: {.Hint show=1 t='Find the tangent'}
-$$y = f'(a) (x - a) + f(a)$$
+#) `gradient(1, 2, 2, 4)`
+#) `gradient(-1, 3, 2, -5)`
+
+Find the equation of the line
+
+#) `line_equation(1, 2, 2, 4)`
+#) `line_equation(3, 1, 1)`
 :::
 
 # Definition
