@@ -12,8 +12,9 @@ def main(key, value, fmt, meta):
             return [bhtml('<div class="multicols">')] + [OrderedList(*value)] + [bhtml('</div>')]
     if key == 'Div':
         [[ident, classes, keyvals], contents] = value
-        if 'cols' in classes:
-            n = dict(keyvals)['n']
+        keyvals = dict(keyvals)
+        if 'n' in keyvals or 'cols' in keyvals:
+            n = keyvals['n'] if 'n' in keyvals else keyvals['cols']
             return [blatex('\\begin{multicols}{' + n + '}')] + contents + [blatex('\\end{multicols}')]
 
 if __name__ == '__main__':

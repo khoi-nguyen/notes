@@ -1,4 +1,4 @@
-from pandocfilters import toJSONFilter, attributes, Math, Span, RawInline, RawBlock
+from pandocfilters import toJSONFilter, attributes, Math, Span, RawInline, RawBlock, Div
 from environment_list import environments
 
 blatex = lambda x: RawBlock('latex', x)
@@ -10,14 +10,18 @@ answer = lambda x, c: [ilatex('\\answer[{}]{{'.format(c))] + x + [ilatex('}')]
 envcount = 1
 first_env = True
 
-def environment(ident, env, keyvals, contents, count):
+def environment(ident, classes, keyvals, contents, count):
+    env = list(set(classes) & set(environments.keys()))
+    env = env[0]
+    classes.remove(env)
     data = environments[env]
     title = '{}: {}'.format(data['title'], keyvals['t'] if 't' in keyvals else '')
     pause = '\\onslide<{}->{{'.format(count)
     begin = f"\\begin{{colorenv}}[{data['bgcolor']}]{{{data['tcolor']}}}"
     begin += f"{{{data['prefix']}\  {data['title']}}}{{{keyvals['t'] if 't' in keyvals else ''}}}"
     end = '\\end{colorenv}}'
-    return [blatex(pause + begin)] + contents + [blatex(end)]
+    keyvals = [[k, v] for k, v in keyvals.items()]
+    return [blatex(pause + begin)] + [Div([ident, classes, keyvals], contents)] + [blatex(end)]
 
 def main(key, value, fmt, meta):
     global envcount, first_env, environments
@@ -41,7 +45,7 @@ def main(key, value, fmt, meta):
                 envcount += 1
             first_env = False
             count = keyvals['show'] if 'show' in keyvals else envcount
-            return environment(ident, classes[0], dict(keyvals), contents, count)
+            return environment(ident, classes, keyvals, contents, count)
 
 if __name__ == '__main__':
     toJSONFilter(main)
