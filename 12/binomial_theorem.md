@@ -60,4 +60,6 @@ Expand $(a + b)^4$ in terms of binomial coefficients
 
 ::: Exercise
 Find the value of the following binomial coefficients
+
+#) `binom(5, 2)`
 :::
