@@ -4,7 +4,12 @@ title: Differentiation
 
 # Starter
 
-#) `integrate('cos(x)', 2, 3)`
-#) `integrate('sin(x)', 0, pi)`
-#) `diff('exp(x^2 + y^2)', 'x', 2, 'y')`
-#) `tangent('x^x', 2)`
+::: Starter
+#) Calculate `integrate('sin(x)', 0, pi)`
+#) Differentiate `diff('exp(x^2 + y^2)', 'x', 2, 'y')`
+#) Find the tangent of `tangent('x^x', 2)`
+:::
+
+::: {.Hint show=1 t='Find the tangent'}
+$$y = f'(a) (x - a) + f(a)$$
+:::
