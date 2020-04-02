@@ -54,7 +54,7 @@ def tikz_plot(contents, opt):
 
     lines = [f"\\begin{{plot}}{{{options['size']}}}{{{options['l']}}}{{{options['b']}}}{{{options['r']}}}{{{options['t']}}}"]
     for l in contents.split('\n'):
-        if re.match('[a-zA-z_,\s]*=', l):
+        if re.match('^[a-zA-z_,\s]*=', l):
             exec(l)
         else:
             lines.append(eval(l))
