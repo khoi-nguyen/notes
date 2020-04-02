@@ -49,14 +49,14 @@ export default {
     },
     mounted() {
         var self = this;
-        var url = 'https://api.github.com/repos/khoi-nguyen/notes/contents/';
+        var url = 'https://api.github.com/repos/khoi-nguyen/teaching/contents/';
         axios.get(url + this.path).then(function (response) {
             let code = atob(response['data']['content']);
             let contents = highlight(code, 'markdown');
             self.contents = contents;
         });
 
-        url = 'https://api.github.com/repos/khoi-nguyen/notes/commits'
+        url = 'https://api.github.com/repos/khoi-nguyen/teaching/commits'
         url += '?path=' + this.path
         // Getting commits
         axios.get(url).then(function (response) {

@@ -1,5 +1,5 @@
 {
-  "name": "notes",
+  "name": "teaching",
   "version": "1.0.0",
   "description": "Teaching resources",
   "main": "index.html",
@@ -32,10 +32,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/khoi-nguyen/notes.git"
+    "url": "git+https://github.com/khoi-nguyen/teaching.git"
   },
   "bugs": {
-    "url": "https://github.com/khoi-nguyen/notes/issues"
+    "url": "https://github.com/khoi-nguyen/teaching/issues"
   },
-  "homepage": "https://github.com/khoi-nguyen/notes#readme"
+  "homepage": "https://github.com/khoi-nguyen/teaching#readme"
 }
