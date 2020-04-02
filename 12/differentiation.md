@@ -103,3 +103,33 @@ Point
 ::: {.Formula t="Tangent equation"}
 $$y = f'(a) (x - a) + f(a)$$
 :::
+
+# Differentiation rules
+
+::: {.Theorem t="Differentiation of usual functions" cols=2}
+#) `diff('k', 'x')`
+#) `diff('x^n', 'x')`
+#) `diff('sin(x)', 'x')`
+#) `diff('cos(x)', 'x')`
+#) `diff('tan(x)', 'x')`
+:::
+
+::: {.Exercise cols=2 t="Differentiate"}
+#) `diff('3*x + 2', 'x')`
+#) `diff('4*x^3 + 2*x^2', 'x')`
+#) `diff('2*cos(x) + 2', 'x')`
+#) `diff('-sin(x) + x^2', 'x')`
+:::
+
+# Leibniz rule
+
+::: {.Theorem t="Leibniz rule"}
+$$(fg)'(x) = f'(x)g(x) + f(x) g'(x)$$
+:::
+
+::: Exercise
+#) `diff('x^2*sin(x)', 'x')`
+#) `diff('sin(x)*cos(x)', 'x')`
+#) `diff('cos(x)^2', 'x')`
+#) `diff('sin(x)^2', 'x')`
+:::
