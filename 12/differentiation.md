@@ -66,3 +66,19 @@ $\lim_{x \to a} \frac {x - a} {x - a}
 ~~~ {.graph b=-3 l=-3 r=3 t=3}
 plot('x')
 ~~~
+
+# Exercises
+
+::: {.Exercise t='Differentiation from first principles'}
+Differentiate from first principles at $a$
+
+#) `diff('3*x + 5', 'x')`
+#) `diff('m*x + c', 'x')`
+#) `diff('k', 'x')`
+:::
+
+::: Extension
+Differentiate from first principles
+
+#) `diff('x^3', 'x')`
+:::
