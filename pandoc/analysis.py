@@ -1,4 +1,5 @@
 from sympy import Integral, symbols, latex, sympify, Derivative
+import re
 
 domain = '-9:9'
 
@@ -22,7 +23,10 @@ def tikz_plot(contents, opt):
 
     lines = [f"\\begin{{plot}}{{{options['size']}}}{{{options['l']}}}{{{options['b']}}}{{{options['r']}}}{{{options['t']}}}"]
     for l in contents.split('\n'):
-        lines.append(eval(l))
+        if re.match('[a-zA-z_-]*\s*=', l):
+            exec(l)
+        else:
+            lines.append(eval(l))
     lines.append('\\end{plot}')
     return '\n'.join(lines)
 

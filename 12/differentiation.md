@@ -17,8 +17,9 @@ $$y = f'(a) (x - a) + f(a)$$
 # Definition
 
 ~~~ {.graph b=-2 l=-3 r=7}
-plot('0.2*x^2 + 1')
-showtangent('0.2*x^2 + 1', 2)
+f = '0.2*x^2 + 1'
+plot(f)
+showtangent(f, 2)
 ~~~
 
 ::: {.Definition t='Derivative'}
