@@ -121,6 +121,30 @@ $$y = f'(a) (x - a) + f(a)$$
 #) `diff('-sin(x) + x^2', 'x')`
 :::
 
+# Radians and degrees
+
+::: {.Warning t="Radians and degrees"}
+The formulae
+$$\sin' = \cos,\quad \cos' = -\sin,\quad \tan' = 1 + \tan^2$$
+are only valid in **radians**.
+:::
+
+::: {.Question t="Degrees or radians?"}
+
+Which graph is in degrees/radians?
+
+::: {.cols n=2}
+~~~ {.graph b=-2 t=2 l=-4 r=4}
+plot('sin(x r)')
+plot('cos(x r)', 'darkgreen')
+~~~
+~~~ {.graph b=-2 t=2 l=-4 r=4}
+plot('sin(x)')
+plot('cos(x)', 'darkgreen')
+~~~
+:::
+:::
+
 # Leibniz rule
 
 ::: {.Theorem t="Leibniz rule"}
