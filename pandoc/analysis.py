@@ -8,6 +8,18 @@ def gradient(x1, y1, x2, y2):
     solution = latex(sympify(f"({y2} - {y1}) / ({x2} - {x1})"))
     return (exercise, solution)
 
+def line_equation(*args):
+    exercise = f'\\text{{grad}} = {args[0]}, ({args[1]}, {args[2]})'
+    args = list(args)
+    if len(args) == 4:
+        x1, y1, x2, y2 = args
+        exercise = f'({x1}, {y1}), ({x2}, {y2})'
+        args = [f"({y2} - {y1}) / ({x2} - {x1})", x2, y2]
+    grad = sympify(args.pop(0))
+    x, a, b = symbols('x'), sympify(args[0]), sympify(args[1])
+    solution = latex(grad * (x - a) + b)
+    return (exercise, f"y = {solution}")
+
 def plot(function, color='darkblue'):
     global domain
     function = function.replace('x', '(\\x)')
