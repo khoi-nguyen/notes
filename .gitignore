@@ -16,3 +16,4 @@ data.json
 *.synctex.gz
 *.tex
 *.toc
+*.vrb
