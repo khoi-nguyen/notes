@@ -13,3 +13,9 @@ title: Differentiation
 ::: {.Hint show=1 t='Find the tangent'}
 $$y = f'(a) (x - a) + f(a)$$
 :::
+
+# Definition
+
+::: {.Definition t='Derivative'}
+$$f'(a) = \lim_{x \to a} \frac {f(x) - f(a)} {x - a}$$
+:::
