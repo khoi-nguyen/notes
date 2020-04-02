@@ -61,5 +61,12 @@ Expand $(a + b)^4$ in terms of binomial coefficients
 ::: Exercise
 Find the value of the following binomial coefficients
 
-#) `binom(5, 2)`
+::: {.cols n=2}
+#) `binom(1, 1)`
+#) `binom(2, 0)`
+#) `binom(3, 2)`
+#) `binom(7, 1)`
+#) `binom(6, 5)`
+#) `binom('n', 1)`
+:::
 :::
