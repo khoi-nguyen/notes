@@ -20,20 +20,18 @@ def line_equation(*args):
     solution = latex(grad * (x - a) + b)
     return (exercise, f"y = {solution}")
 
-def plot(function, color='darkblue'):
+def plot(function, color='darkblue', dom=False):
     global domain
     function = function.replace('x', '(\\x)')
-    return f'\\plotfunction[{color}]{{{domain}}}{{{function}}}'
+    return f'\\plotfunction[{color}]{{{dom if dom else domain}}}{{{function}}}'
 
 def showsecant(function, a, b, color='darkred'):
-    global domain
     x, expr = symbols('x'), sympify(function)
     gradient = (expr.subs(x, b) - expr.subs(x, a)) / (b - a)
     tangent = gradient*(x - a) + expr.subs(x, a)
     return plot(str(tangent), color)
 
 def showtangent(function, a, color='darkgreen'):
-    global domain
     x, expr = symbols('x'), sympify(function)
     gradient = Derivative(expr, x).doit().subs(x, a)
     tangent = gradient*(x - a) + expr.subs(x, a)
