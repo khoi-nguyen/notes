@@ -1,4 +1,4 @@
-from sympy.stats import Normal, Binomial, cdf
+from sympy.stats import Normal, Binomial, Poisson, cdf
 from sympy import binomial, latex, sympify, evalf
 
 def binom(n, k):
@@ -17,5 +17,12 @@ def bin(a, b, n, p):
     exercise = f"P({latex(sympify(a))} < X < {latex(sympify(b))})"
     X = Binomial("X", n, p)
     solution = cdf(X)[b] - cdf(X)[a]
+    solution = solution.evalf().round(3)
+    return (exercise, solution)
+
+def poisson(a, b, k, l):
+    exercise = f"P({latex(sympify(a))} < X < {latex(sympify(b))})"
+    X = Poisson("X", l)
+    solution = cdf(X)(b) - cdf(X)(a)
     solution = solution.evalf().round(3)
     return (exercise, solution)
