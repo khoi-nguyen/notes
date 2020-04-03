@@ -1,4 +1,4 @@
-from sympy import Integral, symbols, latex, sympify, Derivative, simplify
+from sympy import Integral, symbols, latex, sympify, Derivative, simplify as _simplify
 import re
 
 domain = '-9:9'
@@ -73,7 +73,7 @@ def diff(*args):
     if len(args) == 1 or isinstance(args[1], int):
         args.insert(1, symbols('x'))
     exercise = Derivative(*args)
-    solution = simplify(exercise.doit())
+    solution = _simplify(exercise.doit())
     return (latex(exercise), latex(solution))
 
 def tangent(expr, a):
