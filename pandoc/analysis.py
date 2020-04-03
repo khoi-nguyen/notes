@@ -1,11 +1,11 @@
-from sympy import Integral, symbols, latex, sympify, Derivative, simplify as _simplify
+import sympy as s
 import re
 
 domain = '-9:9'
 
 def gradient(x1, y1, x2, y2):
     exercise = f"({x1}, {y1}), ({x2}, {y2})"
-    solution = latex(sympify(f"({y2} - {y1}) / ({x2} - {x1})"))
+    solution = s.latex(s.sympify(f"({y2} - {y1}) / ({x2} - {x1})"))
     return (exercise, solution)
 
 def line_equation(*args):
@@ -15,9 +15,9 @@ def line_equation(*args):
         x1, y1, x2, y2 = args
         exercise = f'({x1}, {y1}), ({x2}, {y2})'
         args = [f"({y2} - {y1}) / ({x2} - {x1})", x2, y2]
-    grad = sympify(args.pop(0))
-    x, a, b = symbols('x'), sympify(args[0]), sympify(args[1])
-    solution = latex(grad * (x - a) + b)
+    grad = s.sympify(args.pop(0))
+    x, a, b = s.symbols('x'), s.sympify(args[0]), s.sympify(args[1])
+    solution = s.latex(grad * (x - a) + b)
     return (exercise, f"y = {solution}")
 
 def plot(function, color='darkblue', dom=False):
@@ -26,19 +26,19 @@ def plot(function, color='darkblue', dom=False):
     return f'\\plotfunction[{color}]{{{dom if dom else domain}}}{{{function}}}'
 
 def showsecant(function, a, b, color='darkred'):
-    x, expr = symbols('x'), sympify(function)
+    x, expr = s.symbols('x'), s.sympify(function)
     gradient = (expr.subs(x, b) - expr.subs(x, a)) / (b - a)
     tangent = gradient*(x - a) + expr.subs(x, a)
     return plot(str(tangent), color)
 
 def showtangent(function, a, color='darkgreen'):
-    x, expr = symbols('x'), sympify(function)
-    gradient = Derivative(expr, x).doit().subs(x, a)
+    x, expr = s.symbols('x'), s.sympify(function)
+    gradient = s.Derivative(expr, x).doit().subs(x, a)
     tangent = gradient*(x - a) + expr.subs(x, a)
     return plot(str(tangent), color)
 
 def showcoordinates(function, a, x_text, y_text):
-    y = sympify(function).subs(symbols('x'), a)
+    y = s.sympify(function).subs(s.symbols('x'), a)
     return f"""
     \draw[dashed] ({a}, 0) node[below] {{\\small ${x_text}$}} -- ({a}, {y}) -- (0, {y}) node[left] {{\\small ${y_text}$}};
     \draw[fill=black] ({a}, {y}) circle (0.1);
@@ -61,25 +61,25 @@ def tikz_plot(contents, opt):
 
 def integrate(expr, a = False, b = False):
     if a or b:
-        expr = Integral(sympify(expr), (symbols('x'), a, b))
+        expr = s.Integral(sympify(expr), (symbols('x'), a, b))
     else:
-        expr = Integral(sympify(expr))
-    exercise = latex(expr)
-    solution = latex(expr.doit())
+        expr = s.Integral(sympify(expr))
+    exercise = s.latex(expr)
+    solution = s.latex(expr.doit())
     return (exercise, solution)
 
 def diff(*args):
-    args = [sympify(a) if isinstance(a, str) else a for a in args]
+    args = [s.sympify(a) if isinstance(a, str) else a for a in args]
     if len(args) == 1 or isinstance(args[1], int):
-        args.insert(1, symbols('x'))
-    exercise = Derivative(*args)
-    solution = _simplify(exercise.doit())
-    return (latex(exercise), latex(solution))
+        args.insert(1, s.symbols('x'))
+    exercise = s.Derivative(*args)
+    solution = s.simplify(exercise.doit())
+    return (s.latex(exercise), s.latex(solution))
 
 def tangent(expr, a):
-    x, expr = symbols('x'), sympify(expr)
+    x, expr = s.symbols('x'), s.sympify(expr)
     exercise = f"y = {latex(expr)} \\text{{ at }} x = {a}"
-    gradient = Derivative(expr, x).doit().subs(x, a)
+    gradient = s.Derivative(expr, x).doit().subs(x, a)
     solution = gradient*(x - a) + expr.subs(x, a)
     solution = f"y = {latex(solution)}"
     return(exercise, solution)

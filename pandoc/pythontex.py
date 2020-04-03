@@ -4,6 +4,8 @@ from analysis import *
 from stats import *
 from probability import *
 
+oo = s.oo
+
 # Shortcuts
 blatex = lambda x: RawBlock('latex', x)
 ilatex = lambda x: RawInline('latex', x)
