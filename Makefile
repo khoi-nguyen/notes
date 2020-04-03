@@ -1,9 +1,18 @@
-MARKDOWN := $(shell find * -name '*.md' | grep -v '^\(env\|node\|www\|README\)')
-DEPENDENCIES := Makefile $(shell find pandoc/*)
+ifeq ($(OS),Windows_NT)
+	MARKDOWN := $(shell dir /b /S *.md)
+	DEPENDENCIES := Makefile $(shell dir /b pandoc\\*.md)
+	ENV :=
+	LATEX := lualatex
+else
+	MARKDOWN := $(shell find * -name '*.md' | grep -v '^\(env\|node\|www\|README\)')
+	DEPENDENCIES := Makefile $(shell find pandoc/*)
+	ENV := source env/bin/activate;
+	LATEX := latexmk -silent -lualatex -cd -f
+endif
 TARGETS := $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.pdf)
 HANDOUTS := $(MARKDOWN:.md=.handout.tex) $(MARKDOWN:.md=.handout.pdf)
 HTML := $(MARKDOWN:.md=.html)
-PANDOC := @. env/bin/activate; pandoc -s -t revealjs --mathjax\
+PANDOC := . env/bin/activate; pandoc -s -t revealjs --mathjax\
 	--css ../pandoc/style.css\
 	-V theme=white\
 	-V height='"100%"'\
@@ -12,7 +21,7 @@ PANDOC := @. env/bin/activate; pandoc -s -t revealjs --mathjax\
 	--filter ./pandoc/pythontex.py\
 	--filter ./pandoc/environments.py\
 	--filter ./pandoc/multicols.py
-BEAMER := @. env/bin/activate; pandoc -s -t beamer --pdf-engine=lualatex\
+BEAMER := $(ENV) pandoc -s -t beamer --pdf-engine=lualatex\
 	--template=./pandoc/beamer.tex\
 	--filter ./pandoc/pythontex.py\
 	--filter ./pandoc/environments.py\
@@ -33,11 +42,11 @@ clean:
 
 %.html: %.md $(DEPENDENCIES)
 	@echo Generating $@...
-	$(PANDOC) -s $< -o $@
+	@$(PANDOC) -s $< -o $@
 
 %.tex: %.md $(DEPENDENCIES)
 	@echo Generating $@...
-	$(BEAMER) -s $< -o $@
+	@$(BEAMER) -s $< -o $@
 
 %.handout.tex: %.md $(DEPENDENCIES)
 	@echo Building $@...
@@ -45,7 +54,7 @@ clean:
 
 %.pdf: %.tex
 	@echo Building $@ with LaTeX...
-	@latexmk -silent -lualatex -cd -f $<
+	@$(LATEX) $<
 
 env: env/bin/activate
 
