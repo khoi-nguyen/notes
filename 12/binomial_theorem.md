@@ -104,4 +104,5 @@ $$\binom n k = \binom {n - 1} {k - 1} + \binom {n - 1} k$$
 
 ::: Exercise
 #) `normal(-1, oo, 0, 1)`
+#) `bin(2, 5, 10, 0.25)`
 :::
