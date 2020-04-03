@@ -87,7 +87,7 @@ def showfrac(num, den, op = False, num2 = 1, den2 = 1):
     lines.append('\\end{tikzpicture}')
     return '\n'.join(lines)
 
-def rectfrac(num, den, num2 = 1, den2 = 1, side = 5):
+def rectfrac(num, den, num2 = 1, den2 = 1, side = 4):
     lines = ['\\begin{tikzpicture}']
     lines.append(f'\\draw (0, 0) rectangle ({side}, {side});')
     if num2 != 1 or den2 != 1:
