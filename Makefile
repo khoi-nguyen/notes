@@ -7,7 +7,7 @@ else
 	MARKDOWN := $(shell find * -name '*.md' | grep -v '^\(env\|node\|www\|README\)')
 	DEPENDENCIES := Makefile $(shell find pandoc/*)
 	ENV := source env/bin/activate;
-	LATEX := latexmk -silent -lualatex -cd -f
+	LATEX := latexmk -silent -lualatex -f
 endif
 TARGETS := $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.pdf)
 HANDOUTS := $(MARKDOWN:.md=.handout.tex) $(MARKDOWN:.md=.handout.pdf)
@@ -54,7 +54,7 @@ clean:
 
 %.pdf: %.tex
 	@echo Building $@ with LaTeX...
-	@$(LATEX) $<
+	@cd $(<D); $(LATEX) $(<F)
 
 env: env/bin/activate
 
