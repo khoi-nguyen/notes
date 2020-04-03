@@ -7,7 +7,7 @@
     table.table.table-striped.table-hover.table-bordered
         thead.thead-dark
             tr
-                th Year
+                th Level
                 th Title
                 th Last modification
         tbody
