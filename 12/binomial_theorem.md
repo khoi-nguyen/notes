@@ -99,3 +99,9 @@ If we **separate** the last character, an $n$-string with k $a$ is
 ::: {.Formula t="Pascal's property"}
 $$\binom n k = \binom {n - 1} {k - 1} + \binom {n - 1} k$$
 :::
+
+# Normal
+
+::: Exercise
+#) `normal(-1, oo, 0, 1)`
+:::
