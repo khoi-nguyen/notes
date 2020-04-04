@@ -8,3 +8,8 @@
   out: 
     - 4^{2}\times 4^{3}
     - 4^{5}
+- name: Exercise overwrite
+  cmd: mult('x^3', 'x^4', l='hello')
+  out:
+    - hello
+    - x^{7}
