@@ -1,6 +1,21 @@
 \documentclass{article}
 \usepackage{../pandoc/common}
 
+\usepackage{avant}
+\usepackage{titlesec}
+\titleformat{\chapter}
+{\color{darkblue}\Huge\sffamily}
+{\color{darkblue}\thechapter}{0.8em}{}
+\titleformat{\section}
+{\color{darkblue}\normalfont\LARGE\sffamily}
+{\color{darkblue}\thesection}{0.8em}{}
+\titleformat{\subsection}
+{\color{darkblue}\normalfont\Large\sffamily}
+{\color{darkblue}\thesubsection}{0.8em}{}
+\titleformat{\subsubsection}
+{\color{darkgreen}\normalfont\sffamily}
+{\color{darkgreen}\thesubsubsection}{0.8em}{}
+
 $if(title)$
 \title{$title$}
 $endif$
@@ -9,7 +24,7 @@ $if(subtitle)$
 \subtitle{$subtitle$}
 $endif$
 
-\newcommand{\answer}[2][2]{\hfill{\emph{#2}}}
+\newcommand{\answer}[2][2]{\hfill{\color{darkred} {#2}}}
 
 \begin{document}
 
