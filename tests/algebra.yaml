@@ -28,3 +28,8 @@
   out:
     - \br{2^{3}}^{4}
     - 2^{12}
+- name: Expanding index
+  cmd: expindex(2, 3)
+  out:
+    - '{2}^{3}'
+    - 2 \times 2 \times 2
