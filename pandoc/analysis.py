@@ -5,6 +5,7 @@ domain = '-9:9'
 
 def sympy2tikz(function):
     function = function.replace('x', '(\\x)')
+    function = function.replace('**', '^')
     op = [m.end() for m in re.finditer('sin|cos|tan', function)]
     changes = [(pos, '(') for pos in op]
     level, levels = 0, []
