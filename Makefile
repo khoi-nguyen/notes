@@ -18,6 +18,7 @@ BEAMER := $(ENV) pandoc -s -t beamer --pdf-engine=lualatex\
 	--filter ./pandoc/multicols.py
 
 all: $(TARGETS)
+	@$(ENV) python ./pandoc/run_test.py
 
 deploy: all $(HANDOUTS)
 	. env/bin/activate; python ./data.py
