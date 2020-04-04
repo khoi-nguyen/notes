@@ -101,10 +101,4 @@ environments = {
         'tcolor': 'darkred',
         'bgcolor': 'lightred',
     },
-    'Homework': {
-        'title': 'Homework',
-        'prefix': '\\faHome',
-        'tcolor': 'darkorange',
-        'bgcolor': 'lightorange',
-    },
 }
