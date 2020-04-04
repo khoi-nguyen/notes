@@ -11,6 +11,9 @@ blatex = lambda x: RawBlock('latex', x)
 ilatex = lambda x: RawInline('latex', x)
 imath = lambda x: Math({'t': 'InlineMath'}, x)
 
+answer = lambda x: ('', x[1]) if isinstance(x, tuple) else ('', x)
+question = lambda x: x[0]
+
 def main(key, value, fmt, meta):
     if key == 'Code':
         [[ident, classes, keyvals], contents] = value

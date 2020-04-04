@@ -1,3 +1,12 @@
 - name: Check sympy imports
   cmd: "'sympify' in globals()"
   out: False
+- name: Test 'answer' function on tuple
+  cmd: answer(('hello', 'bonjour'))
+  out: ['', 'bonjour']
+- name: Test 'answer' function on string/int/float
+  cmd: answer(5)
+  out: ['', 5]
+- name: Test 'question' function
+  cmd: question(('hello', 'bonjour'))
+  out: 'hello'
