@@ -1,3 +1,4 @@
+# Indices
 - name: Index evaluation
   cmd: simplify('3^2')
   out:
@@ -38,6 +39,7 @@
   out:
     - '{2}^{3}'
     - 2 \times 2 \times 2
+# Equations
 - name: Solving linear equation
   cmd: equation('3*x + 4 = 10')
   out:
@@ -53,3 +55,13 @@
   out:
     - 'x^{2} - x - 12 = 0'
     - '-3, 4'
+- name: Factorising
+  cmd: factorise(s.expand('(x - 2)*(x + 3)'))
+  out:
+    - 'x^{2} + x - 6'
+    - '\left(x - 2\right) \left(x + 3\right))'
+- name: Completing the square
+  cmd: complete_square(s.expand('2*(x + 2)^2 + 3'))
+  out:
+    - '2 x^{2} + 8 x + 11'
+    - '2 \left(x + 2\right)^{2} + 3'
