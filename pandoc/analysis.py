@@ -3,6 +3,26 @@ import re
 
 domain = '-9:9'
 
+def sympy2tikz(function):
+    function = function.replace('x', '(\\x)')
+    op = [m.end() for m in re.finditer('sin|cos|tan', function)]
+    changes = [(pos, '(') for pos in op]
+    level, levels = 0, []
+    for p, c in enumerate(list(function)):
+        if c == '(':
+            level += 1
+            if p in op:
+                levels.append(level)
+                pass
+        elif c == ')':
+            if len(levels) and level == levels[-1]:
+                changes.append((p, ')r'))
+                levels.pop()
+            level -= 1
+    for pos, str in sorted(changes, key=lambda x: x[0], reverse=True):
+        function = function[:pos] + str + function[pos:]
+    return function
+
 def gradient(x1, y1, x2, y2):
     exercise = f"({x1}, {y1}), ({x2}, {y2})"
     solution = s.latex(s.sympify(f"({y2} - {y1}) / ({x2} - {x1})"))
@@ -22,8 +42,7 @@ def line_equation(*args):
 
 def plot(function, color='darkblue', dom=False):
     global domain
-    function = function.replace('x', '(\\x)')
-    return f'\\plotfunction[{color}]{{{dom if dom else domain}}}{{{function}}}'
+    return f'\\plotfunction[{color}]{{{dom if dom else domain}}}{{{sympy2tikz(function)}}}'
 
 def showsecant(function, a, b, color='darkred'):
     x, expr = s.symbols('x'), s.sympify(function)
