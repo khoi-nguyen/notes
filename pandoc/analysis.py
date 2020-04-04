@@ -57,6 +57,18 @@ def showtangent(function, a, color='darkgreen'):
     tangent = gradient*(x - a) + expr.subs(x, a)
     return plot(str(tangent), color)
 
+def taylor(function, a, order):
+    poly, f, x = 0, s.sympify(function), s.symbols('x')
+    for i in range(0, order + 1):
+        poly += (f.diff(x, i).subs(x, a))/(s.factorial(i)) * (x - a)**i
+    return poly
+
+taylor_poly = lambda f, a, n: s.latex(taylor(f, a, n))
+
+def showtaylor(function, a, order, color='darkgreen', dom=False):
+    x, expr = s.symbols('x'), s.sympify(function)
+    return plot(str(taylor(function, a, order)), color, dom)
+
 def showcoordinates(function, a, x_text, y_text):
     y = s.sympify(function).subs(s.symbols('x'), a)
     return f"""
