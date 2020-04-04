@@ -3,7 +3,6 @@ from environment_list import environments
 import re
 
 blatex = lambda x: RawBlock('latex', x)
-bhtml = lambda x: RawBlock('html', x)
 ilatex = lambda x: RawInline('latex', x)
 imath = lambda x: Math({'t': 'InlineMath'}, x)
 answer = lambda x, c: [ilatex('\\answer[{}]{{'.format(c))] + x + [ilatex('}')]
@@ -35,7 +34,7 @@ def main(key, value, fmt, meta):
         [[ident, classes, keyvals], contents] = value
         if 'gap' in classes:
             return ilatex('\\vspace{' + contents[0]['c'] + '}')
-        elif 'answer' in classes and fmt == 'beamer':
+        elif 'answer' in classes:
             envcount += 1
             return answer(contents, envcount)
     elif key == 'Header' and value[0] == 1:
@@ -45,8 +44,6 @@ def main(key, value, fmt, meta):
         [[ident, classes, keyvals], contents] = value
         keyvals = dict(keyvals)
         if len(set(classes) & set(environments.keys())) > 0:
-            if fmt == 'revealjs':
-                return [bhtml(f'<div><h4>{environments[classes[0]]["title"]}</h4>')] + contents + [bhtml('</div>')]
             if not first_env and not 'show' in keyvals:
                 envcount += 1
             first_env = False
