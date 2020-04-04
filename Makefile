@@ -11,16 +11,6 @@ else
 endif
 TARGETS := $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.pdf)
 HANDOUTS := $(MARKDOWN:.md=.handout.tex) $(MARKDOWN:.md=.handout.pdf)
-HTML := $(MARKDOWN:.md=.html)
-PANDOC := . env/bin/activate; pandoc -s -t revealjs --mathjax\
-	--css ../pandoc/style.css\
-	-V theme=white\
-	-V height='"100%"'\
-	-V width='"100%"'\
-	-V revealjs-url=https://revealjs.com\
-	--filter ./pandoc/pythontex.py\
-	--filter ./pandoc/environments.py\
-	--filter ./pandoc/multicols.py
 BEAMER := $(ENV) pandoc -s -t beamer --pdf-engine=lualatex\
 	--template=./pandoc/beamer.tex\
 	--filter ./pandoc/pythontex.py\
@@ -39,10 +29,6 @@ deploy: all $(HANDOUTS)
 clean:
 	@echo Removing all temporary files
 	@find [0-9]* -type f | grep -v '\(md\)$$' | xargs rm
-
-%.html: %.md $(DEPENDENCIES)
-	@echo Generating $@...
-	@$(PANDOC) -s $< -o $@
 
 %.tex: %.md $(DEPENDENCIES)
 	@echo Generating $@...
