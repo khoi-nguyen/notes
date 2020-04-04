@@ -11,11 +11,11 @@ else
 endif
 TARGETS := $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.pdf)
 HANDOUTS := $(MARKDOWN:.md=.handout.tex) $(MARKDOWN:.md=.handout.pdf)
-BEAMER := $(ENV) pandoc -s -t beamer --pdf-engine=lualatex\
-	--template=./pandoc/beamer.tex\
+PANDOC := $(ENV) pandoc -s --pdf-engine=lualatex\
 	--filter ./pandoc/pythontex.py\
 	--filter ./pandoc/environments.py\
 	--filter ./pandoc/multicols.py
+BEAMER := $(PANDOC) -t beamer --template=./pandoc/beamer.tex
 
 all: $(TARGETS)
 
