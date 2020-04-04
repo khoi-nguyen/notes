@@ -1,5 +1,8 @@
-- name: Check sympy imports
-  cmd: "'sympify' in globals()"
+- name: 'Check `from sympy import *` was not used'
+  cmd: "'sympify' in vars()"
+  out: False
+- name: 'Check `import sympy` was not used'
+  cmd: "'sympy' in vars()"
   out: False
 - name: Test 'answer' function on tuple
   cmd: answer(('hello', 'bonjour'))

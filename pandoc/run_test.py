@@ -6,7 +6,6 @@ from analysis import *
 from stats import *
 from probability import *
 from pythontex import *
-import sympy
 
 for path in glob('./tests/*.yaml'):
     with open(path) as file:
