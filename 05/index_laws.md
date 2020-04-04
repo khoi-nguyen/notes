@@ -4,17 +4,20 @@ title: Indices
 
 # Starter
 
-::: Starter
+::: {.Starter cols=2}
+Expand the following:
+
+#) `expindex(3, 4)`
+#) `expindex(10, 3)`
+#) `expindex(2, 5)`
+#) `expindex(9, 4)`
+
 Evaluate the following:
 
-#) `simplify('3^2')`
+5) `simplify('3^2')`
 #) `simplify('5^2')`
 #) `simplify('2^3')`
 #) `simplify('7^1')`
-#) `simplify('3^3')`
-#) `simplify('12^2')`
-#) `simplify('4^3')`
-#) `simplify('1^4')`
 :::
 
 ::: {.Extension show=1}
@@ -42,6 +45,17 @@ Index
 \draw[darkorange,thick,->] (0.8, 0) -- (index.west);
 \end{tikzpicture}
 \end{center}
+
+# Index
+
+::: Example
+For each example: which number is the base? Which is the exponent? [1cm]{.gap}
+
+#) $4^7$ [1cm]{.gap}
+
+#) $10^4$ [1cm]{.gap}
+:::
+
 
 # Multiplying Indices
 
@@ -103,6 +117,7 @@ Evaluate the following:
 Simplify $2^5 \div 2^3$
 :::
 
+::: Solution
 \begin{align*}
 2^5 \div 2^3
 = \frac {2^5} {2^3}
@@ -110,6 +125,22 @@ Simplify $2^5 \div 2^3$
 {\cancel 2 \times \cancel 2 \times \cancel 2}
 = 2^2
 \end{align*}
+:::
+
+# Dividing indices
+
+::: {.Exercise cols=2 t="Simplify the following"}
+
+#) `frac('a^5', 'a^2', a=4)`
+#) `frac('a^6', 'a^3', a=6)`
+#) `div('x^9', 'x^4')`
+#) `frac('y^6', 'y^2')`
+#) `div('x^4', 'x^3')`
+:::
+
+::: Question
+How could we spot the answer without writing the product out?
+:::
 
 ::: {.Formula t="Second Law of Indices"}
 $$x^a \div x^b = \frac {x^a} {x^b} = x^{a - b}$$
@@ -120,7 +151,7 @@ $$x^a \div x^b = \frac {x^a} {x^b} = x^{a - b}$$
 ::: Exercise
 Simplify the following:
 
-#) `div('a^7', 'a^2', a=3)`
+#) `frac('a^7', 'a^2', a=3)`
 #) `frac('a^6', 'a^4', a=7)`
 #) `div('a^12', 'a^9', a=2)`
 #) `div('x^8', 'x^3')`
@@ -134,7 +165,7 @@ Simplify the following:
 Simplify the following:
 
 #) `div('a^4', 'a^-2', a=7)`
-#) `div('y^2', 'x^-5', l='y^2 \\div x^{-5}')`
+#) `div('y^2', 'y^-5', l='y^2 \\div y^{-5}')`
 #) `div('a^14', 'a^14', a=23)`
 :::
 
@@ -148,11 +179,28 @@ Simplify `power('a^3', 4, a=2)`
 $$\br{2^3}^4 = 2^3 \times 2^3 \times 2^3 \times 2^3 = 2^{12}$$
 :::
 
+# Powers of indices
+
+::: Exercise
+Simplify the following:
+
+#) `power('a^2', '2', a=3)`
+#) `power('a^4', '3', a=5)`
+#) `power('a^3', '3', a=7)`
+#) `power('a^10', '2', a=5)`
+#) `power('x^5', '4')`
+#) `power('y^10', '7')`
+:::
+
+::: Question
+How could we spot the answer without writing the product out?
+:::
+
 ::: {.Formula t="Third Law of Indices"}
 $$(x^a)^b = x^{ab}$$
 :::
 
-# Power of Indices
+# Powers of Indices
 
 ::: Exercise
 Simplify the following:
@@ -167,7 +215,7 @@ Simplify the following:
 #) `power('a^y', 'b')`
 :::
 
-::: Extension
+::: {.Extension show=1}
 Simplify the following:
 
 #) `power('a^-2', 4, a=5)`
