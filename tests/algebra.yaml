@@ -59,7 +59,7 @@
   cmd: factorise(s.expand('(x - 2)*(x + 3)'))
   out:
     - 'x^{2} + x - 6'
-    - '\left(x - 2\right) \left(x + 3\right))'
+    - '\left(x - 2\right) \left(x + 3\right)'
 - name: Completing the square
   cmd: complete_square(s.expand('2*(x + 2)^2 + 3'))
   out:
