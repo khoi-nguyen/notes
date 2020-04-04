@@ -4,7 +4,7 @@ title: Differentiation
 
 # Starter
 
-::: {.Starter cols=2}
+::: {.Starter cols=2 t="Gradient and line equations"}
 Find the gradient of a line going through
 
 #) `gradient(1, 2, 2, 4)`
@@ -14,6 +14,23 @@ Find the equation of the line
 
 #) `line_equation(1, 2, 2, 4)`
 #) `line_equation(3, 1, 1)`
+:::
+
+# Motivations: minimums and maximums
+
+~~~ {.graph b=-2 t=2 l=-5 r=5}
+f = s.Integral('0.12*(x + 2)*(x - 3)').doit()
+plot(f)
+showtangent(f, -2, 'darkgreen', '-3:-1')
+showtangent(f, 3, 'darkgreen', '2:4')
+~~~
+
+::: {.Question t="Finding extrema"}
+How do you find **maximums** and **minimums**?
+:::
+
+::: {.Idea t="Critical points"}
+We look at points where the **gradient** is **zero**.
 :::
 
 # Motivations: polynomial approximations
