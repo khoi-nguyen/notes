@@ -16,6 +16,7 @@ PANDOC := $(ENV) pandoc -s --pdf-engine=lualatex\
 	--filter ./pandoc/environments.py\
 	--filter ./pandoc/multicols.py
 BEAMER := $(PANDOC) -t beamer --template=./pandoc/beamer.tex
+WORKSHEET := $(PANDOC) -t latex --template=./pandoc/worksheet.tex
 
 all: $(TARGETS)
 
@@ -29,6 +30,10 @@ deploy: all $(HANDOUTS)
 clean:
 	@echo Removing all temporary files
 	@find [0-9]* -type f | grep -v '\(md\)$$' | xargs rm
+
+%.worksheet.tex: %.worksheet.md $(DEPENDENCIES)
+	@echo Generating worksheet for $@...
+	@$(WORKSHEET) -s $< -o $@
 
 %.tex: %.md $(DEPENDENCIES)
 	@echo Generating $@...
