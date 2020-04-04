@@ -26,7 +26,8 @@ tests:
 
 all: tests $(SLIDES) $(HANDOUTS)
 
-deploy: all
+deploy:
+	make all
 	. env/bin/activate; python ./data.py
 	parcel build index.html --out-dir www --public-url ./ --no-cache
 	ls -d */ | grep '^[0-9]' | xargs -I {} cp -R {} www
