@@ -1,0 +1,10 @@
+# Plots
+- name: Check x is replaced by \x in \plot
+  cmd: plot('x')
+  out: \plotfunction[darkblue]{-9:9}{(\x)}
+- name: Changing plot color
+  cmd: plot('x', 'darkred')
+  out: \plotfunction[darkred]{-9:9}{(\x)}
+- name: Changing plot domain
+  cmd: plot('x', 'darkred', '3:4')
+  out: \plotfunction[darkred]{3:4}{(\x)}
