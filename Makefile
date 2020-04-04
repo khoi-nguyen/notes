@@ -11,11 +11,12 @@ else
 endif
 TARGETS := $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.pdf)
 HANDOUTS := $(MARKDOWN:.md=.handout.tex) $(MARKDOWN:.md=.handout.pdf)
-BEAMER := $(ENV) pandoc -s -t beamer --pdf-engine=lualatex\
-	--template=./pandoc/beamer.tex\
+PANDOC := $(ENV) pandoc -s --pdf-engine=lualatex\
 	--filter ./pandoc/pythontex.py\
 	--filter ./pandoc/environments.py\
 	--filter ./pandoc/multicols.py
+BEAMER := $(PANDOC) -t beamer --template=./pandoc/beamer.tex
+WORKSHEET := $(PANDOC) -t latex --template=./pandoc/worksheet.tex
 
 all: $(TARGETS)
 	@$(ENV) python ./pandoc/run_test.py
@@ -30,6 +31,10 @@ deploy: all $(HANDOUTS)
 clean:
 	@echo Removing all temporary files
 	@find [0-9]* -type f | grep -v '\(md\)$$' | xargs rm
+
+%.worksheet.tex: %.worksheet.md $(DEPENDENCIES)
+	@echo Generating worksheet for $@...
+	@$(WORKSHEET) -s $< -o $@
 
 %.tex: %.md $(DEPENDENCIES)
 	@echo Generating $@...

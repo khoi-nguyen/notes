@@ -15,13 +15,13 @@ def add_transition(m):
     envcount += 1
     return f"\\onslide<{envcount}->{{{m.group(1)}}}"
 
-def environment(ident, classes, keyvals, contents, count):
+def environment(ident, classes, keyvals, contents, count, fmt):
     env = list(set(classes) & set(environments.keys()))
     env = env[0]
     classes.remove(env)
     data = environments[env]
     title = '{}: {}'.format(data['title'], keyvals['t'] if 't' in keyvals else '')
-    pause = '\\onslide<{}->{{'.format(count)
+    pause = '\\onslide<{}->{{'.format(count) if fmt == 'beamer' else '{'
     begin = f"\\begin{{colorenv}}[{data['bgcolor']}]{{{data['tcolor']}}}"
     begin += f"{{{data['prefix']}\  {data['title']}}}{{{keyvals['t'] if 't' in keyvals else ''}}}"
     end = '\\end{colorenv}}'
@@ -48,7 +48,7 @@ def main(key, value, fmt, meta):
                 envcount += 1
             first_env = False
             count = keyvals['show'] if 'show' in keyvals else envcount
-            return environment(ident, classes, keyvals, contents, count)
+            return environment(ident, classes, keyvals, contents, count, fmt)
     elif key == 'RawBlock' and value[0] == 'latex':
         [fmt, code] = value
         regex = re.compile(r'(\\plotfunction.*|\\draw.*\\draw.*)$', re.MULTILINE)
