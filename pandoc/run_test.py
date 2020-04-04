@@ -5,7 +5,7 @@ from algebra import *
 from analysis import *
 from stats import *
 from probability import *
-import sympy
+from pythontex import *
 
 for path in glob('./tests/*.yaml'):
     with open(path) as file:
