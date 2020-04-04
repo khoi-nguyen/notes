@@ -35,6 +35,12 @@ environments = {
         'tcolor': 'darkgreen',
         'bgcolor': 'lightgreen',
     },
+    'Idea': {
+        'title': 'Key Idea',
+        'prefix': '\\faLightbulbO',
+        'tcolor': 'darkgreen',
+        'bgcolor': 'lightgreen',
+    },
     'Method': {
         'title': 'Method',
         'prefix': '\\faList \\faGears',
