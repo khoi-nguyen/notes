@@ -13,7 +13,7 @@ Completing the square
 #) Solve `equation('x^2 + 3 = 12')`
 #) Solve `equation('2*x^2 + 3 = 53')`
 #) Solve `equation('3*x^2 - 4 = -4')`
-#) Factorise `factorise('(x - 2)*(x + 3)')`
+#) Factorise `factorise(s.expand('(x - 2)*(x + 3)'))`
 
 # Difficulty of quadratic equations
 

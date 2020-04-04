@@ -20,10 +20,12 @@ def environment(ident, classes, keyvals, contents, count, fmt):
     env = env[0]
     classes.remove(env)
     data = environments[env]
-    title = '{}: {}'.format(data['title'], keyvals['t'] if 't' in keyvals else '')
+    title = keyvals['t'] if 't' in keyvals else ''
+    if env == 'Objective' and title == '':
+        title = '\\today'
     pause = '\\onslide<{}->{{'.format(count) if fmt == 'beamer' else '{'
     begin = f"\\begin{{colorenv}}[{data['bgcolor']}]{{{data['tcolor']}}}"
-    begin += f"{{{data['prefix']}\  {data['title']}}}{{{keyvals['t'] if 't' in keyvals else ''}}}"
+    begin += f"{{{data['prefix']}\  {data['title']}}}{{{title}}}"
     end = '\\end{colorenv}}'
     keyvals = [[k, v] for k, v in keyvals.items()]
     return [blatex(pause + begin)] + [Div([ident, classes, keyvals], contents)] + [blatex(end)]
