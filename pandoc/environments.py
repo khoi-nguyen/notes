@@ -21,7 +21,7 @@ def environment(ident, classes, keyvals, contents, count, fmt):
     classes.remove(env)
     data = environments[env]
     title = '{}: {}'.format(data['title'], keyvals['t'] if 't' in keyvals else '')
-    pause = '\\onslide<{}->{{'.format(count) if fmt == 'beamer' else ''
+    pause = '\\onslide<{}->{{'.format(count) if fmt == 'beamer' else '{'
     begin = f"\\begin{{colorenv}}[{data['bgcolor']}]{{{data['tcolor']}}}"
     begin += f"{{{data['prefix']}\  {data['title']}}}{{{keyvals['t'] if 't' in keyvals else ''}}}"
     end = '\\end{colorenv}}'
