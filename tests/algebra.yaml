@@ -1,4 +1,5 @@
-- cmd: mult('a^2', 'a^3', a=4)
+- name: Index multiplication
+  cmd: mult('a^2', 'a^3', a=4)
   out: 
-    - 4^2 \times 4^3
-    - 4^5
+    - 4^{2}\times 4^{3}
+    - 4^{5}
