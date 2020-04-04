@@ -48,7 +48,7 @@ clean:
 
 %.pdf: %.tex
 	@echo Building $@ with LaTeX...
-	@$(LATEX) $@
+	@$(LATEX) $<
 
 env: env/bin/activate
 
