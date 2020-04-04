@@ -57,6 +57,24 @@ plot(f)
 showtaylor(f, 0, 5, 'darkgreen', '-4:4')
 ~~~
 
+# Motivations: Finding $x$-intercepts
+
+~~~ {.graph b=-2 t=2 l=-5 r=5}
+f = '0.15*(x - 2.2)*(x + 3)'
+plot(f)
+showtangent(f, 2)
+~~~
+
+::: {.Question t="Finding $x$-intercepts"}
+How to estimate the $x$-intercept?
+:::
+
+::: {.Idea t="Newton-Raphson"}
+- The $x$-intercept is close to $2$
+- We **approximate by a line** around $2$
+- We find the **$x$-intercept** of the **line**.
+:::
+
 # Definition
 
 ::: {.cols n=2}
