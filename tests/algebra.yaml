@@ -1,0 +1,15 @@
+- name: Index evaluation
+  cmd: simplify('3^2')
+  out:
+    - 3^{2}
+    - '9'
+- name: Index multiplication
+  cmd: mult('a^2', 'a^3', a=4)
+  out: 
+    - 4^{2}\times 4^{3}
+    - 4^{5}
+- name: Exercise overwrite
+  cmd: mult('x^3', 'x^4', l='hello')
+  out:
+    - hello
+    - x^{7}
