@@ -16,6 +16,26 @@ Find the equation of the line
 #) `line_equation(3, 1, 1)`
 :::
 
+# Motivations: polynomial approximations
+
+::: {.Question t="How does the calculator work?"}
+How does the calculator compute $\sin(0.4)$?
+:::
+
+::: {.Idea t="Polynomial approximation"}
+`'$$\\sin(x) \\approx '
++ taylor_poly('sin(x)', 0, 5)
++ ' \\quad \\sin(0.4) \\approx '
++ s.latex(taylor('sin(x)', 0, 5).subs('x', 0.4))
++ '$$'`
+:::
+
+~~~ {.graph b=-2 t=2}
+f = 'sin(x)'
+plot(f)
+showtaylor(f, 0, 5, 'darkgreen', '-4:4')
+~~~
+
 # Definition
 
 ::: {.cols n=2}
