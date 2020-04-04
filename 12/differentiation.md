@@ -135,8 +135,8 @@ Which graph is in degrees/radians?
 
 ::: {.cols n=2}
 ~~~ {.graph b=-2 t=2 l=-4 r=4}
-plot('sin(x r)')
-plot('cos(x r)', 'darkgreen')
+plot('sin(pi/180*x)')
+plot('cos(pi/180*x)', 'darkgreen')
 ~~~
 ~~~ {.graph b=-2 t=2 l=-4 r=4}
 plot('sin(x)')
@@ -169,7 +169,7 @@ y = \overbrace{m_1}^{\frac {dy} {dt}} t\\
 t = \underbrace{m_2}_{\frac {dt} {dx}} x
 \end{array}
 \implies y = \overbrace{\underbrace{m_1 m_2}_{\frac {dy} {dt} \frac {dt}
-{dx}}}^{\frac {dy} {dx}} t
+{dx}}}^{\frac {dy} {dx}} x
 \implies \frac {dy} {dx} = \frac {dy} {dt} \frac {dt} {dx}
 \end{align*}
 :::
