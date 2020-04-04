@@ -4,6 +4,10 @@ title: Differentiation
 
 # Starter
 
+::: Objective
+Understanding the importance of the **gradient**.
+:::
+
 ::: {.Starter cols=2 t="Gradient and line equations"}
 Find the gradient of a line going through
 
