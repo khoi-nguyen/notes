@@ -75,6 +75,20 @@ How to estimate the $x$-intercept?
 - We find the **$x$-intercept** of the **line**.
 :::
 
+# Einstein's opinion today's topic
+
+::: {.Quote t="Einstein about Newton"}
+In order to put his system into mathematical form at all,
+Newton had to devise the concept of **differential quotients**
+and propound the **laws of motion** in the form of total differential equations
+--perhaps the **greatest advance in thought**
+that a single individual was ever privileged to make.
+:::
+
+::: {.Formula t="Newton's 2nd law of motion"}
+$$F = m {\color{darkred} \frac {d^2x} {dt^2}}$$
+:::
+
 # Definition
 
 ::: {.cols n=2}
