@@ -30,7 +30,7 @@ Evaluate the following:
 
 ::: Definition
 Index
-: A number (called the base) that is raised to a power (called the exponent)
+: A number (called the base) that is raised to a power (called the index)
 :::
 
 \begin{center}
@@ -38,11 +38,8 @@ Index
 \node (origin) at (0, 0) {\LARGE ${\color{darkblue} x}^{\color{darkred} a}$};
 \node[darkblue] (base) at (-1, -1) {base};
 \draw[darkblue,thick,->] (base) -- (origin.south west);
-\node[darkred] (exponent) at (1, 1) {exponent};
+\node[darkred] (exponent) at (1, 1) {index/exponent/power};
 \draw[darkred,thick,->] (exponent) -- (origin.north east);
-\draw[darkorange,thick] (0, 0) circle (0.7cm);
-\node[darkorange] (index) at (2, 0) {index};
-\draw[darkorange,thick,->] (0.8, 0) -- (index.west);
 \end{tikzpicture}
 \end{center}
 
@@ -280,4 +277,34 @@ Simplify the following:
 #) `mult('-4*s^-3', '-6*t^-4')`
 #) `mult('4*z^27', '1/4*z^-26')`
 #) `mult('-13*a^6', '4*b^-5', '1/8*a^-12')`
+:::
+
+# Simplifying indices
+
+::: Example
+Simplify $\frac {8x^5} {2x^2}$
+:::
+
+::: Solution
+$$\frac {8x^5} {2x^2} = \frac {{\color{orange} 8} \times {\color{blue} x^5}} {{\color{orange} 2} \times {\color{blue} x^2}} = {\color{orange} 4}{\color{blue} x^3}$$
+:::
+
+# Simplifying indices
+
+::: Example
+Simplify $12x^7 \div 3x^3$
+:::
+
+::: Solution
+$$12x^7 \div 3x^3 = \frac {12x^7} {3x^3} = \frac {{\color{orange} 12} \times {\color{blue} x^7}} {{\color{orange} 3} \times {\color{blue} x^3}} = {\color{orange} 4}{\color{blue} x^4}$$
+:::
+
+# Simplifying indices
+
+::: Example
+Simplify $\frac {2x^6} {8x^4}$
+:::
+
+::: Solution
+$$\frac {2x^6} {8x^4} = \frac {{\color{orange} 2} \times {\color{blue} x^6}} {{\color{orange} 8} \times {\color{blue} x^4}} = {\color{orange} {\frac 1 4}}{\color{blue} x^2}$$
 :::
