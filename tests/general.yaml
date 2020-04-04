@@ -1,0 +1,3 @@
+- name: Check sympy imports
+  cmd: "'sympify' in globals()"
+  out: False
