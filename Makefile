@@ -18,10 +18,10 @@ PANDOC := $(ENV) pandoc -s --pdf-engine=lualatex\
 BEAMER := $(PANDOC) -t beamer --template=./pandoc/beamer.tex
 WORKSHEET := $(PANDOC) -t latex --template=./pandoc/worksheet.tex
 
-all: $(TARGETS) $(HANDOUTS)
+handouts: $(HANDOUTS)
 	@$(ENV) python ./pandoc/run_test.py
 
-handouts: $(HANDOUTS)
+all: $(TARGETS) $(HANDOUTS)
 	@$(ENV) python ./pandoc/run_test.py
 
 deploy: all $(HANDOUTS)
@@ -45,7 +45,7 @@ clean:
 
 %.handout.tex: %.md $(DEPENDENCIES)
 	@echo Building $@...
-	$(BEAMER) -s $< -o $@ -V handout=true
+	@$(BEAMER) -s $< -o $@ -V handout=true
 
 %.pdf: %.tex
 	@echo Building $@ with LaTeX...
