@@ -268,7 +268,7 @@ Simplify the following:
 #) `mult('8*m^6', '2*n^4')`
 #) `mult('-9*x^10', '4*x^8')`
 #) `mult('x^9', '14*x')`
-#) `mult('16*c', '-4*c^10')`
+#) `mult('16*c^k', '-4*c^10')`
 :::
 
 ::: {.Extension show=1}
@@ -292,11 +292,11 @@ $$\frac {8x^5} {2x^2} = \frac {{\color{orange} 8} \times {\color{blue} x^5}} {{\
 # Simplifying indices
 
 ::: Example
-Simplify $12x^7 \div 3x^3$
+Simplify $15x^7 \div 3x^3$
 :::
 
 ::: Solution
-$$12x^7 \div 3x^3 = \frac {12x^7} {3x^3} = \frac {{\color{orange} 12} \times {\color{blue} x^7}} {{\color{orange} 3} \times {\color{blue} x^3}} = {\color{orange} 4}{\color{blue} x^4}$$
+$$15x^7 \div 3x^3 = \frac {15x^7} {3x^3} = \frac {{\color{orange} 15} \times {\color{blue} x^7}} {{\color{orange} 3} \times {\color{blue} x^3}} = {\color{orange} 5}{\color{blue} x^4}$$
 :::
 
 # Simplifying indices
@@ -307,4 +307,34 @@ Simplify $\frac {2x^6} {8x^4}$
 
 ::: Solution
 $$\frac {2x^6} {8x^4} = \frac {{\color{orange} 2} \times {\color{blue} x^6}} {{\color{orange} 8} \times {\color{blue} x^4}} = {\color{orange} {\frac 1 4}}{\color{blue} x^2}$$
+:::
+
+# Simplifying indices
+
+::: Exercise
+#) `frac('6*a^5', '2*a^2')`
+#) `frac('14*a^10', '7*a^4')`
+#) `div('2*a^12', '6*a^9')`
+#) `div('3*x^4', 'x^3')`
+#) `frac('8*y^7', '8*y^5')`
+#) `div('5*z^8', '-10*z^7')`
+#) `div('54*a^20', '-9*a^19')`
+#) `frac('-17*x^y', '-51*x^7')`
+:::
+
+::: {.Extension show=1}
+Simplify the following:
+
+#) `div('90*m^-4', '18*m^5')`
+#) `div('13/2*a^-5', '6.5*a^-(10/2)')`
+:::
+
+# Simplifying indices
+
+::: Example
+Simplify $\br{2x^2}^3$
+:::
+
+::: Solution
+$$\br{2x^2}^3$$
 :::
