@@ -2,13 +2,12 @@ ifeq ($(OS),Windows_NT)
 	MARKDOWN := $(shell dir /b /S *.md)
 	DEPENDENCIES := Makefile $(shell dir /b pandoc\\*.md)
 	ENV :=
-	LATEX := lualatex
 else
 	MARKDOWN := $(shell find * -name '*.md' | grep -v '^\(env\|node\|www\|README\)')
 	DEPENDENCIES := Makefile $(shell find pandoc/*)
 	ENV := source env/bin/activate;
-	LATEX := latexmk -silent -lualatex -f
 endif
+LATEX := latexmk -silent -lualatex -cd -f
 TARGETS := $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.pdf)
 HANDOUTS := $(MARKDOWN:.md=.handout.tex) $(MARKDOWN:.md=.handout.pdf)
 PANDOC := $(ENV) pandoc -s --pdf-engine=lualatex\
@@ -49,7 +48,7 @@ clean:
 
 %.pdf: %.tex
 	@echo Building $@ with LaTeX...
-	@cd $(<D); $(LATEX) $(<F)
+	@$(LATEX) $@
 
 env: env/bin/activate
 
