@@ -59,6 +59,12 @@ environments = {
         'tcolor': 'darkblue',
         'bgcolor': 'lightblue',
     },
+    'Quote': {
+        'title': 'Quote',
+        'prefix': '\\faQuoteLeft',
+        'tcolor': 'darkblue',
+        'bgcolor': 'lightblue',
+    },
     'Recall': {
         'title': 'Recall',
         'prefix': '\\faHistory',
