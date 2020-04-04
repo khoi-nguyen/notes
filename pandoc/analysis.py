@@ -43,19 +43,21 @@ def line_equation(*args):
 
 def plot(function, color='darkblue', dom=False):
     global domain
+    if not isinstance(function, str):
+        function = str(function)
     return f'\\plotfunction[{color}]{{{dom if dom else domain}}}{{{sympy2tikz(function)}}}'
 
-def showsecant(function, a, b, color='darkred'):
+def showsecant(function, a, b, color='darkred', dom=False):
     x, expr = s.symbols('x'), s.sympify(function)
     gradient = (expr.subs(x, b) - expr.subs(x, a)) / (b - a)
     tangent = gradient*(x - a) + expr.subs(x, a)
-    return plot(str(tangent), color)
+    return plot(str(tangent), color, dom)
 
-def showtangent(function, a, color='darkgreen'):
+def showtangent(function, a, color='darkgreen', dom=False):
     x, expr = s.symbols('x'), s.sympify(function)
     gradient = s.Derivative(expr, x).doit().subs(x, a)
     tangent = gradient*(x - a) + expr.subs(x, a)
-    return plot(str(tangent), color)
+    return plot(str(tangent), color, dom)
 
 def taylor(function, a, order):
     poly, f, x = 0, s.sympify(function), s.symbols('x')
