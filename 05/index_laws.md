@@ -222,3 +222,62 @@ Simplify the following:
 #) `power('a^3', -80, a=49)`
 #) `power('x^-y', '-z')`
 :::
+
+# Simplifying indices
+
+::: Example
+Simplify $3 \times 5x^3$
+:::
+
+::: Solution
+$$3 \times 5x^3 = {\color{red} 3 \times 5} \times x^3 = {\color{red} 15}x^3$$
+:::
+
+::: Example
+Simplify $2x^3 \times 4y$
+:::
+
+::: Solution
+$$2x^3 \times 4y = 2 \times {\color{orange} x^3 \times 4} \times y = 2 \times {\color{orange} 4 \times x^3} \times y = 8x^3y$$
+:::
+
+# Simplifying indices
+
+::: Example
+Simplify $2x^2 \times 5x^4$
+:::
+
+::: Solution
+$$2x^2 \times 5x^4 = 2 \times {\color{orange} x^2 \times 5} \times x^4 = 2 \times {\color{orange} 5 \times x^2} \times x^4 = 10x^6$$
+:::
+
+::: Example
+Simplify $6a^9 \times 5a^9$
+:::
+
+::: Solution
+$$6a^9 \times 7x^9 = 6 \times {\color{orange} a^9 \times 7} \times a^9 = 6 \times {\color{orange} 7 \times a^9} \times a^9 = 42x^{18}$$
+:::
+
+# Simplifying indices
+
+::: Exercise
+Simplify the following:
+
+#) `mult('2', '4*a^3')`
+#) `mult('6*x', '5*y^2')`
+#) `mult('4*b^3', '3*b^2')`
+#) `mult('3*y^4', '7*y^2')`
+#) `mult('8*m^6', '2*n^4')`
+#) `mult('-9*x^10', '4*x^8')`
+#) `mult('x^9', '14*x')`
+#) `mult('16*c', '-4*c^10')`
+:::
+
+::: {.Extension show=1}
+Simplify the following:
+
+#) `mult('-4*s^-3', '-6*t^-4')`
+#) `mult('4*z^27', '1/4*z^-26')`
+#) `mult('-13*a^6', '4*b^-5', '1/8*a^-12')`
+:::
