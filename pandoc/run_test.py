@@ -15,7 +15,9 @@ for path in glob('./tests/*.yaml'):
             result = eval(test['cmd'])
             if isinstance(result, tuple):
                 result = list(result)
-            if result != test['out']:
+            if result == test['out']:
+                print('Passed test:', test['name'])
+            else:
                 print('Failed test:', test['name'])
                 print('Output:', result)
                 print('Expected result:', test['out'])
