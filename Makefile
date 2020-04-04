@@ -8,7 +8,7 @@ else
 	ENV := source env/bin/activate;
 endif
 LATEX := latexmk -silent -lualatex -cd -f
-TARGETS := $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.pdf)
+SLIDES := $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.pdf)
 HANDOUTS := $(MARKDOWN:.md=.handout.tex) $(MARKDOWN:.md=.handout.pdf)
 PANDOC := $(ENV) pandoc -s --pdf-engine=lualatex\
 	--filter ./pandoc/pythontex.py\
@@ -17,13 +17,16 @@ PANDOC := $(ENV) pandoc -s --pdf-engine=lualatex\
 BEAMER := $(PANDOC) -t beamer --template=./pandoc/beamer.tex
 WORKSHEET := $(PANDOC) -t latex --template=./pandoc/worksheet.tex
 
-handouts: $(HANDOUTS)
+.PHONY: tests handouts all deploy clean
+
+handouts: tests $(HANDOUTS)
+
+tests:
 	@$(ENV) python ./pandoc/run_test.py
 
-all: $(TARGETS) $(HANDOUTS)
-	@$(ENV) python ./pandoc/run_test.py
+all: tests $(SLIDES) $(HANDOUTS)
 
-deploy: all $(HANDOUTS)
+deploy: all
 	. env/bin/activate; python ./data.py
 	parcel build index.html --out-dir www --public-url ./ --no-cache
 	ls -d */ | grep '^[0-9]' | xargs -I {} cp -R {} www
