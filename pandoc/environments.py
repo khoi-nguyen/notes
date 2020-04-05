@@ -36,9 +36,11 @@ def main(key, value, fmt, meta):
         [[ident, classes, keyvals], contents] = value
         if 'gap' in classes:
             return ilatex('\\vspace{' + contents[0]['c'] + '}')
-        elif 'answer' in classes:
+        elif 'answer' in classes and fmt == 'beamer':
             envcount += 1
             return answer(contents, envcount)
+        elif 'answer' in classes and fmt == 'latex':
+            return []
     elif key == 'Header' and value[0] == 1:
         envcount = 1
         first_env = True
