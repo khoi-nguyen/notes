@@ -60,6 +60,7 @@ For each example: which number is the base? Which is the exponent?
 # Indices
 
 ::: {.Exercise t="Complete the table"}
+
  Power    $2^k$                      $3^k$                      $10^k$
 -------  -------------------------  -------------------------  ------------------
  3        `answer(2**3)`             `answer(3**3)`             `answer(10**3)`
@@ -69,6 +70,7 @@ For each example: which number is the base? Which is the exponent?
  -1       `answer(latex('2^-1'))`    `answer(latex('3^-1'))`    `answer(latex('10^-1'))`
  -2       `answer(latex('2^-2'))`    `answer(latex('3^-2'))`    `answer(latex('10^-2'))`
  -3       `answer(latex('2^-3'))`    `answer(latex('3^-3'))`    `answer(latex('10^-3'))`
+
 :::
 
 # Multiplying Indices
