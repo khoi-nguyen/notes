@@ -1,5 +1,5 @@
 import sympy as s
-from math import copysign as sign
+from math import log
 
 # Redefine some functions to automatically sympify
 _s = lambda x: s.sympify(x, evaluate=False) if isinstance(x, (str, int)) else x

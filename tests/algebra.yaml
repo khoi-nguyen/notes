@@ -39,6 +39,9 @@
   out:
     - '{2}^{3}'
     - 2 \times 2 \times 2
+- name: Check log is imported
+  cmd: int(log(100)/log(10))
+  out: 2
 # Equations
 - name: Solving linear equation
   cmd: equation('3*x + 4 = 10')
