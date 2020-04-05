@@ -59,7 +59,7 @@ For each example: which number is the base? Which is the exponent?
 
 # Indices
 
-::: {.Exercise t="Complete the table"}
+::: {.Exercise t="Complete the table by evaluating"}
 
  Power    $2^k$                      $3^k$                      $10^k$
 -------  -------------------------  -------------------------  ------------------
