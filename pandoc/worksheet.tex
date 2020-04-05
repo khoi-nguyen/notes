@@ -17,6 +17,12 @@
 
 \usepackage{../pandoc/common}
 
+$if(answers)$
+\newcommand{\answer}[2][2]{\hfill{\color{darkred} {#2}}}
+$else$
+\newcommand{\answer}[2][2]{}
+$endif$
+
 $if(title)$
 \title{$title$}
 $endif$
@@ -24,8 +30,6 @@ $endif$
 $if(subtitle)$
 \subtitle{$subtitle$}
 $endif$
-
-\newcommand{\answer}[2][2]{\hfill{\color{darkred} {#2}}}
 
 \begin{document}
 
