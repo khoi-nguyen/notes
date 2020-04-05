@@ -11,6 +11,7 @@ files = [path for path in sorted(Path('.').rglob('*.md')) if str(path)[0].isdigi
 for path in files:
     if str(path).endswith('worksheet.md'):
         data[-1]['worksheet'] = str(path).replace('.md', '.pdf')
+        data[-1]['answers'] = str(path).replace('.md', '.answers.pdf')
         continue
     modified = path.stat().st_mtime
     path = str(path)
