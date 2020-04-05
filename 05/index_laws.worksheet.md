@@ -35,5 +35,17 @@ title: Indices worksheet
 #) `mult('2', '6*x^3')`
 #) `mult('5*y^2', '10')`
 #) `mult('2*x^4', '12*x^3')`
-#) `mult('9*m^2', '3*n^10')`
+#) `mult('9*m^2', '3*n^5')`
+:::
+
+::: {.Exercise t="Simplify the following:"}
+
+#) `frac('a^8', 'a^2', a=4)`
+#) `frac('x^7', 'a^3')`
+#) `div('t^15', 't^10')`
+#) `div('t^15', 't^10')`
+#) `div('2*x^2', 'x')`
+#) `frac('15*y^5', '5*y^3')`
+#) `div('4*z^3', '16*z')`
+#) `div('49*p^12', '-7*p^6')`
 :::
