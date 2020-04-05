@@ -179,7 +179,7 @@ $$x^a \div x^b = \frac {x^a} {x^b} = x^{a - b}$$
 # Powers of indices
 
 ::: Example
-Simplify `power('a^3', 4, a=2)`
+Simplify $\br{2^3}^4$
 :::
 
 ::: Solution
@@ -239,7 +239,7 @@ Simplify $2x^3 \times 4y$
 :::
 
 ::: Solution
-$$2x^3 \times 4y = 2 \times {\color{darkred} x^3 \times 4} \times y = 2 \times {\color{darkred} 4 \times x^3} \times y = 8x^3y$$
+$2x^3 \times 4y = 2 \times {\color{darkred} x^3 \times 4} \times y = 2 \times {\color{darkred} 4 \times x^3} \times y = 8x^3y$
 :::
 
 # Simplifying indices
@@ -249,7 +249,7 @@ Simplify $2x^2 \times 5x^4$
 :::
 
 ::: Solution
-$$2x^2 \times 5x^4 = 2 \times {\color{darkred} x^2 \times 5} \times x^4 = 2 \times {\color{darkred} 5 \times x^2} \times x^4 = 10x^6$$
+$2x^2 \times 5x^4 = 2 \times {\color{darkred} x^2 \times 5} \times x^4 = 2 \times {\color{darkred} 5 \times x^2} \times x^4 = 10x^6$
 :::
 
 ::: Example
@@ -257,7 +257,7 @@ Simplify $6a^9 \times 5a^9$
 :::
 
 ::: Solution
-$$6a^9 \times 7x^9 = 6 \times {\color{darkred} a^9 \times 7} \times a^9 = 6 \times {\color{darkred} 7 \times a^9} \times a^9 = 42x^{18}$$
+$6a^9 \times 7x^9 = 6 \times {\color{darkred} a^9 \times 7} \times a^9 = 6 \times {\color{darkred} 7 \times a^9} \times a^9 = 42x^{18}$
 :::
 
 # Simplifying indices
