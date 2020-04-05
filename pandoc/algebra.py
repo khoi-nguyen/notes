@@ -1,12 +1,16 @@
+import re
 import sympy as s
 from math import log
 
 # Redefine some functions to automatically sympify
 _s = lambda x: s.sympify(x, evaluate=False) if isinstance(x, (str, int)) else x
-latex = lambda x: s.latex(_s(x)).replace('cdot', 'times')
 _simplify = lambda x: s.simplify(_s(x))
 _expand = lambda x: s.expand(_simplify(x))
 factor = lambda x: s.factor(_s(x))
+def latex(expr):
+    ltx = s.latex(_s(expr)).replace('cdot', 'times')
+    ltx = re.sub(r'\\left\((\-[0-9]+)\\right\) ', r'\1 ', ltx)
+    return ltx
 
 def exercise(expr, callback_ex, callback_sol, **options):
     substitutions = [(s.symbols(t), s.UnevaluatedExpr(v)) for (t, v) in options.items() if t not in ['l']]
