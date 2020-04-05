@@ -23,15 +23,13 @@ $else$
 \newcommand{\answer}[2][2]{}
 $endif$
 
-$if(title)$
-\title{$title$}
-$endif$
-
-$if(subtitle)$
-\subtitle{$subtitle$}
-$endif$
-
 \begin{document}
+
+$if(title)$
+\begin{center}
+{\color{darkblue}\Huge\sffamily $title$}
+\end{center}
+$endif$
 
 $body$
 
