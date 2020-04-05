@@ -13,6 +13,7 @@ LATEX := latexmk -silent -lualatex -cd -f
 SLIDES := $(MARKDOWN:.md=.pdf)
 HANDOUTS := $(MARKDOWN:.md=.handout.pdf)
 WORKSHEETS := $(WORKSHEET_MARKDOWN:.md=.pdf)
+ANSWERS := $(WORKSHEET_MARKDOWN:.md=.answers.pdf)
 PANDOC := $(ENV) pandoc -s --pdf-engine=lualatex\
 	--filter ./pandoc/pythontex.py\
 	--filter ./pandoc/environments.py\
@@ -23,12 +24,12 @@ WORKSHEET := $(PANDOC) -t latex --template=./pandoc/worksheet.tex
 .PHONY: tests handouts all deploy clean
 .PRECIOUS: $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.handout.tex) $(WORKSHEETS:.pdf=.tex)
 
-handouts: tests $(HANDOUTS) $(WORKSHEETS)
+handouts: tests $(HANDOUTS) $(WORKSHEETS) $(ANSWERS)
 
 tests:
 	@$(ENV) python ./pandoc/run_test.py
 
-all: tests $(SLIDES) $(HANDOUTS)
+all: $(SLIDES) handouts
 
 deploy: all
 	. env/bin/activate; python ./data.py
@@ -44,6 +45,10 @@ clean:
 %.worksheet.tex: %.worksheet.md $(DEPENDENCIES)
 	@echo Generating worksheet for $@...
 	@$(WORKSHEET) -s $< -o $@
+
+%.worksheet.answers.tex: %.worksheet.md $(DEPENDENCIES)
+	@echo Generating answer sheet for $@...
+	@$(WORKSHEET) -V answers=1 -s $< -o $@
 
 %.tex: %.md $(DEPENDENCIES)
 	@echo Generating $@...
