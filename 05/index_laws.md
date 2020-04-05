@@ -29,8 +29,8 @@ Evaluate the following:
 # Index
 
 ::: Definition
-Index
-: A number (called the base) that is raised to a power (called the index)
+Index number
+: The power of a number (called the base)
 :::
 
 \begin{center}
@@ -61,7 +61,7 @@ Simplify $2^4 \times 2^3$
 :::
 
 ::: Solution
-$$2^4 \times 2^3 = \overbrace{\underbrace{2 \times 2 \times 2 \times 2}_{2^4} \times \underbrace{2 \times 2 \times 2}_{2^3}}^{\text{2 appears 7 times}} = 2^7$$
+$${\color{darkred} 2^4} \times {\color{darkblue} 2^3} = \overbrace{{\color{darkred} 2 \times 2 \times 2 \times 2} \times {\color{darkblue} 2 \times 2 \times 2}}^{\text{2 appears 7 times}} = 2^7$$
 :::
 
 # Multiplying Indices
@@ -336,5 +336,35 @@ Simplify $\br{2x^2}^3$
 :::
 
 ::: Solution
-$$\br{2x^2}^3$$
+$$\br{2x^2}^3 = {\color{orange} 2^3} \times {\color{blue} \br{x^2}^3} = {\color{orange} 8}{\color{blue} x^6}$$
+:::
+
+::: Example
+Simplify $\br{2x^2y}^3$
+:::
+
+::: Solution
+$$\br{2x^2y}^3 = {\color{orange} 2^3} \times {\color{blue} \br{x^2}^3} \times y^3 = {\color{orange} 8}{\color{blue} x^6}y^3$$
+:::
+
+# Simplifying indices
+
+::: Exercise
+Simplify the following:
+
+#) `power('3*a', 2)`
+#) `power('5*c^2', 2)`
+#) `power('2*x*y', 3)`
+#) `power('6*x*y^-2', 2)`
+#) `power('m^10*n^12', 4)`
+#) `power('-3*x^5*x^4', 3)`
+#) `power('2*m^-10*n^-12', 4)`
+#) `power('-5*p^-8*q^-13', -3)`
+:::
+
+::: {.Extension show=1}
+Simplify the following:
+
+#) `power('-2*a^4*b^-m*c^3', -5)`
+#) `power('3/4*x^-a*y^-b*z^-(2*c)', -3)`
 :::
