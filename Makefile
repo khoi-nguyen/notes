@@ -1,15 +1,18 @@
 ifeq ($(OS),Windows_NT)
-	MARKDOWN := $(shell dir /b /S *.md)
+	MARKDOWN := $(shell dir /b /S *.md | findstr /v /i "\.worksheet\.md$" )
+	WORKSHEET_MARKDOWN := $(shell dir /b /S *.worksheet.md)
 	DEPENDENCIES := Makefile $(shell dir /b pandoc\\*.md)
 	ENV :=
 else
-	MARKDOWN := $(shell find * -name '*.md' | grep -v '^\(env\|node\|www\|README\)')
+	MARKDOWN := $(shell find * -name '*.md' | grep -v '^\(env\|node\|www\|README\)' | grep -v 'worksheet.md$$')
+	WORKSHEET_MARKDOWN := $(shell find * -name '*.worksheet.md')
 	DEPENDENCIES := Makefile $(shell find pandoc/*)
 	ENV := source env/bin/activate;
 endif
 LATEX := latexmk -silent -lualatex -cd -f
 SLIDES := $(MARKDOWN:.md=.pdf)
 HANDOUTS := $(MARKDOWN:.md=.handout.pdf)
+WORKSHEETS := $(WORKSHEET_MARKDOWN:.md=.pdf)
 PANDOC := $(ENV) pandoc -s --pdf-engine=lualatex\
 	--filter ./pandoc/pythontex.py\
 	--filter ./pandoc/environments.py\
@@ -18,9 +21,9 @@ BEAMER := $(PANDOC) -t beamer --template=./pandoc/beamer.tex
 WORKSHEET := $(PANDOC) -t latex --template=./pandoc/worksheet.tex
 
 .PHONY: tests handouts all deploy clean
-.PRECIOUS: $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.handout.tex)
+.PRECIOUS: $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.handout.tex) $(WORKSHEETS:.pdf=.tex)
 
-handouts: tests $(HANDOUTS)
+handouts: tests $(HANDOUTS) $(WORKSHEETS)
 
 tests:
 	@$(ENV) python ./pandoc/run_test.py
