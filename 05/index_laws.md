@@ -22,8 +22,12 @@ Evaluate the following:
 
 ::: {.Extension show=1}
 #) Write 64 as a power of 4
+   `answer(f'4^{{{int(log(64)/log(4))}}}')`
 #) Write 243 as a power of 3
-#) Write out $2^4 \times 2^3$ as a product of 2's, then rewrite it as a single index
+   `answer(f'3^{{{int(log(243)/log(3))}}}')`
+#) Write out $2^4 \times 2^3$ as a product of 2's,
+    then rewrite it as a single index
+   `answer('2^7')`
 :::
 
 # Index
