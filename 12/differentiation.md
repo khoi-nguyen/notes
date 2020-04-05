@@ -227,9 +227,7 @@ $$\frac d {dx} \sin x = \cos x,\quad \frac d {dx} \cos x = -\sin x,\quad \frac d
 are **only** valid in **radians**.
 :::
 
-::: {.Question t="Degrees or radians?"}
-
-::: {.cols n=2}
+::: {.Question cols=2 t="Degrees or radians?"}
 ~~~ {.graph b=-2 t=2 l=-4 r=4}
 plot('sin(pi/180*x)')
 plot('cos(pi/180*x)', 'darkgreen')
@@ -238,7 +236,6 @@ plot('cos(pi/180*x)', 'darkgreen')
 plot('sin(x)')
 plot('cos(x)', 'darkgreen')
 ~~~
-:::
 :::
 
 # Leibniz rule
