@@ -22,8 +22,12 @@ Evaluate the following:
 
 ::: {.Extension show=1}
 #) Write 64 as a power of 4
+   `answer(f'4^{{{int(log(64)/log(4))}}}')`
 #) Write 243 as a power of 3
-#) Write out $2^4 \times 2^3$ as a product of 2's, then rewrite it as a single index
+   `answer(f'3^{{{int(log(243)/log(3))}}}')`
+#) Write out $2^4 \times 2^3$ as a product of 2's,
+    then rewrite it as a single index
+   `answer('2^7')`
 :::
 
 # Index
@@ -46,13 +50,26 @@ Index number
 # Index
 
 ::: Example
-For each example: which number is the base? Which is the exponent? [1cm]{.gap}
+For each example: which number is the base? Which is the exponent?
+[0.5cm]{.gap}
 
 #) $4^7$ [1cm]{.gap}
-
 #) $10^4$ [1cm]{.gap}
 :::
 
+# Indices
+
+::: {.Exercise t="Complete the table"}
+ Power    $2^k$                      $3^k$                      $10^k$
+-------  -------------------------  -------------------------  ------------------
+ 3        `answer(2**3)`             `answer(3**3)`             `answer(10**3)`
+ 2        `answer(2**2)`             `answer(3**2)`             `answer(10**2)`
+ 1        `answer(2**1)`             `answer(3**1)`             `answer(10**1)`
+ r        `answer(2**0)`             `answer(3**0)`             `answer(10**0)`
+ -1       `answer(latex('2^-1'))`    `answer(latex('3^-1'))`    `answer(latex('10^-1'))`
+ -2       `answer(latex('2^-2'))`    `answer(latex('3^-2'))`    `answer(latex('10^-2'))`
+ -3       `answer(latex('2^-3'))`    `answer(latex('3^-3'))`    `answer(latex('10^-3'))`
+:::
 
 # Multiplying Indices
 
@@ -66,9 +83,7 @@ $${\color{darkred} 2^4} \times {\color{darkblue} 2^3} = \overbrace{{\color{darkr
 
 # Multiplying Indices
 
-::: Exercise
-Simplify the following:
-
+::: {.Exercise t="Simplify the following:"}
 #) `mult('a^2', 'a^3', a=4)`
 #) `mult('a^4', 'a^2', a=10)`
 #) `mult('a^5', 'a^3', a=6)`
@@ -87,9 +102,7 @@ $$x^a \times x^b = x^{a + b}$$
 
 # Multiplying Indices
 
-::: Exercise
-Simplify the following indices:
-
+::: {.Exercise t="Simplify the following indices:"}
 #) `mult('a^4', 'a^7', a=3)`
 #) `mult('a^2', 'a^6', a=2)`
 #) `mult('a^5', 'a^3', a=6)`
@@ -100,8 +113,7 @@ Simplify the following indices:
 #) `mult('a^20', 'a^27', a=32)`
 :::
 
-::: {.Extension show=1}
-Evaluate the following:
+::: {.Extension show=1 t="Evaluate the following:"}
 
 #) `mult('a^5', 'a^-3', a=6)`
 #) `mult('x^-2', 'x^7', l='x^{-2} \\times x^7')`
@@ -145,9 +157,7 @@ $$x^a \div x^b = \frac {x^a} {x^b} = x^{a - b}$$
 
 # Dividing indices
 
-::: Exercise
-Simplify the following:
-
+::: {.Exercise t="Simplify the following:"}
 #) `frac('a^7', 'a^2', a=3)`
 #) `frac('a^6', 'a^4', a=7)`
 #) `div('a^12', 'a^9', a=2)`
@@ -158,9 +168,7 @@ Simplify the following:
 #) `frac('x^45', 'x^27')`
 :::
 
-::: {.Extension show=1}
-Simplify the following:
-
+::: {.Extension show=1 t="Simplify the following:"}
 #) `div('a^4', 'a^-2', a=7)`
 #) `div('y^2', 'y^-5', l='y^2 \\div y^{-5}')`
 #) `div('a^14', 'a^14', a=23)`
@@ -178,9 +186,7 @@ $$\br{2^3}^4 = 2^3 \times 2^3 \times 2^3 \times 2^3 = 2^{12}$$
 
 # Powers of indices
 
-::: Exercise
-Simplify the following:
-
+::: {.Exercise t="Simplify the following:"}
 #) `power('a^2', '2', a=3)`
 #) `power('a^4', '3', a=5)`
 #) `power('a^3', '3', a=7)`
@@ -199,9 +205,7 @@ $$(x^a)^b = x^{ab}$$
 
 # Powers of Indices
 
-::: Exercise
-Simplify the following:
-
+::: {.Exercise t="Simplify the following:"}
 #) `power('a^3', 2, a=4)`
 #) `power('a^5', 3, a=10)`
 #) `power('x^7', 4)`
@@ -212,9 +216,7 @@ Simplify the following:
 #) `power('a^y', 'b')`
 :::
 
-::: {.Extension show=1}
-Simplify the following:
-
+::: {.Extension show=1 t="Simplify the following:"}
 #) `power('a^-2', 4, a=5)`
 #) `power('a^3', -80, a=49)`
 #) `power('x^-y', '-z')`
@@ -227,7 +229,7 @@ Simplify $3 \times 5x^3$
 :::
 
 ::: Solution
-$$3 \times 5x^3 = {\color{red} 3 \times 5} \times x^3 = {\color{red} 15}x^3$$
+$$3 \times 5x^3 = {\color{darkred} 3 \times 5} \times x^3 = {\color{darkred} 15}x^3$$
 :::
 
 ::: Example
@@ -235,7 +237,7 @@ Simplify $2x^3 \times 4y$
 :::
 
 ::: Solution
-$$2x^3 \times 4y = 2 \times {\color{orange} x^3 \times 4} \times y = 2 \times {\color{orange} 4 \times x^3} \times y = 8x^3y$$
+$$2x^3 \times 4y = 2 \times {\color{darkred} x^3 \times 4} \times y = 2 \times {\color{darkred} 4 \times x^3} \times y = 8x^3y$$
 :::
 
 # Simplifying indices
@@ -245,7 +247,7 @@ Simplify $2x^2 \times 5x^4$
 :::
 
 ::: Solution
-$$2x^2 \times 5x^4 = 2 \times {\color{orange} x^2 \times 5} \times x^4 = 2 \times {\color{orange} 5 \times x^2} \times x^4 = 10x^6$$
+$$2x^2 \times 5x^4 = 2 \times {\color{darkred} x^2 \times 5} \times x^4 = 2 \times {\color{darkred} 5 \times x^2} \times x^4 = 10x^6$$
 :::
 
 ::: Example
@@ -253,14 +255,12 @@ Simplify $6a^9 \times 5a^9$
 :::
 
 ::: Solution
-$$6a^9 \times 7x^9 = 6 \times {\color{orange} a^9 \times 7} \times a^9 = 6 \times {\color{orange} 7 \times a^9} \times a^9 = 42x^{18}$$
+$$6a^9 \times 7x^9 = 6 \times {\color{darkred} a^9 \times 7} \times a^9 = 6 \times {\color{darkred} 7 \times a^9} \times a^9 = 42x^{18}$$
 :::
 
 # Simplifying indices
 
-::: Exercise
-Simplify the following:
-
+::: {.Exercise t="Simplify the following:"}
 #) `mult('2', '4*a^3')`
 #) `mult('6*x', '5*y^2')`
 #) `mult('4*b^3', '3*b^2')`
@@ -271,9 +271,7 @@ Simplify the following:
 #) `mult('16*c^k', '-4*c^10')`
 :::
 
-::: {.Extension show=1}
-Simplify the following:
-
+::: {.Extension show=1 t="Simplify the following:"}
 #) `mult('-4*s^-3', '-6*t^-4')`
 #) `mult('4*z^27', '1/4*z^-26')`
 #) `mult('-13*a^6', '4*b^-5', '1/8*a^-12')`
@@ -286,7 +284,7 @@ Simplify $\frac {8x^5} {2x^2}$
 :::
 
 ::: Solution
-$$\frac {8x^5} {2x^2} = \frac {{\color{orange} 8} \times {\color{blue} x^5}} {{\color{orange} 2} \times {\color{blue} x^2}} = {\color{orange} 4}{\color{blue} x^3}$$
+$$\frac {8x^5} {2x^2} = \frac {{\color{darkred} 8} \times {\color{darkblue} x^5}} {{\color{darkred} 2} \times {\color{darkblue} x^2}} = {\color{darkred} 4}{\color{darkblue} x^3}$$
 :::
 
 # Simplifying indices
@@ -296,7 +294,7 @@ Simplify $15x^7 \div 3x^3$
 :::
 
 ::: Solution
-$$15x^7 \div 3x^3 = \frac {15x^7} {3x^3} = \frac {{\color{orange} 15} \times {\color{blue} x^7}} {{\color{orange} 3} \times {\color{blue} x^3}} = {\color{orange} 5}{\color{blue} x^4}$$
+$$15x^7 \div 3x^3 = \frac {15x^7} {3x^3} = \frac {{\color{darkred} 15} \times {\color{darkblue} x^7}} {{\color{darkred} 3} \times {\color{darkblue} x^3}} = {\color{darkred} 5}{\color{darkblue} x^4}$$
 :::
 
 # Simplifying indices
@@ -306,7 +304,7 @@ Simplify $\frac {2x^6} {8x^4}$
 :::
 
 ::: Solution
-$$\frac {2x^6} {8x^4} = \frac {{\color{orange} 2} \times {\color{blue} x^6}} {{\color{orange} 8} \times {\color{blue} x^4}} = {\color{orange} {\frac 1 4}}{\color{blue} x^2}$$
+$$\frac {2x^6} {8x^4} = \frac {{\color{darkred} 2} \times {\color{darkblue} x^6}} {{\color{darkred} 8} \times {\color{darkblue} x^4}} = {\color{darkred} {\frac 1 4}}{\color{darkblue} x^2}$$
 :::
 
 # Simplifying indices
@@ -322,9 +320,7 @@ $$\frac {2x^6} {8x^4} = \frac {{\color{orange} 2} \times {\color{blue} x^6}} {{\
 #) `frac('-17*x^y', '-51*x^7')`
 :::
 
-::: {.Extension show=1}
-Simplify the following:
-
+::: {.Extension show=1 t="Simplify the following:" cols=2}
 #) `div('90*m^-4', '18*m^5')`
 #) `div('13/2*a^-5', '6.5*a^-(10/2)')`
 :::
@@ -336,7 +332,7 @@ Simplify $\br{2x^2}^3$
 :::
 
 ::: Solution
-$$\br{2x^2}^3 = {\color{orange} 2^3} \times {\color{blue} \br{x^2}^3} = {\color{orange} 8}{\color{blue} x^6}$$
+$$\br{2x^2}^3 = {\color{darkred} 2^3} \times {\color{darkblue} \br{x^2}^3} = {\color{darkred} 8}{\color{darkblue} x^6}$$
 :::
 
 ::: Example
@@ -344,14 +340,12 @@ Simplify $\br{2x^2y}^3$
 :::
 
 ::: Solution
-$$\br{2x^2y}^3 = {\color{orange} 2^3} \times {\color{blue} \br{x^2}^3} \times y^3 = {\color{orange} 8}{\color{blue} x^6}y^3$$
+$$\br{2x^2y}^3 = {\color{darkred} 2^3} \times {\color{darkblue} \br{x^2}^3} \times y^3 = {\color{darkred} 8}{\color{darkblue} x^6}y^3$$
 :::
 
 # Simplifying indices
 
-::: Exercise
-Simplify the following:
-
+::: {.Exercise title="Simplify the following:"}
 #) `power('3*a', 2)`
 #) `power('5*c^2', 2)`
 #) `power('2*x*y', 3)`
@@ -362,9 +356,7 @@ Simplify the following:
 #) `power('-5*p^-8*q^-13', -3)`
 :::
 
-::: {.Extension show=1}
-Simplify the following:
-
+::: {.Extension show=1 t="Simplify the following:"}
 #) `power('-2*a^4*b^-m*c^3', -5)`
 #) `power('3/4*x^-a*y^-b*z^-(2*c)', -3)`
 :::

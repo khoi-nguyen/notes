@@ -34,11 +34,17 @@
   out:
     - \br{2^{3}}^{4}
     - 2^{12}
+- name: Minus signs when raising power to a power
+  cmd: question(power('-3*x', 3))
+  out: '\br{-3 x}^{3}'
 - name: Expanding index
   cmd: expindex(2, 3)
   out:
     - '{2}^{3}'
     - 2 \times 2 \times 2
+- name: Check log is imported
+  cmd: int(log(100)/log(10))
+  out: 2
 # Equations
 - name: Solving linear equation
   cmd: equation('3*x + 4 = 10')
