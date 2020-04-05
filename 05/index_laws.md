@@ -46,10 +46,10 @@ Index number
 # Index
 
 ::: Example
-For each example: which number is the base? Which is the exponent? [1cm]{.gap}
+For each example: which number is the base? Which is the exponent?
+[0.5cm]{.gap}
 
 #) $4^7$ [1cm]{.gap}
-
 #) $10^4$ [1cm]{.gap}
 :::
 
@@ -303,7 +303,7 @@ $$\frac {2x^6} {8x^4} = \frac {{\color{darkred} 2} \times {\color{darkblue} x^6}
 #) `frac('-17*x^y', '-51*x^7')`
 :::
 
-::: {.Extension show=1 t="Simplify the following:"}
+::: {.Extension show=1 t="Simplify the following:" cols=2}
 #) `div('90*m^-4', '18*m^5')`
 #) `div('13/2*a^-5', '6.5*a^-(10/2)')`
 :::
