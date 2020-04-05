@@ -227,7 +227,7 @@ Simplify $3 \times 5x^3$
 :::
 
 ::: Solution
-$$3 \times 5x^3 = {\color{red} 3 \times 5} \times x^3 = {\color{red} 15}x^3$$
+$$3 \times 5x^3 = {\color{darkred} 3 \times 5} \times x^3 = {\color{darkred} 15}x^3$$
 :::
 
 ::: Example
@@ -235,7 +235,7 @@ Simplify $2x^3 \times 4y$
 :::
 
 ::: Solution
-$$2x^3 \times 4y = 2 \times {\color{orange} x^3 \times 4} \times y = 2 \times {\color{orange} 4 \times x^3} \times y = 8x^3y$$
+$$2x^3 \times 4y = 2 \times {\color{darkred} x^3 \times 4} \times y = 2 \times {\color{darkred} 4 \times x^3} \times y = 8x^3y$$
 :::
 
 # Simplifying indices
@@ -245,7 +245,7 @@ Simplify $2x^2 \times 5x^4$
 :::
 
 ::: Solution
-$$2x^2 \times 5x^4 = 2 \times {\color{orange} x^2 \times 5} \times x^4 = 2 \times {\color{orange} 5 \times x^2} \times x^4 = 10x^6$$
+$$2x^2 \times 5x^4 = 2 \times {\color{darkred} x^2 \times 5} \times x^4 = 2 \times {\color{darkred} 5 \times x^2} \times x^4 = 10x^6$$
 :::
 
 ::: Example
@@ -253,7 +253,7 @@ Simplify $6a^9 \times 5a^9$
 :::
 
 ::: Solution
-$$6a^9 \times 7x^9 = 6 \times {\color{orange} a^9 \times 7} \times a^9 = 6 \times {\color{orange} 7 \times a^9} \times a^9 = 42x^{18}$$
+$$6a^9 \times 7x^9 = 6 \times {\color{darkred} a^9 \times 7} \times a^9 = 6 \times {\color{darkred} 7 \times a^9} \times a^9 = 42x^{18}$$
 :::
 
 # Simplifying indices
@@ -286,7 +286,7 @@ Simplify $\frac {8x^5} {2x^2}$
 :::
 
 ::: Solution
-$$\frac {8x^5} {2x^2} = \frac {{\color{orange} 8} \times {\color{blue} x^5}} {{\color{orange} 2} \times {\color{blue} x^2}} = {\color{orange} 4}{\color{blue} x^3}$$
+$$\frac {8x^5} {2x^2} = \frac {{\color{darkred} 8} \times {\color{darkblue} x^5}} {{\color{darkred} 2} \times {\color{darkblue} x^2}} = {\color{darkred} 4}{\color{darkblue} x^3}$$
 :::
 
 # Simplifying indices
@@ -296,7 +296,7 @@ Simplify $15x^7 \div 3x^3$
 :::
 
 ::: Solution
-$$15x^7 \div 3x^3 = \frac {15x^7} {3x^3} = \frac {{\color{orange} 15} \times {\color{blue} x^7}} {{\color{orange} 3} \times {\color{blue} x^3}} = {\color{orange} 5}{\color{blue} x^4}$$
+$$15x^7 \div 3x^3 = \frac {15x^7} {3x^3} = \frac {{\color{darkred} 15} \times {\color{darkblue} x^7}} {{\color{darkred} 3} \times {\color{darkblue} x^3}} = {\color{darkred} 5}{\color{darkblue} x^4}$$
 :::
 
 # Simplifying indices
@@ -306,7 +306,7 @@ Simplify $\frac {2x^6} {8x^4}$
 :::
 
 ::: Solution
-$$\frac {2x^6} {8x^4} = \frac {{\color{orange} 2} \times {\color{blue} x^6}} {{\color{orange} 8} \times {\color{blue} x^4}} = {\color{orange} {\frac 1 4}}{\color{blue} x^2}$$
+$$\frac {2x^6} {8x^4} = \frac {{\color{darkred} 2} \times {\color{darkblue} x^6}} {{\color{darkred} 8} \times {\color{darkblue} x^4}} = {\color{darkred} {\frac 1 4}}{\color{darkblue} x^2}$$
 :::
 
 # Simplifying indices
@@ -336,7 +336,7 @@ Simplify $\br{2x^2}^3$
 :::
 
 ::: Solution
-$$\br{2x^2}^3 = {\color{orange} 2^3} \times {\color{blue} \br{x^2}^3} = {\color{orange} 8}{\color{blue} x^6}$$
+$$\br{2x^2}^3 = {\color{darkred} 2^3} \times {\color{darkblue} \br{x^2}^3} = {\color{darkred} 8}{\color{darkblue} x^6}$$
 :::
 
 ::: Example
@@ -344,7 +344,7 @@ Simplify $\br{2x^2y}^3$
 :::
 
 ::: Solution
-$$\br{2x^2y}^3 = {\color{orange} 2^3} \times {\color{blue} \br{x^2}^3} \times y^3 = {\color{orange} 8}{\color{blue} x^6}y^3$$
+$$\br{2x^2y}^3 = {\color{darkred} 2^3} \times {\color{darkblue} \br{x^2}^3} \times y^3 = {\color{darkred} 8}{\color{darkblue} x^6}y^3$$
 :::
 
 # Simplifying indices
