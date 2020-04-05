@@ -8,8 +8,8 @@ else
 	ENV := source env/bin/activate;
 endif
 LATEX := latexmk -silent -lualatex -cd -f
-SLIDES := $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.pdf)
-HANDOUTS := $(MARKDOWN:.md=.handout.tex) $(MARKDOWN:.md=.handout.pdf)
+SLIDES := $(MARKDOWN:.md=.pdf)
+HANDOUTS := $(MARKDOWN:.md=.handout.pdf)
 PANDOC := $(ENV) pandoc -s --pdf-engine=lualatex\
 	--filter ./pandoc/pythontex.py\
 	--filter ./pandoc/environments.py\
@@ -26,8 +26,7 @@ tests:
 
 all: tests $(SLIDES) $(HANDOUTS)
 
-deploy:
-	make all
+deploy: all
 	. env/bin/activate; python ./data.py
 	parcel build index.html --out-dir www --public-url ./ --no-cache
 	ls -d */ | grep '^[0-9]' | xargs -I {} cp -R {} www
