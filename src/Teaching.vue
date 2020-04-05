@@ -26,6 +26,9 @@
                         li.list-group-item.
                             #[font-awesome-icon(icon="file-pdf")]
                             #[a(v-bind:href="'./' + file.handout") Handout]
+                        li.list-group-item(v-if="file.worksheet").
+                            #[font-awesome-icon(icon="file-pdf")]
+                            #[a(v-bind:href="'./' + file.worksheet") Worksheet]
                 td {{file.modified}}
 </template>
 

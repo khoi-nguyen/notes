@@ -9,6 +9,9 @@ data = []
 
 files = [path for path in sorted(Path('.').rglob('*.md')) if str(path)[0].isdigit()]
 for path in files:
+    if str(path).endswith('worksheet.md'):
+        data[-1]['worksheet'] = str(path).replace('.md', '.pdf')
+        continue
     modified = path.stat().st_mtime
     path = str(path)
     cmd = 'pandoc -s {} -t markdown --template=pandoc/meta.json'.format(path)
