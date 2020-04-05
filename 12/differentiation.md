@@ -197,14 +197,11 @@ $$y = f'(a) (x - a) + f(a)$$
 # Radians and degrees
 
 ::: {.Warning t="Radians and degrees"}
-The formulae
-$$\sin' = \cos,\quad \cos' = -\sin,\quad \tan' = 1 + \tan^2$$
-are only valid in **radians**.
+$$\frac d {dx} \sin x = \cos x,\quad \frac d {dx} \cos x = -\sin x,\quad \frac d {dx} \tan x = 1 + \tan^2 x$$
+are **only** valid in **radians**.
 :::
 
 ::: {.Question t="Degrees or radians?"}
-
-Which graph is in degrees/radians?
 
 ::: {.cols n=2}
 ~~~ {.graph b=-2 t=2 l=-4 r=4}
