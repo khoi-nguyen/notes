@@ -24,12 +24,12 @@ WORKSHEET := $(PANDOC) -t latex --template=./pandoc/worksheet.tex
 .PHONY: tests handouts all deploy clean
 .PRECIOUS: $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.handout.tex) $(WORKSHEETS:.pdf=.tex)
 
-handouts: tests $(HANDOUTS) $(WORKSHEETS) $(ANSWERS)
+handouts: tests $(HANDOUTS) $(ANSWERS)
 
 tests:
 	@$(ENV) python ./pandoc/run_test.py
 
-all: $(SLIDES) handouts
+all: $(SLIDES) $(WORKSHEETS) handouts
 
 deploy: all
 	. env/bin/activate; python ./data.py
