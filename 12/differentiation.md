@@ -240,8 +240,8 @@ Differentiate from first principles
 
 # Tangent
 
-::: {.cols n=2}
-~~~ {.graph b=-1.5 l=-3 r=7 t=4.5}
+::: {.Remark cols=2 t="Characteristics of the tangent"}
+~~~ {.graph b=-1.5 l=-3 r=5 t=4.5}
 f, a = '0.2*x^2 + 1', 2.5
 plot(f)
 showcoordinates(f, a, 'a', 'f(a)')
@@ -251,7 +251,7 @@ showtangent(f, a)
 Gradient
 : $\frac {df} {dx} (a)$
 
-Point
+Passing through
 : $(a, f(a))$
 :::
 
