@@ -9,6 +9,7 @@ answer = lambda x, c: [ilatex('\\answer[{}]{{'.format(c))] + x + [ilatex('}')]
 
 envcount = 1
 first_env = True
+tally = {env: 0 for env in environments}
 
 def add_transition(m):
     global envcount
@@ -16,16 +17,18 @@ def add_transition(m):
     return f"\\onslide<{envcount}->{{{m.group(1)}}}"
 
 def environment(ident, classes, keyvals, contents, count, fmt):
+    global tally
     env = list(set(classes) & set(environments.keys()))
     env = env[0]
     classes.remove(env)
+    tally[env] += 1
     data = environments[env]
     title = keyvals['t'] if 't' in keyvals else ''
     if env == 'Objective' and title == '':
         title = '\\today'
     pause = '\\onslide<{}->{{'.format(count) if fmt == 'beamer' else '{'
     begin = f"\\begin{{colorenv}}[{data['bgcolor']}]{{{data['tcolor']}}}"
-    begin += f"{{{data['prefix']}\  {data['title']}}}{{{title}}}"
+    begin += f"{{{data['prefix']}\  {data['title']} {tally[env] if fmt == 'latex' else ''}}}{{{title}}}"
     end = '\\end{colorenv}}'
     keyvals = [[k, v] for k, v in keyvals.items()]
     return [blatex(pause + begin)] + [Div([ident, classes, keyvals], contents)] + [blatex(end)]
