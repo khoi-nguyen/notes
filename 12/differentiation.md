@@ -98,7 +98,7 @@ $$m = \frac {\Delta y} {\Delta x}$$
 :::
 
 ::: {.Idea t="Approximation by the tangent" cols=2}
-~~~ {.graph b=-1.5 l=-3 r=7 t=4.5}
+~~~ {.graph b=-1.5 l=-3 r=5 t=4.5}
 f, x = '0.2*x^2 + 1', 2.5
 plot(f)
 showcoordinates(f, x, 'x', 'f(x)')
