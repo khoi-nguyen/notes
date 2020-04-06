@@ -74,7 +74,7 @@ def showtaylor(function, a, order, color='darkgreen', dom=False):
 def showcoordinates(function, a, x_text, y_text):
     y = s.sympify(function).subs(s.symbols('x'), a)
     return f"""
-    \draw[dashed] ({a}, 0) node[below] {{\\small ${x_text}$}} -- ({a}, {y}) -- (0, {y}) node[left] {{\\small ${y_text}$}};
+    \draw[dashed] ({a}, 0) node[below] {{\\scriptsize ${x_text}$}} -- ({a}, {y}) -- (0, {y}) node[left] {{\\scriptsize ${y_text}$}};
     \draw[fill=black] ({a}, {y}) circle (0.1);
     """.replace('\n', '')
 
