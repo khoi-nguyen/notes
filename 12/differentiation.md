@@ -238,12 +238,17 @@ Differentiate $x$ from first principles.
 :::
 
 ::: Solution
-$\lim_{h \to 0} \frac {(\cancel x + h) - \cancel x} h = 1$
+$\lim_{h \to 0} \frac {(\cancel x + h) - \cancel x} h
+= \lim_{h \to 0} \frac h h = 1$
 :::
 
-~~~ {.graph b=-3 l=-3 r=3 t=3}
+::: {.Remark cols=2 t="Gradient and derivatives"}
+~~~ {.graph b=-2 l=-3 r=3 t=3}
 plot('x')
 ~~~
+
+The result coincides with the **gradient** of $x$ as expected.
+:::
 
 # Exercises
 
