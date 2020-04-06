@@ -13,6 +13,7 @@ data.json
 *.pdf
 *.snm
 *.synctex.gz
+*.synctex(busy)
 *.tex
 *.toc
 *.vrb
