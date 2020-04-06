@@ -104,8 +104,12 @@ def rectfrac(num, den, num2 = 1, den2 = 1, side = 4):
 def stf(number):
     exercise = str(number)
     number = s.sympify(number)
+    sign = ''
+    if number < 0:
+        sign = '-'
+        number = -1*number
     power = floor(s.log(number) / s.log(10))
     x = number / 10**power
     x = re.sub(r'([1-9])\.?0*$', r'\1', str(x.evalf()))
-    solution = f"{x} \\times 10^{{{power}}}"
+    solution = f"{sign}{x} \\times 10^{{{power}}}"
     return (exercise, solution)

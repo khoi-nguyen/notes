@@ -75,20 +75,25 @@
 - name: Standard form (bigger than 1)
   cmd: stf(485)
   out:
-    - "485"
-    - "4.85 \\times 10^{2}"
+    - '485'
+    - '4.85 \\times 10^{2}'
 - name: Standard form (less than 1)
   cmd: stf(0.0032)
   out:
-    - "0.0032"
-    - "3.2 \\times 10^{-3}"
+    - '0.0032'
+    - '3.2 \times 10^{-3}'
 - name: Standard form (rounding)
   cmd: stf(0.00312)
   out:
-    - "0.00312"
-    - "3.12 \\times 10^{-3}"
+    - '0.00312'
+    - '3.12 \times 10^{-3}'
 - name: Standard form (one significant figure)
   cmd: stf('0.00002')
   out:
-    - "0.00002"
-    - "2 \\times 10^{-5}"
+    - '0.00002'
+    - '2 \times 10^{-5}'
+- name: Standard form (negative number)
+  cmd: stf('-0.00352')
+  out:
+    - '-0.00352'
+    - '-3.52 \times 10^{-3}'
