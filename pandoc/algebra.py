@@ -1,6 +1,6 @@
 import re
 import sympy as s
-from math import log
+from math import log, floor
 
 # Redefine some functions to automatically sympify
 _s = lambda x: s.sympify(x, evaluate=False) if isinstance(x, (str, int)) else x
@@ -100,3 +100,11 @@ def rectfrac(num, den, num2 = 1, den2 = 1, side = 4):
         lines.append(f'\\draw (0, {i*side/den2}) -- ({side}, {i*side/den2});')
     lines.append('\\end{tikzpicture}')
     return '\n'.join(lines)
+
+def stf(number):
+    power = floor(log(number)/log(10))
+    x = number/10**power
+    exercise = str(number)
+    import logging; logging.warning(x, power)
+    solution = f"{x} \\times 10^{{{power}}}"
+    return (exercise, solution)

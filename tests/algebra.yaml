@@ -71,3 +71,14 @@
   out:
     - '2 x^{2} + 8 x + 11'
     - '2 \left(x + 2\right)^{2} + 3'
+# Standard Form
+- name: Standard form (bigger than 1)
+  cmd: stf(485)
+  out:
+    - "485"
+    - "4.85 \\times 10^{2}"
+- name: Standard form (less than 1)
+  cmd: stf(0.0032)
+  out:
+    - "0.0032"
+    - "3.2 \\times 10^{-3}"
