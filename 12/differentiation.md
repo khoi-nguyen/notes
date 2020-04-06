@@ -197,24 +197,25 @@ $$\frac {df} {dx} \defeq \lim_{h \to 0} \frac {f(x + h) - f(x)} {h}$$
 # Differentiation from first principles
 
 ::: Example
-Differentiate $x^2$ from first principles at $a$.
+Differentiate $x^2$ from first principles.
 :::
 
 ::: Solution
-$\lim_{x \to a} \frac {x^2 - a^2} {x - a}
-= \lim_{x \to a} \frac {\cancel{(x - a)} (x + a)} {\cancel{x - a}}
-= 2a$
+\begin{align*}
+\lim_{h \to 0} \frac {\br{x + h}^2 - x^2} h
+&= \lim_{h \to 0} \frac {\cancel{x^2} + 2xh + h^2 - \cancel{x^2}} h\\
+&= \lim_{h \to 0} \br{2x + h} = 2x
+\end{align*}
 :::
 
 # Differentiation from first principles
 
 ::: Example
-Differentiate $x$ from first principles at $a$.
+Differentiate $x$ from first principles.
 :::
 
 ::: Solution
-$\lim_{x \to a} \frac {x - a} {x - a}
-= \lim_{x \to a} \frac {\cancel{(x - a)}} {\cancel{x - a}}
+$\lim_{h \to 0} \frac {\cancel x + h - \cancel x} h
 = 1$
 :::
 
