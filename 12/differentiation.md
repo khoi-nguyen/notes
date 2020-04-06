@@ -99,12 +99,13 @@ $$m = \frac {\Delta y} {\Delta x}$$
 
 ::: {.Idea t="Approximation by the tangent" cols=2}
 ~~~ {.graph b=-1.5 l=-3 r=7 t=4.5}
-f, a = '0.2*x^2 + 1', 2.5
+f, x = '0.2*x^2 + 1', 2.5
 plot(f)
-showcoordinates(f, a, 'a', 'f(a)')
-showtangent(f, a)
+showcoordinates(f, x, 'x', 'f(x)')
+showtangent(f, x)
 ~~~
 
+[0.5cm]{.gap}
 The **gradient** of a curve at a **point**
 will be the **gradient** of its **tangent** at that point.
 :::
@@ -112,85 +113,85 @@ will be the **gradient** of its **tangent** at that point.
 # Approximating the tangent
 
 ::: {.cols n="2"}
-~~~ {.graph b=-1 l=-2 r=7 t=5.5}
-f, a, x = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 5
+~~~ {.graph b=-1 l=-3 r=7 t=5.5}
+f, x, h = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 3.5
 plot(f)
-showcoordinates(f, a, 'a', 'f(a)')
 showcoordinates(f, x, 'x', 'f(x)')
-showsecant(f, a, x)
+showcoordinates(f, x + h, 'x + h', 'f(x + h)')
+showsecant(f, x, x + h)
 ~~~
-~~~ {.graph b=-1 l=-2 r=7 t=5.5}
-f, a, x = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 4
+~~~ {.graph b=-1 l=-3 r=7 t=5.5}
+f, x, h = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 2.5
 plot(f)
-showcoordinates(f, a, 'a', 'f(a)')
 showcoordinates(f, x, 'x', 'f(x)')
-showsecant(f, a, x)
+showcoordinates(f, x + h, 'x + h', 'f(x + h)')
+showsecant(f, x, x + h)
 ~~~
-~~~ {.graph b=-1 l=-2 r=7 t=5.5}
-f, a, x = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 3
+~~~ {.graph b=-1 l=-3 r=7 t=5.5}
+f, x, h = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 1.5
 plot(f)
-showcoordinates(f, a, 'a', 'f(a)')
 showcoordinates(f, x, 'x', 'f(x)')
-showsecant(f, a, x)
+showcoordinates(f, x + h, 'x + h', 'f(x + h)')
+showsecant(f, x, x + h)
 ~~~
-~~~ {.graph b=-1 l=-2 r=7 t=5.5}
-f, a, x = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 2
+~~~ {.graph b=-1 l=-3 r=7 t=5.5}
+f, x, h = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 1
 plot(f)
-showcoordinates(f, a, 'a', 'f(a)')
 showcoordinates(f, x, 'x', 'f(x)')
-showsecant(f, a, x)
+showcoordinates(f, x + h, 'x + h', 'f(x + h)')
+showsecant(f, x, x + h)
 ~~~
 :::
 
 # Approximating the tangent
 
 ::: {.Idea cols="2" t="Approximation by secants"}
-~~~ {.graph b=-1 l=-2 r=5.5 t=4}
-f, a, x = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 4
+~~~ {.graph b=-1 l=-2.5 r=5.5 t=5}
+f, x, h = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 2.5
 plot(f)
-showcoordinates(f, a, 'a', 'f(a)')
 showcoordinates(f, x, 'x', 'f(x)')
-showsecant(f, a, x)
+showcoordinates(f, x + h, 'x + h', 'f(x + h)')
+showsecant(f, x, x + h)
 ~~~
-~~~ {.graph b=-1 l=-2 r=5.5 t=4}
-f, a, x = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 3
+~~~ {.graph b=-1 l=-2.5 r=5.5 t=5}
+f, x, h = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 1.5
 plot(f)
-showcoordinates(f, a, 'a', 'f(a)')
 showcoordinates(f, x, 'x', 'f(x)')
-showsecant(f, a, x)
+showcoordinates(f, x + h, 'x + h', 'f(x + h)')
+showsecant(f, x, x + h)
 ~~~
 
 We approximate the **tangent** by the **secant**,
 whose gradient is
-$$\frac {f(x) - f(a)} {x - a}$$
+$$\frac {f(x + h) - f(x)} {h}$$
 
-[0.4cm]{.gap}
-It gets better as $x$ gets **closer** to $a$.
+[1.2cm]{.gap}
+It gets better as $h$ **tends to $0$**.
 :::
 
 # Definition
 
 ::: {.cols n=2}
 ~~~ {.graph b=-1.5 l=-3 r=7 t=4.5}
-f, a, x = '0.2*x^2 + 1', 2.5, 3.5
+f, x, h = '0.2*x^2 + 1', 2.5, 1
 plot(f)
-showcoordinates(f, a, 'a', 'f(a)')
 showcoordinates(f, x, 'x', 'f(x)')
-showsecant(f, a, x)
+showcoordinates(f, x + h, 'x + h', 'f(x + h)')
+showsecant(f, x, x + h)
 ~~~
-$\text{Gradient} = \frac {f(x) - f(a)} {x - a}$
+$\text{\small{Gradient}} = \frac {f(x + h) - f(x)} {h}$
 
 ~~~ {.graph b=-1.5 l=-3 r=7 t=4.5}
-f, a = '0.2*x^2 + 1', 2.5
+f, x = '0.2*x^2 + 1', 2.5
 plot(f)
-showcoordinates(f, a, 'a', 'f(a)')
-showtangent(f, a)
+showcoordinates(f, x, 'x', 'f(x)')
+showtangent(f, x)
 ~~~
-$\text{Gradient} = \lim_{x \to a} \frac {f(x) - f(a)} {x - a}$
+$\text{\small{Gradient}} = \lim_{h \to 0} \frac {f(x + h) - f(x)} {h}$
 :::
 
 ::: {.Definition t='Derivative'}
-$$f'(a) \defeq \lim_{x \to a} \frac {f(x) - f(a)} {x - a}$$
+$$\frac {df} {dx} \defeq \lim_{h \to 0} \frac {f(x + h) - f(x)} {h}$$
 :::
 
 # Differentiation from first principles
