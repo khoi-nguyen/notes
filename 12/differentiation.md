@@ -142,6 +142,32 @@ showsecant(f, a, x)
 ~~~
 :::
 
+# Approximating the tangent
+
+::: {.Idea cols="2" t="Approximation by secants"}
+~~~ {.graph b=-1 l=-2 r=5.5 t=4}
+f, a, x = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 4
+plot(f)
+showcoordinates(f, a, 'a', 'f(a)')
+showcoordinates(f, x, 'x', 'f(x)')
+showsecant(f, a, x)
+~~~
+~~~ {.graph b=-1 l=-2 r=5.5 t=4}
+f, a, x = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 3
+plot(f)
+showcoordinates(f, a, 'a', 'f(a)')
+showcoordinates(f, x, 'x', 'f(x)')
+showsecant(f, a, x)
+~~~
+
+We approximate the **tangent** by the **secant**,
+whose gradient is
+$$\frac {f(x) - f(a)} {x - a}$$
+
+[0.4cm]{.gap}
+It gets better as $x$ gets **closer** to $a$.
+:::
+
 # Definition
 
 ::: {.cols n=2}
