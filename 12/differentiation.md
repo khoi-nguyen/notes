@@ -215,9 +215,7 @@ Differentiate $x$ from first principles.
 :::
 
 ::: Solution
-$\lim_{h \to 0} \frac {\cancel x + h - x} h
-= \lim_{x \to a} \frac {\cancel{(x - a)}} {\cancel{x - a}}
-= 1$
+$\lim_{h \to 0} \frac {(\cancel x + h) - \cancel x} h = 1$
 :::
 
 ~~~ {.graph b=-3 l=-3 r=3 t=3}
@@ -227,7 +225,7 @@ plot('x')
 # Exercises
 
 ::: {.Exercise t='Differentiation from first principles'}
-Differentiate from first principles at $a$
+Differentiate from first principles
 
 #) `diff('3*x + 5')`
 #) `diff('m*x + c')`
@@ -242,6 +240,7 @@ Differentiate from first principles
 
 # Tangent
 
+::: {.cols n=2}
 ~~~ {.graph b=-1.5 l=-3 r=7 t=4.5}
 f, a = '0.2*x^2 + 1', 2.5
 plot(f)
@@ -250,13 +249,14 @@ showtangent(f, a)
 ~~~
 
 Gradient
-: $f'(a)$
+: $\frac {df} {dx} (a)$
 
 Point
 : $(a, f(a))$
+:::
 
 ::: {.Formula t="Tangent equation"}
-$$y = f'(a) (x - a) + f(a)$$
+$$y = \frac {df} {dx} (a) (x - a) + f(a)$$
 :::
 
 # Differentiation rules
