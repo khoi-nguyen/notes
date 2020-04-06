@@ -82,3 +82,13 @@
   out:
     - "0.0032"
     - "3.2 \\times 10^{-3}"
+- name: Standard form (rounding)
+  cmd: stf(0.00312)
+  out:
+    - "0.00312"
+    - "3.12 \\times 10^{-3}"
+- name: Standard form (one significant figure)
+  cmd: stf('0.00002')
+  out:
+    - "0.00002"
+    - "2 \\times 10^{-5}"
