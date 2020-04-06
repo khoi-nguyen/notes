@@ -91,30 +91,6 @@ that a single individual was ever privileged to make.
 $$F = m {\color{darkred} \frac {d^2x} {dt^2}}$$
 :::
 
-# Generalising the gradient
-
-::: {.cols n=2}
-Generalising **gradient** to curves
-
-~~~ {.graph b=-1.5 l=-3 r=7 t=4.5}
-f, a = '0.2*x^2 + 1', 2.5
-plot(f)
-showcoordinates(f, a, 'a', 'f(a)')
-showtangent(f, a)
-~~~
-by approximating **curves** by **lines**.
-
-Approximating **curves** by a line
-
-~~~ {.graph b=-1.5 l=-3 r=7 t=4.5}
-f, a = '0.2*x^2 + 1', 2.5
-plot(f)
-showcoordinates(f, a, 'a', 'f(a)')
-showtangent(f, a)
-~~~
-by requiring they have the **same gradient**.
-:::
-
 # Definition
 
 ::: {.cols n=2}
