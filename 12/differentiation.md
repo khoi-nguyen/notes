@@ -109,6 +109,39 @@ The **gradient** of a curve at a **point**
 will be the **gradient** of its **tangent** at that point.
 :::
 
+# Approximating the tangent
+
+::: {.cols n="2"}
+~~~ {.graph b=-1 l=-2 r=7 t=5.5}
+f, a, x = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 5
+plot(f)
+showcoordinates(f, a, 'a', 'f(a)')
+showcoordinates(f, x, 'x', 'f(x)')
+showsecant(f, a, x)
+~~~
+~~~ {.graph b=-1 l=-2 r=7 t=5.5}
+f, a, x = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 4
+plot(f)
+showcoordinates(f, a, 'a', 'f(a)')
+showcoordinates(f, x, 'x', 'f(x)')
+showsecant(f, a, x)
+~~~
+~~~ {.graph b=-1 l=-2 r=7 t=5.5}
+f, a, x = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 3
+plot(f)
+showcoordinates(f, a, 'a', 'f(a)')
+showcoordinates(f, x, 'x', 'f(x)')
+showsecant(f, a, x)
+~~~
+~~~ {.graph b=-1 l=-2 r=7 t=5.5}
+f, a, x = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 2
+plot(f)
+showcoordinates(f, a, 'a', 'f(a)')
+showcoordinates(f, x, 'x', 'f(x)')
+showsecant(f, a, x)
+~~~
+:::
+
 # Definition
 
 ::: {.cols n=2}
