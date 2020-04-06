@@ -208,6 +208,29 @@ Differentiate $x^2$ from first principles.
 \end{align*}
 :::
 
+# Interpretation
+
+::: {.Example t="Derivative of $x^2$"}
+$$f(x) = x^2 \qquad \underbrace{\frac {df} {dx} = 2x}_{\text{gradient}}$$
+
+::: {.cols n=2}
+
+ $x$       $f(x)$    Gradient
+--------  --------  ----------
+ -1.5      2.25      -3
+ 0         0         0
+ 2         4         4
+
+~~~ {.graph b=-1 l=-4 r=4}
+f = 'x^2'
+plot(f)
+showtangent(f, -1.5, 'darkgreen', '-2:-1')
+showtangent(f, 0, 'darkred', '-1:1')
+showtangent(f, 2, 'darkorange', '1.5:2.5')
+~~~
+:::
+:::
+
 # Differentiation from first principles
 
 ::: Example
