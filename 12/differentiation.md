@@ -215,7 +215,8 @@ Differentiate $x$ from first principles.
 :::
 
 ::: Solution
-$\lim_{h \to 0} \frac {\cancel x + h - \cancel x} h
+$\lim_{h \to 0} \frac {\cancel x + h - x} h
+= \lim_{x \to a} \frac {\cancel{(x - a)}} {\cancel{x - a}}
 = 1$
 :::
 
@@ -296,7 +297,7 @@ plot('cos(x)', 'darkgreen')
 # Leibniz rule
 
 ::: {.Theorem t="Leibniz rule"}
-$$(fg)'(x) = f'(x)g(x) + f(x) g'(x)$$
+$$\frac d {dx} \br{f(x)g(x)} = \frac {df} {dx}(x) g(x) + f(x) \frac {dg} {dx}(x)$$
 :::
 
 ::: Exercise
