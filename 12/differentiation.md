@@ -91,6 +91,24 @@ that a single individual was ever privileged to make.
 $$F = m {\color{darkred} \frac {d^2x} {dt^2}}$$
 :::
 
+# Generalising the gradient
+
+::: {.Recall t="Gradient of straight line"}
+$$m = \frac {\Delta y} {\Delta x}$$
+:::
+
+::: {.Idea t="Approximation by the tangent" cols=2}
+~~~ {.graph b=-1.5 l=-3 r=7 t=4.5}
+f, a = '0.2*x^2 + 1', 2.5
+plot(f)
+showcoordinates(f, a, 'a', 'f(a)')
+showtangent(f, a)
+~~~
+
+The **gradient** of a curve at a **point**
+will be the **gradient** of its **tangent** at that point.
+:::
+
 # Definition
 
 ::: {.cols n=2}
