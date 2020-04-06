@@ -97,3 +97,8 @@
   out:
     - '-0.00352'
     - '-3.52 \times 10^{-3}'
+- name: Standard form to decimal
+  cmd: stf2dec('-0.00352')
+  out:
+    - '-3.52 \times 10^{-3}'
+    - '-0.00352'

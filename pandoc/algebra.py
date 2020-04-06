@@ -113,3 +113,5 @@ def stf(number):
     x = re.sub(r'([1-9])\.?0*$', r'\1', str(x.evalf()))
     solution = f"{sign}{x} \\times 10^{{{power}}}"
     return (exercise, solution)
+
+stf2dec = lambda x: (stf(x)[1], stf(x)[0])
