@@ -105,6 +105,5 @@ def stf(number):
     power = floor(log(number)/log(10))
     x = number/10**power
     exercise = str(number)
-    import logging; logging.warning(x, power)
     solution = f"{x} \\times 10^{{{power}}}"
     return (exercise, solution)
