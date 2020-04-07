@@ -7,7 +7,7 @@ else
 	MARKDOWN := $(shell find * -name '*.md' | grep -v '^\(env\|node\|www\|README\)' | grep -v 'worksheet.md$$')
 	WORKSHEET_MARKDOWN := $(shell find * -name '*.worksheet.md')
 	DEPENDENCIES := Makefile $(shell find pandoc/*)
-	ENV := source env/bin/activate;
+	ENV := . env/bin/activate;
 endif
 LATEX := latexmk -silent -lualatex -cd -f
 SLIDES := $(MARKDOWN:.md=.pdf)
@@ -27,12 +27,12 @@ WORKSHEET := $(PANDOC) -t latex --template=./pandoc/worksheet.tex
 handouts: tests $(HANDOUTS) $(ANSWERS)
 
 tests:
-	@$(ENV) python ./pandoc/run_test.py
+	@$(ENV) python3 ./pandoc/run_test.py
 
 all: $(SLIDES) $(WORKSHEETS) handouts
 
 deploy: all
-	. env/bin/activate; python ./data.py
+	. env/bin/activate; python3 ./data.py
 	parcel build index.html --out-dir www --public-url ./ --no-cache
 	ls -d */ | grep '^[0-9]' | xargs -I {} cp -R {} www
 	rsync -avu --delete www/ khoi@nguyen.me.uk:~/www
@@ -65,6 +65,6 @@ clean:
 env: env/bin/activate
 
 env/bin/activate: requirements.txt
-	test -d env || virtualenv env
-	. env/bin/activate; pip install -Ur requirements.txt
+	test -d env || virtualenv -p python3 env
+	. env/bin/activate; pip3 install -Ur requirements.txt
 	touch env/bin/activate
