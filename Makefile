@@ -4,7 +4,7 @@ endef
 
 MARKDOWN := $(shell find * -name '*.md' | grep -v '^\(env\|node\|www\|README\)' | grep -v 'worksheet.md$$')
 WORKSHEET_MARKDOWN := $(shell find * -name '*.worksheet.md')
-DEPENDENCIES := env Makefile $(shell find pandoc/*)
+DEPENDENCIES := env/bin/activate Makefile $(shell find pandoc/*)
 ENV := . env/bin/activate;
 LATEX := latexmk -silent -lualatex -cd -f
 SLIDES := $(MARKDOWN:.md=.pdf)
@@ -18,15 +18,18 @@ PANDOC := $(ENV) pandoc -s --pdf-engine=lualatex\
 BEAMER := $(PANDOC) -t beamer --template=./pandoc/beamer.tex
 WORKSHEET := $(PANDOC) -t latex --template=./pandoc/worksheet.tex
 
-.PHONY: tests handouts all deploy clean
+.PHONY: tests handouts all deploy clean init
 .PRECIOUS: $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.handout.tex) $(WORKSHEETS:.pdf=.tex) $(ANSWERS:.pdf=.tex)
 
-handouts: env tests $(HANDOUTS) $(ANSWERS)
+handouts: env/bin/activate tests $(HANDOUTS) $(ANSWERS)
 
 tests:
 	$(call vagrant, $(ENV) python3 ./pandoc/run_test.py)
 
 all: $(SLIDES) $(WORKSHEETS) handouts
+
+init:
+	vagrant up
 
 deploy: all
 	. env/bin/activate; python3 ./data.py
@@ -59,9 +62,8 @@ clean:
 	@echo Building $@ with LaTeX...
 	$(call vagrant, $(LATEX) $<)
 
-env: env/bin/activate
-
 env/bin/activate: requirements.txt
+	@echo Setting up virtual environment
 	$(call vagrant, test -d env || python3 -m venv env)
-	$(call vagrant, . env/bin/activate; pip3 install -Ur requirements.txt)
-	$(call touch env/bin/activate)
+	$(call vagrant, $(ENV) pip3 install -Ur requirements.txt)
+	$(call vagrant, touch env/bin/activate)
