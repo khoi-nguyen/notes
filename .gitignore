@@ -1,4 +1,5 @@
 .cache/
+.vagrant/
 dist/
 env/
 node_modules/
