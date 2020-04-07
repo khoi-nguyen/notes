@@ -1,14 +1,11 @@
-ifeq ($(OS),Windows_NT)
-	MARKDOWN := $(shell dir /b /S *.md | findstr /v /i "\.worksheet\.md$" )
-	WORKSHEET_MARKDOWN := $(shell dir /b /S *.worksheet.md)
-	DEPENDENCIES := Makefile $(shell dir /b pandoc\\*.md)
-	ENV :=
-else
-	MARKDOWN := $(shell find * -name '*.md' | grep -v '^\(env\|node\|www\|README\)' | grep -v 'worksheet.md$$')
-	WORKSHEET_MARKDOWN := $(shell find * -name '*.worksheet.md')
-	DEPENDENCIES := Makefile $(shell find pandoc/*)
-	ENV := . env/bin/activate;
-endif
+define vagrant
+	@vagrant ssh -- "cd teaching; $(1)"
+endef
+
+MARKDOWN := $(shell find * -name '*.md' | grep -v '^\(env\|node\|www\|README\)' | grep -v 'worksheet.md$$')
+WORKSHEET_MARKDOWN := $(shell find * -name '*.worksheet.md')
+DEPENDENCIES := env Makefile $(shell find pandoc/*)
+ENV := . env/bin/activate;
 LATEX := latexmk -silent -lualatex -cd -f
 SLIDES := $(MARKDOWN:.md=.pdf)
 HANDOUTS := $(MARKDOWN:.md=.handout.pdf)
@@ -27,7 +24,7 @@ WORKSHEET := $(PANDOC) -t latex --template=./pandoc/worksheet.tex
 handouts: tests $(HANDOUTS) $(ANSWERS)
 
 tests:
-	@$(ENV) python3 ./pandoc/run_test.py
+	$(call vagrant, $(ENV) python3 ./pandoc/run_test.py)
 
 all: $(SLIDES) $(WORKSHEETS) handouts
 
@@ -40,31 +37,31 @@ deploy: all
 
 clean:
 	@echo Removing all temporary files
-	@find [0-9]* -type f | grep -v '\(md\)$$' | xargs rm
+	$(call vagrant, find [0-9]* -type f | grep -v '\(md\)$$' | xargs rm)
 
 %.worksheet.tex: %.worksheet.md $(DEPENDENCIES)
 	@echo Generating worksheet for $@...
-	@$(WORKSHEET) -s $< -o $@
+	$(call vagrant, $(WORKSHEET) -s $< -o $@)
 
 %.worksheet.answers.tex: %.worksheet.md $(DEPENDENCIES)
 	@echo Generating answer sheet for $@...
-	@$(WORKSHEET) -V answers=1 -s $< -o $@
+	$(call vagrant, $(WORKSHEET) -V answers=1 -s $< -o $@)
 
 %.tex: %.md $(DEPENDENCIES)
 	@echo Generating $@...
-	@$(BEAMER) -s $< -o $@
+	$(call vagrant, $(BEAMER) -s $< -o $@)
 
 %.handout.tex: %.md $(DEPENDENCIES)
 	@echo Building $@...
-	@$(BEAMER) -s $< -o $@ -V handout=true
+	$(call vagrant, $(BEAMER) -s $< -o $@ -V handout=true)
 
 %.pdf: %.tex
 	@echo Building $@ with LaTeX...
-	@$(LATEX) $<
+	$(call vagrant, $(LATEX) $<)
 
 env: env/bin/activate
 
 env/bin/activate: requirements.txt
-	test -d env || python3 -m venv env
-	. env/bin/activate; pip3 install -Ur requirements.txt
-	touch env/bin/activate
+	$(call vagrant, test -d env || python3 -m venv env)
+	$(call vagrant, . env/bin/activate; pip3 install -Ur requirements.txt)
+	$(call touch env/bin/activate)
