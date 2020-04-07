@@ -65,6 +65,6 @@ clean:
 env: env/bin/activate
 
 env/bin/activate: requirements.txt
-	test -d env || virtualenv -p python3 env
+	test -d env || python3 -m venv env
 	. env/bin/activate; pip3 install -Ur requirements.txt
 	touch env/bin/activate
