@@ -21,7 +21,7 @@ WORKSHEET := $(PANDOC) -t latex --template=./pandoc/worksheet.tex
 .PHONY: tests handouts all deploy clean
 .PRECIOUS: $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.handout.tex) $(WORKSHEETS:.pdf=.tex) $(ANSWERS:.pdf=.tex)
 
-handouts: tests $(HANDOUTS) $(ANSWERS)
+handouts: env tests $(HANDOUTS) $(ANSWERS)
 
 tests:
 	$(call vagrant, $(ENV) python3 ./pandoc/run_test.py)
