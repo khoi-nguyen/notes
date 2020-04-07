@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+while true
+do
+    if [[ "$(git pull)" != "Already"* ]]; then
+        notify-send "New commit! Pulling and building"
+        make -j 10 deploy
+        notify-send "The website has been updated"
+    fi
+    sleep 300
+done
