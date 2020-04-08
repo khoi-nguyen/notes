@@ -2,11 +2,8 @@
 
 ## Setting up
 
-- Install LaTeX (MacTex on MacOS)
-- Sign up on [GitHub](https://github.com)
-- Install [Python 3](https://www.python.org/downloads/)
-  and run `pip3 install virtualenv`
-- Install [Pandoc](https://pandoc.org/installing.html)
+- Install [Vagrant](https://www.vagrantup.com/)
+- Install [Virtualbox](https://www.vagrantup.com/)
 
 ### Recommended if you don't have a good text editor
 
@@ -14,3 +11,5 @@
     - atom-build + build-make (F9 to build PDF)
     - pdf-view-plus (pdf preview)
     - language-pfm
+
+For the first run,
