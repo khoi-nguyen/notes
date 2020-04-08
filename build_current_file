@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+n="$(echo "$1" | wc -m)"
+current="$(echo "${2:$n}")"
+
+if [[ "$current" = *.md ]]; then
+    if [[ "$current" = *.worksheet.md ]]; then
+        make $(echo "$current" | sed 's/\.md$/.answers.pdf/')
+    else
+        make $(echo "$current" | sed 's/\.md$/.handout.pdf/')
+    fi
+else
+    make all
+fi
