@@ -17,3 +17,7 @@ For the first run, press `F7` and select `init`.
 Then press `F7` again, and select `current`.
 
 To build the file you are working on, press `F9`.
+
+# Build status
+
+[![Build Status](https://travis-ci.com/khoi-nguyen/teaching.svg?branch=master)](https://travis-ci.com/khoi-nguyen/teaching)
