@@ -1,7 +1,9 @@
 cmd: vagrant ssh -- "cd teaching; ./build_current_file {PROJECT_PATH} {FILE_ACTIVE}"
-name: handouts
+name: current
 targets:
-  init:
-    cmd: vagrant up
+  handouts:
+    cmd: vagrant ssh -- "cd teaching; make handouts"
   all:
     cmd: vagrant ssh -- "cd teaching; make all"
+  init:
+    cmd: vagrant up
