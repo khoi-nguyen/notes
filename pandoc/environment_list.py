@@ -1,4 +1,10 @@
 environments = {
+    'Code': {
+        'title': 'Code',
+        'prefix': '\\faCode',
+        'tcolor': 'darkblue',
+        'bgcolor': 'lightblue',
+    },
     'Definition': {
         'title': 'Definition',
         'prefix': '\\faStar \\faBook',
@@ -82,6 +88,12 @@ environments = {
         'prefix': '\\faDownload',
         'tcolor': 'darkorange',
         'bgcolor': 'lightorange',
+    },
+    'Result': {
+        'title': 'Result',
+        'prefix': '\\faImage',
+        'tcolor': 'darkgreen',
+        'bgcolor': 'lightgreen',
     },
     'Solution': {
         'title': 'Solution',
