@@ -127,6 +127,8 @@ showcoordinates(f, x, 'x', 'f(x)')
 showcoordinates(f, x + h, 'x + h', 'f(x + h)')
 showsecant(f, x, x + h)
 ~~~
+:::
+::: {.cols n="2"}
 ~~~ {.graph b=-1 l=-3 r=7 t=5.5}
 f, x, h = '-0.1*x^2 + cos(x) + 3.7', 1.5, 1.5
 plot(f)
