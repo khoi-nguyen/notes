@@ -7,7 +7,7 @@ SLIDES := $(MARKDOWN:.md=.pdf)
 HANDOUTS := $(MARKDOWN:.md=.handout.pdf)
 WORKSHEETS := $(WORKSHEET_MARKDOWN:.md=.pdf)
 ANSWERS := $(WORKSHEET_MARKDOWN:.md=.answers.pdf)
-PANDOC := $(ENV) pandoc -s --pdf-engine=lualatex\
+PANDOC := $(ENV) pandoc -s\
 	--filter ./pandoc/pythontex.py\
 	--filter ./pandoc/environments.py\
 	--filter ./pandoc/multicols.py
