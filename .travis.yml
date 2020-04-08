@@ -1,0 +1,9 @@
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y pandoc
+  - sudo apt-get install -y texlive-full
+
+python:
+  - "3.8"
+
+script: make all
