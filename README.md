@@ -6,10 +6,10 @@
 - Install [Vagrant](https://vagrantup.com/)
 - Install [Virtualbox](https://virtualbox.org/)
 - Install [Atom](https://atom.io/) with the following extensions
-  (`Ctrl+,` to open the settings, then go to the `+ Install` tab):
-    - atom-build
-    - pdf-view-plus (pdf preview)
-    - language-pfm
+  (`Ctrl+comma` to open the settings, then go to the `+ Install` tab):
+    - build (by noseglid)
+    - pdf-view-plus (by Aerijo)
+    - language-pfm (by leipert)
 - Clone this repository in Atom (`Ctrl+Shift+8`, `Clone an existing Github repository`, Clone from `https://github.com/khoi-nguyen/teaching.git`)
 - Log in on Github in Atom (`Ctrl+Shift+8`)
 
