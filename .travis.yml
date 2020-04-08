@@ -2,11 +2,9 @@ language: python
 
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install -y texlive-full curl
-  - curl -o ./pandoc.deb https://github.com/jgm/pandoc/releases/download/2.9.2.1/pandoc-2.9.2.1-1-amd64.deb
-  - pwd
-  - ls
-  - sudo dpkg -i pandoc.deb
+  - sudo apt-get install -y texlive-full wget
+  - wget https://github.com/jgm/pandoc/releases/download/2.9.2.1/pandoc-2.9.2.1-1-amd64.deb
+  - sudo dpkg -i pandoc-2.9.2.1-1-amd64.deb
 
 python:
   - "3.8"
