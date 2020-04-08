@@ -86,3 +86,17 @@ Text between backticks will be **executed as Python code**.
 ::: {.Result t="Python"}
 34 times 47 is `34*47`.
 :::
+
+# Algebra
+
+::: {.Code t="Algebra"}
+    #) `equation('3*x + 2 = 5')`
+    #) `equation(s.expand('2*(x - 1)*(x + 2)'))`
+    #) `complete_square('x^2 + 3*x + 2')`
+:::
+
+::: {.Result t="Algebra"}
+#) `equation('3*x + 2 = 5')`
+#) `equation(s.expand('2*(x - 1)*(x + 2)'))`
+#) `complete_square('x^2 + 3*x + 2')`
+:::
