@@ -1,6 +1,12 @@
+ifeq ("$(shell pwd)","/home/vagrant/teaching")
+define vagrant
+	@$(1)
+endef
+else
 define vagrant
 	@vagrant ssh -- "cd teaching; $(1)"
 endef
+endif
 
 MARKDOWN := $(shell find * -name '*.md' | grep -v '^\(env\|node\|www\|README\)' | grep -v 'worksheet.md$$')
 WORKSHEET_MARKDOWN := $(shell find * -name '*.worksheet.md')
