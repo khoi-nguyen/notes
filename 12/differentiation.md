@@ -193,7 +193,7 @@ $\text{\small{Gradient}} = \lim_{h \to 0} \frac {f(x + h) - f(x)} {h}$
 :::
 
 ::: {.Definition t='Derivative'}
-$$\frac {df} {dx} \defeq \lim_{h \to 0} \frac {f(x + h) - f(x)} {h}$$
+$$\frac {df} {dx}(x) \defeq \lim_{h \to 0} \frac {f(x + h) - f(x)} {h}$$
 :::
 
 # Differentiation from first principles
