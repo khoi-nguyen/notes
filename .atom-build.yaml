@@ -2,6 +2,6 @@ cmd: vagrant ssh -- "cd teaching; make"
 name: handouts
 targets:
   init:
-    cmd: vagrant ssh -- "make init"
+    cmd: vagrant up
   all:
     cmd: vagrant ssh -- "cd teaching; make all"
