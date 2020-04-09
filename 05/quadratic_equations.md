@@ -1,51 +1,45 @@
 ---
 title: Quadratic Equations
+#
 ...
 
 # Starter
 
-::: Objective
-Completing the square
+::: {.Exercise cols=2}
+Expand the brackets for:
+
+#) `expand('(x + 1)*(x + 1)')`
+#) `expand('(x - 2)^2')`
+#) `expand('(2*x - 3)^2')`
+
+Factorise the following by 3:
+
+#) `factorise('3*x + 3')`
+#) `factorise('3*x + 1')`
+#) `factorise('3*x - 5')`
 :::
 
-#) Solve `equation('2*x - 5 = 4')`
-#) Solve `equation('4*x - 5 = 2*x + 7')`
-#) Solve `equation('x^2 + 3 = 12')`
-#) Solve `equation('2*x^2 + 3 = 53')`
-#) Solve `equation('3*x^2 - 4 = -4')`
-#) Factorise `factorise(s.expand('(x - 2)*(x + 3)'))`
-
-# Difficulty of quadratic equations
-
-::: Question
-*Which* question is harder and *why*?
-
-- Solve `equation('x^2 - 9 = 16')`
-- Solve `equation('x^2 - 5*x = -6')`
-:::
-
-::: Solution
-The second one is *harder* because $x$ appears twice.
-
-It makes it harder to *change the subject*.
+::: {.Extension t="Solve the following equations:"}
+#) `equation(s.expand('(x + 3)^2'))`
+#) `equation(s.expand('(5*x - 1)^2'))`
+#) `equation(s.expand('(8*x - 9)^2'))`
 :::
 
 # Completing the square
 
-::: Recall
-$$a^2 - b^2 = (a - b)(a + b)$$
+::: Solution
+(Proof TODO)
 :::
 
-::: Exercise
-Expand $\br{x + \frac b 2}^2 - \br{\frac {b} 2}^2$
+# Completing the square
+
+
+::: {.Example t="Complete the square"}
+$$x^2 + 6x$$
 :::
 
 ::: Solution
-$$\br{x + \frac b 2}^2 - \br{\frac b 2}^2 = x (x + b) = x^2 + bx$$
-:::
-
-::: Remark
-Count how many $x$ are on either sides
+$$x^2 + 6x = (x {\color{darkred} + 3})^2 - {\color{darkblue} 3^2} = (x + {\color{darkred} 3})^2 - {\color{darkblue} 9}$$
 :::
 
 # Completing the square
@@ -185,3 +179,5 @@ Similarities
 - Convexity
 
 # Summary
+
+# Difficulty of quadratic equations
