@@ -1,4 +1,4 @@
-cmd: vagrant ssh -- "cd teaching; ./build_current_file {PROJECT_PATH} {FILE_ACTIVE}"
+cmd: vagrant ssh -- "cd teaching; ./bin/build_current_file {PROJECT_PATH} {FILE_ACTIVE}"
 name: current
 targets:
   handouts:
