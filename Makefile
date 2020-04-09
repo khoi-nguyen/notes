@@ -19,7 +19,7 @@ WORKSHEET := $(PANDOC) -t latex --template=./pandoc/worksheet.tex
 
 handouts: env/bin/activate tests $(HANDOUTS) $(ANSWERS)
 
-tests:
+tests: env/bin/activate
 	@$(ENV) python3 ./pandoc/run_test.py
 
 all: $(SLIDES) $(WORKSHEETS) handouts
