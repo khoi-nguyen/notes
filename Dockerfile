@@ -1,20 +1,18 @@
-FROM alpine:latest
+FROM archlinux/base
 
-RUN apk update
-RUN apk add -U --repository http://dl-3.alpinelinux.org/alpine/edge/testing \
-        pandoc
-RUN apk --no-cache add\
-        grep\
+RUN pacman --noconfirm -Syyu
+RUN pacman --noconfirm -S\
+        grep \
+        findutils\
         make\
-        texlive\
-        texlive-luatex\
-        python3
-RUN apk add -U --repository http://dl-3.alpinelinux.org/alpine/edge/community \
-        texmf-dist-fontsextra\
-        texmf-dist-latexextra\
-        texmf-dist-pictures
+        pandoc\
+        python\
+        texlive-core\
+        texlive-fontsextra\
+        texlive-latexextra\
+        texlive-pictures
 
-RUN luaotfload-tool -u
+RUN mkluatexfontdb -u
 
 WORKDIR /teaching
 
