@@ -1,19 +1,29 @@
 ---
 title: Quadratic Equations
+#
 ...
 
 # Starter
 
-::: Objective
-Completing the square
+::: {.Exercise cols=2}
+Expand the brackets for:
+
+#) `expand('(x + 1)*(x + 1)')`
+#) `expand('(x - 2)^2')`
+#) `expand('(2*x - 3)^2')`
+
+Factorise the following by 3:
+
+#) `factorise(s.expand('(3x + 3)'))`
+#) `factorise(s.expand('(3x + 1)'))`
+#) `factorise(s.expand('(3x - 5)'))`
 :::
 
-#) Solve `equation('2*x - 5 = 4')`
-#) Solve `equation('4*x - 5 = 2*x + 7')`
-#) Solve `equation('x^2 + 3 = 12')`
-#) Solve `equation('2*x^2 + 3 = 53')`
-#) Solve `equation('3*x^2 - 4 = -4')`
-#) Factorise `factorise(s.expand('(x - 2)*(x + 3)'))`
+::: {.Extension t="Solve the following equations:"}
+#) `equation(s.expand('(x + 3)^2'))`
+#) `equation(s.expand('(5*x - 1)^2'))`
+#) `equation(s.expand('(8*x - 9)^2'))`
+:::
 
 # Difficulty of quadratic equations
 
