@@ -26,6 +26,7 @@ all: $(SLIDES) $(WORKSHEETS) handouts
 
 deploy: all
 	@$(ENV) python3 ./bin/data.py
+	npm install
 	parcel build src/index.html --out-dir www --public-url ./ --no-cache
 	rsync -am --include '*/' --include '*.pdf' --exclude '*' . www
 
