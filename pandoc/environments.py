@@ -26,7 +26,7 @@ def environment(ident, classes, keyvals, contents, count, fmt):
     title = keyvals['t'] if 't' in keyvals else ''
     if env == 'Objective' and title == '':
         title = '\\today'
-    pause = '\\onslide<{}->{{'.format(count) if fmt == 'beamer' else '{'
+    pause = '\\onslide<{}->{{'.format(count) if fmt == 'beamer' and env != 'Code' else '{'
     begin = f"\\begin{{colorenv}}[{data['bgcolor']}]{{{data['tcolor']}}}"
     begin += f"{{{data['prefix']}\  {data['title']} {tally[env] if fmt == 'latex' else ''}}}{{{title}}}"
     end = '\\end{colorenv}}'

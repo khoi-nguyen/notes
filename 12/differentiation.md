@@ -114,28 +114,30 @@ will be the **gradient** of its **tangent** at that point.
 
 ::: {.cols n="2"}
 ~~~ {.graph b=-1 l=-3 r=7 t=5.5}
-f, x, h = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 3.5
+f, x, h = '-0.1*x^2 + cos(x) + 3.7', 1.5, 3.5
 plot(f)
 showcoordinates(f, x, 'x', 'f(x)')
 showcoordinates(f, x + h, 'x + h', 'f(x + h)')
 showsecant(f, x, x + h)
 ~~~
 ~~~ {.graph b=-1 l=-3 r=7 t=5.5}
-f, x, h = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 2.5
+f, x, h = '-0.1*x^2 + cos(x) + 3.7', 1.5, 2.5
+plot(f)
+showcoordinates(f, x, 'x', 'f(x)')
+showcoordinates(f, x + h, 'x + h', 'f(x + h)')
+showsecant(f, x, x + h)
+~~~
+:::
+::: {.cols n="2"}
+~~~ {.graph b=-1 l=-3 r=7 t=5.5}
+f, x, h = '-0.1*x^2 + cos(x) + 3.7', 1.5, 1.5
 plot(f)
 showcoordinates(f, x, 'x', 'f(x)')
 showcoordinates(f, x + h, 'x + h', 'f(x + h)')
 showsecant(f, x, x + h)
 ~~~
 ~~~ {.graph b=-1 l=-3 r=7 t=5.5}
-f, x, h = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 1.5
-plot(f)
-showcoordinates(f, x, 'x', 'f(x)')
-showcoordinates(f, x + h, 'x + h', 'f(x + h)')
-showsecant(f, x, x + h)
-~~~
-~~~ {.graph b=-1 l=-3 r=7 t=5.5}
-f, x, h = '0.15*x^2*sin(0.2*x) + 1.2', 1.5, 1
+f, x, h = '-0.1*x^2 + cos(x) + 3.7', 1.5, 1
 plot(f)
 showcoordinates(f, x, 'x', 'f(x)')
 showcoordinates(f, x + h, 'x + h', 'f(x + h)')
@@ -191,7 +193,7 @@ $\text{\small{Gradient}} = \lim_{h \to 0} \frac {f(x + h) - f(x)} {h}$
 :::
 
 ::: {.Definition t='Derivative'}
-$$\frac {df} {dx} \defeq \lim_{h \to 0} \frac {f(x + h) - f(x)} {h}$$
+$$\frac {df} {dx}(x) \defeq \lim_{h \to 0} \frac {f(x + h) - f(x)} {h}$$
 :::
 
 # Differentiation from first principles
