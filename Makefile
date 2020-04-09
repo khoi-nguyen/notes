@@ -25,7 +25,7 @@ tests:
 all: $(SLIDES) $(WORKSHEETS) handouts
 
 deploy: all
-	. env/bin/activate; python3 ./data.py
+	. env/bin/activate; python3 ./bin/data.py
 	parcel build index.html --out-dir www --public-url ./ --no-cache
 	ls -d */ | grep '^[0-9]' | xargs -I {} cp -R {} www
 	rsync -avu --delete www/ khoi@nguyen.me.uk:~/www
