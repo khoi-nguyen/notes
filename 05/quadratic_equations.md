@@ -14,9 +14,9 @@ Expand the brackets for:
 
 Factorise the following by 3:
 
-#) `factorise(s.expand('(3x + 3)'))`
-#) `factorise(s.expand('(3x + 1)'))`
-#) `factorise(s.expand('(3x - 5)'))`
+#) `factorise('3*x + 3')`
+#) `factorise('3*x + 1')`
+#) `factorise('3*x - 5')`
 :::
 
 ::: {.Extension t="Solve the following equations:"}
@@ -25,37 +25,21 @@ Factorise the following by 3:
 #) `equation(s.expand('(8*x - 9)^2'))`
 :::
 
-# Difficulty of quadratic equations
-
-::: Question
-*Which* question is harder and *why*?
-
-- Solve `equation('x^2 - 9 = 16')`
-- Solve `equation('x^2 - 5*x = -6')`
-:::
+# Completing the square
 
 ::: Solution
-The second one is *harder* because $x$ appears twice.
-
-It makes it harder to *change the subject*.
+(Proof TODO)
 :::
 
 # Completing the square
 
-::: Recall
-$$a^2 - b^2 = (a - b)(a + b)$$
-:::
 
-::: Exercise
-Expand $\br{x + \frac b 2}^2 - \br{\frac {b} 2}^2$
+::: {.Example t="Complete the square"}
+$$x^2 + 6x$$
 :::
 
 ::: Solution
-$$\br{x + \frac b 2}^2 - \br{\frac b 2}^2 = x (x + b) = x^2 + bx$$
-:::
-
-::: Remark
-Count how many $x$ are on either sides
+$$x^2 + 6x = (x {\color{darkred} + 3})^2 - {\color{darkblue} 3^2} = (x + {\color{darkred} 3})^2 - {\color{darkblue} 9}$$
 :::
 
 # Completing the square
@@ -195,3 +179,5 @@ Similarities
 - Convexity
 
 # Summary
+
+# Difficulty of quadratic equations
