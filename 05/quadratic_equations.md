@@ -45,6 +45,24 @@ $$x^2 + 6x = (x {\color{darkred} + 3})^2 - {\color{darkblue} 3^2} = (x + {\color
 # Completing the square
 
 ::: Recall
+$$a^2 - b^2 = \br{a + b}\br{a - b}$$
+:::
+
+::: Exercise
+Expand $\br{x + \frac b 2}^2 - \br{\frac {b} 2}^2$
+:::
+
+::: Solution
+$$\br{x + \frac b 2}^2 - \br{\frac b 2}^2 = x (x + b) = x^2 + bx$$
+:::
+
+::: Remark
+Count how many $x$ are on either sides
+:::
+
+# Completing the square
+
+::: Recall
 $$x^2 + bx = \br{x + \frac b 2}^2 - \br{\frac b 2}^2$$
 :::
 
