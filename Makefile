@@ -33,6 +33,7 @@ deploy: all
 clean:
 	@echo Removing all temporary files
 	@find [0-9]* -type f | grep -v '\(md\)$$' | xargs rm
+	@rm -fR env
 
 %.worksheet.tex: %.worksheet.md $(DEPENDENCIES)
 	@echo Generating worksheet for $@...
