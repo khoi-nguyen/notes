@@ -6,14 +6,8 @@
 
 ## Setting up
 
-- Install [Docker](https://docker.com)
-  - Widows:
-    - [Windows 10 Enterprise](https://download.docker.com/win/stable/Docker%20Desktop%20Installer.exe)
-    - [Other versions](https://github.com/docker/toolbox/releases/download/v19.03.1/DockerToolbox-19.03.1.exe)
-  - MacOS:
-    - [10.13 or newer, with hardware 2010 or newer](https://download.docker.com/mac/stable/Docker.dmg)
-    - [Other versions](https://github.com/docker/toolbox/releases/download/v19.03.1/DockerToolbox-19.03.1.pkg)
-  - Linux: use your package manager
+- Install [Vagrant](https://vagrantup.com)
+- Install [Virtualbox](https://www.virtualbox.org/)
 - Install [Atom](https://atom.io/) with the following extensions
   (`Ctrl+comma` to open the settings, then go to the `+ Install` tab):
     - build (by noseglid)
@@ -21,7 +15,10 @@
     - language-pfm (by leipert)
 - Clone this repository in Atom (`Ctrl+Shift+8`, `Clone an existing Github repository`, Clone from `https://github.com/khoi-nguyen/teaching.git`)
 
-To build the file you are working on, press `F9`.
+Press `F7` and select `init`.
+
+Open a `.md` file to edit, press `F7` and select current.
+Subsequent builds can be triggered by pressing `F9`.
 
 ### For advanced users who don't want to use Atom
 
