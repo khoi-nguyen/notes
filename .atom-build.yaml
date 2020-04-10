@@ -5,5 +5,7 @@ targets:
     cmd: docker run -v {PROJECT_PATH}:/teaching:delegated bknguyen/teaching handouts
   all:
     cmd: docker run -v {PROJECT_PATH}:/teaching:delegated bknguyen/teaching all
+  clean:
+    cmd: docker run -v {PROJECT_PATH}:/teaching:delegated bknguyen/teaching clean
   update_docker:
     cmd: docker pull bknguyen/teaching
