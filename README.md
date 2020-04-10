@@ -23,6 +23,10 @@
 
 To build the file you are working on, press `F9`.
 
+### For advanced users who don't want to use Atom
+
+Run `$ docker run -v $(pwd):/teaching bknguyen/teaching all` from the project's directory to build everything.
+
 ## Additional steps if you want to contribute
 
 - Create a [Github](https://github.com) account
