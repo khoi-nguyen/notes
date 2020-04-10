@@ -26,6 +26,19 @@ $x \times 2^{-2}$           $x \times 2^{-1} =$
 
 :::
 
+# Inconvenience of large numbers
+
+::: {.Example t="Read out the number:"}
+#) 70000000
+#) 0.0000000025
+#) 21000000000
+:::
+
+::: Example
+#) Which number is bigger between 500000000 and 50000000?
+#) Which number is smaller between 0.00000001 and 0.0000001?
+:::
+
 # Standard form
 
 ::: {.Definition t="Standard Form"}
