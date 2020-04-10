@@ -16,7 +16,4 @@
 - Clone this repository in Atom (`Ctrl+Shift+8`, `Clone an existing Github repository`, Clone from `https://github.com/khoi-nguyen/teaching.git`)
 - Log in on Github in Atom (`Ctrl+Shift+8`)
 
-For the first run, press `F7` and select `init`.
-Then press `F7` again, and select `current`.
-
 To build the file you are working on, press `F9`.
