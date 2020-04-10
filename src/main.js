@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App';
+
+import About from './About';
 import Home from './Home';
 import Project from './Project';
 import Teaching from './Teaching';
@@ -21,6 +23,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 const routes = [
     { path: '/', component: Home },
+    { path: '/about', component: About },
     { path: '/project', component: Project },
     { path: '/teaching', component: Teaching },
     { path: '/file', component: File },

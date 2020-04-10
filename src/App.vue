@@ -11,6 +11,8 @@ div
                         router-link.nav-link(to="/project") Project
                     li.nav-item
                         router-link.nav-link(to="/teaching") Teaching resources
+                    li.nav-item
+                        router-link.nav-link(to="/about") About
     div
         router-view
 </template>
