@@ -25,16 +25,16 @@ factorise = lambda expr, **options: exercise(expr, _s, factor, **options)
 def expindex(base, power):
     return (f"{{{base}}}^{{{power}}}", " \\times ".join([str(base)] * power))
 
-def _mult(join_ex, join_sol, terms, options):
+def _mult(join_ex, join_sol, terms, options, cbk = latex):
     substitutions = [(s.symbols(t), s.UnevaluatedExpr(v)) for (t, v) in options.items() if t not in ['l']]
     if 'l' in options.keys():
         exercise = options['l']
     else:
-        exercise = join_ex.join([latex(_s(t).subs(substitutions)) for t in terms])
+        exercise = join_ex.join([cbk(_s(str(t)).subs(substitutions)) for t in terms])
         if join_ex == '}{':
             exercise = f'\\frac{{{exercise}}}'
     solution = _simplify(f'({join_sol.join([str(t) for t in terms])})').subs(substitutions)
-    return (exercise, latex(solution))
+    return (exercise, cbk(solution))
 
 mult = lambda *terms, **options: _mult('\\times ', ')*(', terms, options)
 div = lambda *terms, **options: _mult('\\div ', ')/(', terms, options)
@@ -115,3 +115,9 @@ def stf(number):
     return (exercise, solution)
 
 stf2dec = lambda x: (stf(x)[1], stf(x)[0])
+_stf = lambda t: stf(t)[1]
+stfmult = lambda *terms, **options: _mult(' \\times ', ')*(', terms, options, _stf)
+stfdiv = lambda *terms, **options: _mult(' \\div ', ')/(', terms, options, _stf)
+stffrac = lambda *terms, **options: _mult('}{', ')/(', terms, options, _stf)
+stfadd = lambda *terms, **options: _mult(' + ', ')+(', terms, options, _stf)
+stfsub = lambda *terms, **options: _mult(' - ', ')-(', terms, options, _stf)
