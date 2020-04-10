@@ -1,9 +1,9 @@
-cmd: docker run -v `pwd`:/teaching --entrypoint './bin/build_current_file' bknguyen/teaching {PROJECT_PATH} {FILE_ACTIVE}
+cmd: docker run -v {PROJECT_PATH}:/teaching --entrypoint './bin/build_current_file' bknguyen/teaching {PROJECT_PATH} {FILE_ACTIVE}
 name: current
 targets:
   handouts:
-    cmd: docker run -v `pwd`:/teaching bknguyen/teaching handouts
+    cmd: docker run -v {PROJECT_PATH}:/teaching bknguyen/teaching handouts
   all:
-    cmd: docker run -v `pwd`:/teaching bknguyen/teaching all
+    cmd: docker run -v {PROJECT_PATH}:/teaching bknguyen/teaching all
   update_docker:
     cmd: docker pull bknguyen/teaching
