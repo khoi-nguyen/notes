@@ -4,8 +4,26 @@ title: Standard Form
 
 # Starter
 
-::: Exercise
-Match the equivalent operations
+::: {.Exercise t="Calculate:"}
+#) `simplify('10^2')`
+#) `simplify('10^3')`
+#) `simplify('10^(-1)')`
+#) `simplify('10^5')`
+#) `simplify('10^(-2)')`
+#) `simplify('10^0')`
+:::
+
+::: {.Exercise t="Match the equivalent operations:"}
+
+-----------------------     ---------------------
+$x \div 2^{-1}$             $x \times 10^{-3} =$  
+$x \times 10^0$             $x \div 2^2 =$  
+$x \div 10^3$               $x \div 10^4 =$  
+$x \times 10^4$             $x \times 2 =$  
+$x \div 2$                  $x \div 10^0 =$  
+$x \times 2^{-2}$           $x \times 2^{-1} =$
+-----------------------     ---------------------
+
 :::
 
 # Standard form
@@ -222,7 +240,4 @@ The number of zeros before the 4 tells us the '-' power of 10
 #) `stf(0.01023)`
 #) `stf(1)`
 #) `stf('0.101010')`
-:::
-
-::: Exercise
 :::
