@@ -9,10 +9,11 @@ import Teaching from './Teaching';
 import File from './File';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faFilePdf, faFileAlt } from '@fortawesome/free-solid-svg-icons'
+import { faFilePdf, faFileAlt, faHome, faChalkboardTeacher, faTasks, faAddressCard } from '@fortawesome/free-solid-svg-icons'
+import { faGitAlt } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faFilePdf, faFileAlt)
+library.add(faFilePdf, faFileAlt, faHome, faChalkboardTeacher, faTasks, faAddressCard, faGitAlt)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

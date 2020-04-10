@@ -6,15 +6,25 @@ div
             div.collapse.navbar-collapse
                 ul.navbar-nav.mr-auto
                     li.nav-item
-                        router-link.nav-link(to="/") Home
+                        router-link.nav-link(to="/"). 
+                            #[font-awesome-icon(icon="home")]
+                            Home
                     li.nav-item
-                        router-link.nav-link(to="/project") Project
+                        router-link.nav-link(to="/project").
+                            #[font-awesome-icon(icon="tasks")]
+                            Project
                     li.nav-item
-                        router-link.nav-link(to="/teaching") Teaching resources
+                        router-link.nav-link(to="/teaching").
+                            #[font-awesome-icon(icon="chalkboard-teacher")]
+                            Resources
                     li.nav-item
-                        a.nav-link(href="https://github.com/khoi-nguyen/teaching") Github
+                        a.nav-link(href="https://github.com/khoi-nguyen/teaching").
+                            #[font-awesome-icon(:icon="['fab', 'git-alt']")]
+                            Github
                     li.nav-item
-                        router-link.nav-link(to="/about") About
+                        router-link.nav-link(to="/about").
+                            #[font-awesome-icon(icon="address-card")]
+                            About
     div
         router-view
 </template>
