@@ -1,12 +1,15 @@
+# Files
 MARKDOWN := $(shell find * -name '*.md' | grep -v '^\(env\|node\|www\|README\)' | grep -v 'worksheet.md$$')
 WORKSHEET_MARKDOWN := $(shell find * -name '*.worksheet.md')
-DEPENDENCIES := env/bin/activate Makefile $(shell find pandoc/*)
-ENV := . env/bin/activate;
-LATEX := latexmk -silent -lualatex -cd -f
 SLIDES := $(MARKDOWN:.md=.pdf)
 HANDOUTS := $(MARKDOWN:.md=.handout.pdf)
 WORKSHEETS := $(WORKSHEET_MARKDOWN:.md=.pdf)
 ANSWERS := $(WORKSHEET_MARKDOWN:.md=.answers.pdf)
+DEPENDENCIES := env/bin/activate Makefile $(shell find pandoc/*)
+
+# Commands
+ENV := . env/bin/activate;
+LATEX := latexmk -silent -lualatex -cd -f
 PANDOC := $(ENV) pandoc -s --pdf-engine=lualatex\
 	--filter ./pandoc/pythontex.py\
 	--filter ./pandoc/environments.py\
