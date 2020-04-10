@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App';
 import Home from './Home';
+import Project from './Project';
 import Teaching from './Teaching';
 import File from './File';
 
@@ -20,6 +21,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 const routes = [
     { path: '/', component: Home },
+    { path: '/project', component: Project },
     { path: '/teaching', component: Teaching },
     { path: '/file', component: File },
     { path: '/file/:dir/:filename', component: File },

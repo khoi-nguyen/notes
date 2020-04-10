@@ -8,6 +8,8 @@ div
                     li.nav-item
                         router-link.nav-link(to="/") Home
                     li.nav-item
+                        router-link.nav-link(to="/project") Project
+                    li.nav-item
                         router-link.nav-link(to="/teaching") Teaching resources
     div
         router-view
