@@ -6,7 +6,6 @@
 
 ## Setting up
 
-- Create a [Github](https://github.com) account if you don't have one
 - Install [Docker](https://docker.com)
 - Install [Atom](https://atom.io/) with the following extensions
   (`Ctrl+comma` to open the settings, then go to the `+ Install` tab):
@@ -14,6 +13,10 @@
     - pdf-view-plus (by Aerijo)
     - language-pfm (by leipert)
 - Clone this repository in Atom (`Ctrl+Shift+8`, `Clone an existing Github repository`, Clone from `https://github.com/khoi-nguyen/teaching.git`)
+
+# Additional steps if you want to contribute
+
+- Create a [Github](https://github.com) account
 - Log in on Github in Atom (`Ctrl+Shift+8`)
 
 To build the file you are working on, press `F9`.
