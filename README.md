@@ -7,8 +7,7 @@
 ## Setting up
 
 - Create a [Github](https://github.com) account if you don't have one
-- Install [Vagrant](https://vagrantup.com/)
-- Install [Virtualbox](https://virtualbox.org/)
+- Install [Docker](https://docker.com)
 - Install [Atom](https://atom.io/) with the following extensions
   (`Ctrl+comma` to open the settings, then go to the `+ Install` tab):
     - build (by noseglid)
