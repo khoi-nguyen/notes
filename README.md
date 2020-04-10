@@ -7,13 +7,13 @@
 ## Setting up
 
 - Install [Docker](https://docker.com)
-  - **Widows**:
+  - Widows:
     - [Windows 10 Enterprise](https://download.docker.com/win/stable/Docker%20Desktop%20Installer.exe)
     - [Other versions](https://github.com/docker/toolbox/releases/download/v19.03.1/DockerToolbox-19.03.1.exe)
-  - **MacOS**:
+  - MacOS:
     - [10.13 or newer, with hardware 2010 or newer](https://download.docker.com/mac/stable/Docker.dmg)
     - [Other versions](https://github.com/docker/toolbox/releases/download/v19.03.1/DockerToolbox-19.03.1.pkg)
-  - **Linux**: use your package manager
+  - Linux: use your package manager
 - Install [Atom](https://atom.io/) with the following extensions
   (`Ctrl+comma` to open the settings, then go to the `+ Install` tab):
     - build (by noseglid)
@@ -21,9 +21,9 @@
     - language-pfm (by leipert)
 - Clone this repository in Atom (`Ctrl+Shift+8`, `Clone an existing Github repository`, Clone from `https://github.com/khoi-nguyen/teaching.git`)
 
-# Additional steps if you want to contribute
+To build the file you are working on, press `F9`.
+
+## Additional steps if you want to contribute
 
 - Create a [Github](https://github.com) account
 - Log in on Github in Atom (`Ctrl+Shift+8`)
-
-To build the file you are working on, press `F9`.
