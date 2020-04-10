@@ -33,50 +33,39 @@ Factorise the following by 3:
 
 # Completing the square
 
-
 ::: {.Example t="Complete the square"}
 $$x^2 + 6x$$
 :::
 
 ::: Solution
-$$x^2 + 6x = (x {\color{darkred} + 3})^2 - {\color{darkblue} 3^2} = (x + {\color{darkred} 3})^2 - {\color{darkblue} 9}$$
+$$x^2 + 6x = \underbrace{{(x + 3)}^2}_{x^2 + 6x \cancel {+ 9}} \cancel {- 3^2} = {(x + 3)}^2 - 9$$
 :::
 
 # Completing the square
 
-::: Recall
-$$a^2 - b^2 = \br{a + b}\br{a - b}$$
-:::
-
-::: Exercise
-Expand $\br{x + \frac b 2}^2 - \br{\frac {b} 2}^2$
+::: {.Example t="Complete the square"}
+$$x^2 - 10x$$
 :::
 
 ::: Solution
-$$\br{x + \frac b 2}^2 - \br{\frac b 2}^2 = x (x + b) = x^2 + bx$$
-:::
-
-::: Remark
-Count how many $x$ are on either sides
+$$x^2 - 10x = \underbrace{{(x - 5)}^2}_{x^2 - 10x \cancel {+ 25}} \cancel {- 5^2} = {(x - 5)}^2 - 25$$
 :::
 
 # Completing the square
 
-::: Recall
-$$x^2 + bx = \br{x + \frac b 2}^2 - \br{\frac b 2}^2$$
+::: {.Example t="Complete the square"}
+$$3x^2 + 3x + 4$$
 :::
 
-::: Example
-$$x^2 + 6x = \br{x + 3}^2 - 9$$
-:::
-
-::: Example
-Make $x$ only appear once in `complete_square('x^2 - 5*x + 6')`
+::: Solution
+$3x^2 + 3x + 4 = 3 ({\color{darkred} x^2 + x}) + 4 = 3[{{\color{darkred} \underbrace{{(x + \frac {1} {2})}^2}_{x^2 + x + \frac {1} {4}} - {\frac {1} {2}}^2}}] + 4$
+$$= 3{(x + \frac {1} {2})}^2 {\color{darkblue} - 3 (\frac {1} {4}) + 4} = {(x + \frac {1} {2})}^2 {\color{darkblue} + \frac {13} {4}}$$
 :::
 
 # Exercises
 
-::: Exercise
+::: {.Exercise t="Complete the square"}
+
 #) `complete_square('x^2 + 10*x')`
 #) `complete_square('x^2 - 8*x')`
 #) `complete_square('x^2 + 8*x - 3')`
@@ -88,9 +77,29 @@ Make $x$ only appear once in `complete_square('x^2 - 5*x + 6')`
 
 # Solving equations
 
-Now that $x$ appears only **once**, we can **change the subject**.
+When $x$ appears only **once**, we can **make $x$ the subject**.
 
-::: Exercise
+::: {.Example t="Complete the square, then solve for x"}
+$$x^2 - 8x = 0$$
+:::
+
+::: Solution
+
+$x^2 - 8x = {(x - 4)}^2 - 16$
+
+${(x - 4)}^2 - 16 = 0$
+
+${(x - 4)}^2 = 16$
+
+$x - 4 = ± 4$
+
+Hence, $x = 0$ or $x = 8$
+:::
+
+# Completing the square
+
+::: {.Exercise t="Complete the square, then solve for $x$"}
+
 #) `equation('x^2 - 2*x + 1')`
 #) `equation('x^2 - 5*x + 6')`
 #) `equation('x^2 - 4*x - 3')`
@@ -98,11 +107,7 @@ Now that $x$ appears only **once**, we can **change the subject**.
 #) `equation('3*x^2 - 5*x + 2')`
 :::
 
-# Completing the square
-
-::: Exercise
-Complete the square `complete_square('2*x^2 - 3*x + 1')`
-:::
+# Role of $a$ in $a \br{x - \alpha}^2 + \beta$
 
 ::: Remark
 Every quadratic equation can be written in the form
@@ -120,12 +125,6 @@ plot('1/7*(x + 2)^2 - 1', 'darkgreen')
 plot('1/20*(x + 2)^2 - 1', 'darkblue')
 plot('-1/9*(x + 2)^2 - 1', 'darkorange')
 plot('-1/5*(x + 2)^2 - 1', 'gray')
-~~~
-
-# Graphing $x^2$
-
-~~~ {.graph b=-1 t=9}
-plot('x^2')
 ~~~
 
 # Role of $a$ in $a \br{x - \alpha}^2 + \beta$
@@ -155,7 +154,7 @@ plot('1/2*(x + 2)^2 - 4', 'darkorange')
 plot('1/2*(x + 3)^2 - 4', 'gray')
 ~~~
 
-# Role of $a$ in $a \br{x - \alpha}^2 + \beta$
+# Role of $\alpha$ in $a \br{x - \alpha}^2 + \beta$
 
 ::: Question
 What happens if $\alpha$ changes?
@@ -199,3 +198,48 @@ Similarities
 # Summary
 
 # Difficulty of quadratic equations
+
+::: Question
+*Which* question is harder and *why*?
+
+- Solve `equation('x^2 - 9 = 16')`
+- Solve `equation('x^2 - 5*x = -6')`
+:::
+
+::: Solution
+The second one is *harder* because $x$ appears twice.
+
+It makes it harder to *change the subject*.
+:::
+
+# Completing the square
+
+::: Recall
+$$a^2 - b^2 = \br{a + b}\br{a - b}$$
+:::
+
+::: Exercise
+Expand $\br{x + \frac b 2}^2 - \br{\frac {b} 2}^2$
+:::
+
+::: Solution
+$$\br{x + \frac b 2}^2 - \br{\frac b 2}^2 = x (x + b) = x^2 + bx$$
+:::
+
+::: Remark
+Count how many $x$ are on either sides
+:::
+
+# Completing the square
+
+::: Recall
+$$x^2 + bx = \br{x + \frac b 2}^2 - \br{\frac b 2}^2$$
+:::
+
+::: Example
+$$x^2 + 6x = \br{x + 3}^2 - 9$$
+:::
+
+::: Example
+Make $x$ only appear once in `complete_square('x^2 - 5*x + 6')`
+:::
