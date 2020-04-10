@@ -7,6 +7,13 @@
 ## Setting up
 
 - Install [Docker](https://docker.com)
+  - **Widows**:
+    - [Windows 10 Enterprise](https://download.docker.com/win/stable/Docker%20Desktop%20Installer.exe)
+    - [Other versions](https://github.com/docker/toolbox/releases/download/v19.03.1/DockerToolbox-19.03.1.exe)
+  - **MacOS**:
+    - [10.13 or newer, with hardware 2010 or newer](https://download.docker.com/mac/stable/Docker.dmg)
+    - [Other versions](https://github.com/docker/toolbox/releases/download/v19.03.1/DockerToolbox-19.03.1.pkg)
+  - **Linux**: use your package manager
 - Install [Atom](https://atom.io/) with the following extensions
   (`Ctrl+comma` to open the settings, then go to the `+ Install` tab):
     - build (by noseglid)
