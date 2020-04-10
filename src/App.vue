@@ -12,6 +12,8 @@ div
                     li.nav-item
                         router-link.nav-link(to="/teaching") Teaching resources
                     li.nav-item
+                        a.nav-link(href="https://github.com/khoi-nguyen/teaching") Github
+                    li.nav-item
                         router-link.nav-link(to="/about") About
     div
         router-view
