@@ -38,7 +38,7 @@ $$x^2 + 6x$$
 :::
 
 ::: Solution
-$$x^2 + 6x = \underbrace{{(x + 3)}^2}_{x^2 + 6x \cancel {+ 9}} \cancel {- 3^2} = {(x + 3)}^2 - 9$$
+$$x^2 + 6x = \underbrace{(x + 3)^2}_{x^2 + 6x  {\color{darkred} + 9}} {\color{darkred} - 3^2} = (x + 3)^2 - 9$$
 :::
 
 # Completing the square
@@ -48,7 +48,7 @@ $$x^2 - 10x$$
 :::
 
 ::: Solution
-$$x^2 - 10x = \underbrace{{(x - 5)}^2}_{x^2 - 10x \cancel {+ 25}} \cancel {- 5^2} = {(x - 5)}^2 - 25$$
+$$x^2 - 10x = \underbrace{(x - 5)^2}_{x^2 - 10x {\color{darkred} + 25}} {\color{darkred} - 5^2} = (x - 5)^2 - 25$$
 :::
 
 # Completing the square
