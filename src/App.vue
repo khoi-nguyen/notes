@@ -1,7 +1,7 @@
 <template lang="pug">
 div
     nav.navbar.navbar-dark.sticky-top.bg-dark.flex-md-nowrap.p-0.navbar-expand-md
-        router-link.navbar-brand.col-sm-3.col-md-2.mr-0(to="/") 20bleu.co.uk
+        router-link.navbar-brand.col-sm-3.col-md-2.mr-0(to="/") mathsnuggets.co.uk
         .collapse.navbar-collapse
             ul.navbar-nav.mr-auto.px-3
                 li.nav-item.text-nowrap(v-for="link in links")
