@@ -243,3 +243,15 @@ $$x^2 + 6x = \br{x + 3}^2 - 9$$
 ::: Example
 Make $x$ only appear once in `complete_square('x^2 - 5*x + 6')`
 :::
+
+# Quadratic Formula
+
+Suppose we are given an equation of the form $ax^2 + bx + c = 0$.
+
+${\color{darkred} ax^2 + bx} + c = 0$
+
+${\color{darkred} a[(x + \frac {b} {2a})^2 - \frac {b^2} {4a^2}]} = -c$
+
+$(x + \frac {b} {2a})^2 {\color{darkblue} - \frac {b^2} {4a^2}} = {\color{darkblue} - \frac {c} {a}}$
+
+$(x + \frac {b} {2a})^2 = {\color{darkblue} \frac {b^2 - 4ac} {4a^2}}$
