@@ -254,3 +254,42 @@ The number of zeros before the 4 tells us the '-' power of 10
 #) `stf(1)`
 #) `stf('0.101010')`
 :::
+
+# Multiplying numbers in standard form
+
+::: {.Example t="Work out the following (leave answer in St.F)"}
+$3 \times 10^2 \times 2 \times 10^3$
+:::
+
+::: Solution
+$3 \times {\color{darkred} 10^2 \times 2} \times 10^3 = 3 \times {\color{darkred} 2 \times 10^2} \times 10^3 = 6 \times 10^5$
+:::
+
+::: {.Example t="Work out the following (leave answer in St.F)"}
+$6 \times 10^{-4} \times 3 \times 10^2$
+:::
+
+::: Solution
+$6 \times {\color{darkred} 10^{-4} \times 3} \times 10^2 = 6 \times {\color{darkred} 3 \times 10^{-4}} \times 10^2 = 18 \times 10^{-2}$
+
+$= 1.8 \times 10 \times 10^{-2} = 1.8 \times 10^{-1}$
+:::
+
+# Multiplying numbers in standard form
+
+::: {.Exercise t="Work out the following (leave answers in St.F)"}
+#) `stfmult(100, 2000)`
+#) `stfmult(300, 200)`
+#) `stfmult(0.1, 9000)`
+#) `stfmult(0.003, 0.00003)`
+#) `stfmult(40000, 500)`
+#) `stfmult(0.006, 0.0000009)`
+#) `stfmult(5000, 0.0008)`
+#) `stfmult(1200, 0.000004)`
+:::
+
+::: {.Extension t="Work out the following (leave answers in St.F)"}
+#) `stfmult(5500, 0.000002)`
+#) `stfmult(0.0042, 0.004)`
+#) `stfmult(0.25, 0.0064)`
+:::
