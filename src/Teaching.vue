@@ -1,5 +1,5 @@
 <template lang="pug">
-.container
+div
     h1 Teaching resources
     p.lead.
         You will find my teaching resources on this page.
