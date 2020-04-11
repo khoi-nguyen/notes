@@ -1,5 +1,5 @@
 <template lang="pug">
-.container
+div
     h1 About
     .row
         .col-sm
