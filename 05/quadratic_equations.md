@@ -246,12 +246,18 @@ Make $x$ only appear once in `complete_square('x^2 - 5*x + 6')`
 
 # Quadratic Formula
 
-Suppose we are given an equation of the form $ax^2 + bx + c = 0$.
+::: {.Question t='General case'}
+How to solve $ax^2 + bx + c = 0$?
+:::
 
-${\color{darkred} ax^2 + bx} + c = 0$
+::: {.Solution t='Outline of the General case'}
+Step 1
+: Complete the square so **$x$ appears once**
 
-${\color{darkred} a[(x + \frac {b} {2a})^2 - \frac {b^2} {4a^2}]} = -c$
+${\color{darkred} ax^2 + bx} + c = 0 \implies {\color{darkred} a\left[(x + \frac {b} {2a})^2 - \frac {b^2} {4a^2}\right]} + c = 0$
 
-$(x + \frac {b} {2a})^2 {\color{darkblue} - \frac {b^2} {4a^2}} = {\color{darkblue} - \frac {c} {a}}$
+Step 2
+: Change the subject to $\br{x + \Box}^2$
 
-$(x + \frac {b} {2a})^2 = {\color{darkblue} \frac {b^2 - 4ac} {4a^2}}$
+$\br{x + \frac {b} {2a}}^2 {\color{darkblue} - \frac {b^2} {4a^2} + \frac {c} {a}} = 0 \implies \boxed{\br{x + \frac b {2 a}}^2 = \frac {b^2 - 4ac} {4a^2}}$
+:::
