@@ -1,5 +1,5 @@
 <template lang="pug">
-.container
+div
     h1 Our project
     p
         img(src="https://github.com/khoi-nguyen/teaching/workflows/Build/badge.svg")
