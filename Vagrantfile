@@ -65,6 +65,6 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     pacman --noconfirm -Syyu
-    pacman --noconfirm -S make texlive-core texlive-fontsextra texlive-latexextra texlive-pictures pandoc
+    pacman --noconfirm -S grep findutils make pandoc python texlive-core texlive-fontsextra texlive-latexextra texlive-pictures
   SHELL
 end
