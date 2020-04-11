@@ -21,6 +21,19 @@
                 I enjoy table tennis and playing the piano.
         .col-sm
             h2 Tom Chambaud
+            h4 Resource Coordinator
+            p.
+                Hello to all reading! I am Tom Chambaud, a
+                half-French Teacher of Mathematics. In 2019, I graduated
+                from #[a(href='https://www.keele.ac.uk') Keele University] with a
+                First-Class honours degree in Mathematics and obtained my PGCE qualification from
+                the #[a(href='https://ox.ac.uk') University of Oxford] the following year.
+            p.
+                With a passion for helping young people and enjoying
+                life outside of teaching, I wish to invigorate the
+                like-minded and students alike. My hobbies include
+                competitive badminton, cooking great food and
+                playing piano!
 </template>
 
 <script>
