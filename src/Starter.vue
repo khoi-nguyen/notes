@@ -1,25 +1,27 @@
 <template lang="pug">
 div
     #starter
-    .row
-        .col-md-8
-            h1
-                input(type='text' placeholder='Lesson Objective')
-            h3 {{date.toDateString()}}
-        .col-md-4
-            BaseTimer
-    ul.list-group
-        li.list-group-item.d-flex.justify-content-between.align-items-center(v-for="(q, index) in questions")
-            span
-                span(v-html="q[0]")
-                span(v-html="q[1]")
-            span
-                span.text-success(v-html="q[2]" v-if="show_answers")
-                span.badge.badge-danger(v-on:click="remove_question(index)" v-if="!show_answers") x
-    p(v-if="questions.length > 0")
-        button.btn.btn-success(v-on:click="toggle_show_answers()" v-if="!show_answers") Show answers
-        button.btn.btn-primary(v-on:click="toggle_show_answers()" v-if="show_answers") Hide answers
-        button.btn.btn-secondary(v-on:click="reset_questions()") Reset
+        div
+            .row
+                .col-md-8.col-lg-10
+                    h1
+                        input(type='text' placeholder='Lesson Objective')
+                    h3 {{date.toDateString()}}
+                .col-md-4.col-lg-2.text-right
+                    BaseTimer
+            ul.list-group
+                li.list-group-item.d-flex.justify-content-between.align-items-center(v-for="(q, index) in questions")
+                    span
+                        span {{index + 1}})&nbsp;
+                        span(v-html="q[0]")
+                        span(v-html="q[1]")
+                    span
+                        span.text-success(v-html="q[2]" v-if="show_answers")
+                        span.badge.badge-danger(v-on:click="remove_question(index)" v-if="!show_answers") x
+            p(v-if="questions.length > 0")
+                button.btn.btn-success(v-on:click="toggle_show_answers()" v-if="!show_answers") Show answers
+                button.btn.btn-primary(v-on:click="toggle_show_answers()" v-if="show_answers") Hide answers
+                button.btn.btn-secondary(v-on:click="reset_questions()") Reset
     hr
     h2 Add questions
     form(v-on:submit="add_question")
@@ -34,6 +36,7 @@ div
                 select.custom-select(v-model="question")
                     option(v-for="ex in exerciseList" :value="ex.name") {{ex.title}}
         button.btn.btn-primary(type="submit") Add question(s)
+    button.btn.btn-success(v-on:click="toggle_fullscreen")#btn-fullscreen Fullscreen
 </template>
 
 <script>
@@ -90,6 +93,9 @@ export default {
         remove_question: function(index) {
             this.questions.splice(index, 1);
         },
+        toggle_fullscreen: function() {
+            document.querySelector('#starter').requestFullscreen();
+        },
         toggle_show_answers: function() {
             this.show_answers = !this.show_answers;
         },
@@ -103,5 +109,21 @@ export default {
 <style>
 h1 input {
     border: 0;
+}
+#starter:fullscreen {
+    background-color: white;
+    height: 100vw;
+}
+#starter:fullscreen > div {
+    font-size: 1.5vw;
+    margin: auto;
+    height: 100vw;
+    width: 90vw;
+}
+#starter:fullscreen h1 {
+    font-size: 5vw;
+}
+#starter:fullscreen h3 {
+    font-size: 2.5vw;
 }
 </style>
