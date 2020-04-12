@@ -7,8 +7,8 @@ div
                 span(v-html="q[0]")
                 span(v-html="q[1]")
             span
-                span.badge.badge-success.answer(v-html="q[2]" v-if="show_answers")
-                span.badge.badge-danger.answer(v-on:click="remove_question(index)" v-if="!show_answers") x
+                span.text-success(v-html="q[2]" v-if="show_answers")
+                span.badge.badge-danger(v-on:click="remove_question(index)" v-if="!show_answers") x
     p(v-if="questions.length > 0")
         button.btn.btn-success(v-on:click="toggle_show_answers()" v-if="!show_answers") Show answers
         button.btn.btn-primary(v-on:click="toggle_show_answers()" v-if="show_answers") Hide answers
