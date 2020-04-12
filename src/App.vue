@@ -12,13 +12,18 @@ div
         .row
             .col-md-2.d-none.d-md-block.bg-light.sidebar
                 .sidebar-sticky
-                    h6.sidebar-heading.text-muted
-                        span Latest builds
+                    h5.sidebar-heading.text-muted Contribute
                     ul.nav.flex-column
-                        li.nav-item(v-for="run in runs").
-                            #[small {{run.head_commit.message}}]
-                            #[br]
-                            #[small.text-muted {{run.head_commit.author.name}}]
+                        li.nav-item
+                            a.nav-link(href="https://github.com/khoi-nguyen/teaching").
+                                #[font-awesome-icon.text-muted(icon="file-pdf")]
+                                Github
+                            a.nav-link(href="https://github.com/khoi-nguyen/teaching").
+                                #[font-awesome-icon.text-muted(icon="file-pdf")]
+                                Issues
+                    h5.sidebar-heading.text-muted Build status
+                    p
+                        img(src="https://github.com/khoi-nguyen/teaching/workflows/Build/badge.svg")
             main.col-md-9.ml-sm-auto.col-lg-10.pt-3.px-4
                 router-view
 </template>
@@ -30,7 +35,6 @@ export default {
     name: 'App',
     data() {
         return {
-            runs: [],
             links: [
                 {text: 'Home', icon: 'home', to: '/'},
                 {text: 'Project', icon: 'tasks', to: '/project'},
@@ -38,13 +42,6 @@ export default {
                 {text: 'About', icon: 'address-card', to: '/about'},
             ],
         }
-    },
-    mounted() {
-        var self = this;
-        var url = 'https://api.github.com/repos/khoi-nguyen/teaching/actions/runs';
-        axios.get(url).then(function (response) {
-            self.runs = response['data']['workflow_runs'].slice(0, 5);
-        });
     },
 }
 </script>
@@ -67,7 +64,6 @@ export default {
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
 }
 body {
-  font-size: .875rem;
 }
 
 .feather {
@@ -105,11 +101,6 @@ body {
   color: #333;
 }
 
-.sidebar .nav-link .feather {
-  margin-right: 4px;
-  color: #999;
-}
-
 .sidebar .nav-link.active {
   color: #007bff;
 }
@@ -120,7 +111,7 @@ body {
 }
 
 .sidebar-heading {
-  font-size: .75rem;
+  font-size: .85rem;
   text-transform: uppercase;
 }
 
