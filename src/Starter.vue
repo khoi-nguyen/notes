@@ -11,7 +11,7 @@ div
                     BaseTimer
             .row
                 ul.list-group.col
-                    li.list-group-item.d-flex.justify-content-between.align-items-center(v-for="(q, index) in questions" v-if="index <= questions.length/2")
+                    li.list-group-item.d-flex.justify-content-between.align-items-center(v-for="(q, index) in questions" v-if="index <= questions.length/2 - 1")
                         span
                             span {{index + 1}})&nbsp;
                             span(v-html="q[0]")
@@ -20,7 +20,7 @@ div
                             span.text-success(v-html="q[2]" v-if="show_answers")
                             span.badge.badge-danger(v-on:click="remove_question(index)" v-if="!show_answers") x
                 ul.list-group.col
-                    li.list-group-item.d-flex.justify-content-between.align-items-center(v-for="(q, index) in questions" v-if="index > questions.length/2")
+                    li.list-group-item.d-flex.justify-content-between.align-items-center(v-for="(q, index) in questions" v-if="index > questions.length/2 - 1")
                         span
                             span {{index + 1}})&nbsp;
                             span(v-html="q[0]")
@@ -135,5 +135,8 @@ h1 input {
 }
 #starter:fullscreen h3 {
     font-size: 2.5vw;
+}
+#starter:fullscreen .badge-danger, #starter:fullscreen .btn-secondary {
+    display: none;
 }
 </style>
