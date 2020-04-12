@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from pandoc.algebra import *
+from pandoc.generator import *
 
 app = Flask(__name__)
 CORS(app)
@@ -16,4 +16,5 @@ def exercise_list():
 
 @app.route('/add_question/<name>/<n>')
 def add_question(name, n):
-    return jsonify(equation('x^2 - 5*x + 6'))
+    function = globals()[f'generate_{name}']
+    return jsonify(function())
