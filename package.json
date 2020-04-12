@@ -32,6 +32,7 @@
     "@vue/component-compiler-utils": "^3.1.2",
     "acorn": "^7.1.1",
     "kind-of": "^6.0.3",
+    "sass": "^1.26.3",
     "vue-template-compiler": "^2.6.11"
   },
   "repository": {
