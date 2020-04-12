@@ -3,9 +3,11 @@ div
     h1 Starter Generator
     ul.list-group
         li.list-group-item.d-flex.justify-content-between.align-items-center(v-for="(q, index) in questions")
-            span(v-html="q[0]")
             span
-                span.badge.badge-success.answer(v-html="q[1]" v-if="show_answers")
+                span(v-html="q[0]")
+                span(v-html="q[1]")
+            span
+                span.badge.badge-success.answer(v-html="q[2]" v-if="show_answers")
                 span.badge.badge-danger.answer(v-on:click="remove_question(index)" v-if="!show_answers") x
     p(v-if="questions.length > 0")
         button.btn.btn-success(v-on:click="toggle_show_answers()" v-if="!show_answers") Show answers
@@ -60,8 +62,9 @@ export default {
                 var data = response.data;
                 data.forEach(function (element, index) {
                     var options = {displayMode: true};
-                    this[index][0] = katex.renderToString(element[0], options)
+                    this[index][0] = element[0];
                     this[index][1] = katex.renderToString(element[1], options)
+                    this[index][2] = katex.renderToString(element[2], options)
                 }, data);
                 self.questions = self.questions.concat(data);
             });

@@ -7,13 +7,13 @@ def generate_stf():
     """Standard form"""
     x = randint(1, 99999)
     power = -len(str(x)) + randint(-2, 7)
-    return stf(round(x*10**power, 4))
+    return ('Convert to standard form',) + stf(round(x*10**power, 4))
 
 def generate_expindex():
-    """Expanding powrs"""
+    """Expanding powers"""
     base = randint(2, 9)
     power = randint(1, 4)
-    return expindex(base, power)
+    return ('Expand the power',) + expindex(base, power)
 
 def generate_equation():
     """Linear equation"""
@@ -21,7 +21,7 @@ def generate_equation():
     b = randint(-5, 5)
     c = randint(-5, 5)
     x = s.symbols('x')
-    return equation(f'{str(a * x + b)} = {c}')
+    return ('Solve',) + equation(f'{str(a * x + b)} = {c}')
 
 def generate_quadratic_equation():
     """Quadratic equation"""
@@ -29,4 +29,4 @@ def generate_quadratic_equation():
     x2 = randint(-5, 5)
     x = s.symbols('x')
     eq = s.expand((x - x1)*(x - x2))
-    return equation(str(eq))
+    return ('Solve',) + equation(str(eq))
