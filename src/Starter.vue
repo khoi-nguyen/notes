@@ -9,15 +9,25 @@ div
                     h3 {{date.toDateString()}}
                 .col-md-4.col-lg-2.text-right
                     BaseTimer
-            ul.list-group
-                li.list-group-item.d-flex.justify-content-between.align-items-center(v-for="(q, index) in questions")
-                    span
-                        span {{index + 1}})&nbsp;
-                        span(v-html="q[0]")
-                        span(v-html="q[1]")
-                    span
-                        span.text-success(v-html="q[2]" v-if="show_answers")
-                        span.badge.badge-danger(v-on:click="remove_question(index)" v-if="!show_answers") x
+            .row
+                ul.list-group.col
+                    li.list-group-item.d-flex.justify-content-between.align-items-center(v-for="(q, index) in questions" v-if="index <= questions.length/2")
+                        span
+                            span {{index + 1}})&nbsp;
+                            span(v-html="q[0]")
+                            span(v-html="q[1]")
+                        span
+                            span.text-success(v-html="q[2]" v-if="show_answers")
+                            span.badge.badge-danger(v-on:click="remove_question(index)" v-if="!show_answers") x
+                ul.list-group.col
+                    li.list-group-item.d-flex.justify-content-between.align-items-center(v-for="(q, index) in questions" v-if="index > questions.length/2")
+                        span
+                            span {{index + 1}})&nbsp;
+                            span(v-html="q[0]")
+                            span(v-html="q[1]")
+                        span
+                            span.text-success(v-html="q[2]" v-if="show_answers")
+                            span.badge.badge-danger(v-on:click="remove_question(index)" v-if="!show_answers") x
             p(v-if="questions.length > 0")
                 button.btn.btn-success(v-on:click="toggle_show_answers()" v-if="!show_answers") Show answers
                 button.btn.btn-primary(v-on:click="toggle_show_answers()" v-if="show_answers") Hide answers
