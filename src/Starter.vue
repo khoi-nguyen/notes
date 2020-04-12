@@ -5,10 +5,11 @@ div
         li.list-group-item.d-flex.justify-content-between.align-items-center(v-for="(q, index) in questions")
             span(v-html="q[0]")
             span
-                span.badge.badge-success.answer.d-none(v-html="q[1]")
-                span.badge.badge-danger.answer(v-on:click="remove_question(index)") x
+                span.badge.badge-success.answer(v-html="q[1]" v-if="show_answers")
+                span.badge.badge-danger.answer(v-on:click="remove_question(index)" v-if="!show_answers") x
     p(v-if="questions.length > 0")
-        button.btn.btn-success(v-on:click="show_answers()") Show answers
+        button.btn.btn-success(v-on:click="toggle_show_answers()" v-if="!show_answers") Show answers
+        button.btn.btn-primary(v-on:click="toggle_show_answers()" v-if="show_answers") Hide answers
         button.btn.btn-secondary(v-on:click="reset_questions()") Reset
     hr
     h2 Add questions
@@ -40,6 +41,7 @@ export default {
             question: '',
             questions: [],
             n: 1,
+            show_answers: false,
         };
     },
     mounted() {
@@ -67,11 +69,8 @@ export default {
         remove_question: function(index) {
             this.questions.splice(index, 1);
         },
-        show_answers: function() {
-            var answers = document.getElementsByClassName('answer');
-            for(var i = 0; i < answers.length; i++) {
-                answers[i].classList.toggle('d-none');
-            }
+        toggle_show_answers: function() {
+            this.show_answers = !this.show_answers;
         },
         reset_questions: function() {
             this.questions = [];
