@@ -1,6 +1,13 @@
 <template lang="pug">
 div
-    h1 Starter Generator
+    #starter
+    .row
+        .col-md-8
+            h1
+                input(type='text' placeholder='Lesson Objective')
+            h3 {{date.toDateString()}}
+        .col-md-4
+            BaseTimer
     ul.list-group
         li.list-group-item.d-flex.justify-content-between.align-items-center(v-for="(q, index) in questions")
             span
@@ -34,8 +41,13 @@ const axios = require('axios').default;
 const katex = require('katex');
 import 'katex/dist/katex.min.css';
 
+import BaseTimer from "./BaseTimer";
+
 export default {
     name: 'Starter',
+	components: {
+        BaseTimer
+	},
     data() {
         if(window.location.hostname == 'localhost') {
             var backend = 'http://localhost:5000/';
@@ -44,6 +56,7 @@ export default {
         }
         return {
             backend: backend,
+            date: new Date(),
             exerciseList: [],
             question: '',
             questions: [],
@@ -86,3 +99,9 @@ export default {
     },
 }
 </script>
+
+<style>
+h1 input {
+    border: 0;
+}
+</style>
