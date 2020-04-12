@@ -24,7 +24,7 @@ div
                     h5.sidebar-heading.text-muted Build status
                     p
                         img(src="https://github.com/khoi-nguyen/teaching/workflows/Build/badge.svg")
-            main.col-md-9.ml-sm-auto.col-lg-10.pt-3.px-4
+            main.col-md-9.ml-sm-auto.col-lg-9.pt-3.px-4
                 router-view
 </template>
 
