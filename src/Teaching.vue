@@ -9,13 +9,13 @@ div
             tr
                 th Level
                 th Title
-                th Last modification
         tbody
             tr(v-for="file in data")
                 td {{file.year}}
                 td
                     h5 {{file.meta.title}}
                     h6 {{file.meta.subtitle}}
+                    h6.text-muted Last modified on {{file.modified}}
                     ul.list-group.list-group-horizontal
                         li.list-group-item.
                             #[font-awesome-icon(icon="file-alt")]
@@ -32,7 +32,6 @@ div
                         li.list-group-item(v-if="file.answers").
                             #[font-awesome-icon(icon="file-pdf")]
                             #[a(v-bind:href="'./' + file.answers") Answers]
-                td {{file.modified}}
 </template>
 
 <script>
