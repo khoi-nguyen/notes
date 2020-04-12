@@ -17,17 +17,20 @@ div
 </template>
 
 <script>
+const axios = require('axios').default;
 export default {
     name: 'Starter',
     data() {
         return {
-            exerciseList: [
-                {
-                    name: 'quadratic_equation',
-                    title: 'Quadratic Equation',
-                }
-            ],
+            exerciseList: [],
         };
+    },
+    mounted() {
+        var self = this;
+        const url = 'http://localhost:5000/';
+        axios.get(url).then(function (response) {
+            self.exerciseList = response.data;
+        });
     },
 }
 </script>
