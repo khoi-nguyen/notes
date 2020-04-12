@@ -46,7 +46,7 @@ export default {
         var self = this;
         axios.get(host).then(function (response) {
             self.exerciseList = response.data;
-            self.question = self.exerciseList[0].title;
+            self.question = self.exerciseList[0].name;
         });
     },
     methods: {
@@ -56,8 +56,9 @@ export default {
             axios.get(url).then(function (response) {
                 var data = response.data;
                 data.forEach(function (element, index) {
-                    this[index][0] = katex.renderToString(element[0])
-                    this[index][1] = katex.renderToString(element[1])
+                    var options = {displayMode: true};
+                    this[index][0] = katex.renderToString(element[0], options)
+                    this[index][1] = katex.renderToString(element[1], options)
                 }, data);
                 self.questions = self.questions.concat(data);
             });
