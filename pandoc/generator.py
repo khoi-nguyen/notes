@@ -5,9 +5,9 @@ import sympy as s
 
 def generate_stf():
     """Standard form"""
-    x = randint(0, 100)
-    power = randint(-5, 5) - len(str(x))
-    return stf(str(x*10**power))
+    x = randint(1, 99999)
+    power = -len(str(x)) + randint(-2, 7)
+    return stf(round(x*10**power, 4))
 
 def generate_expindex():
     """Expanding powrs"""
