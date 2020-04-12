@@ -2,9 +2,14 @@
 div
     h1 Starter Generator
     ul.list-group
-        li.list-group-item.d-flex.justify-content-between.align-items-center(v-for="q in questions")
+        li.list-group-item.d-flex.justify-content-between.align-items-center(v-for="(q, index) in questions")
             span(v-html="q[0]")
-            span.badge.badge-success(v-html="q[1]")
+            span
+                span.badge.badge-success.answer.d-none(v-html="q[1]")
+                span.badge.badge-danger.answer(v-on:click="remove_question(index)") x
+    p(v-if="questions.length > 0")
+        button.btn.btn-success(v-on:click="show_answers()") Show answers
+        button.btn.btn-secondary(v-on:click="reset_questions()") Reset
     hr
     h2 Add questions
     form(v-on:submit="add_question")
@@ -55,6 +60,18 @@ export default {
                 }, data);
                 self.questions = self.questions.concat(data);
             });
+        },
+        remove_question: function(index) {
+            this.questions.splice(index, 1);
+        },
+        show_answers: function() {
+            var answers = document.getElementsByClassName('answer');
+            for(var i = 0; i < answers.length; i++) {
+                answers[i].classList.toggle('d-none');
+            }
+        },
+        reset_questions: function() {
+            this.questions = [];
         }
     },
 }
