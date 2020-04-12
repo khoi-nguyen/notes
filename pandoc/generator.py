@@ -9,6 +9,12 @@ def generate_stf():
     power = randint(-5, 5) - len(str(x))
     return stf(str(x*10**power))
 
+def generate_expindex():
+    """Expanding powrs"""
+    base = randint(2, 9)
+    power = randint(1, 4)
+    return expindex(base, power)
+
 def generate_equation():
     """Linear equation"""
     a = (-1)**randint(0, 1)*randint(1, 5)
