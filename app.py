@@ -15,6 +15,11 @@ def exercise_list():
     ])
 
 @app.route('/add_question/<name>/<n>')
-def add_question(name, n):
+def add_question(name, n = 1):
     function = globals()[f'generate_{name}']
-    return jsonify(function())
+    questions = []
+    while len(questions) < int(n):
+        q = function()
+        if q not in questions:
+            questions.append(q)
+    return jsonify(questions)

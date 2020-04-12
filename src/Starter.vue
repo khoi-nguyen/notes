@@ -48,9 +48,12 @@ export default {
             var self = this;
             var url = host + 'add_question/' + self.question + '/' + self.n;
             axios.get(url).then(function (response) {
-                var q = katex.renderToString(response.data[0])
-                var a = katex.renderToString(response.data[1])
-                self.questions.push([q, a])
+                var data = response.data;
+                data.forEach(function (element, index) {
+                    this[index][0] = katex.renderToString(element[0])
+                    this[index][1] = katex.renderToString(element[1])
+                }, data);
+                self.questions = self.questions.concat(data);
             });
         }
     },
