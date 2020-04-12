@@ -3,8 +3,9 @@ div
     h1 Starter Generator
     ul.list-group
         li.list-group-item.d-flex.justify-content-between.align-items-center(v-for="q in questions")
-            span {{q[0]}}
-            span.badge.badge-success {{q[1]}}
+            span(v-html="q[0]")
+            span.badge.badge-success(v-html="q[1]")
+    hr
     h2 Add questions
     form(v-on:submit="add_question")
         .from-group.row
@@ -22,7 +23,10 @@ div
 
 <script>
 const axios = require('axios').default;
+const katex = require('katex');
 const host = 'http://localhost:5000/';
+import 'katex/dist/katex.min.css';
+
 export default {
     name: 'Starter',
     data() {
@@ -44,7 +48,9 @@ export default {
             var self = this;
             var url = host + 'add_question/' + self.question + '/' + self.n;
             axios.get(url).then(function (response) {
-                self.questions.push(response.data)
+                var q = katex.renderToString(response.data[0])
+                var a = katex.renderToString(response.data[1])
+                self.questions.push([q, a])
             });
         }
     },
