@@ -51,6 +51,7 @@ export default {
     },
     methods: {
         add_question: function(event) {
+            event.preventDefault();
             var self = this;
             var url = host + 'add_question/' + self.question + '/' + self.n;
             axios.get(url).then(function (response) {
