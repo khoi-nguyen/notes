@@ -29,7 +29,7 @@ div
 <script>
 const axios = require('axios').default;
 const katex = require('katex');
-const host = 'http://localhost:5000/';
+const host = 'https://mathsnuggets.co.uk/_starters/';
 import 'katex/dist/katex.min.css';
 
 export default {
