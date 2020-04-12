@@ -40,6 +40,7 @@ export default {
                 {text: 'Project', icon: 'tasks', to: '/project'},
                 {text: 'Resources', icon: 'chalkboard-teacher', to: '/teaching'},
                 {text: 'About', icon: 'address-card', to: '/about'},
+                {text: 'Starter Generator', icon: 'address-card', to: '/starter'},
             ],
         }
     },
