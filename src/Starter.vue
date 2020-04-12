@@ -32,13 +32,18 @@ div
 <script>
 const axios = require('axios').default;
 const katex = require('katex');
-const host = 'https://mathsnuggets.co.uk/_starters/';
 import 'katex/dist/katex.min.css';
 
 export default {
     name: 'Starter',
     data() {
+        if(window.location.hostname == 'localhost') {
+            var backend = 'http://localhost:5000/';
+        } else {
+            var backend = 'https://mathsnuggets.co.uk/_starters/';
+        }
         return {
+            backend: backend,
             exerciseList: [],
             question: '',
             questions: [],
@@ -48,7 +53,7 @@ export default {
     },
     mounted() {
         var self = this;
-        axios.get(host).then(function (response) {
+        axios.get(self.backend).then(function (response) {
             self.exerciseList = response.data;
             self.question = self.exerciseList[0].name;
         });
@@ -57,7 +62,7 @@ export default {
         add_question: function(event) {
             event.preventDefault();
             var self = this;
-            var url = host + 'add_question/' + self.question + '/' + self.n;
+            var url = self.backend + 'add_question/' + self.question + '/' + self.n;
             axios.get(url).then(function (response) {
                 var data = response.data;
                 data.forEach(function (element, index) {
