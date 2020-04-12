@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -12,3 +12,7 @@ def exercise_list():
             'name': 'quadratic_equation',
         }
     ])
+
+@app.route('/add_question/<name>/<n>')
+def add_question(name, n):
+    return jsonify(['x^2 - 5x + 6', '2, 3'])
