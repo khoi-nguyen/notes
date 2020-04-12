@@ -5,18 +5,18 @@ from pandoc.generator import *
 app = Flask(__name__)
 CORS(app)
 
+exercises = [{'title': globals()[f].__doc__, 'name': f} for f in dir() if f.startswith('generate_')]
+
 @app.route('/')
 def exercise_list():
-    return jsonify([
-        {
-            'title': 'Quadratic Equations',
-            'name': 'quadratic_equation',
-        }
-    ])
+    global exercises
+    return jsonify(exercises)
 
 @app.route('/add_question/<name>/<n>')
 def add_question(name, n = 1):
-    function = globals()[f'generate_{name}']
+    if name not in exercises:
+        pass
+    function = globals()[name]
     questions = []
     while len(questions) < int(n):
         q = function()

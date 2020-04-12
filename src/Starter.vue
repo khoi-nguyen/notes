@@ -37,7 +37,7 @@ export default {
     data() {
         return {
             exerciseList: [],
-            question: 'quadratic_equation',
+            question: '',
             questions: [],
             n: 1,
         };
@@ -46,6 +46,7 @@ export default {
         var self = this;
         axios.get(host).then(function (response) {
             self.exerciseList = response.data;
+            self.question = self.exerciseList[0].title;
         });
     },
     methods: {
