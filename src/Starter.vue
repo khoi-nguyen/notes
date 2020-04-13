@@ -110,7 +110,14 @@ export default {
             this.questions.splice(index, 1);
         },
         toggle_fullscreen: function() {
-            document.querySelector('#starter').requestFullscreen();
+            var elem = document.getElementById('starter');
+            if (elem.requestFullScreen) {
+                  elem.requestFullScreen();
+            } else if (elem.mozRequestFullScreen) {
+                  elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullScreen) {
+                  elem.webkitRequestFullScreen();
+            }
         },
         toggle_show_answers: function() {
             this.show_answers = !this.show_answers;
