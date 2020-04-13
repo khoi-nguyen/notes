@@ -12,7 +12,7 @@ def generate_stf():
 def generate_expindex():
     """Expanding powers"""
     base = randint(2, 9)
-    power = randint(1, 4)
+    power = randint(2, 5)
     return ('Expand the power',) + expindex(base, power)
 
 def generate_equation():
@@ -27,6 +27,7 @@ def generate_quadratic_equation():
     """Quadratic equation"""
     x1 = randint(-5, 5)
     x2 = randint(-5, 5)
+    a = (-1)**randint(0, 1) * randint(1, 3)
     x = s.symbols('x')
-    eq = s.expand((x - x1)*(x - x2))
+    eq = s.expand((a*x - x1)*(x - x2))
     return ('Solve',) + equation(str(eq))
