@@ -21,7 +21,8 @@ div
                             span(v-html="q[0]")
                             span(v-html="q[1]")
                         span
-                            span.text-success(v-html="q[2]" v-if="show_answers")
+                            span.badge.badge-success(v-on:click="toggle_show_answer(index)" v-if="!show_answers && !answers.includes(index)") Solution
+                            span.text-success(v-html="q[2]" v-on:click="toggle_show_answer(index)" v-if="show_answers || answers.includes(index)")
                             span.badge.badge-danger(v-on:click="remove_question(index)" v-if="!show_answers") x
                 ul.list-group.col
                     li.list-group-item.d-flex.justify-content-between.align-items-center(v-for="(q, index) in questions" v-if="index > (questions.length-1)/2")
@@ -30,7 +31,8 @@ div
                             span(v-html="q[0]")
                             span(v-html="q[1]")
                         span
-                            span.text-success(v-html="q[2]" v-if="show_answers")
+                            span.badge.badge-success(v-on:click="toggle_show_answer(index)" v-if="!show_answers && !answers.includes(index)") Solution
+                            span.text-success(v-html="q[2]" v-on:click="toggle_show_answer(index)" v-if="show_answers || answers.includes(index)")
                             span.badge.badge-danger(v-on:click="remove_question(index)" v-if="!show_answers") x
             p(v-if="questions.length > 0")
                 button.btn.btn-success(v-on:click="toggle_show_answers()" v-if="!show_answers") Show answers
@@ -85,6 +87,7 @@ export default {
             questions: [],
             n: 1,
             show_answers: false,
+            answers: [],
             time: 300,
         };
     },
@@ -124,8 +127,16 @@ export default {
                   elem.webkitRequestFullScreen();
             }
         },
+        toggle_show_answer: function(index) {
+            if(!this.answers.includes(index)) {
+                this.answers.push(index);
+            } else {
+                this.answers.splice(this.answers.indexOf(index), 1);
+            }
+        },
         toggle_show_answers: function() {
             this.show_answers = !this.show_answers;
+            this.answers = [];
         },
         reset_questions: function() {
             this.questions = [];
