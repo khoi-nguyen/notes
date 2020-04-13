@@ -7,3 +7,5 @@ targets:
     cmd: vagrant ssh -- "make all"
   init:
     cmd: vagrant up
+  vagrant:
+    cmd: vagrant halt && vagrant provision && vagrant up
