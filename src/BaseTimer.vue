@@ -16,7 +16,7 @@
         ></path>
       </g>
     </svg>
-    <span class="base-timer__label">{{ formattedTimeLeft }}</span>
+    <span class="base-timer__label" v-on:click="startTimer()">{{ formattedTimeLeft }}</span>
   </div>
 </template>
 
@@ -43,6 +43,7 @@ const COLOR_CODES = {
 export default {
   data() {
     return {
+      paused: true,
       timePassed: 0,
       timerInterval: null
     };
@@ -95,17 +96,18 @@ export default {
     }
   },
 
-  mounted() {
-    this.startTimer();
-  },
-
   methods: {
     onTimesUp() {
       clearInterval(this.timerInterval);
     },
 
     startTimer() {
-      this.timerInterval = setInterval(() => (this.timePassed += 1), 1000);
+      if (this.paused) {
+        this.timerInterval = setInterval(() => (this.timePassed += 1), 1000);
+      } else {
+        clearInterval(this.timerInterval);
+      }
+      this.paused = !this.paused;
     }
   }
 };
