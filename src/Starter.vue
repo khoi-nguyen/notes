@@ -8,7 +8,7 @@ div
                         input(type='text' placeholder='Lesson Objective')
                     h3 {{date.toDateString()}}
                 .col-md-4.col-lg-2.text-right
-                    BaseTimer
+                    BaseTimer(:timeLimit="600")
             .row
                 ul.list-group.col
                     li.list-group-item.d-flex.justify-content-between.align-items-center(v-for="(q, index) in questions" v-if="index <= (questions.length-1)/2")

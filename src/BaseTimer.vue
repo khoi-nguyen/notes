@@ -21,37 +21,41 @@
 </template>
 
 <script>
-const TIME_LIMIT = 300;
-const FULL_DASH_ARRAY = 283;
-const WARNING_THRESHOLD = TIME_LIMIT/2;
-const ALERT_THRESHOLD = TIME_LIMIT/4;
-
-const COLOR_CODES = {
-  info: {
-    color: "green"
-  },
-  warning: {
-    color: "orange",
-    threshold: WARNING_THRESHOLD
-  },
-  alert: {
-    color: "red",
-    threshold: ALERT_THRESHOLD
-  }
-};
 
 export default {
+  props: {
+    timeLimit: {type: Number, required: true,},
+  },
   data() {
+    const TIME_LIMIT = this.timeLimit;
+    const WARNING_THRESHOLD = TIME_LIMIT/2;
+    const ALERT_THRESHOLD = TIME_LIMIT/4;
+
+    const COLOR_CODES = {
+      info: {
+        color: "green"
+      },
+      warning: {
+        color: "orange",
+        threshold: WARNING_THRESHOLD
+      },
+      alert: {
+        color: "red",
+        threshold: ALERT_THRESHOLD
+      }
+    };
     return {
       paused: true,
       timePassed: 0,
-      timerInterval: null
+      timerInterval: null,
+      colorCodes: COLOR_CODES,
+      fullDashArray: 283,
     };
   },
 
   computed: {
     circleDasharray() {
-      return `${(this.timeFraction * FULL_DASH_ARRAY).toFixed(0)} 283`;
+      return `${(this.timeFraction * this.fullDashArray).toFixed(0)} 283`;
     },
 
     formattedTimeLeft() {
@@ -67,16 +71,16 @@ export default {
     },
 
     timeLeft() {
-      return TIME_LIMIT - this.timePassed;
+      return this.timeLimit - this.timePassed;
     },
 
     timeFraction() {
-      const rawTimeFraction = this.timeLeft / TIME_LIMIT;
-      return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
+      const rawTimeFraction = this.timeLeft / this.timeLimit;
+      return rawTimeFraction - (1 / this.timeLimit) * (1 - rawTimeFraction);
     },
 
     remainingPathColor() {
-      const { alert, warning, info } = COLOR_CODES;
+      const { alert, warning, info } = this.colorCodes;
 
       if (this.timeLeft <= alert.threshold) {
         return alert.color;
