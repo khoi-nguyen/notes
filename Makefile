@@ -27,7 +27,10 @@ tests: env/bin/activate
 
 all: $(SLIDES) $(WORKSHEETS) handouts
 
-server:
+frontend: node_modules
+	parcel src/index.html
+
+backend: env/bin/activate
 	@$(ENV) python3 app.py
 
 deploy: all
@@ -66,3 +69,6 @@ env/bin/activate: requirements.txt
 	@test -d env || python3 -m venv env
 	@$(ENV) pip3 install -Ur requirements.txt
 	@touch env/bin/activate
+
+node_modules: package-lock.json package.json
+	@npm install

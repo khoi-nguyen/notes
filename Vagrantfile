@@ -23,7 +23,8 @@ Vagrant.configure("2") do |config|
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # NOTE: This will enable public access to the opened port
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 1234, host: 1234
+  config.vm.network "forwarded_port", guest: 5000, host: 5000
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access
@@ -65,6 +66,9 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     pacman --noconfirm -Syyu
-    pacman --noconfirm -S grep findutils make pandoc python texlive-core texlive-fontsextra texlive-latexextra texlive-pictures
+    pacman --needed --noconfirm -S grep findutils make pandoc python texlive-core texlive-fontsextra texlive-latexextra texlive-pictures npm
+    npm install -g parcel
   SHELL
+
+  config.ssh.extra_args = ["-t", "cd /vagrant; bash --login"]
 end
