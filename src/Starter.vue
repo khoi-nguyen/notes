@@ -7,8 +7,12 @@ div
                     h1
                         input(type='text' placeholder='Lesson Objective')
                     h3 {{date.toDateString()}}
+                    .form-group.row
+                        label.col-4.col-form-label.col-form-label-sm Timer (seconds)
+                        .col-8
+                            input.form-control(v-model='time')
                 .col-md-4.col-lg-2.text-right
-                    BaseTimer(:timeLimit="600")
+                    BaseTimer(:timeLimit="time")
             .row
                 ul.list-group.col
                     li.list-group-item.d-flex.justify-content-between.align-items-center(v-for="(q, index) in questions" v-if="index <= (questions.length-1)/2")
@@ -81,6 +85,7 @@ export default {
             questions: [],
             n: 1,
             show_answers: false,
+            time: 300,
         };
     },
     mounted() {
