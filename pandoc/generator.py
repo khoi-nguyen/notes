@@ -3,6 +3,13 @@ from random import randint
 
 import sympy as s
 
+def generate_multindex(level):
+    """Multiply Indices"""
+    base = randint(1, 9)
+    power_1 = randint(0, 9)
+    power_2 = randint(0, 9)
+    return ('Multiply Index',) + mult(f'a^{power_1}', f'a^{power_2}', a=base)
+
 def generate_stf(level):
     """Standard form"""
     x = randint(1, 99999)
