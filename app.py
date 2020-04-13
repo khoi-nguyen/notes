@@ -12,14 +12,14 @@ def exercise_list():
     global exercises
     return jsonify(exercises)
 
-@app.route('/add_question/<name>/<n>')
-def add_question(name, n = 1):
+@app.route('/add_question/<name>/<n>/<level>')
+def add_question(name, n, level):
     if name not in exercises:
         pass
     function = globals()[name]
     questions = []
     while len(questions) < int(n):
-        q = function()
+        q = function(int(level))
         if q not in questions:
             questions.append(q)
     return jsonify(questions)

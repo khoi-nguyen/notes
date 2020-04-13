@@ -39,12 +39,17 @@ div
             label.col-sm-2.col-form-label.col-form-label-sm How many
             .col-sm-10
                 select.custom-select(v-model="n")
-                    option(v-for="i in [1, 2, 3, 4, 5]" :value="i") {{i}}
+                    option(v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :value="i") {{i}}
         .from-group.row
             label.col-sm-2.col-form-label.col-form-label-sm Exercise
             .col-sm-10
                 select.custom-select(v-model="question")
                     option(v-for="ex in exerciseList" :value="ex.name") {{ex.title}}
+        .from-group.row
+            label.col-sm-2.col-form-label.col-form-label-sm Level
+            .col-sm-10
+                select.custom-select(v-model="level")
+                    option(v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :value="i") {{i}}
         button.btn.btn-primary(type="submit") Add question(s)
     button.btn.btn-success(v-on:click="toggle_fullscreen")#btn-fullscreen Fullscreen
 </template>
@@ -71,6 +76,7 @@ export default {
             backend: backend,
             date: new Date(),
             exerciseList: [],
+            level: 5,
             question: '',
             questions: [],
             n: 1,
@@ -88,7 +94,7 @@ export default {
         add_question: function(event) {
             event.preventDefault();
             var self = this;
-            var url = self.backend + 'add_question/' + self.question + '/' + self.n;
+            var url = self.backend + 'add_question/' + self.question + '/' + self.n + '/' + self.level;
             axios.get(url).then(function (response) {
                 var data = response.data;
                 data.forEach(function (element, index) {
