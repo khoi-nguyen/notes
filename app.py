@@ -23,3 +23,5 @@ def add_question(name, n, level):
         if q not in questions:
             questions.append(q)
     return jsonify(questions)
+
+app.run(debug=True, host='0.0.0.0')

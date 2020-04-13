@@ -27,6 +27,9 @@ tests: env/bin/activate
 
 all: $(SLIDES) $(WORKSHEETS) handouts
 
+server:
+	@$(ENV) python3 app.py
+
 deploy: all
 	@$(ENV) python3 ./bin/data.py
 	npm install
