@@ -70,5 +70,5 @@ Vagrant.configure("2") do |config|
     npm install -g parcel
   SHELL
 
-  config.ssh.extra_args = ["-t", "cd /vagrant; bash --login"]
+  config.ssh.extra_args = ["-t", "cd /home/vagrant/teaching; bash --login"]
 end
