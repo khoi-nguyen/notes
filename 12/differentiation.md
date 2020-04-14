@@ -172,6 +172,8 @@ We approximate the **tangent** by the **secant**,
 whose gradient is
 $$\frac {f(x + h) - f(x)} {h}$$
 
+. . .
+
 [1.2cm]{.gap}
 It gets better as $h$ **tends to $0$**.
 :::
