@@ -3,6 +3,7 @@ from algebra import *
 from analysis import *
 from stats import *
 from probability import *
+from tikz import *
 
 oo = s.oo
 
@@ -29,6 +30,8 @@ def main(key, value, fmt, meta):
         [[ident, classes, keyvals], contents] = value
         if 'graph' in classes and fmt == 'beamer':
             return blatex(tikz_plot(contents, dict(keyvals)))
+        if 'picture' in classes:
+            return blatex(tikz_picture(contents, dict(keyvals)))
 
 if __name__ == '__main__':
     toJSONFilter(main)
