@@ -27,15 +27,13 @@ Index number
 : The power of a number (called the base)
 :::
 
-\begin{center}
-\begin{tikzpicture}
-\node (origin) at (0, 0) {\LARGE ${\color{darkblue} x}^{\color{darkred} a}$};
-\node[darkblue] (base) at (-1, -1) {base};
-\draw[darkblue,thick,->] (base) -- (origin.south west);
-\node[darkred] (exponent) at (1, 1) {index/exponent/power};
-\draw[darkred,thick,->] (exponent) -- (origin.north east);
-\end{tikzpicture}
-\end{center}
+~~~ picture
+text('index', '\\LARGE ${\\color{darkblue} x}^{\\color{darkred} a}$', 0, 0)
+text('base', 'base', -1, -1, 'darkblue')
+text('exponent', 'index/exponent/power', 1, 1, 'darkred')
+arrow('base', 'index.south west', 'darkblue, thick')
+arrow('exponent', 'index.north east', 'darkred, thick')
+~~~
 
 # Index
 
