@@ -18,9 +18,9 @@
 \usepackage{../pandoc/common}
 
 $if(answers)$
-\newcommand{\answer}[2][2]{\hfill{\color{darkred} {#2}}}
+\newcommand{\answer}[1]{\hfill{\color{darkred} {#1}}}
 $else$
-\newcommand{\answer}[2][2]{}
+\newcommand{\answer}[1]{}
 $endif$
 
 \begin{document}

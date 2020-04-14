@@ -5,28 +5,18 @@ import re
 blatex = lambda x: RawBlock('latex', x)
 ilatex = lambda x: RawInline('latex', x)
 imath = lambda x: Math({'t': 'InlineMath'}, x)
-answer = lambda x, c: [ilatex('\\answer[{}]{{'.format(c))] + x + [ilatex('}')]
+answer = lambda x: [ilatex('\\answer{')] + x + [ilatex('}')]
 
-envcount = 1
-first_env = True
 tally = {env: 0 for env in environments}
 
-def add_transition(m):
-    global envcount
-    envcount += 1
-    return f"\\onslide<{envcount}->{{{m.group(1)}}}"
-
-def environment(ident, classes, keyvals, contents, count, fmt):
+def environment(env, ident, classes, keyvals, contents, fmt):
     global tally
-    env = list(set(classes) & set(environments.keys()))
-    env = env[0]
-    classes.remove(env)
     tally[env] += 1
     data = environments[env]
     title = keyvals['t'] if 't' in keyvals else ''
     if env == 'Objective' and title == '':
         title = '\\today'
-    pause = '\\onslide<{}->{{'.format(count) if fmt == 'beamer' and env != 'Code' else '{'
+    pause = '\\onslide<+->{' if fmt == 'beamer' and env != 'Code' else '{'
     begin = f"\\begin{{colorenv}}[{data['bgcolor']}]{{{data['tcolor']}}}"
     begin += f"{{{data['prefix']}\  {data['title']} {tally[env] if fmt == 'latex' else ''}}}{{{title}}}"
     end = '\\end{colorenv}}'
@@ -34,30 +24,24 @@ def environment(ident, classes, keyvals, contents, count, fmt):
     return [blatex(pause + begin)] + [Div([ident, classes, keyvals], contents)] + [blatex(end)]
 
 def main(key, value, fmt, meta):
-    global envcount, first_env, environments
+    global environments
     if key == 'Span':
         [[ident, classes, keyvals], contents] = value
         if 'gap' in classes:
             return ilatex('\\vspace{' + contents[0]['c'] + '}')
         elif 'answer' in classes:
-            envcount += 1
-            return answer(contents, envcount)
-    elif key == 'Header' and value[0] == 1:
-        envcount = 1
-        first_env = True
+            return answer(contents)
     elif key == 'Div':
         [[ident, classes, keyvals], contents] = value
         keyvals = dict(keyvals)
-        if len(set(classes) & set(environments.keys())) > 0:
-            if not first_env and not 'show' in keyvals:
-                envcount += 1
-            first_env = False
-            count = keyvals['show'] if 'show' in keyvals else envcount
-            return environment(ident, classes, keyvals, contents, count, fmt)
+        env = list(set(classes) & set(environments.keys()))
+        if len(env) > 0:
+            return environment(env[0], ident, classes, keyvals, contents, fmt)
     elif key == 'RawBlock' and value[0] == 'latex':
         [fmt, code] = value
+        code = f'\\onslide<+->{{{code}}}'
         regex = re.compile(r'(\\plotfunction.*|\\draw.*\\draw.*)$', re.MULTILINE)
-        code = re.sub(regex, add_transition, code)
+        code = re.sub(regex, r'\\onslide<+->{\1}', code)
         return RawBlock(fmt, code)
 
 if __name__ == '__main__':
