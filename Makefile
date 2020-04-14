@@ -23,6 +23,7 @@ WORKSHEET := $(PANDOC) -t latex --template=./pandoc/worksheet.tex
 handouts: env/bin/activate tests $(HANDOUTS) $(ANSWERS)
 
 tests: env/bin/activate
+	@$(ENV) python3 ./bin/data.py
 	@$(ENV) python3 ./pandoc/run_test.py
 
 all: $(SLIDES) $(WORKSHEETS) handouts
@@ -34,7 +35,6 @@ backend: env/bin/activate
 	@$(ENV) python3 app.py
 
 deploy: all
-	@$(ENV) python3 ./bin/data.py
 	npm install
 	parcel build src/index.html --out-dir www --public-url ./ --no-cache
 	rsync -am --include '*/' --include '*.pdf' --exclude '*' . www
