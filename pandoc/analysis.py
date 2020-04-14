@@ -78,19 +78,25 @@ def showcoordinates(function, a, x_text, y_text):
     \draw[fill=black] ({a}, {y}) circle (0.1);
     """.replace('\n', '')
 
-def tikz_plot(contents, opt):
+def tikz_plot(contents, opt, fmt):
     options = {'size': 0.5, 'b': -6, 'l': -9, 'r': 9, 't': 6}
     options.update(opt)
     global domain
     domain = f"{options['l']}:{options['r']}"
 
-    lines = [f"\\begin{{plot}}{{{options['size']}}}{{{options['l']}}}{{{options['b']}}}{{{options['r']}}}{{{options['t']}}}"]
+    lines = [
+        '\\onslide<+->{' if fmt == 'beamer' else '{',
+        f"\\begin{{plot}}{{{options['size']}}}{{{options['l']}}}{{{options['b']}}}{{{options['r']}}}{{{options['t']}}}"
+    ]
     for l in contents.split('\n'):
         if re.match('^[a-zA-z_,\s]*=', l):
             exec(l)
         else:
-            lines.append(eval(l))
-    lines.append('\\end{plot}')
+            line = eval(l)
+            if fmt == 'beamer':
+                line = f'\\onslide<+->{{{line}}}'
+            lines.append(line)
+    lines.append('\\end{plot}}')
     return '\n'.join(lines)
 
 def integrate(expr, a = False, b = False):

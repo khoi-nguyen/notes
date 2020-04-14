@@ -28,8 +28,8 @@ def main(key, value, fmt, meta):
             ]
     if key == 'CodeBlock':
         [[ident, classes, keyvals], contents] = value
-        if 'graph' in classes and fmt == 'beamer':
-            return blatex(tikz_plot(contents, dict(keyvals)))
+        if 'graph' in classes:
+            return blatex(tikz_plot(contents, dict(keyvals), fmt))
         if 'picture' in classes:
             return blatex(tikz_picture(contents, dict(keyvals)))
 

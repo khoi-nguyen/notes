@@ -32,12 +32,6 @@ def main(key, value, fmt, meta):
         env = list(set(classes) & set(environments.keys()))
         if len(env) > 0:
             return environment(env[0], value, dict(keyvals), fmt)
-    elif key == 'RawBlock' and value[0] == 'latex':
-        [fmt, code] = value
-        code = f'\\onslide<+->{{{code}}}'
-        regex = re.compile(r'(\\plotfunction.*|\\draw.*\\draw.*)$', re.MULTILINE)
-        code = re.sub(regex, r'\\onslide<+->{\1}', code)
-        return RawBlock(fmt, code)
 
 if __name__ == '__main__':
     toJSONFilter(main)
