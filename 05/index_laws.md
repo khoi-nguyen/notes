@@ -1,5 +1,6 @@
 ---
 title: Index Laws
+publish: true
 ...
 
 # Starter

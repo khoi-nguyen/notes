@@ -1,5 +1,6 @@
 ---
 title: Differentiation
+publish: true
 ...
 
 # Starter
