@@ -18,7 +18,7 @@ for path in files:
     cmd = 'pandoc -s {} -t markdown --template=pandoc/meta.json'.format(path)
     json_string = subprocess.check_output(cmd.split(' '))
     meta = json.loads(json_string)
-    if metadata.get('publish'):
+    if meta.get('publish'):
         data.append({
             'path': path,
             'year': path.split('/')[0],
