@@ -106,6 +106,8 @@ showcoordinates(f, x, 'x', 'f(x)')
 showtangent(f, x)
 ~~~
 
+. . .
+
 [0.5cm]{.gap}
 The **gradient** of a curve at a **point**
 will be the **gradient** of its **tangent** at that point.
@@ -164,6 +166,8 @@ showcoordinates(f, x + h, 'x + h', 'f(x + h)')
 showsecant(f, x, x + h)
 ~~~
 
+. . .
+
 We approximate the **tangent** by the **secant**,
 whose gradient is
 $$\frac {f(x + h) - f(x)} {h}$$
@@ -182,6 +186,9 @@ showcoordinates(f, x, 'x', 'f(x)')
 showcoordinates(f, x + h, 'x + h', 'f(x + h)')
 showsecant(f, x, x + h)
 ~~~
+
+. . .
+
 $\text{\small{Gradient}} = \frac {f(x + h) - f(x)} {h}$
 
 ~~~ {.graph b=-1.5 l=-3 r=7 t=4.5}
@@ -190,6 +197,9 @@ plot(f)
 showcoordinates(f, x, 'x', 'f(x)')
 showtangent(f, x)
 ~~~
+
+. . .
+
 $\text{\small{Gradient}} = \lim_{h \to 0} \frac {f(x + h) - f(x)} {h}$
 :::
 
@@ -250,6 +260,8 @@ $\lim_{h \to 0} \frac {(\cancel x + h) - \cancel x} h
 plot('x')
 ~~~
 
+. . .
+
 The result coincides with the **gradient** of $x$ as expected.
 :::
 
@@ -278,6 +290,8 @@ plot(f)
 showcoordinates(f, a, 'a', 'f(a)')
 showtangent(f, a)
 ~~~
+
+. . .
 
 Gradient
 : $\frac {df} {dx} (a)$
