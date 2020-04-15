@@ -32,6 +32,9 @@
 - name: Partial differentiation
   cmd: question(diff('x*y', 'x', partial=True))
   out: '\frac{\partial}{\partial x} x y'
+- name: Don't factorise trig functions
+  cmd: answer(diff('sin(x)^2'))
+  out: ['', '2 \sin{\left(x \right)} \cos{\left(x \right)}']
 # Taylor
 - name: Taylor development
   cmd: str(taylor('exp(x)', 0, 3))

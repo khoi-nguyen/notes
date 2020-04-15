@@ -113,7 +113,7 @@ def diff(*args, **options):
     if len(args) == 1 or isinstance(args[1], int):
         args.insert(1, s.symbols('x'))
     exercise = s.Derivative(*args)
-    solution = s.simplify(exercise.doit())
+    solution = s.expand_trig(s.simplify(exercise.doit()))
     exercise = s.latex(s.Derivative(*args))
     exercise = exercise.replace('\\partial', 'd') if not options.get('partial') else exercise
     return (exercise, s.latex(solution))
