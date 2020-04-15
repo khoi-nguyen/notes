@@ -15,7 +15,7 @@ RUN pacman --noconfirm -S\
         texlive-pictures
 
 RUN mkluatexfontdb -u
-RUN npm install -g parcel
+RUN npm install -g parcel-bundler
 
 WORKDIR /teaching
 

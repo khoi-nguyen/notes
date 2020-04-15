@@ -67,7 +67,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     pacman --noconfirm -Syyu
     pacman --needed --noconfirm -S grep findutils make pandoc python texlive-core texlive-fontsextra texlive-latexextra texlive-pictures npm
-    npm install -g parcel
+    npm install -g parcel-bundler
   SHELL
 
   config.ssh.extra_args = ["-t", "cd /home/vagrant/teaching; bash --login"]
