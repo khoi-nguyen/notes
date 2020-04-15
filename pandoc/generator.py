@@ -25,11 +25,50 @@ def generate_expindex(level):
 
 def generate_equation(level):
     """Linear equation"""
-    a = (-1)**randint(0, 1)*randint(1, 5)
-    b = randint(-5, 5)
-    c = randint(-5, 5)
     x = s.symbols('x')
-    return ('Solve',) + equation(f'{str(a * x + b)} = {c}')
+    # a*x = b or x + a = b or x/a = b
+    if level <= 3:
+        a = randint(2, 5)
+        b = randint(0, 9)
+        cointoss = randint(0, 2)
+        # Level 1 1,1, level 2 at most 1 negative, level 3 can have -1,-1
+        sign_1 = (-1)**randint(0, 1) if level >= 2 else 1
+        sign_2 = (-1)**randint(0, 1) if level >= 2 else 1
+        if sign_1 == -1 and level == 2:
+            sign_2 = 1
+
+        if cointoss == 1:
+            lhs, rhs = sign_1*a*x, sign_2*randint(0, 4)*a
+        elif cointoss == 2:
+            lhs, rhs = sign_1/a*x, sign_2*randint(0, 4)
+        else:
+            lhs, rhs = x + sign_1*a, sign_2*b + sign_1*a
+    # a*x + b = c
+    elif level <= 5:
+        a = randint(2, 5)
+        b = randint(1, 9)
+        sign_1 = (-1)**randint(0, 1) if level == 5 else 1
+        sign_2 = (-1)**randint(0, 1) if level == 5 else 1
+        c = sign_2*b + randint(-9, 9)*a
+        lhs, rhs = sign_1*a*x + sign_2*b, c
+    # a*x + b = c*x + d (int solution)
+    elif level <= 7:
+        a = randint(2, 5)
+        b = randint(1, 9)
+        c = randint(1, 9)
+        sign_1 = (-1)**randint(0, 1) if level == 7 else 1
+        sign_2 = (-1)**randint(0, 1) if level == 7 else 1
+        sign_3 = (-1)**randint(0, 1) if level == 7 else 1
+        d = sign_2*b + randint(-9, 9)*(sign_1*a - sign_3*c)
+        lhs, rhs = sign_1*a*x + sign_2*b, sign_3*c*x + d
+    # a*x + b = c*x + d
+    elif level <= 9:
+        a = (-1)**randint(0,1)*randint(2, 9)
+        b = (-1)**randint(0,1)*randint(1, 9)
+        c = (-1)**randint(0,1)*randint(1, 9)
+        d = (-1)**randint(0,1)*randint(1, 9)
+        lhs, rhs = a*x + b, c*x + d
+    return ('Solve',) + equation(str(s.simplify(lhs)), str(s.simplify(rhs)))
 
 def generate_quadratic_equation(level):
     """Quadratic equation"""
