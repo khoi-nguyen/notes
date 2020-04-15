@@ -93,7 +93,7 @@ def tikz_plot(contents, opt, fmt):
             exec(l)
         else:
             line = eval(l)
-            if fmt == 'beamer':
+            if fmt == 'beamer' and options.get('transitions'):
                 line = f'\\onslide<+->{{{line}}}'
             lines.append(line)
     lines.append('\\end{plot}}')
