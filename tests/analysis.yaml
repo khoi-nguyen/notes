@@ -17,8 +17,6 @@
 - name: Radians in nested trig functions for plots
   cmd: plot('sin(cos(x))')
   out: \plotfunction[darkblue]{-9:9}{sin((cos(((\x))r))r)}
-# Find gradient, line equation
-- name: Calculate the gradient between two points
   cmd: answer(gradient(0, 0, 1, 2))
   out: ['', '2']
 - name: Find the line equation with gradient and point
@@ -27,6 +25,13 @@
 - name: Find the line equation with two points
   cmd: answer(line_equation(0, 1, 1, 3))
   out: ['', 'y = 2 x + 1']
+# Differentiation
+- name: Treat other variables as constant when differentiating
+  cmd: question(diff('x^n'))
+  out: '\frac{d}{d x} x^{n}'
+- name: Partial differentiation
+  cmd: question(diff('x*y', 'x', partial=True))
+  out: '\frac{\partial}{\partial x} x y'
 # Taylor
 - name: Taylor development
   cmd: str(taylor('exp(x)', 0, 3))

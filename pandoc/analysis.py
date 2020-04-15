@@ -108,13 +108,15 @@ def integrate(expr, a = False, b = False):
     solution = s.latex(expr.doit())
     return (exercise, solution)
 
-def diff(*args):
+def diff(*args, **options):
     args = [s.sympify(a) if isinstance(a, str) else a for a in args]
     if len(args) == 1 or isinstance(args[1], int):
         args.insert(1, s.symbols('x'))
     exercise = s.Derivative(*args)
     solution = s.simplify(exercise.doit())
-    return (s.latex(exercise), s.latex(solution))
+    exercise = s.latex(s.Derivative(*args))
+    exercise = exercise.replace('\\partial', 'd') if not options.get('partial') else exercise
+    return (exercise, s.latex(solution))
 
 def tangent(expr, a):
     x, expr = s.symbols('x'), s.sympify(expr)
