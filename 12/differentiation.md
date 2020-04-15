@@ -3,26 +3,6 @@ title: Differentiation
 publish: true
 ...
 
-# Starter
-
-::: Objective
-Understanding the importance of the **gradient**.
-:::
-
-::: {.Starter cols=2 t="Gradient and line equations"}
-Find the gradient of a line going through
-
-#) `gradient(1, 2, 2, 4)`
-#) `gradient(-1, 3, 2, -5)`
-#) `gradient(2, 4, 5, 13)`
-
-Find the equation of the line passing through
-
-#) `line_equation(1, 2, 2, 4)`
-#) `line_equation(3, 9, 1, 5)`
-#) `line_equation(1, 4, 4, 1)`
-:::
-
 # Motivations: minimums and maximums
 
 ~~~ {.graph b=-2 t=2 l=-5 r=5}
