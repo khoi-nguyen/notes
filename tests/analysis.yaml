@@ -27,8 +27,8 @@
   out: ['', 'y = 2 x + 1']
 # Differentiation
 - name: Treat other variables as constant when differentiating
-  cmd: question(diff('x^n'))
-  out: '\frac{d}{d x} x^{n}'
+  cmd: diff('x^n')
+  out: ['\frac{d}{d x} x^{n}', 'n x^{n - 1}']
 - name: Partial differentiation
   cmd: question(diff('x*y', 'x', partial=True))
   out: '\frac{\partial}{\partial x} x y'
