@@ -7,7 +7,7 @@ div
                     h1
                         input(type='text' placeholder='Lesson Objective')
                     h3 {{date.toDateString()}}
-                    .form-group.row
+                    .form-group.row#timer
                         label.col-4.col-form-label.col-form-label-sm Timer (seconds)
                         .col-8
                             input.form-control(v-model='time')
@@ -165,7 +165,7 @@ h1 input {
 #starter:fullscreen h3 {
     font-size: 2.5vw;
 }
-#starter:fullscreen .badge-danger, #starter:fullscreen .btn-secondary {
+#starter:fullscreen .badge-danger, #starter:fullscreen .btn-secondary, #starter:fullscreen #timer {
     display: none;
 }
 </style>
