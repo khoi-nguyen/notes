@@ -3,6 +3,7 @@
 dist/
 env/
 node_modules/
+Tex/
 www/
 __pycache__/
 data.json
@@ -10,11 +11,13 @@ data.json
 *.fdb_latexmk
 *.fls
 *.log
+*.mp4
 *.nav
 *.pdf
 *.snm
 *.synctex.gz
 *.synctex(busy)
 *.tex
+*.txt
 *.toc
 *.vrb
