@@ -29,14 +29,14 @@ tests: env/bin/activate
 all: $(SLIDES) $(WORKSHEETS) handouts
 
 frontend: node_modules
-	@npm start
+	@npm run-script start
 
 backend: env/bin/activate
 	@$(ENV) python3 app.py
 
 deploy: all
 	@npm install
-	@npm build
+	@npm run-script build
 	@rsync -am --include '*/' --include '*.pdf' --exclude '*' . www
 
 clean:
