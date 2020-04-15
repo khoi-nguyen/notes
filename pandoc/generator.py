@@ -38,9 +38,9 @@ def generate_equation(level):
             sign_2 = 1
 
         if cointoss == 1:
-            lhs, rhs = sign_1*x*a, sign_2*randint(0, 4)*a
+            lhs, rhs = sign_1*a*x, sign_2*randint(0, 4)*a
         elif cointoss == 2:
-            lhs, rhs = sign_1*x/a, sign_2*randint(0, 4)
+            lhs, rhs = sign_1/a*x, sign_2*randint(0, 4)
         else:
             lhs, rhs = x + sign_1*a, sign_2*b + sign_1*a
     # a*x + b = c
@@ -56,9 +56,9 @@ def generate_equation(level):
         a = randint(2, 5)
         b = randint(1, 9)
         c = randint(1, 9)
-        sign_1 = (-1)**randint(0, 1) if level == 5 else 1
-        sign_2 = (-1)**randint(0, 1) if level == 5 else 1
-        sign_3 = (-1)**randint(0, 1) if level == 5 else 1
+        sign_1 = (-1)**randint(0, 1) if level == 7 else 1
+        sign_2 = (-1)**randint(0, 1) if level == 7 else 1
+        sign_3 = (-1)**randint(0, 1) if level == 7 else 1
         d = sign_2*b + randint(-9, 9)*(sign_1*a - sign_3*c)
         lhs, rhs = sign_1*a*x + sign_2*b, sign_3*c*x + d
     # a*x + b = c*x + d
