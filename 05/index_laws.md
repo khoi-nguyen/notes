@@ -298,11 +298,11 @@ $$\frac {8x^5} {2x^2} = \frac {{\color{darkred} 8} \times {\color{darkblue} x^5}
 # Simplifying indices
 
 ::: Example
-Simplify $15x^7 \div 3x^3$
+Simplify $15x^7 \div \br{3x^3}$
 :::
 
 ::: Solution
-$$15x^7 \div 3x^3 = \frac {15x^7} {3x^3} = \frac {{\color{darkred} 15} \times {\color{darkblue} x^7}} {{\color{darkred} 3} \times {\color{darkblue} x^3}} = {\color{darkred} 5}{\color{darkblue} x^4}$$
+$$15x^7 \div \br{3x^3} = \frac {15x^7} {3x^3} = \frac {{\color{darkred} 15} \times {\color{darkblue} x^7}} {{\color{darkred} 3} \times {\color{darkblue} x^3}} = {\color{darkred} 5}{\color{darkblue} x^4}$$
 :::
 
 # Simplifying indices
