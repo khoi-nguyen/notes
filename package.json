@@ -4,7 +4,8 @@
   "description": "Teaching resources",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx parcel src/index.html",
+    "build": "npx parcel build src/index.html --out-dir www --public-url ./ --no-cache"
   },
   "author": "Khoi Nguyen",
   "license": "GPL-3.0-or-later",
@@ -20,6 +21,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
     "katex": "^0.11.1",
+    "parcel-bundler": "^1.12.4",
     "popper.js": "^1.16.1",
     "prismjs": "^1.20.0",
     "pug": "^2.0.4",

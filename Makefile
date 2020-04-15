@@ -29,15 +29,15 @@ tests: env/bin/activate
 all: $(SLIDES) $(WORKSHEETS) handouts
 
 frontend: node_modules
-	parcel src/index.html
+	@npm start
 
 backend: env/bin/activate
 	@$(ENV) python3 app.py
 
 deploy: all
-	npm install
-	parcel build src/index.html --out-dir www --public-url ./ --no-cache
-	rsync -am --include '*/' --include '*.pdf' --exclude '*' . www
+	@npm install
+	@npm build
+	@rsync -am --include '*/' --include '*.pdf' --exclude '*' . www
 
 clean:
 	@echo Removing all temporary files
