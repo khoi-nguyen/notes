@@ -25,19 +25,23 @@ factorise = lambda expr, **options: exercise(expr, _s, factor, **options)
 def expindex(base, power):
     return (f"{{{base}}}^{{{power}}}", " \\times ".join([str(base)] * power))
 
-def _mult(join_ex, join_sol, terms, options, cbk = latex):
+def _mult(join_ex, join_sol, terms, options, cbk = latex, div = False):
     substitutions = [(s.symbols(t), s.UnevaluatedExpr(v)) for (t, v) in options.items() if t not in ['l']]
     if 'l' in options.keys():
         exercise = options['l']
     else:
-        exercise = join_ex.join([cbk(_s(str(t)).subs(substitutions)) for t in terms])
+        l_terms = [cbk(_s(str(t)).subs(substitutions)) for t in terms]
+        # Bracket terms if necessary
+        if div == True and ' ' in l_terms[1]:
+            l_terms[1] = f'\\br{{{l_terms[1]}}}'
+        exercise = join_ex.join(l_terms)
         if join_ex == '}{':
             exercise = f'\\frac{{{exercise}}}'
     solution = _simplify(f'({join_sol.join([str(t) for t in terms])})').subs(substitutions)
     return (exercise, cbk(solution))
 
 mult = lambda *terms, **options: _mult('\\times ', ')*(', terms, options)
-div = lambda *terms, **options: _mult('\\div ', ')/(', terms, options)
+div = lambda *terms, **options: _mult('\\div ', ')/(', terms, options, latex, True)
 frac = lambda *terms, **options: _mult('}{', ')/(', terms, options)
 lcm = lambda *terms: (','.join([str(t) for t in terms]), s.lcm(terms))
 
@@ -117,7 +121,7 @@ def stf(number):
 stf2dec = lambda x: (stf(x)[1], stf(x)[0])
 _stf = lambda t: stf(t)[1]
 stfmult = lambda *terms, **options: _mult(' \\times ', ')*(', terms, options, _stf)
-stfdiv = lambda *terms, **options: _mult(' \\div ', ')/(', terms, options, _stf)
+stfdiv = lambda *terms, **options: _mult(' \\div ', ')/(', terms, options, _stf, True)
 stffrac = lambda *terms, **options: _mult('}{', ')/(', terms, options, _stf)
 stfadd = lambda *terms, **options: _mult(' + ', ')+(', terms, options, _stf)
 stfsub = lambda *terms, **options: _mult(' - ', ')-(', terms, options, _stf)

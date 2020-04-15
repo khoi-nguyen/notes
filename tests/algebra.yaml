@@ -107,12 +107,16 @@
   out:
     - '4 \times 10^{4} \times 1 \times 10^{-2}'
     - '4 \times 10^{2}'
-- name: Standard form division
+- name: Standard form division (frac)
   cmd: stffrac(10000, 0.2)
   out:
     - '\frac{1 \times 10^{4}}{2 \times 10^{-1}}'
     - '5 \times 10^{4}'
-# TODO: division test after solving bracket issue
+- name: Standard form division (div)
+  cmd: stfdiv(10000, 0.2)
+  out:
+    - '1 \times 10^{4} \div \br{2 \times 10^{-1}}'
+    - '5 \times 10^{4}'
 - name: Standard form addition
   cmd: stfadd(10000, 2000)
   out:
