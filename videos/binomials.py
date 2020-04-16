@@ -34,7 +34,7 @@ class APlusBSquared(Scene):
             arrow = DoubleArrow(
                 big_square.get_corner(corner),
                 big_square.get_corner(corner) + vector,
-                color = GRAY, stroke_width = 1, tip_length = 0.1,
+                color = GRAY, stroke_width = 1, tip_length = 0.1, buff = 0,
             ).shift(0.2*shift)
             arrows.append(arrow)
             lengths.append(TexMobject(tex, color=GRAY).next_to(arrow, 0.1*shift))
