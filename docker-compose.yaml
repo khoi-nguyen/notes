@@ -1,0 +1,10 @@
+version: '3.1'
+services:
+  manim:
+    image: eulertour/manim:latest
+    entrypoint:
+      - ./manim.py
+    volumes:
+      - ./videos:/videos
+    working_dir: /videos
+    network_mode: "none"
