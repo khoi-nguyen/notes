@@ -7,6 +7,30 @@ class Scene(m.Scene):
         },
     }
 
+class DoubleArrow(m.DoubleArrow):
+    def __init__(self, a, b, **kwargs):
+        options = {
+            'color': m.BLACK,
+        }
+        options.update(kwargs)
+        m.DoubleArrow.__init__(self, a, b, **options)
+
+class Rectangle(m.Rectangle):
+    def __init__(self, **kwargs):
+        options = {
+            'color': m.BLACK,
+        }
+        options.update(kwargs)
+        m.Rectangle.__init__(self, **options)
+
+class Square(m.Square):
+    def __init__(self, **kwargs):
+        options = {
+            'color': m.BLACK,
+        }
+        options.update(kwargs)
+        m.Square.__init__(self, **options)
+
 class TexMobject(m.TexMobject):
     def __init__(self, *text, **kwargs):
         options = {
