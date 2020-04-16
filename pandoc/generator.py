@@ -60,6 +60,8 @@ def generate_equation(level):
         sign_2 = (-1)**randint(0, 1) if level == 7 else 1
         sign_3 = (-1)**randint(0, 1) if level == 7 else 1
         d = sign_2*b + randint(-9, 9)*(sign_1*a - sign_3*c)
+        if a == c:
+            a = a + 1
         lhs, rhs = sign_1*a*x + sign_2*b, sign_3*c*x + d
     # a*x + b = c*x + d
     elif level <= 9:
@@ -67,6 +69,8 @@ def generate_equation(level):
         b = (-1)**randint(0,1)*randint(1, 9)
         c = (-1)**randint(0,1)*randint(1, 9)
         d = (-1)**randint(0,1)*randint(1, 9)
+        if a == c:
+            a = a + 1
         lhs, rhs = a*x + b, c*x + d
     return ('Solve',) + equation(str(s.simplify(lhs)), str(s.simplify(rhs)))
 
