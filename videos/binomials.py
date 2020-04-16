@@ -78,12 +78,24 @@ class APlusBSquared(Scene):
 
         # Display right-hand side
         previous = a_plus_b_squared
+        groups = {'a^2': [], 'ab': [], 'b^2': []}
         for i in range(0, len(terms)):
             char = '=' if i == 0 else '+'
             link = TexMobject(char).scale(1.5).next_to(previous, RIGHT)
+            groups[squares_data[i][5]] += [link, areas[i]]
             self.play(
                 Write(link),
                 Transform(areas[i], terms[i].next_to(link, RIGHT))
             )
             previous = areas[i]
+        self.wait()
+
+        # Collect like terms
+        two_ab = TexMobject('+', '2ab').scale(1.5).next_to(VGroup(*groups['a^2']), RIGHT)
+        two_ab.set_color_by_tex_to_color_map({'2': GRAY})
+        b_squared = VGroup(*groups['b^2']).copy().next_to(two_ab, RIGHT)
+        self.play(
+            Transform(VGroup(*groups['ab']), two_ab),
+            Transform(VGroup(*groups['b^2']), b_squared),
+        )
         self.wait(5)
