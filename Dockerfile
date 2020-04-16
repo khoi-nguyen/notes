@@ -1,21 +1,18 @@
-FROM archlinux/base
+FROM alpine:latest
 
-RUN pacman --noconfirm -Syyu
-RUN pacman --noconfirm -S\
-        grep \
-        findutils\
+RUN apk --no-cache add --repository http://dl-3.alpinelinux.org/alpine/edge/testing \
+        pandoc
+RUN apk --no-cache add\
+        grep\
         make\
         npm\
-        pandoc\
-        python\
+        python3\
         rsync\
-        texlive-core\
-        texlive-fontsextra\
-        texlive-latexextra\
-        texlive-pictures
-
-RUN mkluatexfontdb -u
-RUN npm install -g parcel-bundler
+        texlive
+RUN apk --no-cache add --repository http://dl-3.alpinelinux.org/alpine/edge/community \
+        texmf-dist-fontsextra\
+        texmf-dist-latexextra\
+        texmf-dist-pictures
 
 WORKDIR /teaching
 
