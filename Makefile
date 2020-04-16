@@ -9,7 +9,7 @@ DEPENDENCIES := env/bin/activate Makefile $(shell find pandoc/*)
 
 # Commands
 ENV := . env/bin/activate;
-LATEX := latexmk -silent -lualatex -cd -f
+LATEX := latexmk -silent -pdf -cd -f
 PANDOC := $(ENV) pandoc -s --pdf-engine=lualatex\
 	--filter ./pandoc/pythontex.py\
 	--filter ./pandoc/environments.py\
