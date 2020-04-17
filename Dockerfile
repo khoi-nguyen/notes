@@ -3,7 +3,6 @@ FROM alpine:latest
 RUN apk --no-cache add --repository http://dl-3.alpinelinux.org/alpine/edge/testing \
         pandoc
 RUN apk --no-cache add\
-        grep\
         make\
         npm\
         python3\
