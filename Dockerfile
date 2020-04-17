@@ -17,7 +17,7 @@ RUN apk add --no-cache perl wget xz \
     > install-tl/texlive.profile \
  && install-tl/install-tl --profile=install-tl/texlive.profile \
  && tlmgr install \
-      cc-icons \
+      ccicons \
       collection-latexrecommended \
       collection-latexextra \
       collection-fontsrecommended \
