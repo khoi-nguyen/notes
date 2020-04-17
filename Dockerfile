@@ -21,6 +21,7 @@ RUN apk add --no-cache perl wget xz \
       collection-latexrecommended \
       collection-latexextra \
       collection-fontsrecommended \
+      fira \
       fontawesome \
       latexmk \
  && rm -rf install-tl
