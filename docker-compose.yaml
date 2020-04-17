@@ -9,6 +9,7 @@ services:
     image: eulertour/manim:latest
     entrypoint:
       - ./manim.py
+    user: ${ID}
     volumes:
       - ./videos:/videos
     working_dir: /videos
