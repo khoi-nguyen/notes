@@ -53,25 +53,24 @@ def generate_equation(level):
         lhs, rhs = sign_1*a*x + sign_2*b, c
     # a*x + b = c*x + d (int solution)
     elif level <= 7:
-        a = randint(2, 5)
         b = randint(1, 9)
         c = randint(1, 9)
         sign_1 = (-1)**randint(0, 1) if level == 7 else 1
         sign_2 = (-1)**randint(0, 1) if level == 7 else 1
         sign_3 = (-1)**randint(0, 1) if level == 7 else 1
+        a = sign_1*sign_3*c + (-1)**randint(0, 1)*randint(1, 9)
         d = sign_2*b + randint(-9, 9)*(sign_1*a - sign_3*c)
-        if a == c:
-            a = a + 1
         lhs, rhs = sign_1*a*x + sign_2*b, sign_3*c*x + d
     # a*x + b = c*x + d
     elif level <= 9:
-        a = (-1)**randint(0,1)*randint(2, 9)
         b = (-1)**randint(0,1)*randint(1, 9)
         c = (-1)**randint(0,1)*randint(1, 9)
         d = (-1)**randint(0,1)*randint(1, 9)
-        if a == c:
-            a = a + 1
-        lhs, rhs = a*x + b, c*x + d
+        sign_1 = (-1)**randint(0, 1)
+        sign_2 = (-1)**randint(0, 1)
+        sign_3 = (-1)**randint(0, 1)
+        a = sign_1*sign_3*c + (-1)**randint(0, 1)*randint(1, 9)
+        lhs, rhs = sign_1*a*x + sign_2*b, sign_3*c*x + d
     return ('Solve',) + equation(str(s.simplify(lhs)), str(s.simplify(rhs)))
 
 def generate_quadratic_equation(level):
