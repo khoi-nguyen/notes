@@ -1,10 +1,8 @@
-FROM python:3.7.1-alpine3.8
+FROM python:3.8.2-alpine3.11
 
-ARG PANDOC_V=2.4
 ENV PATH /usr/local/texlive/2020/bin/x86_64-linuxmusl:$PATH
 
-RUN apk add --no-cache ca-certificates && update-ca-certificates \
- && wget -O - https://github.com/jgm/pandoc/releases/download/$PANDOC_V/pandoc-$PANDOC_V-linux.tar.gz | \
+RUN wget -O - https://github.com/jgm/pandoc/releases/download/2.9.2.1/pandoc-2.9.2.1-linux-amd64.tar.gz| \
     tar -xz -C /usr/local/ --strip-components=1 \
  && rm -rf /usr/local/share/man/*
 
@@ -19,16 +17,16 @@ RUN apk add --no-cache perl wget xz \
     > install-tl/texlive.profile \
  && install-tl/install-tl --profile=install-tl/texlive.profile \
  && tlmgr install \
+      cc-icons \
       collection-latexrecommended \
       collection-latexextra \
       collection-fontsrecommended \
- && rm -rf install-tl \
- && apk del --purge xz
+      fontawesome \
+      latexmk \
+ && rm -rf install-tl
 
-RUN apk --no-cache add\
-        make\
-        npm\
-        rsync
+RUN apk --no-cache add make npm rsync
+RUN apk del --purge wget xz
 
 WORKDIR /teaching
 
