@@ -66,8 +66,9 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     pacman --noconfirm -Syyu
-    pacman --needed --noconfirm -S grep findutils make pandoc python texlive-core texlive-fontsextra texlive-latexextra texlive-pictures npm
-    npm install -g parcel-bundler
+    pacman --needed --noconfirm -S docker docker-compose
+    usermod -aG docker vagrant
+    systemctl enable docker && systemctl start docker
   SHELL
 
   config.ssh.extra_args = ["-t", "cd /home/vagrant/teaching; bash --login"]
