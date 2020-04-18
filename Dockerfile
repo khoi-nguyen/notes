@@ -24,10 +24,10 @@ RUN apk add --no-cache perl wget xz \
       fira \
       fontawesome \
       latexmk \
- && rm -rf install-tl
+ && rm -rf install-tl \
+ && apk del --purge wget xz
 
 RUN apk --no-cache add make npm rsync
-RUN apk del --purge wget xz
 
 WORKDIR /teaching
 
