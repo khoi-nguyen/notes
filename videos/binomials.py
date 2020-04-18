@@ -25,7 +25,7 @@ class APlusBSquared(Scene):
         self.wait()
 
         # Total area
-        a_plus_b_squared = TexMobject('(a + b)^2').scale(2).move_to(big_square.get_center())
+        a_plus_b_squared = big_square.write('(a + b)^2')
         self.play(Write(a_plus_b_squared))
         self.wait()
 
@@ -48,7 +48,7 @@ class APlusBSquared(Scene):
                 fill_color = color,
             ).move_to(big_square.get_corner(corner), corner)
             squares.append(square)
-            areas.append(TexMobject(text).scale(2).move_to(square.get_center()))
+            areas.append(square.write(text))
             terms.append(TexMobject(text, color=color).scale(1.5))
         self.play(
             ApplyMethod(big_square.set_fill, WHITE),
@@ -91,7 +91,7 @@ class ASquaredMinusBSquared(Scene):
             fill_opacity = opacity,
             fill_color = BLUE,
         ).to_edge(DOWN).shift(0.5*UP)
-        a_squared = TexMobject('a^2').scale(2).move_to(big_square.get_center())
+        a_squared = big_square.write('a^2')
         self.play(
             FadeIn(big_square),
             Write(a_squared)
@@ -104,7 +104,7 @@ class ASquaredMinusBSquared(Scene):
             fill_opacity = 1,
             fill_color = RED,
         ).move_to(big_square.get_corner(DR), DR)
-        b_squared = TexMobject('b^2').scale(2).move_to(small_square.get_center())
+        b_squared = small_square.write('b^2')
         self.play(
             FadeIn(small_square),
             Write(b_squared)

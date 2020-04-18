@@ -23,6 +23,9 @@ class Rectangle(m.Rectangle):
         options.update(kwargs)
         m.Rectangle.__init__(self, **options)
 
+    def write(self, tex):
+        return TexMobject(tex).scale(2).move_to(self.get_center())
+
     def length(self, edge, start_direction, text, length, shift = 0.2):
         arrow = m.DoubleArrow(
             self.get_corner(edge + start_direction),
