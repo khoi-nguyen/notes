@@ -79,3 +79,122 @@ class APlusBSquared(Scene):
             Transform(VGroup(*groups['b^2']), b_squared),
         )
         self.wait(5)
+
+class ASquaredMinusBSquared(Scene):
+
+    def construct(self):
+        a, b, opacity = 5, 1.75, 0.5
+
+        # Big square
+        big_square = Square(
+            side_length = a,
+            fill_opacity = opacity,
+            fill_color = BLUE,
+        ).to_edge(DOWN).shift(0.5*UP)
+        a_squared = TexMobject('a^2').scale(2).move_to(big_square.get_center())
+        self.play(
+            FadeIn(big_square),
+            Write(a_squared)
+        )
+        self.wait()
+
+        # Small square
+        small_square = Square(
+            side_length = b,
+            fill_opacity = 1,
+            fill_color = RED,
+        ).move_to(big_square.get_corner(DOWN + RIGHT)).shift(b/2*(UP + LEFT))
+        b_squared = TexMobject('b^2').scale(2).move_to(small_square.get_center())
+        self.play(
+            FadeIn(small_square),
+            Write(b_squared)
+        )
+        self.wait()
+
+        # Preparing LHS
+        lhs1 = TexMobject('a^2', color=BLUE).scale(1.5).to_edge(UP).shift(3*LEFT)
+        lhs2 = TexMobject('-b^2', color=RED).scale(1.5).next_to(lhs1, RIGHT)
+        self.play(
+            Transform(a_squared, lhs1),
+            Transform(b_squared, lhs2),
+        )
+
+        # Lengths
+        lengths = [
+            (DOWN, RIGHT, 'b', b),
+            (LEFT, UP, 'a', a), (UP, LEFT, 'a', a),
+            (RIGHT, UP, 'a-b', a-b), (RIGHT, DOWN, 'b', b),
+        ]
+        lengths_objs = [big_square.length(*l) for l in lengths]
+        self.play(*[FadeIn(o) for o in lengths_objs])
+        self.wait()
+
+        # Square difference
+        shape = Polygon(
+            big_square.get_corner(UP + LEFT),
+            big_square.get_corner(UP + RIGHT),
+            small_square.get_corner(UP + RIGHT),
+            small_square.get_corner(UP + LEFT),
+            small_square.get_corner(DOWN + LEFT),
+            big_square.get_corner(DOWN + LEFT),
+            color = BLACK,
+            fill_color = GREEN,
+            fill_opacity = opacity,
+        )
+        b_label = lengths_objs[-1]
+        aminusb = lengths_objs[-2]
+        self.play(
+            FadeOut(VGroup(big_square, small_square)),
+            FadeIn(shape),
+            ApplyMethod(b_label.shift, b*LEFT),
+            FadeOut(lengths_objs[0]),
+            FadeOut(lengths_objs[1]),
+        )
+
+        # Split shape
+        rect = Rectangle(
+            width = a,
+            height = a - b,
+            fill_color = GREEN,
+            fill_opacity = opacity,
+        ).move_to(big_square.get_corner(UP + LEFT) + (a - b)/2*DOWN + a/2*RIGHT)
+        rect2 = Rectangle(
+            width = a - b,
+            height = b,
+            fill_color = GREEN,
+            fill_opacity = opacity,
+        ).move_to(big_square.get_corner(DOWN + LEFT) + (a - b)/2*RIGHT + b/2*UP)
+        self.play(
+            FadeIn(VGroup(rect, rect2)),
+            FadeOut(shape),
+        )
+        self.wait()
+
+        # Reorganise pieces
+        self.play(
+            ApplyMethod(VGroup(rect2, b_label).shift, b*(RIGHT + UP)),
+            FadeOut(b_label),
+        )
+        aplusb = rect.length(DOWN, LEFT, 'a + b', a + b)
+        b_label = rect.length(UP, RIGHT, 'b', -b)
+        self.play(
+            ApplyMethod(aminusb.shift, b*RIGHT),
+            Rotate(rect2, -PI/2, about_point=rect2.get_corner(DOWN + RIGHT)),
+            FadeIn(aplusb),
+            FadeIn(b_label)
+        )
+        self.wait()
+
+        # Print rhs
+        eq = TexMobject('=', color=GREEN).scale(1.5).next_to(lhs2, RIGHT)
+        rhs1 = TexMobject('(a + b)', color=GREEN).scale(1.5).next_to(eq, RIGHT)
+        rhs2 = TexMobject('(a - b)', color=GREEN).scale(1.5).next_to(rhs1, RIGHT)
+        self.play(
+            FadeIn(eq),
+            Transform(aplusb.copy(), rhs1),
+        )
+        self.wait()
+        self.play(
+            Transform(aminusb.copy(), rhs2),
+        )
+        self.wait(5)
