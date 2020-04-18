@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   make:
-    image: bknguyen/teaching
+    build: .
     user: ${ID}
     volumes:
       - .:/teaching
@@ -9,6 +9,7 @@ services:
     image: eulertour/manim:latest
     entrypoint:
       - ./manim.py
+    user: ${ID}
     volumes:
       - ./videos:/videos
     working_dir: /videos
