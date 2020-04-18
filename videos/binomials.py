@@ -15,33 +15,13 @@ class APlusBSquared(Scene):
         self.wait()
 
         # Display Lengths
-        arrows, lengths = [], []
-        arrows_data = [
-            # Top edge
-            (UP + LEFT, a*RIGHT, UP, 'a'),
-            (UP + RIGHT, b*LEFT, UP, 'b'),
-            # Right edge
-            (UP + RIGHT, a*DOWN, RIGHT, 'a'),
-            (DOWN + RIGHT, b*UP, RIGHT, 'b'),
-            # Bottom edge
-            (DOWN + LEFT, a*RIGHT, DOWN, 'a'),
-            (DOWN + RIGHT, b*LEFT, DOWN, 'b'),
-            # Left edge
-            (UP + LEFT, a*DOWN, LEFT, 'a'),
-            (DOWN + LEFT, b*UP, LEFT, 'b'),
+        lengths = [
+            (UP, LEFT, 'a', a), (UP, RIGHT, 'b', b),
+            (RIGHT, UP, 'a', a), (RIGHT, DOWN, 'b', b),
+            (BOTTOM, LEFT, 'a', a), (BOTTOM, RIGHT, 'b', b),
+            (LEFT, UP, 'a', a), (LEFT, DOWN, 'b', b),
         ]
-        for (corner, vector, shift, tex) in arrows_data:
-            arrow = DoubleArrow(
-                big_square.get_corner(corner),
-                big_square.get_corner(corner) + vector,
-                color = GRAY, stroke_width = 1, tip_length = 0.1, buff = 0,
-            ).shift(0.2*shift)
-            arrows.append(arrow)
-            lengths.append(TexMobject(tex, color=GRAY).next_to(arrow, 0.1*shift))
-        self.play(
-            *[FadeIn(arrow) for arrow in arrows],
-            *[Write(length) for length in lengths],
-        )
+        self.play(*[FadeIn(big_square.length(*l)) for l in lengths])
         self.wait()
 
         # Total area

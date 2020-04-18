@@ -23,7 +23,16 @@ class Rectangle(m.Rectangle):
         options.update(kwargs)
         m.Rectangle.__init__(self, **options)
 
-class Square(m.Square):
+    def length(self, edge, start_direction, text, length, shift = 0.2):
+        arrow = m.DoubleArrow(
+            self.get_corner(edge + start_direction),
+            self.get_corner(edge + start_direction) - length*start_direction,
+            color = m.GRAY, stroke_width = 1, tip_length = 0.1, buff = 0,
+        ).shift(shift*edge)
+        label = TexMobject(text, color=m.GRAY).next_to(arrow, 0.1*edge)
+        return m.VGroup(arrow, label)
+
+class Square(Rectangle, m.Square):
     def __init__(self, **kwargs):
         options = {
             'color': m.BLACK,
