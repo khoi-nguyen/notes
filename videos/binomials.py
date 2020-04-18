@@ -62,7 +62,7 @@ class APlusBSquared(Scene):
         for i in range(0, len(terms)):
             char = '=' if i == 0 else '+'
             link = TexMobject(char).scale(1.5).next_to(previous, RIGHT)
-            groups[squares_data[i][5]] += [link, areas[i]]
+            groups[squares_data[i][4]] += [link, areas[i]]
             self.play(
                 Write(link),
                 Transform(areas[i], terms[i].next_to(link, RIGHT))
