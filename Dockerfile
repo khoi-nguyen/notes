@@ -29,6 +29,9 @@ RUN apk add --no-cache perl wget xz \
 
 RUN apk --no-cache add make npm rsync
 
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+
 WORKDIR /teaching
 
 ENTRYPOINT ["make", "-j", "10"]
