@@ -36,17 +36,17 @@ class APlusBSquared(Scene):
         # Decomposition
         squares, areas, terms = [], [], []
         squares_data = [
-            (UP, LEFT, a, a, BLUE, 'a^2'),
-            (DOWN, LEFT, a, b, GRAY, 'ab'),
-            (UP, RIGHT, b, a, GRAY, 'ab'),
-            (DOWN, RIGHT, b, b, RED, 'b^2'),
+            (UL, a, a, BLUE, 'a^2'),
+            (DL, a, b, GRAY, 'ab'),
+            (UR, b, a, GRAY, 'ab'),
+            (DR, b, b, RED, 'b^2'),
         ]
-        for (vert, hor, width, height, color, text) in squares_data:
+        for (corner, width, height, color, text) in squares_data:
             square = Rectangle(
                 width = width, height = height,
                 fill_opacity = opacity,
                 fill_color = color,
-            ).move_to(big_square.get_corner(vert + hor) - height/2*vert - width/2*hor)
+            ).move_to(big_square.get_corner(corner), corner)
             squares.append(square)
             areas.append(TexMobject(text).scale(2).move_to(square.get_center()))
             terms.append(TexMobject(text, color=color).scale(1.5))
@@ -103,7 +103,7 @@ class ASquaredMinusBSquared(Scene):
             side_length = b,
             fill_opacity = 1,
             fill_color = RED,
-        ).move_to(big_square.get_corner(DOWN + RIGHT)).shift(b/2*(UP + LEFT))
+        ).move_to(big_square.get_corner(DR), DR)
         b_squared = TexMobject('b^2').scale(2).move_to(small_square.get_center())
         self.play(
             FadeIn(small_square),
@@ -131,12 +131,12 @@ class ASquaredMinusBSquared(Scene):
 
         # Square difference
         shape = Polygon(
-            big_square.get_corner(UP + LEFT),
-            big_square.get_corner(UP + RIGHT),
-            small_square.get_corner(UP + RIGHT),
-            small_square.get_corner(UP + LEFT),
-            small_square.get_corner(DOWN + LEFT),
-            big_square.get_corner(DOWN + LEFT),
+            big_square.get_corner(UL),
+            big_square.get_corner(UR),
+            small_square.get_corner(UR),
+            small_square.get_corner(UL),
+            small_square.get_corner(DL),
+            big_square.get_corner(DL),
             color = BLACK,
             fill_color = GREEN,
             fill_opacity = opacity,
@@ -157,13 +157,13 @@ class ASquaredMinusBSquared(Scene):
             height = a - b,
             fill_color = GREEN,
             fill_opacity = opacity,
-        ).move_to(big_square.get_corner(UP + LEFT) + (a - b)/2*DOWN + a/2*RIGHT)
+        ).move_to(big_square.get_corner(UL), UL)
         rect2 = Rectangle(
             width = a - b,
             height = b,
             fill_color = GREEN,
             fill_opacity = opacity,
-        ).move_to(big_square.get_corner(DOWN + LEFT) + (a - b)/2*RIGHT + b/2*UP)
+        ).move_to(big_square.get_corner(DL), DL)
         self.play(
             FadeIn(VGroup(rect, rect2)),
             FadeOut(shape),
@@ -172,14 +172,14 @@ class ASquaredMinusBSquared(Scene):
 
         # Reorganise pieces
         self.play(
-            ApplyMethod(VGroup(rect2, b_label).shift, b*(RIGHT + UP)),
+            ApplyMethod(VGroup(rect2, b_label).shift, b*UR),
             FadeOut(b_label),
         )
         aplusb = rect.length(DOWN, LEFT, 'a + b', a + b)
         b_label = rect.length(UP, RIGHT, 'b', -b)
         self.play(
             ApplyMethod(aminusb.shift, b*RIGHT),
-            Rotate(rect2, -PI/2, about_point=rect2.get_corner(DOWN + RIGHT)),
+            Rotate(rect2, -PI/2, about_point=rect2.get_corner(DR)),
             FadeIn(aplusb),
             FadeIn(b_label)
         )
