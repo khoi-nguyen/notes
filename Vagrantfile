@@ -68,6 +68,8 @@ Vagrant.configure("2") do |config|
     pacman --noconfirm -Syyu
     pacman --needed --noconfirm -S docker docker-compose
     usermod -aG docker vagrant
+    if ! grep -qF "alias make" /home/vagrant/.bashrc;
+    then echo "alias make='docker-compose run make'" >> /home/vagrant/.bashrc; fi
     systemctl enable docker && systemctl start docker
   SHELL
 
