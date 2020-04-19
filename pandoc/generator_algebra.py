@@ -175,4 +175,8 @@ def generate_stf(level):
         number_1 = randint(101, 9999)
         x = number_1/(100 if number_1 < 1000 else 1000)
         power = randint(-7, 7)
-    return ('Convert to standard form',) + stf(str(round(x*10**power, 4)))
+    return ('Convert to standard form',) + stf(x*10**power)
+
+def generate_stf2dec(level):
+    """Standard form to ordinary"""
+    return ('Convert to an ordinary number',) + generate_stf(level)[2:0:-1]
