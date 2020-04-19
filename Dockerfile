@@ -1,13 +1,17 @@
-FROM python:3.8.2-alpine3.11
+FROM python:3.8.2-slim-buster
 
-ENV PATH /usr/local/texlive/2020/bin/x86_64-linuxmusl:$PATH
+ENV PATH /usr/local/texlive/2020/bin/x86_64-linux:$PATH
 
-RUN wget -O - https://github.com/jgm/pandoc/releases/download/2.9.2.1/pandoc-2.9.2.1-linux-amd64.tar.gz| \
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+      npm \
+      perl \
+      rsync \
+      wget \
+ && wget -O - https://github.com/jgm/pandoc/releases/download/2.9.2.1/pandoc-2.9.2.1-linux-amd64.tar.gz| \
     tar -xz -C /usr/local/ --strip-components=1 \
- && rm -rf /usr/local/share/man/*
-
-RUN apk add --no-cache perl wget xz \
- && mkdir install-tl \
+ && rm -rf /usr/local/share/man/* \
+ &&  mkdir install-tl \
  && wget -O - http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | \
     tar -xz -C install-tl --strip-components=1 \
  && printf '%s\n' \
@@ -23,14 +27,12 @@ RUN apk add --no-cache perl wget xz \
       collection-fontsrecommended \
       fira \
       fontawesome \
-      latexmk \
  && rm -rf install-tl \
- && apk del --purge wget xz
-
-RUN apk --no-cache add make npm rsync
+ && apt-get -y remove wget perl \
+ && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt ./
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 WORKDIR /teaching
 
