@@ -8,7 +8,7 @@ ANSWERS := $(WORKSHEET_MARKDOWN:.md=.answers.pdf)
 DEPENDENCIES := Makefile $(shell find pandoc/*)
 
 # Commands
-LATEX := latexmk -silent -pdf -cd -f
+LATEX := pdflatex -interaction=batchmode
 PANDOC := pandoc -s --pdf-engine=lualatex\
 	--filter ./pandoc/pythontex.py\
 	--filter ./pandoc/environments.py\
@@ -60,7 +60,7 @@ clean:
 
 %.pdf: %.tex
 	@echo Building $@ with LaTeX...
-	@$(LATEX) $<
+	cd $(@D); $(LATEX) $(<F)
 
 node_modules: package-lock.json package.json
 	@npm install
