@@ -4,6 +4,7 @@ ENV PATH /usr/local/texlive/2020/bin/x86_64-linux:$PATH
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
+      make \
       npm \
       perl \
       rsync \
