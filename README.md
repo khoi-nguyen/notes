@@ -6,6 +6,8 @@
 
 ## Setting up
 
+### OS/X and Windows
+
 - Install [Vagrant](https://vagrantup.com)
 - Install [Virtualbox](https://www.virtualbox.org/)
 - Install [Atom](https://atom.io/) with the following extensions
@@ -21,9 +23,11 @@ This could take a while depending on your internet connection.
 Open a `.md` file to edit, press `F7` and select current.
 Subsequent builds can be triggered by pressing `F9`.
 
-### For advanced users who don't want to use Atom
+### Linux
 
-Run `$ docker run -v $(pwd):/teaching bknguyen/teaching all` from the project's directory to build everything.
+- Install `docker` and `docker-compose`
+- Clone the directory
+- Run `docker-compose run make`
 
 ## Additional steps if you want to contribute
 
