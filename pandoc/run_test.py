@@ -15,10 +15,11 @@ for path in glob('./tests/*.yaml'):
             result = eval(test['cmd'])
             if isinstance(result, tuple):
                 result = list(result)
-            if result == test['out']:
-                print('Passed test:', test['name'])
-            else:
+            if result != test['out']:
                 print('Failed test:', test['name'])
-                print('Output:', result)
-                print('Expected result:', test['out'])
+                expected, output = str(test['out']), str(result)
+                print('Expected:', expected)
+                print('Output  :', output)
+                pos = max([i for i in range(0, min(len(expected), len(output))) if expected[:i] == output[0:i]])
+                print('         ' + ' ' * pos, '^')
                 sys.exit(1)
