@@ -125,3 +125,22 @@ stfdiv = lambda *terms, **options: _mult(' \\div ', ')/(', terms, options, _stf,
 stffrac = lambda *terms, **options: _mult('}{', ')/(', terms, options, _stf)
 stfadd = lambda *terms, **options: _mult(' + ', ')+(', terms, options, _stf)
 stfsub = lambda *terms, **options: _mult(' - ', ')-(', terms, options, _stf)
+
+def circle_equation(info, lhs, rhs = 0):
+    if isinstance(lhs, str) and '=' in lhs:
+        lhs, rhs = lhs.split('=')
+    eq = _s(lhs) - _s(rhs)
+    exercise = f'{latex(lhs)} = {latex(rhs)}'
+
+    # alpha [ (x - v)^2 + (y - w)^2 - r^2 ] = 0
+    x, y = s.symbols('x y')
+    alpha = eq.coeff(x, 2)
+    v = - eq.coeff(x, 1) / (2 * alpha)
+    w = - eq.coeff(y, 1) / (2 * alpha)
+    r = s.sqrt(v**2 + w**2 - eq.subs([(x, 0), (y, 0)])/alpha)
+
+    if info == 'radius':
+        solution = latex(r)
+    else:
+        solution = f'\\br{{{latex(v)}, {latex(w)}}}'
+    return (exercise, solution)
