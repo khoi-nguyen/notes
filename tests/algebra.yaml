@@ -133,6 +133,11 @@
   out:
     - 'x^{2} + y^{2} - 16 = 9'
     - '5'
+- name: Radius of a circle with factorised lhs
+  cmd: circle_equation('radius', '(x - 3)^2 + (y + 5)^2 = 16')
+  out:
+    - '\left(x - 3\right)^{2} + \left(y + 5\right)^{2} = 16'
+    - '4'
 - name: Radius of a circle without rhs
   cmd: circle_equation('radius', s.expand('3*((x - 2)**2 + (y + 1)**2 - 4)'))
   out:
@@ -143,6 +148,11 @@
   out:
     - 'x^{2} - 6 x + y^{2} - 2 y - 6 = 0'
     - '\br{3, 1}'
+- name: Center of a circle with factorised lhs
+  cmd: circle_equation('center', '(x - 3)^2 + (y + 5)^2 = 16')
+  out:
+    - '\left(x - 3\right)^{2} + \left(y + 5\right)^{2} = 16'
+    - '\br{3, -5}'
 - name: Center of a circle without rhs
   cmd: circle_equation('center', s.expand('3*((x - 2)**2 + (y + 1)**2 - 4)'))
   out:

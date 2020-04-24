@@ -129,7 +129,7 @@ stfsub = lambda *terms, **options: _mult(' - ', ')-(', terms, options, _stf)
 def circle_equation(info, lhs, rhs = 0):
     if isinstance(lhs, str) and '=' in lhs:
         lhs, rhs = lhs.split('=')
-    eq = _s(lhs) - _s(rhs)
+    eq = s.expand(_s(lhs) - _s(rhs))
     exercise = f'{latex(lhs)} = {latex(rhs)}'
 
     # alpha [ (x - v)^2 + (y - w)^2 - r^2 ] = 0
