@@ -106,7 +106,7 @@ export default {
             axios.get(url).then(function (response) {
                 var data = response.data;
                 data.forEach(function (element, index) {
-                    var options = {displayMode: true};
+                    var options = {displayMode: true, macros: {'\\br': '\\left(#1\\right)'}};
                     this[index][0] = element[0];
                     this[index][1] = katex.renderToString(element[1], options)
                     this[index][2] = katex.renderToString(element[2], options)
