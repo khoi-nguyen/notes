@@ -5,10 +5,10 @@ current="$(echo "${2:$n}")"
 
 if [[ "$current" = *.md ]]; then
     if [[ "$current" = *.worksheet.md ]]; then
-        docker-compose run make $(echo "$current" | sed 's/\.md$/.answers.pdf/')
+        make $(echo "$current" | sed 's/\.md$/.answers.pdf/')
     else
-        docker-compose run make $(echo "$current" | sed 's/\.md$/.handout.pdf/')
+        make $(echo "$current" | sed 's/\.md$/.handout.pdf/')
     fi
 else
-    docker-compose run make all
+    make all
 fi

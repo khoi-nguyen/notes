@@ -1,13 +1,9 @@
-cmd: vagrant ssh -- "./bin/build_current_file {PROJECT_PATH} {FILE_ACTIVE}"
+cmd: docker-compose run --entrypoint ./bin/build_current_file make {PROJECT_PATH} {FILE_ACTIVE}
 name: current
 targets:
   handouts:
-    cmd: vagrant ssh -- "./bin/vagrant_docker run make handouts"
+    cmd: docker-compose run make handouts
   all:
-    cmd: vagrant ssh -- "./bin/vagrant_docker run make all"
-  update_docker_images:
-    cmd: vagrant ssh -- "./bin/vagrant_docker pull"
-  restart_vm:
-    cmd: vagrant halt && vagrant up
-  reset_vagrant:
-    cmd: vagrant halt && vagrant destroy -f && vagrant up
+    cmd: docker-compose run make all
+  update_docker_image:
+    cmd: docker-compose pull
