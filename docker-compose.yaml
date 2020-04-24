@@ -4,7 +4,7 @@ services:
     image: bknguyen/teaching:latest
     user: ${ID}
     volumes:
-      - .:/teaching
+      - .:/teaching:delegated
   manim:
     image: eulertour/manim:latest
     entrypoint:
