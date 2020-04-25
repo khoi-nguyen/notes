@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
+cd /vagrant
+
 FILES="$(find * -regex '^[0-9].*\.md' | grep "$1" | tr '\n' ' ' | xargs)"
 
 if [[ "$FILES" = *.md ]]; then
     if [[ "$FILES" = *.worksheet.md ]]; then
-        make $(echo "$FILES" | sed 's/\.md$/.answers.pdf/g')
+        make -j 10 $(echo "$FILES" | sed 's/\.md$/.answers.pdf/g')
     else
-        make $(echo "$FILES" | sed 's/\.md$/.handout.pdf/g')
+        make -j 10 $(echo "$FILES" | sed 's/\.md$/.handout.pdf/g')
     fi
 else
     make all

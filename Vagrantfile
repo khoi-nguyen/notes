@@ -44,7 +44,6 @@ Vagrant.configure("2") do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  config.vm.synced_folder "./", "/home/vagrant/teaching/"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -67,8 +66,9 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     pacman --noconfirm -Syyu
     pacman --needed --noconfirm -S grep findutils make pandoc python python-pip texlive-core texlive-fontsextra texlive-latexextra texlive-pictures npm
-    pip install -r /home/vagrant/teaching/requirements.txt
+    pip install -r /vagrant/requirements.txt
+    if ! grep -qF "cd /vagrant" /home/vagrant/.bashrc;
+    then echo "cd /vagrant" >> /home/vagrant/.bashrc ; fi
+    chown vagrant. /home/vagrant/.bashrc
   SHELL
-
-  config.ssh.extra_args = ["-t", "cd /home/vagrant/teaching; bash --login"]
 end

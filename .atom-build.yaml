@@ -1,12 +1,12 @@
-cmd: vagrant ssh -- "./bin/build_current_file {FILE_ACTIVE_NAME}"
+cmd: vagrant ssh -c "cd /vagrant; ./bin/build_current_file {FILE_ACTIVE_NAME}"
 name: current
 targets:
   handouts:
-    cmd: vagrant ssh -- "make handouts"
+    cmd: vagrant ssh -c "cd /vagrant; make -j 10 handouts"
   all:
-    cmd: vagrant ssh -- "make all"
+    cmd: vagrant ssh -c "cd /vagrant; make -j 10 all"
   clean:
-    cmd: vagrant ssh -- "make clean"
+    cmd: vagrant ssh -c "cd /vagrant; make -j 10 clean"
   start_vm:
     cmd: vagrant up
   stop_vm:
