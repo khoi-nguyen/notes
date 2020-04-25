@@ -174,9 +174,9 @@ def generate_stf(level):
         ranges = {4: (1, 5), 5: (-5, -1), 6: (-5, 5)}
         power = randint(*ranges[level])
     else:
-        number_1 = randint(101, 9999)
-        x = number_1/(100 if number_1 < 1000 else 1000)
-        power = randint(-7, 7)
+        number = randint(101, 9999)
+        x = number / 10**(len(str(number)) - 1)
+        power = randint(-4, 7)
     return ('Convert to standard form',) + stf(x*10**power)
 
 def generate_stf2dec(level):
