@@ -133,3 +133,13 @@ def stationary_points(expr):
     exercise = s.latex(f)
     solution = s.latex(st_pts)
     return (exercise, solution)
+
+def minimum(expr, a=-s.oo, b=s.oo):
+    f = s.sympify(expr)
+    x = s.symbols('x')
+    I = s.Interval(a, b)
+    y_min = s.minimum(f, x, I)
+    x_min = s.solve(f - y_min, x)
+    exercise = s.latex(f)
+    solution = ', '.join([s.latex(i) for i in x_min])
+    return (exercise, solution)
