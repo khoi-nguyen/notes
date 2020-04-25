@@ -165,6 +165,20 @@ def generate_quadratic_equation(level):
 
 def generate_stf(level):
     """Standard form"""
-    x = randint(1, 99999)
-    power = -len(str(x)) + randint(-2, 7)
-    return ('Convert to standard form',) + stf(round(x*10**power, 4))
+    if level <= 3:
+        x = randint(1, 9)
+        ranges = {1: (1, 3), 2: (-3, -1), 3: (-3, 3)}
+        power = randint(*ranges[level])
+    elif level <= 6:
+        x = randint(11, 99)/10
+        ranges = {4: (1, 5), 5: (-5, -1), 6: (-5, 5)}
+        power = randint(*ranges[level])
+    else:
+        number = randint(101, 9999)
+        x = number / 10**(len(str(number)) - 1)
+        power = randint(-4, 7)
+    return ('Convert to standard form',) + stf(x*10**power)
+
+def generate_stf2dec(level):
+    """Standard form to ordinary"""
+    return ('Convert to an ordinary number',) + generate_stf(level)[2:0:-1]

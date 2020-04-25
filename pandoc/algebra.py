@@ -106,8 +106,9 @@ def rectfrac(num, den, num2 = 1, den2 = 1, side = 4):
     return '\n'.join(lines)
 
 def stf(number):
-    exercise = str(number)
-    number = s.sympify(number)
+    exercise = re.sub(r'([1-9])\.?0*\s*$', r'\1', f'{s.N(number):.15f}')
+    exercise = re.sub(r'\.0*$', '', exercise)
+    number = s.sympify(str(number))
     sign = ''
     if number < 0:
         sign = '-'

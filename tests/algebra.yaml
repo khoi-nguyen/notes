@@ -88,17 +88,32 @@
     - '0.00312'
     - '3.12 \times 10^{-3}'
 - name: Standard form (one significant figure)
-  cmd: stf('0.00002')
+  cmd: stf(0.00002)
   out:
     - '0.00002'
     - '2 \times 10^{-5}'
 - name: Standard form (negative number)
-  cmd: stf('-0.00352')
+  cmd: stf(-0.00352)
   out:
     - '-0.00352'
     - '-3.52 \times 10^{-3}'
+- name: Standard form with standard form notation
+  cmd: stf(54000)
+  out:
+    - '54000'
+    - '5.4 \times 10^{4}'
+- name: Standard form with standard form notation
+  cmd: stf(1.47*10**-7)
+  out:
+    - '0.000000147'
+    - '1.47 \times 10^{-7}'
+- name: Standard form with Sympy expression
+  cmd: stf('1.47*10^-7')
+  out:
+    - '0.000000147'
+    - '1.47 \times 10^{-7}'
 - name: Standard form to decimal
-  cmd: stf2dec('-0.00352')
+  cmd: stf2dec(-0.00352)
   out:
     - '-3.52 \times 10^{-3}'
     - '-0.00352'
