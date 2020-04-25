@@ -23,7 +23,6 @@ Vagrant.configure("2") do |config|
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # NOTE: This will enable public access to the opened port
-  config.vm.network "private_network", type: "dhcp"
   config.vm.network "forwarded_port", guest: 1234, host: 1234
   config.vm.network "forwarded_port", guest: 5000, host: 5000
 
@@ -47,10 +46,11 @@ Vagrant.configure("2") do |config|
   # argument is a set of non-required options.
   if Vagrant::Util::Platform.windows? then
     unless Vagrant.has_plugin?("vagrant-winnfsd")
-      raise  Vagrant::Errors::VagrantError.new, "In Atom, press F7 > nfs_for_windows and start again"
+      raise  Vagrant::Errors::VagrantError.new, "In Atom, F7 > nfs_for_windows"
     end
+    config.vm.network "private_network", type: "dhcp"
+    config.vm.synced_folder './', "/vagrant", type:"nfs"
   end
-  config.vm.synced_folder './', "/vagrant", type:"nfs"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
