@@ -18,11 +18,14 @@
     - language-pfm (by leipert)
 - Clone this repository in Atom (`Ctrl+Shift+8`, `Clone an existing Github repository`, Clone from `https://github.com/khoi-nguyen/teaching.git`)
 
-Press `F7` and select `init`.
+Press `F7` and select `start_vm`.
 This could take a while depending on your internet connection.
 
-Open a `.md` file to edit, press `F7` and select current.
-Subsequent builds can be triggered by pressing `F9`.
+Open a `.md` file to edit (e.g. `12/differentiation.md`),
+press `F7` and select `current`.
+After the build, you can open the generated PDF (e.g. `12/differentiation.handout.pdf`).
+Subsequent builds can be triggered by pressing `F9`,
+which repeats the last build (`F7`).
 
 ### Linux
 
