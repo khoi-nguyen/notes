@@ -15,3 +15,5 @@ targets:
     cmd: vagrant provision
   reset_vm:
     cmd: vagrant halt -f && vagrant provision && vagrant up
+  nfs_for_windows:
+    cmd: vagrant plugin install vagrant-winnfsd && vagrant up
