@@ -8,6 +8,7 @@
 
 ### OS/X and Windows
 
+- **Windows users**: ensure Hyper-V is [disabled](https://www.vagrantup.com/docs/installation/#windows-virtualbox-and-hyper-v)
 - Install [Vagrant](https://vagrantup.com)
 - Install [Virtualbox](https://www.virtualbox.org/)
 - Install [Atom](https://atom.io/) with the following extensions
