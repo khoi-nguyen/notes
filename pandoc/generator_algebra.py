@@ -167,10 +167,12 @@ def generate_stf(level):
     """Standard form"""
     if level <= 3:
         x = randint(1, 9)
-        power = randint(1 if level == 1 else -3 , -1 if level == 2 else 3)
+        ranges = {1: (1, 3), 2: (-3, -1), 3: (-3, 3)}
+        power = randint(*ranges[level])
     elif level <= 6:
         x = randint(11, 99)/10
-        power = randint(1 if level == 4 else -5, -1 if level == 5 else 5)
+        ranges = {4: (1, 5), 5: (-5, -1), 6: (-5, 5)}
+        power = randint(*ranges[level])
     else:
         number_1 = randint(101, 9999)
         x = number_1/(100 if number_1 < 1000 else 1000)
