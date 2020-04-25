@@ -6,8 +6,6 @@
 
 ## Setting up
 
-### OS/X and Windows
-
 - Install [Vagrant](https://vagrantup.com)
 - Install [Virtualbox](https://www.virtualbox.org/)
 - Install [Atom](https://atom.io/) with the following extensions
@@ -18,7 +16,7 @@
 - Clone this repository in Atom (`Ctrl+Shift+8`, `Clone an existing Github repository`, Clone from `https://github.com/khoi-nguyen/teaching.git`)
 
 For **Windows**, press `F7` and select `nfs_for_windows`.
-For **MacOS**, you can just press `F7` and select `start_vm`.
+For **MacOS/Linux**, you can just press `F7` and select `start_vm`.
 This could take a while depending on your internet connection.
 
 Open a `.md` file to edit (e.g. `12/differentiation.md`),
@@ -26,12 +24,6 @@ press `F7` and select `current`.
 After the build, you can open the generated PDF (e.g. `12/differentiation.handout.pdf`).
 Subsequent builds can be triggered by pressing `F9`,
 which repeats the last build (`F7`).
-
-### Linux
-
-- Install `docker` and `docker-compose`
-- Clone the directory
-- Run `docker-compose run make`
 
 ## Additional steps if you want to contribute
 
