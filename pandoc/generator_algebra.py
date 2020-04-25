@@ -3,6 +3,24 @@ from random import randint, choice
 
 import sympy as s
 
+def generate_circle_equation(level):
+    """Radius/center from circle equation"""
+    info = 'center' if randint(0, 1) else 'radius'
+    lower_bound = -9 if level >= 3 else 0
+    m = 1 if level <= 8 else randint(1, 2)
+    a = randint(m*lower_bound, m*9)
+    b = randint(m*lower_bound, m*9)
+    x, y = s.symbols('x y')
+    lhs = (m*x - a)**2 + (m*y - b)**2
+    rhs = m**2*randint(1, 9)**2
+    if level >= 5:
+        lhs = s.expand(lhs)
+    if level >= 6:
+        offset = randint(-25, 25)
+        lhs += offset
+        rhs += offset
+    return (f'Find the {info} of the circle whose equation is',) + circle_equation(info, lhs, rhs)
+
 def generate_complete_square(level):
     """Completing the square"""
     x = s.symbols('x')
