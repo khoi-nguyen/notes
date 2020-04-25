@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from pandocfilters import toJSONFilter, attributes, Math, Span, RawInline, RawBlock, Str
 from algebra import *
 from analysis import *
