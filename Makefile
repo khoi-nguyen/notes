@@ -1,5 +1,5 @@
 # Files
-MARKDOWN := $(shell find * -name '*.md' | grep -v '^\(node\|www\|README\)' | grep -v 'worksheet.md$$')
+MARKDOWN := $(shell find * -regex '^[0-9].*\.md' | grep -v 'worksheet.md$$')
 WORKSHEET_MARKDOWN := $(shell find * -name '*.worksheet.md')
 SLIDES := $(MARKDOWN:.md=.pdf)
 HANDOUTS := $(MARKDOWN:.md=.handout.pdf)
