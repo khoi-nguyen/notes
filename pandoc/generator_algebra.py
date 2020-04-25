@@ -1,4 +1,5 @@
 from .algebra import *
+from .generator_helpers import *
 from random import randint, choice
 
 import sympy as s
@@ -165,18 +166,9 @@ def generate_quadratic_equation(level):
 
 def generate_stf(level):
     """Standard form"""
-    if level <= 3:
-        x = randint(1, 9)
-        ranges = {1: (1, 3), 2: (-3, -1), 3: (-3, 3)}
-        power = randint(*ranges[level])
-    elif level <= 6:
-        x = randint(11, 99)/10
-        ranges = {4: (1, 5), 5: (-5, -1), 6: (-5, 5)}
-        power = randint(*ranges[level])
-    else:
-        number = randint(101, 9999)
-        x = number / 10**(len(str(number)) - 1)
-        power = randint(-4, 7)
+    n = pick({1: (1, 9), 4: (11, 99), 7: (101, 9999)}, level)
+    x = n / 10**(len(str(n)) - 1)
+    power = pick({1: (1, 3), 3: (-3, -3), 5: (-5, 5), 7: (-5, 7)}, level)
     return ('Convert to standard form',) + stf(x*10**power)
 
 def generate_stf2dec(level):
