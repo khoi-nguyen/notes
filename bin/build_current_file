@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
-n="$(echo "$1" | wc -m)"
-current="$(echo "${2:$n}")"
+FILES="$(find * -regex '^[0-9].*\.md' | grep "$1" | tr '\n' ' ' | xargs)"
 
-if [[ "$current" = *.md ]]; then
-    if [[ "$current" = *.worksheet.md ]]; then
-        make $(echo "$current" | sed 's/\.md$/.answers.pdf/')
+if [[ "$FILES" = *.md ]]; then
+    if [[ "$FILES" = *.worksheet.md ]]; then
+        make $(echo "$FILES" | sed 's/\.md$/.answers.pdf/g')
     else
-        make $(echo "$current" | sed 's/\.md$/.handout.pdf/')
+        make $(echo "$FILES" | sed 's/\.md$/.handout.pdf/g')
     fi
 else
     make all

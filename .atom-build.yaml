@@ -1,4 +1,4 @@
-cmd: vagrant ssh -- "./bin/build_current_file {PROJECT_PATH} {FILE_ACTIVE}"
+cmd: vagrant ssh -- "./bin/build_current_file {FILE_ACTIVE_NAME}"
 name: current
 targets:
   handouts:
