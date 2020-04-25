@@ -5,7 +5,13 @@ targets:
     cmd: vagrant ssh -- "make handouts"
   all:
     cmd: vagrant ssh -- "make all"
-  init:
+  clean:
+    cmd: vagrant ssh -- "make clean"
+  start_vm:
     cmd: vagrant up
-  vagrant:
-    cmd: vagrant halt && vagrant provision && vagrant up
+  stop_vm:
+    cmd: vagrant halt -f
+  update_software_vm:
+    cmd: vagrant provision
+  reset_vm:
+    cmd: vagrant halt -f && vagrant provision && vagrant up
