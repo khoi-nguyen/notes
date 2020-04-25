@@ -2,9 +2,9 @@ cmd: vagrant ssh -- "./bin/build_current_file {PROJECT_PATH} {FILE_ACTIVE}"
 name: current
 targets:
   handouts:
-    cmd: vagrant ssh -- "docker-compose run make handouts"
+    cmd: vagrant ssh -- "make handouts"
   all:
-    cmd: vagrant ssh -- "docker-compose run make all"
+    cmd: vagrant ssh -- "make all"
   init:
     cmd: vagrant up
   vagrant:
