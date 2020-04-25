@@ -120,8 +120,16 @@ def diff(*args, **options):
 
 def tangent(expr, a):
     x, expr = s.symbols('x'), s.sympify(expr)
-    exercise = f"y = {latex(expr)} \\text{{ at }} x = {a}"
+    exercise = f"y = {s.latex(expr)} \\text{{ at }} x = {a}"
     gradient = s.Derivative(expr, x).doit().subs(x, a)
     solution = gradient*(x - a) + expr.subs(x, a)
-    solution = f"y = {latex(solution)}"
-    return(exercise, solution)
+    solution = f"y = {s.latex(solution)}"
+    return (exercise, solution)
+
+def stationary_points(expr):
+    f = s.sympify(expr)
+    x = s.symbols('x')
+    st_pts = s.stationary_points(f, x)
+    exercise = s.latex(f)
+    solution = s.latex(st_pts)
+    return (exercise, solution)
