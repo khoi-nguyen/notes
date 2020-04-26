@@ -46,10 +46,10 @@ Vagrant.configure("2") do |config|
   # argument is a set of non-required options.
   if Vagrant::Util::Platform.windows? then
     unless Vagrant.has_plugin?("vagrant-winnfsd")
-      raise  Vagrant::Errors::VagrantError.new, "In Atom, F7 > nfs_for_windows"
+      raise  Vagrant::Errors::VagrantError.new, "In Atom, F7 > nfs_for_windows and restart the VM"
     end
-    config.vm.network "private_network", type: "dhcp"
-    config.vm.synced_folder './', "/vagrant", type:"nfs"
+    config.vm.network "private_network", type: "192.168.50.10"
+    config.vm.synced_folder './', "/vagrant", type:"nfs", mount_options: ['rw', 'vers=3', 'tcp']
   end
 
   # Provider-specific configuration so you can fine-tune various
@@ -62,6 +62,7 @@ Vagrant.configure("2") do |config|
 
     # Customize the amount of memory on the VM:
     vb.memory = "1024"
+    v.cpus = 2
   end
   #
   # View the documentation for the provider you are using for more
