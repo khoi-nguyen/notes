@@ -16,7 +16,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: docker://bknguyen/teaching:latest
         with:
-          args: "handouts artifacts"
+          args: "handouts"
+      - run: mkdir -p artifacts
+      - run: rsync -am --include '*/' --include '*.pdf' --exclude '*' . artifacts
       - uses: actions/upload-artifact@master
         with:
           name: handouts
@@ -27,7 +29,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: docker://bknguyen/teaching:latest
         with:
-          args: "slides artifacts"
+          args: "slides"
+      - run: mkdir -p artifacts
+      - run: rsync -am --include '*/' --include '*.pdf' --exclude '*' . artifacts
       - uses: actions/upload-artifact@master
         with:
           name: slides
@@ -54,7 +58,7 @@ jobs:
       - uses: actions/download-artifact@master
         with:
           name: www
-          path: .
+          path: www
       - uses: actions/download-artifact@master
         with:
           name: handouts
