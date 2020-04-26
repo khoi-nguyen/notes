@@ -1,5 +1,8 @@
 from random import randint
 
-def pick(ranges, level):
+def pick(ranges, level, rand_int=True):
     key = max([n for n in ranges.keys() if n <= level])
-    return randint(*ranges[key])
+    if rand_int:
+        return randint(*ranges[key])
+    else:
+        return ranges[key]
