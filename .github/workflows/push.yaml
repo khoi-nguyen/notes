@@ -10,14 +10,40 @@ jobs:
       - uses: docker://bknguyen/teaching:latest
         with:
           args: "tests"
-  make_artifacts:
+  handouts:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
       - uses: docker://bknguyen/teaching:latest
         with:
-          args: "artifacts"
+          args: "handouts artifacts"
       - uses: actions/upload-artifact@master
         with:
           name: artifacts
           path: artifacts
+  slides:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker://bknguyen/teaching:latest
+        with:
+          args: "slides artifacts"
+      - uses: actions/upload-artifact@master
+        with:
+          name: slides
+          path: artifacts
+  www:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker://bknguyen/teaching:latest
+        with:
+          args: "www"
+      - uses: actions/download-artifact@master
+        with:
+          name: handouts
+          path: www
+      - uses: actions/download-artifact@master
+        with:
+          name: slides
+          path: www

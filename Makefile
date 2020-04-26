@@ -16,15 +16,17 @@ PANDOC := pandoc -s --pdf-engine=lualatex\
 BEAMER := $(PANDOC) -t beamer --template=./pandoc/beamer.tex
 WORKSHEET := $(PANDOC) -t latex --template=./pandoc/worksheet.tex
 
-.PHONY: tests handouts all deploy clean www artifacts
+.PHONY: tests handouts all deploy clean www artifacts slides
 .PRECIOUS: $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.handout.tex) $(WORKSHEETS:.pdf=.tex) $(ANSWERS:.pdf=.tex)
 
 handouts: $(HANDOUTS) $(ANSWERS)
 
+slides: $(SLIDES) $(WORKSHEETS)
+
 tests:
 	@python3 ./pandoc/run_test.py
 
-all: $(SLIDES) $(WORKSHEETS) handouts
+all: handouts slides
 
 frontend: node_modules
 	@npm run-script start
@@ -36,7 +38,7 @@ www: node_modules
 	@python3 ./bin/data.py
 	@npm run-script build
 
-artifacts: all
+artifacts:
 	@mkdir -p $@
 	@rsync -am --include '*/' --include '*.pdf' --exclude '*' . $@
 
