@@ -12,8 +12,8 @@ VIDEOS := $(MANIM:.py=)
 # Commands
 LATEX := pdflatex -interaction=batchmode
 PANDOC := pandoc -s --pdf-engine=lualatex --filter ./bin/filter
-BEAMER := $(PANDOC) -t beamer --template=./pandoc/beamer.tex
-WORKSHEET := $(PANDOC) -t latex --template=./pandoc/worksheet.tex
+BEAMER := $(PANDOC) -t beamer --template=./pandoc/templates/beamer.tex
+WORKSHEET := $(PANDOC) -t latex --template=./pandoc/templates/worksheet.tex
 
 .PHONY: tests handouts all deploy clean www artifacts slides videos
 .PRECIOUS: $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.handout.tex) $(WORKSHEETS:.pdf=.tex) $(ANSWERS:.pdf=.tex)
