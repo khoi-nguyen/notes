@@ -37,7 +37,8 @@ www: node_modules
 	@npm run-script build
 
 artifacts: all
-	@rsync -am --include '*/' --include '*.pdf' --exclude '*' . artifacts
+	@mkdir -p $@
+	@rsync -am --include '*/' --include '*.pdf' --exclude '*' . $@
 
 clean:
 	@echo Removing all temporary files
