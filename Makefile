@@ -29,7 +29,7 @@ frontend: node_modules
 	@npm run-script start
 
 backend:
-	@python3 app.py
+	@python3 -m generator.server
 
 www: node_modules
 	@python3 ./bin/data.py
