@@ -45,6 +45,10 @@ jobs:
           path: www
   gather:
     runs-on: ubuntu-18.04
+    needs:
+      - handouts
+      - slides
+      - node
     steps:
       - uses: actions/download-artifact@master
         with:
