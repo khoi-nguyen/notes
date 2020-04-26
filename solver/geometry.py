@@ -7,7 +7,9 @@ RAD = 180/PI
 def cosine_law(a, b, c, gamma='gamma', radians=False):
     """Apply the Law of Cosines to find an angle or a length
 
-    :param lengths: list containing the lengths of the triangle
+    :param a: first side
+    :param b: second side
+    :param c: third side
     :param gamma: angle contained between the first two sides
     :param radians: use radians if True, degrees otherwise
     """
