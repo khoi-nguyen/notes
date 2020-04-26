@@ -143,3 +143,5 @@ def minimum(expr, a=-s.oo, b=s.oo):
     exercise = s.latex(f)
     solution = ', '.join([s.latex(i) for i in x_min])
     return (exercise, solution)
+
+maximum = lambda e, a=-s.oo, b=s.oo: minimum(f'-({e})', a, b)

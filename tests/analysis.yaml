@@ -43,10 +43,14 @@
 - name: Stationary points
   cmd: stationary_points('x^2 - 6*x + 4')
   out: ['x^{2} - 6 x + 4', '\left\{3\right\}']
-#minimum
+# Minimum
 - name: Single minimum function
   cmd: minimum('x^2 + 4*x + 6')
   out: ['x^{2} + 4 x + 6', '-2']
 - name: Double minimum function
   cmd: minimum('(x-2)^2 * (x-3)^2')
   out: ['\left(x - 3\right)^{2} \left(x - 2\right)^{2}', '2, 3']
+# Maximum
+- name: Find function max
+  cmd: maximum('-(x - 2)^2 * (x + 3)^2')
+  out: ['\left(x - 2\right)^{2} \left(x + 3\right)^{2}', '-3, 2']
