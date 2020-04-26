@@ -1,4 +1,4 @@
-name: Create PDFS
+name: Building
 
 on: push
 
