@@ -9,10 +9,7 @@ DEPENDENCIES := Makefile $(shell find pandoc/*)
 
 # Commands
 LATEX := pdflatex -interaction=batchmode
-PANDOC := pandoc -s --pdf-engine=lualatex\
-	--filter ./pandoc/pythontex.py\
-	--filter ./pandoc/environments.py\
-	--filter ./pandoc/multicols.py
+PANDOC := pandoc -s --pdf-engine=lualatex --filter ./bin/filter
 BEAMER := $(PANDOC) -t beamer --template=./pandoc/beamer.tex
 WORKSHEET := $(PANDOC) -t latex --template=./pandoc/worksheet.tex
 

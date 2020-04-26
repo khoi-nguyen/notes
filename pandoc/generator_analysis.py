@@ -1,4 +1,4 @@
-from .analysis import *
+from solver.analysis import *
 from random import randint
 
 import sympy as s
