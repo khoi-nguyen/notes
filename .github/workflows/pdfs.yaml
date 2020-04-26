@@ -12,5 +12,5 @@ jobs:
           args: "deploy"
       - uses: actions/upload-artifact@master
         with:
-          name: www
-          path: www
+          name: artifacts
+          path: artifacts

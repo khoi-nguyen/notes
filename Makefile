@@ -16,13 +16,12 @@ PANDOC := pandoc -s --pdf-engine=lualatex\
 BEAMER := $(PANDOC) -t beamer --template=./pandoc/beamer.tex
 WORKSHEET := $(PANDOC) -t latex --template=./pandoc/worksheet.tex
 
-.PHONY: tests handouts all deploy clean init
+.PHONY: tests handouts all deploy clean www artifacts
 .PRECIOUS: $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.handout.tex) $(WORKSHEETS:.pdf=.tex) $(ANSWERS:.pdf=.tex)
 
 handouts: $(HANDOUTS) $(ANSWERS)
 
 tests:
-	@python3 ./bin/data.py
 	@python3 ./pandoc/run_test.py
 
 all: $(SLIDES) $(WORKSHEETS) handouts
@@ -33,10 +32,12 @@ frontend: node_modules
 backend:
 	@python3 app.py
 
-deploy: all
-	@npm install
+www: node_modules
+	@python3 ./bin/data.py
 	@npm run-script build
-	@rsync -am --include '*/' --include '*.pdf' --exclude '*' . www
+
+artifacts: all
+	@rsync -am --include '*/' --include '*.pdf' --exclude '*' . artifacts
 
 clean:
 	@echo Removing all temporary files
