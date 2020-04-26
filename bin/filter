@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 cat - \
-    | python3 -m pandoc.pythontex \
-    | python3 -m pandoc.environments \
-    | python3 -m pandoc.multicols \
-
+    | python3 -m pandoc.filters.pythontex \
+    | python3 -m pandoc.filters.environments \
+    | python3 -m pandoc.filters.multicols \

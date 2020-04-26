@@ -14,7 +14,7 @@ for path in sorted(Path('resources').rglob('*.md')):
         continue
     modified = path.stat().st_mtime
     path = str(path)
-    cmd = 'pandoc -s {} -t markdown --template=pandoc/meta.json'.format(path)
+    cmd = 'pandoc -s {} -t markdown --template=pandoc/templates/meta.json'.format(path)
     json_string = subprocess.check_output(cmd.split(' '))
     meta = json.loads(json_string)
     if meta.get('publish'):
