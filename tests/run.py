@@ -1,11 +1,11 @@
 import yaml
 import sys
 from glob import glob
-from algebra import *
-from analysis import *
-from stats import *
-from probability import *
-from pythontex import *
+from solver.algebra import *
+from solver.analysis import *
+from solver.stats import *
+from solver.probability import *
+from pandoc.pythontex import *
 
 for path in glob('./tests/*.yaml'):
     with open(path) as file:

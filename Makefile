@@ -21,7 +21,7 @@ handouts: $(HANDOUTS) $(ANSWERS)
 slides: $(SLIDES) $(WORKSHEETS)
 
 tests:
-	@python3 ./pandoc/run_test.py
+	@python3 -m tests.run
 
 all: handouts slides
 
