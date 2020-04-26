@@ -3,7 +3,14 @@ name: Create PDFS
 on: push
 
 jobs:
-  build:
+  tests:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker://bknguyen/teaching:latest
+        with:
+          args: "tests"
+  make_artifacts:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
