@@ -9,10 +9,7 @@ DEPENDENCIES := Makefile $(shell find pandoc/*)
 
 # Commands
 LATEX := pdflatex -interaction=batchmode
-PANDOC := pandoc -s --pdf-engine=lualatex\
-	--filter ./pandoc/pythontex.py\
-	--filter ./pandoc/environments.py\
-	--filter ./pandoc/multicols.py
+PANDOC := pandoc -s --pdf-engine=lualatex --filter ./bin/filter
 BEAMER := $(PANDOC) -t beamer --template=./pandoc/beamer.tex
 WORKSHEET := $(PANDOC) -t latex --template=./pandoc/worksheet.tex
 
@@ -24,7 +21,7 @@ handouts: $(HANDOUTS) $(ANSWERS)
 slides: $(SLIDES) $(WORKSHEETS)
 
 tests:
-	@python3 ./pandoc/run_test.py
+	@python3 -m tests.run
 
 all: handouts slides
 
@@ -32,7 +29,7 @@ frontend: node_modules
 	@npm run-script start
 
 backend:
-	@python3 app.py
+	@python3 -m generator.server
 
 www: node_modules
 	@python3 ./bin/data.py

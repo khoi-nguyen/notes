@@ -1,4 +1,4 @@
-from .algebra import *
+from solver.algebra import *
 from .generator_helpers import *
 from random import randint, choice
 

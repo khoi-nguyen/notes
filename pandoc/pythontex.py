@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
 from pandocfilters import toJSONFilter, attributes, Math, Span, RawInline, RawBlock, Str
-from algebra import *
-from analysis import *
-from stats import *
-from probability import *
-from tikz import *
+from solver.algebra import *
+from solver.analysis import *
+from solver.stats import *
+from solver.probability import *
+from .tikz import *
 
 oo = s.oo
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from pandocfilters import toJSONFilter, Span, RawInline, RawBlock, Div
-from environment_list import environments
+from .environment_list import environments
 import re
 
 blatex = lambda x: RawBlock('latex', x)
