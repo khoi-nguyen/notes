@@ -1,0 +1,10 @@
+# Law of Cosines
+- name: Law of cosines to check right triangle has an angle of 90 degrees
+  cmd: answer(cosine_law(3, 4, 5))
+  out: ['', '\gamma = 90']
+- name: Law of cosines to find length
+  cmd: answer(cosine_law(8, 10, 'x', 60*DEG))
+  out: ['', 'x = 2 \sqrt{21}']
+- name: Law of cosines to find angle in radians
+  cmd: answer(cosine_law('sqrt(2)', 5, 'sqrt(17)', 'alpha', radians=True))
+  out: ['', '\alpha = \frac{\pi}{4}']
