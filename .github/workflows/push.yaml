@@ -50,6 +50,7 @@ jobs:
       - slides
       - node
     steps:
+      - run: mkdir -p www
       - uses: actions/download-artifact@master
         with:
           name: www
