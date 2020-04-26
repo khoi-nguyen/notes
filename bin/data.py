@@ -7,8 +7,7 @@ import json
 
 data = []
 
-files = [path for path in sorted(Path('.').rglob('*.md')) if str(path)[0].isdigit()]
-for path in files:
+for path in sorted(Path('resources').rglob('*.md')):
     if str(path).endswith('worksheet.md'):
         data[-1]['worksheet'] = str(path).replace('.md', '.pdf')
         data[-1]['answers'] = str(path).replace('.md', '.answers.pdf')
@@ -21,7 +20,7 @@ for path in files:
     if meta.get('publish'):
         data.append({
             'path': path,
-            'year': path.split('/')[0],
+            'year': path.split('/')[1],
             'meta': meta,
             'pdf': path.replace('.md', '.pdf'),
             'handout': path.replace('.md', '.handout.pdf'),

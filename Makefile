@@ -1,5 +1,5 @@
 # Files
-MARKDOWN := $(shell find * -regex '^[0-9].*\.md' | grep -v 'worksheet.md$$')
+MARKDOWN := $(shell find * -regex '^resources.*\.md' | grep -v 'worksheet.md$$')
 WORKSHEET_MARKDOWN := $(shell find * -name '*.worksheet.md')
 SLIDES := $(MARKDOWN:.md=.pdf)
 HANDOUTS := $(MARKDOWN:.md=.handout.pdf)
@@ -40,7 +40,7 @@ deploy: all
 
 clean:
 	@echo Removing all temporary files
-	@find [0-9]* -type f | grep -v '\(md\)$$' | xargs rm
+	@find resources -type f | grep -v 'md$$' | xargs rm
 
 %.worksheet.tex: %.worksheet.md $(DEPENDENCIES)
 	@echo Generating worksheet for $@...
