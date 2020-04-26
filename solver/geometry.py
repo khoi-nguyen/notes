@@ -25,7 +25,7 @@ def cosine_law(a, b, c, gamma='gamma', radians=False):
     else:
         symbol = lengths[is_symbol.index(True)]
 
-    dom = s.Interval(*((0, PI/2) if solve_for_angle else (0, s.oo)))
+    dom = s.Interval(*(0, PI/2 if solve_for_angle else s.oo))
     sols = s.solveset(a**2 + b**2 - 2*a*b*s.cos(gamma) - c**2, symbol, domain=dom)
     sol = sols.args[0] * (1 if radians or not solve_for_angle else RAD)
 
