@@ -6,6 +6,8 @@ HANDOUTS := $(MARKDOWN:.md=.handout.pdf)
 WORKSHEETS := $(WORKSHEET_MARKDOWN:.md=.pdf)
 ANSWERS := $(WORKSHEET_MARKDOWN:.md=.answers.pdf)
 DEPENDENCIES := Makefile $(shell find pandoc/*)
+MANIM := $(shell ls videos/*.py | grep -v 'base\|manim')
+VIDEOS := $(MANIM:.py=)
 
 # Commands
 LATEX := pdflatex -interaction=batchmode
@@ -13,7 +15,7 @@ PANDOC := pandoc -s --pdf-engine=lualatex --filter ./bin/filter
 BEAMER := $(PANDOC) -t beamer --template=./pandoc/beamer.tex
 WORKSHEET := $(PANDOC) -t latex --template=./pandoc/worksheet.tex
 
-.PHONY: tests handouts all deploy clean www artifacts slides
+.PHONY: tests handouts all deploy clean www artifacts slides videos
 .PRECIOUS: $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.handout.tex) $(WORKSHEETS:.pdf=.tex) $(ANSWERS:.pdf=.tex)
 
 handouts: $(HANDOUTS) $(ANSWERS)
@@ -41,7 +43,7 @@ artifacts:
 
 clean:
 	@echo Removing all temporary files
-	@find resources -type f | grep -v 'md$$' | xargs rm
+	@find resources -type f | grep -v 'md$$' | xargs rm -f
 
 %.worksheet.tex: %.worksheet.md $(DEPENDENCIES)
 	@echo Generating worksheet for $@...
@@ -65,3 +67,10 @@ clean:
 
 node_modules: package-lock.json package.json
 	@npm install
+
+videos: $(VIDEOS)
+
+%: %.py
+	@grep ^class $< | sed 's/(/ /' | awk '{ print $$2 }' \
+		| xargs -I {} python3 -m videos.manim $< {}
+	@touch $@
