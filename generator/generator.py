@@ -1,2 +1,2 @@
-from .generator_algebra import *
-from .generator_analysis import *
+from .algebra import *
+from .analysis import *

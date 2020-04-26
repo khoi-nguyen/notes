@@ -1,5 +1,5 @@
 from solver.algebra import *
-from .generator_helpers import *
+from .helpers import *
 from random import randint, choice
 
 import sympy as s
