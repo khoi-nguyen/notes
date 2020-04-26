@@ -4,4 +4,3 @@ cat - \
     | python3 -m pandoc.pythontex \
     | python3 -m pandoc.environments \
     | python3 -m pandoc.multicols \
-
