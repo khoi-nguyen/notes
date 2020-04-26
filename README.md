@@ -15,7 +15,8 @@
     - language-pfm (by leipert)
 - Clone this repository in Atom (`Ctrl+Shift+8`, `Clone an existing Github repository`, Clone from `https://github.com/khoi-nguyen/teaching.git`)
 
-For **Windows**, press `F7` and select `nfs_for_windows`.
+For **Windows**, press `F7` and select `nfs_for_windows`,
+then press `F7` and select `start_vm`.
 For **MacOS/Linux**, you can just press `F7` and select `start_vm`.
 This could take a while depending on your internet connection.
 
