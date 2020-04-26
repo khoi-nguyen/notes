@@ -1,5 +1,5 @@
 from manimlib.imports import *
-from base import *
+from videos.base import *
 
 class MultiplyIndices(Scene):
     def construct(self):
