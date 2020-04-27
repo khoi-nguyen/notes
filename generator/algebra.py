@@ -7,22 +7,19 @@ import sympy as s
 def generate_circle_equation(level):
     """Radius/center from circle equation"""
     # Generating a random equation in canonical form
-    (a, b, r) = pick({
-        1: ([0, 9], [0, 9], [1, 9]),
-        3: ([-9, 9], [-9, 9], [1, 9]),
-        8: ([-9, 9, 0.5], [-9, 9, 0.5], [1, 9, 0.5]),
+    (a, b, r, offset) = pick({
+        1: ([0, 9], [0, 9], [1, 9], [0, 0]),
+        3: ([-9, 9], [-9, 9], [1, 9], [0, 0]),
+        5: ([-9, 9], [-9, 9], [1, 9], [-25, 25]),
+        8: ([-9, 9, 0.5], [-9, 9, 0.5], [1, 9, 0.5], [-25, 25, 0.5]),
     }, level)
     x, y = s.symbols('x y')
-    lhs = s.nsimplify((x - a)**2 + (y - b)**2)
-    rhs = s.nsimplify(r**2)
+    lhs = s.nsimplify((x - a)**2 + (y - b)**2 + offset)
+    rhs = s.nsimplify(r**2 + offset)
 
     # Minor transformations for higher levels
     if level >= 5:
         lhs = s.expand(lhs)
-    if level >= 6:
-        offset = randint(-25, 25)
-        lhs += offset
-        rhs += offset
 
     info = 'center' if randint(0, 1) else 'radius'
     return (f'Find the {info} of the circle whose equation is',) + circle_equation(info, lhs, rhs)
@@ -148,11 +145,9 @@ def generate_quadratic_equation(level):
 
     # Add surds for higher levels
     if level >= 8:
-        if not randint(0, 3):
-            u = s.sign(u) * s.sqrt(s.Abs(u))
-        if not randint(0, 3):
-            v = s.sign(v) * s.sqrt(s.Abs(v))
-
+        u = u if randint(0, 3) else s.sign(u) * s.sqrt(s.Abs(u))
+        v = v if randint(0, 3) else s.sign(v) * s.sqrt(s.Abs(v))
+ 
     x = s.symbols('x')
     lhs, rhs = s.expand(a * (x - u) * (x - v)) + d*x + e, d*x + e
     return ('Solve',) + equation(str(lhs), str(rhs))
