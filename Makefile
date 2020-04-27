@@ -19,7 +19,7 @@ VIDEOS := $(MANIM:.py=)
 
 # Commands
 LATEX := pdflatex -interaction=batchmode
-PANDOC := pandoc -s --pdf-engine=lualatex --filter ./bin/filter
+PANDOC := pandoc -s --filter ./bin/filter
 BEAMER := $(PANDOC) -t beamer --template=./pandoc/templates/beamer.tex
 WORKSHEET := $(PANDOC) -t latex --template=./pandoc/templates/worksheet.tex
 
@@ -55,19 +55,19 @@ clean:
 	@echo Removing all temporary files
 	@find resources -type f | grep -v 'md$$' | xargs rm -f
 
-%.worksheet.tex: %.worksheet.md $(DEPENDENCIES)
+%.worksheet.tex: %.worksheet.md $(DEPENDENCIES) $(ENV)
 	@echo Generating worksheet for $@...
 	@$(WORKSHEET) -s $< -o $@
 
-%.worksheet.answers.tex: %.worksheet.md $(DEPENDENCIES)
+%.worksheet.answers.tex: %.worksheet.md $(DEPENDENCIES) $(ENV)
 	@echo Generating answer sheet for $@...
 	@$(WORKSHEET) -V answers=1 -s $< -o $@
 
-%.tex: %.md $(DEPENDENCIES)
+%.tex: %.md $(DEPENDENCIES) $(ENV)
 	@echo Generating $@...
 	@$(BEAMER) -s $< -o $@
 
-%.handout.tex: %.md $(DEPENDENCIES)
+%.handout.tex: %.md $(DEPENDENCIES) $(ENV)
 	@echo Building $@...
 	@$(BEAMER) -s $< -o $@ -V handout=true
 
