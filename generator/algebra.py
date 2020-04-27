@@ -24,23 +24,25 @@ def generate_circle_equation(level):
 
 def generate_complete_square(level):
     """Completing the square"""
+    a = pick({
+        1: [1, 1],
+        7: ([-3, 3], lambda x: x != 0),
+        8: ([-3, 3, 0.5], lambda x: x != 0),
+    }, level)
+    h = pick({
+        1: [0, 9],
+        6: [-9, 9],
+        8: [-9, 9, 0.5],
+    }, level)
+    k = pick({
+        1: [0, 0],
+        3: [0, 9],
+        5: [-9, 9],
+        8: [-9, 9, 0.5],
+    }, level)
+
     x = s.symbols('x')
-    a, d, k = 1, 1, 0
-    if level <= 2:
-        h = randint(0, 9)
-    elif level <= 4:
-        h = randint(0, 9)
-        k = randint(0, 9)
-    elif level <= 6:
-        h = randint(-9, 9)
-        k = randint(-9, 9)
-    else:
-        a = (-1)**randint(0, 1)*randint(1, 3*d)
-        h = randint(-9*d, 9*d)
-        k = randint(-9*d, 9*d)
-        if level >= 8:
-            d = randint(1, 2 if d < 9 else 3)
-    eq = s.expand((a*(x + h)**2 + k)/d)
+    eq = s.nsimplify(s.expand(a*(x + h)**2 + k))
     return ('Complete the square',) + complete_square(eq)
 
 def generate_equation(level):
