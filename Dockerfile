@@ -4,14 +4,10 @@ ENV PATH /usr/local/texlive/2020/bin/x86_64-linux:$PATH
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
-      ffmpeg \
-      gcc \
-      libcairo2-dev \
       make \
       npm \
       perl \
       rsync \
-      sox \
       wget \
  && wget -O - https://github.com/jgm/pandoc/releases/download/2.9.2.1/pandoc-2.9.2.1-linux-amd64.tar.gz| \
     tar -xz -C /usr/local/ --strip-components=1 \
@@ -37,7 +33,6 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt ./
-RUN apt-get update && apt-get install -y --no-install-recommends pkg-config libjpeg-dev libpango1.0-dev libgif-dev
 RUN pip3 install -r requirements.txt
 
 WORKDIR /teaching
