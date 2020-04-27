@@ -1,5 +1,15 @@
-from manimlib.imports import *
-from videos.base import *
+from manimlib.imports import (
+    ApplyMethod,
+    BLUE,
+    GREEN,
+    LEFT,
+    RED,
+    RIGHT,
+    Transform,
+    VGroup,
+    Write,
+)
+from videos.base import Scene, TexMobject
 
 
 class MultiplyIndices(Scene):

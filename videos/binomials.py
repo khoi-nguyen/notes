@@ -1,5 +1,30 @@
-from manimlib.imports import *
-from videos.base import *
+from manimlib.imports import (
+    ApplyMethod,
+    BOTTOM,
+    BLACK,
+    BLUE,
+    DL,
+    DR,
+    DOWN,
+    FadeIn,
+    FadeOut,
+    GRAY,
+    GREEN,
+    LEFT,
+    PI,
+    Polygon,
+    RED,
+    RIGHT,
+    Rotate,
+    Transform,
+    UL,
+    UP,
+    UR,
+    VGroup,
+    WHITE,
+    Write,
+)
+from videos.base import Rectangle, Scene, Square, TexMobject
 
 
 class APlusBSquared(Scene):
