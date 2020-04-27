@@ -1,6 +1,6 @@
 import re
 import sympy as s
-from math import log, floor
+from math import floor
 
 # Redefine some functions to automatically sympify
 _s = lambda x: s.sympify(x, evaluate=False) if isinstance(x, (str, int)) else x
@@ -48,7 +48,7 @@ def _mult(join_ex, join_sol, terms, options, cbk=latex, div=False):
     else:
         l_terms = [cbk(_s(str(t)).subs(substitutions)) for t in terms]
         # Bracket terms if necessary
-        if div == True and " " in l_terms[1]:
+        if div and " " in l_terms[1]:
             l_terms[1] = f"\\br{{{l_terms[1]}}}"
         exercise = join_ex.join(l_terms)
         if join_ex == "}{":
@@ -109,7 +109,7 @@ def showfrac(num, den, op=False, num2=1, den2=1):
                 (
                     num2,
                     den2,
-                    "color=darkred, pattern=north west lines, pattern color=darkred, thick",
+                    "color=darkred,pattern=north west lines,pattern color=darkred,thick",
                 )
             )
         if den != den2:
@@ -119,7 +119,8 @@ def showfrac(num, den, op=False, num2=1, den2=1):
         for i in range(0, n):
             angle = 90 + i * 360 / denominator
             lines.append(
-                f"\\draw[{option}] (0, 0) -- ({angle}:1cm) arc ({angle}:{angle + 360/denominator}:1cm) -- cycle;"
+                f"\\draw[{option}] (0, 0) -- ({angle}:1cm) arc"
+                + f"({angle}:{angle + 360/denominator}:1cm) -- cycle;"
             )
     lines.append(f"\\node at (0, 1.5) {{${node}$}};")
     lines.append("\\end{tikzpicture}")
@@ -134,7 +135,8 @@ def rectfrac(num, den, num2=1, den2=1, side=4):
             f"\\draw[fill=lightblue] (0, 0) rectangle ({num/den*side}, {side});"
         )
     lines.append(
-        f"\\draw[thick, color=darkblue, pattern=north west lines, pattern color=darkblue] (0, 0) rectangle ({num/den*side}, {num2/den2*side});"
+        "\\draw[thick,color=darkblue,pattern=north west lines,pattern color=darkblue]"
+        + f"(0, 0) rectangle ({num/den*side}, {num2/den2*side});"
     )
     for i in range(0, den):
         lines.append(f"\\draw ({i*side/den}, 0) -- ({i*side/den}, {side});")

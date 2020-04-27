@@ -109,7 +109,7 @@ environments = {
     },
     "Theorem": {
         "title": "Theorem",
-        "prefix": "\\faBook\ \\faStar",
+        "prefix": "\\faBook\\ \\faStar",
         "tcolor": "darkblue",
         "bgcolor": "lightblue",
     },

@@ -3,7 +3,7 @@ import manimlib.imports as m
 
 class Scene(m.Scene):
     CONFIG = {
-        "camera_config": {"background_color": m.WHITE,},
+        "camera_config": {"background_color": m.WHITE},
     }
 
 

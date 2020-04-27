@@ -161,7 +161,7 @@ def generate_quadratic_equation(level):
         level,
     )
     (d, e) = pick(
-        {1: ([0, 0], [-30, 30]), 3: ([0, 0], [0, 0]), 7: ([-9, 9], [-9, 9]),}, level
+        {1: ([0, 0], [-30, 30]), 3: ([0, 0], [0, 0]), 7: ([-9, 9], [-9, 9])}, level
     )
 
     # Add surds for higher levels

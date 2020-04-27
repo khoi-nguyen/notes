@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from pandocfilters import toJSONFilter, attributes, Math, Span, RawInline, RawBlock, Str
+from pandocfilters import toJSONFilter, Math, Span, RawInline, RawBlock
 from solver.algebra import *
 from solver.analysis import *
 from solver.stats import *

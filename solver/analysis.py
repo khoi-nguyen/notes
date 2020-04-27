@@ -75,19 +75,20 @@ def taylor(function, a, order):
     return poly
 
 
-taylor_poly = lambda f, a, n: s.latex(taylor(f, a, n))
+def taylor_poly(f, a, n):
+    return s.latex(taylor(f, a, n))
 
 
 def showtaylor(function, a, order, color="darkgreen", dom=False):
-    x, expr = s.symbols("x"), s.sympify(function)
     return plot(str(taylor(function, a, order)), color, dom)
 
 
 def showcoordinates(function, a, x_text, y_text):
     y = s.sympify(function).subs(s.symbols("x"), a)
     return f"""
-    \draw[dashed] ({a}, 0) node[below] {{\\footnotesize ${x_text}$}} -- ({a}, {y}) -- (0, {y}) node[{'left' if a > 0 else 'right'}] {{\\footnotesize ${y_text}$}};
-    \draw[fill=black] ({a}, {y}) circle (0.1);
+    \\draw[dashed] ({a}, 0) node[below] {{\\footnotesize ${x_text}$}} -- ({a}, {y})
+    -- (0, {y}) node[{'left' if a > 0 else 'right'}] {{\\footnotesize ${y_text}$}};
+    \\draw[fill=black] ({a}, {y}) circle (0.1);
     """.replace(
         "\n", ""
     )
@@ -101,10 +102,11 @@ def tikz_plot(contents, opt, fmt):
 
     lines = [
         "\\onslide<+->{" if fmt == "beamer" else "{",
-        f"\\begin{{plot}}{{{options['size']}}}{{{options['l']}}}{{{options['b']}}}{{{options['r']}}}{{{options['t']}}}",
+        f"\\begin{{plot}}{{{options['size']}}}"
+        + f"{{{options['l']}}}{{{options['b']}}}{{{options['r']}}}{{{options['t']}}}",
     ]
     for l in contents.split("\n"):
-        if re.match("^[a-zA-z_,\s]*=", l):
+        if re.match(r"^[a-zA-z_,\s]*=", l):
             exec(l)
         else:
             line = eval(l)
@@ -117,9 +119,9 @@ def tikz_plot(contents, opt, fmt):
 
 def integrate(expr, a=False, b=False):
     if a or b:
-        expr = s.Integral(sympify(expr), (symbols("x"), a, b))
+        expr = s.Integral(s.sympify(expr), (s.symbols("x"), a, b))
     else:
-        expr = s.Integral(sympify(expr))
+        expr = s.Integral(s.sympify(expr))
     exercise = s.latex(expr)
     solution = s.latex(expr.doit())
     return (exercise, solution)
@@ -159,12 +161,13 @@ def stationary_points(expr):
 def minimum(expr, a=-s.oo, b=s.oo):
     f = s.sympify(expr)
     x = s.symbols("x")
-    I = s.Interval(a, b)
-    y_min = s.minimum(f, x, I)
+    Interval = s.Interval(a, b)
+    y_min = s.minimum(f, x, Interval)
     x_min = s.solve(f - y_min, x)
     exercise = s.latex(f)
     solution = ", ".join([s.latex(i) for i in x_min])
     return (exercise, solution)
 
 
-maximum = lambda e, a=-s.oo, b=s.oo: minimum(f"-({e})", a, b)
+def maximum(expr, a=-s.oo, b=s.oo):
+    minimum(f"-({expr})", a, b)

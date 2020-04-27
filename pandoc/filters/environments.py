@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 
-from pandocfilters import toJSONFilter, Span, RawInline, RawBlock, Div
+from pandocfilters import toJSONFilter, RawInline, RawBlock, Div
 from .environment_list import environments
-import re
 
 blatex = lambda x: RawBlock("latex", x)
 ilatex = lambda x: RawInline("latex", x)
@@ -18,7 +17,8 @@ def environment(env, value, keyvals, fmt):
     title = keyvals["t"] if "t" in keyvals else ""
     pause = "\\onslide<+->{" if fmt == "beamer" and env != "Code" else "{"
     begin = f"\\begin{{colorenv}}[{data['bgcolor']}]{{{data['tcolor']}}}"
-    begin += f"{{{data['prefix']}\  {data['title']} {tally[env] if fmt == 'latex' else ''}}}{{{title}}}"
+    begin += f"{{{data['prefix']}\\  {data['title']} "
+    begin += f"{tally[env] if fmt == 'latex' else ''}}}{{{title}}}"
     end = "\\end{colorenv}}"
     value[0][1].remove(env)
     return [blatex(pause + begin)] + [Div(*value)] + [blatex(end)]

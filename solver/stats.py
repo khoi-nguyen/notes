@@ -1,8 +1,14 @@
-from math import floor, ceil
 import statistics
 
-midval = lambda x: sum(x) / len(x) if isinstance(x, list) else x
-display_val = lambda x: f"{x[0]}-{x[1]}" if isinstance(x, list) else x
+
+def midval(x):
+    return sum(x) / len(x) if isinstance(x, list) else x
+
+
+def display_val(x):
+    return f"{x[0]}-{x[1]}" if isinstance(x, list) else x
+
+
 columns = {
     "values": [
         "Values",
