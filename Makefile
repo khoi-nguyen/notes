@@ -23,7 +23,7 @@ PANDOC := pandoc -s --pdf-engine=lualatex --filter ./bin/filter
 BEAMER := $(PANDOC) -t beamer --template=./pandoc/templates/beamer.tex
 WORKSHEET := $(PANDOC) -t latex --template=./pandoc/templates/worksheet.tex
 
-.PHONY: tests handouts all deploy clean www artifacts slides videos env
+.PHONY: tests handouts all deploy clean www artifacts slides videos env format
 .PRECIOUS: $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.handout.tex) $(WORKSHEETS:.pdf=.tex) $(ANSWERS:.pdf=.tex)
 
 handouts: $(HANDOUTS) $(ANSWERS)
@@ -91,3 +91,7 @@ env/bin/activate: requirements.txt
 	test -d env || python3 -m venv env
 	$(START_ENV) pip install -Ur requirements.txt
 	touch env/bin/activate
+
+format:
+	$(START_ENV) black .
+	@$(START_ENV) python3 -m flake8
