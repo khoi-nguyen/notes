@@ -91,12 +91,12 @@ Text between backticks will be **executed as Python code**.
 
 ::: {.Code t="Algebra"}
     #) `equation('3*x + 2 = 5')`
-    #) `equation(s.expand('2*(x - 1)*(x + 2)'))`
+    #) `equation(Expand('2*(x - 1)*(x + 2)'))`
     #) `complete_square('x^2 + 3*x + 2')`
 :::
 
 ::: {.Result t="Algebra"}
 #) `equation('3*x + 2 = 5')`
-#) `equation(s.expand('2*(x - 1)*(x + 2)'))`
+#) `equation(Expand('2*(x - 1)*(x + 2)'))`
 #) `complete_square('x^2 + 3*x + 2')`
 :::

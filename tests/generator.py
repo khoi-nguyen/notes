@@ -1,4 +1,5 @@
-from generator.generator import *
+from generator.algebra import *
+from generator.analysis import *
 
 exercises = [f for f in dir() if f.startswith("generate_")]
 

@@ -54,17 +54,17 @@
     - x^{2} - 5 x + 6 = 0
     - 2, 3
 - name: Quadratic equation from factorised form
-  cmd: equation(s.expand('(x - 4)*(x + 3)'))
+  cmd: equation(Expand('(x - 4)*(x + 3)'))
   out:
     - 'x^{2} - x - 12 = 0'
     - '-3, 4'
 - name: Factorising
-  cmd: factorise(s.expand('(x - 2)*(x + 3)'))
+  cmd: factorise(Expand('(x - 2)*(x + 3)'))
   out:
     - 'x^{2} + x - 6'
     - '\left(x - 2\right) \left(x + 3\right)'
 - name: Completing the square
-  cmd: complete_square(s.expand('2*(x + 2)^2 + 3'))
+  cmd: complete_square(Expand('2*(x + 2)^2 + 3'))
   out:
     - '2 x^{2} + 8 x + 11'
     - '2 \left(x + 2\right)^{2} + 3'
@@ -151,12 +151,12 @@
     - '\left(x - 3\right)^{2} + \left(y + 5\right)^{2} = 16'
     - '4'
 - name: Radius of a circle without rhs
-  cmd: circle_equation('radius', s.expand('3*((x - 2)**2 + (y + 1)**2 - 4)'))
+  cmd: circle_equation('radius', Expand('3*((x - 2)**2 + (y + 1)**2 - 4)'))
   out:
     - '3 x^{2} - 12 x + 3 y^{2} + 6 y + 3 = 0'
     - '2'
 - name: Center of a circle with rhs
-  cmd: circle_equation('center', s.expand('(x - 3)**2 + (y - 1)**2 - 16'))
+  cmd: circle_equation('center', Expand('(x - 3)**2 + (y - 1)**2 - 16'))
   out:
     - 'x^{2} - 6 x + y^{2} - 2 y - 6 = 0'
     - '\br{3, 1}'
@@ -166,7 +166,7 @@
     - '\left(x - 3\right)^{2} + \left(y + 5\right)^{2} = 16'
     - '\br{3, -5}'
 - name: Center of a circle without rhs
-  cmd: circle_equation('center', s.expand('3*((x - 2)**2 + (y + 1)**2 - 4)'))
+  cmd: circle_equation('center', Expand('3*((x - 2)**2 + (y + 1)**2 - 4)'))
   out:
     - '3 x^{2} - 12 x + 3 y^{2} + 6 y + 3 = 0'
     - '\br{2, -1}'

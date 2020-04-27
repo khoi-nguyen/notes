@@ -20,9 +20,9 @@ Factorise the following by 3:
 :::
 
 ::: {.Extension t="Solve the following equations:"}
-#) `equation(s.expand('(x + 3)^2'))`
-#) `equation(s.expand('(5*x - 1)^2'))`
-#) `equation(s.expand('(8*x - 9)^2'))`
+#) `equation(Expand('(x + 3)^2'))`
+#) `equation(Expand('(5*x - 1)^2'))`
+#) `equation(Expand('(8*x - 9)^2'))`
 :::
 
 # Completing the square
