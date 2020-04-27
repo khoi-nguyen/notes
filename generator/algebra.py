@@ -202,23 +202,22 @@ def generate_stfadd(level):
     }, level)
     bound_distance = lambda C: lambda p1, p2: s.Abs(p1 - p2) <= C
     powers_constraints = {
-        1: ([1, 5], bound_distance(0)),
-        3: ([-3, 3], bound_distance(1)),
-        5: ([-5, 5], bound_distance(2)),
-        7: ([-5, 7], bound_distance(5)),
+        1: ([1, 5], [1, 5], bound_distance(0)),
+        3: ([-3, 3], [1, 5], bound_distance(1)),
+        5: ([-5, 5], [1, 5], bound_distance(2)),
+        7: ([-5, 7], [1, 5], bound_distance(5)),
     }
 
-    power_1 = pick(powers_constraints, level)
-    power_2 = pick(powers_constraints, level)
-    return ('Work out and leave in standard form',) + stfadd(x*10**power_1, y*10**power_2)
+    (p1, p2) = pick(powers_constraints, level)
+    return ('Work out and leave in standard form',) + stfadd(x*10**p1, y*10**p2)
 
 def generate_stfdiv(level):
     """Divide standard form"""
     (x, y) = pick({
         1: ([1, 9], [1, 9], lambda x, y: x/y < 10 and x % y == 0),
         3: ([1, 9], [1, 9], lambda x, y: x % y == 0),
-        5: ([1, 9], [1.1, 9.9, 0.1], lambda x, y: 10*x % y == 0),
-        7: ([1.1, 9.9, 0.1], [1.1, 9.9, 0.1], lambda x, y: 10*x % y == 0),
+        5: ([1.1, 9.9, 0.1], [1, 9], lambda x, y: 10*x % y == 0),
+        7: ([1.1, 9.9, 0.1], [1.1, 9.9, 0.1], lambda x, y: 100*x % 10*y == 0),
     }, level)
     powers_constraints = {
         1: [1, 3],
