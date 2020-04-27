@@ -13,7 +13,15 @@ from solver.algebra import (
 from generator.helpers import pick
 from random import randint, choice
 
-import sympy as s
+from sympy import (
+    Abs,
+    expand as Expand,
+    simplify as Simplify,
+    nsimplify,
+    sign,
+    sqrt,
+    symbols,
+)
 
 
 def generate_circle_equation(level):
@@ -28,13 +36,13 @@ def generate_circle_equation(level):
         },
         level,
     )
-    x, y = s.symbols("x y")
-    lhs = s.nsimplify((x - a) ** 2 + (y - b) ** 2 + offset)
-    rhs = s.nsimplify(r ** 2 + offset)
+    x, y = symbols("x y")
+    lhs = nsimplify((x - a) ** 2 + (y - b) ** 2 + offset)
+    rhs = nsimplify(r ** 2 + offset)
 
     # Minor transformations for higher levels
     if level >= 5:
-        lhs = s.expand(lhs)
+        lhs = Expand(lhs)
 
     info = "center" if randint(0, 1) else "radius"
     return (f"Find the {info} of the circle whose equation is",) + circle_equation(
@@ -55,14 +63,14 @@ def generate_complete_square(level):
         },
         level,
     )
-    x = s.symbols("x")
-    eq = s.nsimplify(s.expand(a * (x + h) ** 2 + k))
+    x = symbols("x")
+    eq = nsimplify(Expand(a * (x + h) ** 2 + k))
     return ("Complete the square",) + complete_square(eq)
 
 
 def generate_equation(level):
     """Linear equation"""
-    x = s.symbols("x")
+    x = symbols("x")
     # a*x = b or x + a = b or x/a = b
     if level <= 3:
         a = randint(2, 5)
@@ -108,7 +116,7 @@ def generate_equation(level):
         sign_3 = (-1) ** randint(0, 1)
         a = sign_1 * sign_3 * c + (-1) ** randint(0, 1) * randint(1, 9)
         lhs, rhs = sign_1 * a * x + sign_2 * b, sign_3 * c * x + d
-    return ("Solve",) + equation(str(s.simplify(lhs)), str(s.simplify(rhs)))
+    return ("Solve",) + equation(str(Simplify(lhs)), str(Simplify(rhs)))
 
 
 def generate_expindex(level):
@@ -177,11 +185,11 @@ def generate_quadratic_equation(level):
 
     # Add surds for higher levels
     if level >= 8:
-        u = u if randint(0, 3) else s.sign(u) * s.sqrt(s.Abs(u))
-        v = v if randint(0, 3) else s.sign(v) * s.sqrt(s.Abs(v))
+        u = u if randint(0, 3) else sign(u) * sqrt(Abs(u))
+        v = v if randint(0, 3) else sign(v) * sqrt(Abs(v))
 
-    x = s.symbols("x")
-    lhs, rhs = s.expand(a * (x - u) * (x - v)) + d * x + e, d * x + e
+    x = symbols("x")
+    lhs, rhs = Expand(a * (x - u) * (x - v)) + d * x + e, d * x + e
     return ("Solve",) + equation(str(lhs), str(rhs))
 
 
@@ -226,7 +234,7 @@ def generate_stfadd(level):
         },
         level,
     )
-    bound_distance = lambda C: lambda p1, p2: s.Abs(p1 - p2) <= C
+    bound_distance = lambda C: lambda p1, p2: Abs(p1 - p2) <= C
     powers_constraints = {
         1: ([1, 5], [1, 5], bound_distance(0)),
         3: ([-3, 3], [1, 5], bound_distance(1)),
