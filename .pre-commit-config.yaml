@@ -1,9 +1,0 @@
-repos:
-  - repo: local
-    hooks:
-      - id: format
-        name: Format code
-        description: Code Formatter via black and flake8
-        entry: make format
-        language: system
-        types: [python]
