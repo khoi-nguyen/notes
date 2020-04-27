@@ -92,6 +92,6 @@ env/bin/activate: requirements.txt
 	$(START_ENV) pip install -Ur requirements.txt
 	touch env/bin/activate
 
-format:
+format: $(ENV)
 	$(START_ENV) black .
 	@$(START_ENV) python3 -m flake8
