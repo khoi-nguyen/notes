@@ -6,20 +6,25 @@ import sympy as s
 
 def generate_circle_equation(level):
     """Radius/center from circle equation"""
-    info = 'center' if randint(0, 1) else 'radius'
-    lower_bound = -9 if level >= 3 else 0
-    m = 1 if level <= 8 else randint(1, 2)
-    a = randint(m*lower_bound, m*9)
-    b = randint(m*lower_bound, m*9)
+    # Generating a random equation in canonical form
+    (a, b, r) = pick({
+        1: ([0, 9], [0, 9], [1, 9]),
+        3: ([-9, 9], [-9, 9], [1, 9]),
+        8: ([-9, 9, 0.5], [-9, 9, 0.5], [1, 9, 0.5]),
+    }, level)
     x, y = s.symbols('x y')
-    lhs = (m*x - a)**2 + (m*y - b)**2
-    rhs = m**2*randint(1, 9)**2
+    lhs = s.nsimplify((x - a)**2 + (y - b)**2)
+    rhs = s.nsimplify(r**2)
+
+    # Minor transformations for higher levels
     if level >= 5:
         lhs = s.expand(lhs)
     if level >= 6:
         offset = randint(-25, 25)
         lhs += offset
         rhs += offset
+
+    info = 'center' if randint(0, 1) else 'radius'
     return (f'Find the {info} of the circle whose equation is',) + circle_equation(info, lhs, rhs)
 
 def generate_complete_square(level):
