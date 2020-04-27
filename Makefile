@@ -33,6 +33,7 @@ slides: $(SLIDES) $(WORKSHEETS)
 tests: $(ENV)
 	@$(START_ENV) python3 -m tests.run
 	@$(START_ENV) python3 -m tests.generator
+	@$(START_ENV) python3 -m flake8
 
 all: handouts slides
 
