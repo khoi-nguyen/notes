@@ -24,6 +24,7 @@ slides: $(SLIDES) $(WORKSHEETS)
 
 tests:
 	@python3 -m tests.run
+	@python3 -m tests.generator
 
 all: handouts slides
 
