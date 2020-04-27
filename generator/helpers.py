@@ -25,7 +25,7 @@ def pick(constraints, level):
         sets = []
         for range_ in constraint[:-1]:
             [a, b], step = range_[:2], 1 if len(range_) <= 2 else range_[2]
-            sets.append([a + n*step for n in range(0, (b - a) // step + 1)])
+            sets.append([a + n*step for n in range(0, int((b - a) // step) + 1)])
         solutions = [x for x in product(*sets) if callback(*x)]
         rand = choice(solutions)
 
@@ -35,6 +35,6 @@ def pick(constraints, level):
         rand = ()
         for range_ in constraint:
             [a, b], step = range_[:2], 1 if len(range_) < 3 else range_[2]
-            rand += (a + randint(0, (b - a) // step)*step,)
+            rand += (a + randint(0, int((b - a) // step))*step,)
 
     return rand[0] if len(rand) == 1 else rand
