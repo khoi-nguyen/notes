@@ -88,7 +88,7 @@ env: env/bin/activate
 
 env/bin/activate: requirements.txt
 	test -d env || python3 -m venv env
-	$(START_ENV) pip install -Ur requirements.txt
+	$(START_ENV) pip3 install -Ur requirements.txt
 	touch env/bin/activate
 
 format: $(ENV)
