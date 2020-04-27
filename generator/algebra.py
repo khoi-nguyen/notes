@@ -230,6 +230,24 @@ def generate_stfdiv(level):
     power_2 = pick(powers_constraints, level)
     return ('Work out and leave in standard form',) + stfdiv(x*10**power_1, y*10**power_2)
 
+def generate_stfsub(level):
+    """Subtract standard form"""
+    (x, y) = pick({
+        1: ([1, 9], [1, 9], lambda x, y: 0 < x - y < 10),
+        3: ([1, 9], [1, 9], lambda x, y: x - y > 0),
+        5: ([1, 9], [1.1, 9.9, 0.1], lambda x, y: x - y > 0),
+        7: ([1, 9], [1.01, 9.99, 0.01]),
+    }, level)
+    powers_constraints = {
+        1: [1, 3],
+        3: [-3, 3],
+        5: [-5, 5],
+        7: [-5, 7],
+    }
+    power_1 = pick(powers_constraints, level)
+    power_2 = pick(powers_constraints, level)
+    return ('Work out and leave in standard form',) + stfsub(x*10**power_1, y*10**power_2)
+
 def generate_stf2dec(level):
     """Standard form to ordinary"""
     return ('Convert to an ordinary number',) + generate_stf(level)[2:0:-1]
