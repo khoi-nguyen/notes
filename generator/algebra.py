@@ -192,6 +192,26 @@ def generate_stfmult(level):
     power_2 = pick(powers_constraints, level)
     return ('Work out and leave in standard form',) + stfmult(x*10**power_1, y*10**power_2)
 
+def generate_stfadd(level):
+    """Add standard form"""
+    (x, y) = pick({
+        1: ([1, 9], [1, 9], lambda x, y: x + y < 10),
+        3: ([1, 9], [1, 9]),
+        5: ([1, 9], [1.1, 9.9, 0.1]),
+        7: ([1, 9], [1.01, 9.99, 0.01]),
+    }, level)
+    bound_distance = lambda C: lambda p1, p2: s.Abs(p1 - p2) <= C
+    powers_constraints = {
+        1: ([1, 5], bound_distance(0)),
+        3: ([-3, 3], bound_distance(1)),
+        5: ([-5, 5], bound_distance(2)),
+        7: ([-5, 7], bound_distance(5)),
+    }
+
+    power_1 = pick(powers_constraints, level)
+    power_2 = pick(powers_constraints, level)
+    return ('Work out and leave in standard form',) + stfadd(x*10**power_1, y*10**power_2)
+
 def generate_stfdiv(level):
     """Divide standard form"""
     (x, y) = pick({
