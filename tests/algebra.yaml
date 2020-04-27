@@ -4,7 +4,7 @@
   out: ['\left(x - 1\right) \left(x - 3\right)', 'x^{2} - 4 x + 3']
 - name: algebra.simplify must not be overriden
   cmd: simplify('(x^2 - 1)/(x - 1)')
-  out: ['\\frac{x^{2} - 1}{x - 1}', 'x + 1']
+  out: ['\frac{x^{2} - 1}{x - 1}', 'x + 1']
 # Indices
 - name: Index evaluation
   cmd: simplify('3^2')
