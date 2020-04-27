@@ -192,6 +192,26 @@ def generate_stfmult(level):
     power_2 = pick(powers_constraints, level)
     return ('Work out and leave in standard form',) + stfmult(x*10**power_1, y*10**power_2)
 
+def generate_stfdiv(level):
+    """Divide standard form"""
+    powers_constraints = {
+        1: [1, 3],
+        3: [-3, 3],
+        5: [-5, 5],
+        7: [-5, 7],
+    }
+    bases_constraints = {
+        1: ([1, 9], [1, 9], lambda x, y: x/y < 10 and x % y == 0),
+        3: ([1, 9], [1, 9], lambda x, y: x % y == 0),
+        5: ([1, 9], [1.1, 9.9, 0.1]),
+        7: ([1, 9], [1.01, 9.99, 0.01]),
+    }
+
+    (x, y) = pick(bases_constraints, level)
+    power_1 = pick(powers_constraints, level)
+    power_2 = pick(powers_constraints, level)
+    return ('Work out and leave in standard form',) + stfdiv(x*10**power_1, y*10**power_2)
+
 def generate_stf2dec(level):
     """Standard form to ordinary"""
     return ('Convert to an ordinary number',) + generate_stf(level)[2:0:-1]
