@@ -6,7 +6,7 @@ publish: true
 # Motivations: minimums and maximums
 
 ~~~ {.graph b=-2 t=2 l=-5 r=5}
-f = s.Integral('0.12*(x + 2)*(x - 3)').doit()
+f = Integral('0.12*(x + 2)*(x - 3)').doit()
 plot(f)
 showtangent(f, -2, 'darkgreen', '-3:-1')
 showtangent(f, 3, 'darkgreen', '2:4')
@@ -30,7 +30,7 @@ How does the calculator compute $\sin(0.4)$?
 `'$$\\sin(x) \\approx '
 + taylor_poly('sin(x)', 0, 5)
 + ' \\quad \\sin(0.4) \\approx '
-+ s.latex(taylor('sin(x)', 0, 5).subs('x', 0.4))
++ latex(taylor('sin(x)', 0, 5).subs('x', 0.4))
 + '$$'`
 :::
 
