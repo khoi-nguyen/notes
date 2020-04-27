@@ -217,7 +217,7 @@ def generate_stfdiv(level):
         1: ([1, 9], [1, 9], lambda x, y: x/y < 10 and x % y == 0),
         3: ([1, 9], [1, 9], lambda x, y: x % y == 0),
         5: ([1.1, 9.9, 0.1], [1, 9], lambda x, y: 10*x % y == 0),
-        7: ([1.1, 9.9, 0.1], [1.1, 9.9, 0.1], lambda x, y: 100*x % 10*y == 0),
+        7: ([1.1, 9.9, 0.1], [1.2, 9.8, 0.2], lambda x, y: 100*x % (10*y) == 0)
     }, level)
     powers_constraints = {
         1: [1, 3],
