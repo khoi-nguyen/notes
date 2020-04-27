@@ -5,12 +5,13 @@ from sympy import (
     Integral,
     Interval,
     latex,
+    minimum as minimum_,
     oo,
     solve,
     stationary_points,
     symbols,
     sympify,
-    simplify,
+    simplify as simplify_,
 )
 import re
 
@@ -145,7 +146,7 @@ def diff(*args, **options):
     if len(args) == 1 or isinstance(args[1], int):
         args.insert(1, symbols("x"))
     exercise = Derivative(*args)
-    solution = expand_trig(simplify(exercise.doit()))
+    solution = expand_trig(simplify_(exercise.doit()))
     exercise = latex(Derivative(*args))
     exercise = (
         exercise.replace("\\partial", "d") if not options.get("partial") else exercise
@@ -175,7 +176,7 @@ def minimum(expr, a=-oo, b=oo):
     f = sympify(expr)
     x = symbols("x")
     domain = Interval(a, b)
-    y_min = minimum(f, x, domain)
+    y_min = minimum_(f, x, domain)
     x_min = solve(f - y_min, x)
     exercise = latex(f)
     solution = ", ".join([latex(i) for i in x_min])
