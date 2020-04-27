@@ -109,7 +109,8 @@ def showfrac(num, den, op=False, num2=1, den2=1):
                 (
                     num2,
                     den2,
-                    "color=darkred,pattern=north west lines,pattern color=darkred,thick",
+                    "color=darkred,pattern=north west lines,"
+                    + "pattern color=darkred,thick",
                 )
             )
         if den != den2:
