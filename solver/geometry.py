@@ -1,10 +1,11 @@
 import sympy as s
 
 PI = s.pi
-DEG = PI/180
-RAD = 180/PI
+DEG = PI / 180
+RAD = 180 / PI
 
-def cosine_law(a, b, c, gamma='gamma', radians=False):
+
+def cosine_law(a, b, c, gamma="gamma", radians=False):
     """Apply the Law of Cosines to find an angle or a length
 
     :param a: first side
@@ -25,10 +26,12 @@ def cosine_law(a, b, c, gamma='gamma', radians=False):
     else:
         symbol = lengths[is_symbol.index(True)]
 
-    dom = s.Interval(*(0, PI/2 if solve_for_angle else s.oo))
-    sols = s.solveset(a**2 + b**2 - 2*a*b*s.cos(gamma) - c**2, symbol, domain=dom)
+    dom = s.Interval(*(0, PI / 2 if solve_for_angle else s.oo))
+    sols = s.solveset(
+        a ** 2 + b ** 2 - 2 * a * b * s.cos(gamma) - c ** 2, symbol, domain=dom
+    )
     sol = sols.args[0] * (1 if radians or not solve_for_angle else RAD)
 
-    exercise = f'{a}, {b}, {c}, {gamma}'
-    solution = f'{s.latex(symbol)} = {s.latex(sol)}'
+    exercise = f"{a}, {b}, {c}, {gamma}"
+    solution = f"{s.latex(symbol)} = {s.latex(sol)}"
     return (exercise, solution)

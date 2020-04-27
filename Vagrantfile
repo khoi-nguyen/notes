@@ -73,7 +73,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     pacman --noconfirm -Syyu
     pacman --needed --noconfirm -S grep findutils make pandoc python python-pip texlive-core texlive-fontsextra texlive-latexextra texlive-pictures npm
-    pip install -r /vagrant/requirements.txt
+    pacman --needed --noconfirm -S cairo ffmpeg sox pkgconf gcc
     if ! grep -qF "cd /vagrant" /home/vagrant/.bashrc;
     then echo "cd /vagrant" >> /home/vagrant/.bashrc ; fi
     chown vagrant. /home/vagrant/.bashrc
