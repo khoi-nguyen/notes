@@ -1,12 +1,11 @@
-from solver.analysis import *
 from random import randint
-
-import sympy as s
+from solver.analysis import line_equation
+from sympy import symbols
 
 
 def generate_find_linear_equation(level):
     """Linear equation from two points"""
-    x = s.symbols("x")
+    x = symbols("x")
     # y = ax or y = x + b with one easy point
     if level <= 3:
         cointoss = randint(0, 1)

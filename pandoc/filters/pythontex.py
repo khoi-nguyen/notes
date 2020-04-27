@@ -7,8 +7,6 @@ from solver.stats import *
 from solver.probability import *
 from .tikz import *
 
-oo = s.oo
-
 # Shortcuts
 blatex = lambda x: RawBlock("latex", x)
 ilatex = lambda x: RawInline("latex", x)

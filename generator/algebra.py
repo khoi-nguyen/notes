@@ -1,5 +1,16 @@
-from solver.algebra import *
-from .helpers import *
+from solver.algebra import (
+    circle_equation,
+    complete_square,
+    equation,
+    expindex,
+    mult,
+    stf,
+    stfmult,
+    stfadd,
+    stfdiv,
+    stfsub,
+)
+from generator.helpers import pick
 from random import randint, choice
 
 import sympy as s
