@@ -1,4 +1,17 @@
-import sympy as s
+from sympy import (
+    Derivative,
+    expand_trig,
+    factorial,
+    Integral,
+    Interval,
+    latex,
+    oo,
+    solve,
+    stationary_points,
+    symbols,
+    sympify,
+    simplify,
+)
 import re
 
 domain = "-9:9"
@@ -28,7 +41,7 @@ def sympy2tikz(function):
 
 def gradient(x1, y1, x2, y2):
     exercise = f"({x1}, {y1}), ({x2}, {y2})"
-    solution = s.latex(s.sympify(f"({y2} - {y1}) / ({x2} - {x1})"))
+    solution = latex(sympify(f"({y2} - {y1}) / ({x2} - {x1})"))
     return (exercise, solution)
 
 
@@ -39,9 +52,9 @@ def line_equation(*args):
         x1, y1, x2, y2 = args
         exercise = f"({x1}, {y1}), ({x2}, {y2})"
         args = [f"({y2} - {y1}) / ({x2} - {x1})", x2, y2]
-    grad = s.sympify(args.pop(0))
-    x, a, b = s.symbols("x"), s.sympify(args[0]), s.sympify(args[1])
-    solution = s.latex(grad * (x - a) + b)
+    grad = sympify(args.pop(0))
+    x, a, b = symbols("x"), sympify(args[0]), sympify(args[1])
+    solution = latex(grad * (x - a) + b)
     return (exercise, f"y = {solution}")
 
 
@@ -55,28 +68,28 @@ def plot(function, color="darkblue", dom=False):
 
 
 def showsecant(function, a, b, color="darkred", dom=False):
-    x, expr = s.symbols("x"), s.sympify(function)
+    x, expr = symbols("x"), sympify(function)
     gradient = (expr.subs(x, b) - expr.subs(x, a)) / (b - a)
     tangent = gradient * (x - a) + expr.subs(x, a)
     return plot(str(tangent), color, dom)
 
 
 def showtangent(function, a, color="darkgreen", dom=False):
-    x, expr = s.symbols("x"), s.sympify(function)
-    gradient = s.Derivative(expr, x).doit().subs(x, a)
+    x, expr = symbols("x"), sympify(function)
+    gradient = Derivative(expr, x).doit().subs(x, a)
     tangent = gradient * (x - a) + expr.subs(x, a)
     return plot(str(tangent), color, dom)
 
 
 def taylor(function, a, order):
-    poly, f, x = 0, s.sympify(function), s.symbols("x")
+    poly, f, x = 0, sympify(function), symbols("x")
     for i in range(0, order + 1):
-        poly += (f.diff(x, i).subs(x, a)) / (s.factorial(i)) * (x - a) ** i
+        poly += (f.diff(x, i).subs(x, a)) / (factorial(i)) * (x - a) ** i
     return poly
 
 
 def taylor_poly(f, a, n):
-    return s.latex(taylor(f, a, n))
+    return latex(taylor(f, a, n))
 
 
 def showtaylor(function, a, order, color="darkgreen", dom=False):
@@ -84,7 +97,7 @@ def showtaylor(function, a, order, color="darkgreen", dom=False):
 
 
 def showcoordinates(function, a, x_text, y_text):
-    y = s.sympify(function).subs(s.symbols("x"), a)
+    y = sympify(function).subs(symbols("x"), a)
     return f"""
     \\draw[dashed] ({a}, 0) node[below] {{\\footnotesize ${x_text}$}} -- ({a}, {y})
     -- (0, {y}) node[{'left' if a > 0 else 'right'}] {{\\footnotesize ${y_text}$}};
@@ -119,55 +132,55 @@ def tikz_plot(contents, opt, fmt):
 
 def integrate(expr, a=False, b=False):
     if a or b:
-        expr = s.Integral(s.sympify(expr), (s.symbols("x"), a, b))
+        expr = Integral(sympify(expr), (symbols("x"), a, b))
     else:
-        expr = s.Integral(s.sympify(expr))
-    exercise = s.latex(expr)
-    solution = s.latex(expr.doit())
+        expr = Integral(sympify(expr))
+    exercise = latex(expr)
+    solution = latex(expr.doit())
     return (exercise, solution)
 
 
 def diff(*args, **options):
-    args = [s.sympify(a) if isinstance(a, str) else a for a in args]
+    args = [sympify(a) if isinstance(a, str) else a for a in args]
     if len(args) == 1 or isinstance(args[1], int):
-        args.insert(1, s.symbols("x"))
-    exercise = s.Derivative(*args)
-    solution = s.expand_trig(s.simplify(exercise.doit()))
-    exercise = s.latex(s.Derivative(*args))
+        args.insert(1, symbols("x"))
+    exercise = Derivative(*args)
+    solution = expand_trig(simplify(exercise.doit()))
+    exercise = latex(Derivative(*args))
     exercise = (
         exercise.replace("\\partial", "d") if not options.get("partial") else exercise
     )
-    return (exercise, s.latex(solution))
+    return (exercise, latex(solution))
 
 
 def tangent(expr, a):
-    x, expr = s.symbols("x"), s.sympify(expr)
-    exercise = f"y = {s.latex(expr)} \\text{{ at }} x = {a}"
-    gradient = s.Derivative(expr, x).doit().subs(x, a)
+    x, expr = symbols("x"), sympify(expr)
+    exercise = f"y = {latex(expr)} \\text{{ at }} x = {a}"
+    gradient = Derivative(expr, x).doit().subs(x, a)
     solution = gradient * (x - a) + expr.subs(x, a)
-    solution = f"y = {s.latex(solution)}"
+    solution = f"y = {latex(solution)}"
     return (exercise, solution)
 
 
-def stationary_points(expr):
-    f = s.sympify(expr)
-    x = s.symbols("x")
-    st_pts = s.stationary_points(f, x)
-    exercise = s.latex(f)
-    solution = s.latex(st_pts)
+def stationary(expr):
+    f = sympify(expr)
+    x = symbols("x")
+    st_pts = stationary_points(f, x)
+    exercise = latex(f)
+    solution = latex(st_pts)
     return (exercise, solution)
 
 
-def minimum(expr, a=-s.oo, b=s.oo):
-    f = s.sympify(expr)
-    x = s.symbols("x")
-    Interval = s.Interval(a, b)
-    y_min = s.minimum(f, x, Interval)
-    x_min = s.solve(f - y_min, x)
-    exercise = s.latex(f)
-    solution = ", ".join([s.latex(i) for i in x_min])
+def minimum(expr, a=-oo, b=oo):
+    f = sympify(expr)
+    x = symbols("x")
+    domain = Interval(a, b)
+    y_min = minimum(f, x, domain)
+    x_min = solve(f - y_min, x)
+    exercise = latex(f)
+    solution = ", ".join([latex(i) for i in x_min])
     return (exercise, solution)
 
 
-def maximum(expr, a=-s.oo, b=s.oo):
+def maximum(expr, a=-oo, b=oo):
     return minimum(f"-({expr})", a, b)

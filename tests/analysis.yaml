@@ -41,7 +41,7 @@
   out: 'x**3/6 + x**2/2 + x + 1'
 # Stationary points
 - name: Stationary points
-  cmd: stationary_points('x^2 - 6*x + 4')
+  cmd: stationary('x^2 - 6*x + 4')
   out: ['x^{2} - 6 x + 4', '\left\{3\right\}']
 # Minimum
 - name: Single minimum function
