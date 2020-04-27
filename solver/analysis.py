@@ -170,4 +170,4 @@ def minimum(expr, a=-s.oo, b=s.oo):
 
 
 def maximum(expr, a=-s.oo, b=s.oo):
-    minimum(f"-({expr})", a, b)
+    return minimum(f"-({expr})", a, b)

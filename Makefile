@@ -1,3 +1,11 @@
+ifeq ($(GITHUB), 1)
+START_ENV :=
+ENV :=
+else
+START_ENV := . env/bin/activate;
+ENV := env
+endif
+
 # Files
 MARKDOWN := $(shell find * -regex '^resources.*\.md' | grep -v 'worksheet.md$$')
 WORKSHEET_MARKDOWN := $(shell find * -name '*.worksheet.md')
@@ -15,27 +23,27 @@ PANDOC := pandoc -s --pdf-engine=lualatex --filter ./bin/filter
 BEAMER := $(PANDOC) -t beamer --template=./pandoc/templates/beamer.tex
 WORKSHEET := $(PANDOC) -t latex --template=./pandoc/templates/worksheet.tex
 
-.PHONY: tests handouts all deploy clean www artifacts slides videos
+.PHONY: tests handouts all deploy clean www artifacts slides videos env
 .PRECIOUS: $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.handout.tex) $(WORKSHEETS:.pdf=.tex) $(ANSWERS:.pdf=.tex)
 
 handouts: $(HANDOUTS) $(ANSWERS)
 
 slides: $(SLIDES) $(WORKSHEETS)
 
-tests:
-	@python3 -m tests.run
-	@python3 -m tests.generator
+tests: $(ENV)
+	@$(START_ENV) python3 -m tests.run
+	@$(START_ENV) python3 -m tests.generator
 
 all: handouts slides
 
 frontend: node_modules
 	@npm run-script start
 
-backend:
-	@python3 -m generator.server
+backend: $(ENV)
+	@$(START_ENV) python3 -m generator.server
 
-www: node_modules
-	@python3 ./bin/data.py
+www: node_modules $(ENV)
+	@$(START_ENV) python3 ./bin/data.py
 	@npm run-script build
 
 artifacts:
@@ -71,7 +79,14 @@ node_modules: package-lock.json package.json
 
 videos: $(VIDEOS)
 
-%: %.py
+%: %.py $(ENV)
 	@grep ^class $< | sed 's/(/ /' | awk '{ print $$2 }' \
-		| xargs -I {} python3 -m videos.manim $< {}
+		| xargs -I {} $(START_ENV) python3 -m videos.manim $< {}
 	@touch $@
+
+env: env/bin/activate
+
+env/bin/activate: requirements.txt
+	test -d env || python3 -m venv env
+	$(START_ENV) pip install -Ur requirements.txt
+	touch env/bin/activate
