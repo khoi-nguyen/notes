@@ -166,36 +166,37 @@ def generate_quadratic_equation(level):
 
 def generate_stf(level):
     """Standard form"""
-    n = pick({1: (1, 9), 4: (11, 99), 7: (101, 9999)}, level)
-    x = n / 10**(len(str(n)) - 1)
-    power = pick({1: (1, 3), 3: (-3, -3), 5: (-5, 5), 7: (-5, 7)}, level)
+    x = pick({
+        1: [1, 9],
+        4: [1, 10, 0.1],
+        7: [1.01, 9.99, 0.01]
+    }, level)
+    power = pick({
+        1: [1, 3],
+        3: [-3, -3],
+        5: [-5, 5],
+        7: [-5, 7]
+    }, level)
     return ('Convert to standard form',) + stf(x*10**power)
 
 def generate_stfmult(level):
     """Multiply standard form"""
-    power_range = {1: (1, 3), 3: (-3, -3), 5: (-5, 5), 7: (-5, 7)}
-    power_1 = pick(power_range, level)
-    power_2 = pick(power_range, level)
-    ranges = {
-        1: (1, 9, 'product'), #product
-        3: (1, 9),
-        5: [(1, 9), (11, 99)],
-        7: (101, 999)
+    powers_constraints = {
+        1: [1, 3],
+        3: [-3, -3],
+        5: [-5, 5],
+        7: [-5, 7],
+    }
+    bases_constraints = {
+        1: ([1, 9], [1, 9], lambda x, y: x*y < 10),
+        3: ([1, 9], [1, 9]),
+        5: ([1, 9], [1.1, 9.9, 0.1]),
+        7: ([1, 9], [1.01, 9.99, 0.01]),
     }
 
-    # Pick x and y
-    info = pick(ranges, level, False)
-    if isinstance(info, tuple) and len(info) == 2:
-        x = randint(*info)
-        y = randint(*info)
-    elif isinstance(info, list):
-        x = randint(*info[0])
-        y = randint(*info[1])
-    else:
-        x = randint(info[0], info[1] // 2)
-        y = randint(1, max(1, info[1] // x))
-    x = x / 10**(len(str(x)) - 1)
-    y = y / 10**(len(str(y)) - 1)
+    (x, y) = pick(bases_constraints, level)
+    power_1 = pick(powers_constraints, level)
+    power_2 = pick(powers_constraints, level)
     return ('Work out and leave in standard form',) + stfmult(x*10**power_1, y*10**power_2)
 
 def generate_stf2dec(level):
