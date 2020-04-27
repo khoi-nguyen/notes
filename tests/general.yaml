@@ -1,6 +1,7 @@
+---
 - name: 'Check `import sympy` was not used'
   cmd: "'sympy' in vars()"
-  out: False
+  out: false
 - name: Test 'answer' function on tuple
   cmd: answer(('hello', 'bonjour'))
   out: ['', 'bonjour']

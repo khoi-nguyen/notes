@@ -1,3 +1,4 @@
+---
 # Indices
 - name: Index evaluation
   cmd: simplify('3^2')

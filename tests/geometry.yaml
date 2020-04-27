@@ -1,3 +1,4 @@
+---
 # Law of Cosines
 - name: Law of cosines to check right triangle has an angle of 90 degrees
   cmd: answer(cosine_law(3, 4, 5))

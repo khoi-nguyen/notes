@@ -1,3 +1,4 @@
+---
 # Plots
 - name: Check x is replaced by \x in \plot
   cmd: plot('x')
@@ -17,6 +18,7 @@
 - name: Radians in nested trig functions for plots
   cmd: plot('sin(cos(x))')
   out: \plotfunction[darkblue]{-9:9}{sin((cos(((\x))r))r)}
+- name: Gradient from two points
   cmd: answer(gradient(0, 0, 1, 2))
   out: ['', '2']
 - name: Find the line equation with gradient and point
