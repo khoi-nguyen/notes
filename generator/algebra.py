@@ -194,20 +194,18 @@ def generate_stfmult(level):
 
 def generate_stfdiv(level):
     """Divide standard form"""
+    (x, y) = pick({
+        1: ([1, 9], [1, 9], lambda x, y: x/y < 10 and x % y == 0),
+        3: ([1, 9], [1, 9], lambda x, y: x % y == 0),
+        5: ([1, 9], [1.1, 9.9, 0.1], lambda x, y: 10*x % y == 0),
+        7: ([1.1, 9.9, 0.1], [1.1, 9.9, 0.1], lambda x, y: 10*x % y == 0),
+    }, level)
     powers_constraints = {
         1: [1, 3],
         3: [-3, 3],
         5: [-5, 5],
         7: [-5, 7],
     }
-    bases_constraints = {
-        1: ([1, 9], [1, 9], lambda x, y: x/y < 10 and x % y == 0),
-        3: ([1, 9], [1, 9], lambda x, y: x % y == 0),
-        5: ([1, 9], [1.1, 9.9, 0.1]),
-        7: ([1, 9], [1.01, 9.99, 0.01]),
-    }
-
-    (x, y) = pick(bases_constraints, level)
     power_1 = pick(powers_constraints, level)
     power_2 = pick(powers_constraints, level)
     return ('Work out and leave in standard form',) + stfdiv(x*10**power_1, y*10**power_2)
