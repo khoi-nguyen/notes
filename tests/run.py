@@ -8,19 +8,25 @@ from solver.stats import *
 from solver.probability import *
 from pandoc.filters.pythontex import *
 
-for path in glob('./tests/*.yaml'):
+for path in glob("./tests/*.yaml"):
     with open(path) as file:
         tests = yaml.load(file, Loader=yaml.FullLoader)
 
         for test in tests:
-            result = eval(test['cmd'])
+            result = eval(test["cmd"])
             if isinstance(result, tuple):
                 result = list(result)
-            if result != test['out']:
-                print('Failed test:', test['name'])
-                expected, output = str(test['out']), str(result)
-                print('Expected:', expected)
-                print('Output  :', output)
-                pos = max([i for i in range(0, min(len(expected), len(output))) if expected[:i] == output[0:i]])
-                print('         ' + ' ' * pos, '^')
+            if result != test["out"]:
+                print("Failed test:", test["name"])
+                expected, output = str(test["out"]), str(result)
+                print("Expected:", expected)
+                print("Output  :", output)
+                pos = max(
+                    [
+                        i
+                        for i in range(0, min(len(expected), len(output)))
+                        if expected[:i] == output[0:i]
+                    ]
+                )
+                print("         " + " " * pos, "^")
                 sys.exit(1)
