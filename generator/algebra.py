@@ -26,6 +26,13 @@ from sympy import (
 )
 
 
+def condition_frac(ascending_order=False):
+    if ascending_order:
+        return lambda a, b: a < b and gcd(a, b) == 1
+    else:
+        return lambda a, b: gcd(a, b) == 1
+
+
 def generate_circle_equation(level):
     """Radius/center from circle equation"""
     # Generating a random equation in canonical form
@@ -307,22 +314,23 @@ def generate_multfrac(level):
         {
             1: ([1, 1], [2, 5]),
             3: ([1, 1], [2, 9]),
-            4: ([2, 9], [2, 9], lambda a, b: a < b and gcd(a, b) == 1),
-            7: ([2, 13], [2, 13], lambda a, b: gcd(a, b) == 1),
+            4: ([2, 9], [2, 9], condition_frac(True)),
+            7: ([2, 13], [2, 13], condition_frac()),
         },
         level,
     )
     (c, d) = pick(
         {
             1: ([1, 1], [2, 5]),
-            2: ([2, 2], [2, 5], lambda c, d: gcd(c, d) == 1),
-            3: ([2, 5], [2, 5], lambda c, d: gcd(c, d) == 1),
-            4: ([2, 9], [2, 9], lambda c, d: c < d and gcd(c, d) == 1),
-            7: ([2, 13], [2, 13], lambda c, d: gcd(c, d) == 1),
+            2: ([2, 2], [2, 5], condition_frac()),
+            3: ([2, 5], [2, 5], condition_frac()),
+            4: ([2, 9], [2, 9], condition_frac(True)),
+            7: ([2, 13], [2, 13], condition_frac()),
         },
         level,
     )
     return ("Calculate the following",) + mult(nsimplify(a / b), nsimplify(c / d))
+
 
 def generate_divfrac(level):
     """Divide Fractions"""
@@ -330,17 +338,17 @@ def generate_divfrac(level):
         {
             1: ([1, 1], [2, 5]),
             3: ([1, 1], [2, 9]),
-            4: ([2, 9], [2, 9], lambda a, b: a < b and gcd(a, b) == 1),
-            7: ([2, 13], [2, 13], lambda a, b: gcd(a, b) == 1),
+            4: ([2, 9], [2, 9], condition_frac(True)),
+            7: ([2, 13], [2, 13], condition_frac()),
         },
         level,
     )
     (c, d) = pick(
         {
             1: ([1, 1], [2, 9]),
-            3: ([2, 5], [2, 9], lambda c, d: gcd(c, d) == 1),
-            4: ([2, 9], [2, 9], lambda c, d: c < d and gcd(c, d) == 1),
-            7: ([2, 13], [2, 13], lambda c, d: gcd(c, d) == 1),
+            3: ([2, 5], [2, 9], condition_frac()),
+            4: ([2, 9], [2, 9], condition_frac(True)),
+            7: ([2, 13], [2, 13], condition_frac()),
         },
         level,
     )
