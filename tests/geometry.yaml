@@ -9,3 +9,13 @@
 - name: Law of cosines to find angle in radians
   cmd: cosine_law('sqrt(2)', 5, 'sqrt(17)', 'alpha', radians=True)[1]
   out: '\alpha = \frac{\pi}{4}'
+# Pythagoras
+- name: Get missing length by Pythagoras's Theorem
+  cmd: pythagoras('a', 8, 10)[1]
+  out: 'a = 6'
+- name: Check if right triangle
+  cmd: pythagoras(3, 4, 5)[1]
+  out: 'Right triangle'
+- name: Check if right triangle
+  cmd: pythagoras(4, 4, 5)[1]
+  out: 'Not a right triangle'
