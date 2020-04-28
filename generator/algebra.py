@@ -1,6 +1,7 @@
 from solver.algebra import (
     circle_equation,
     complete_square,
+    div,
     equation,
     expindex,
     mult,
@@ -10,6 +11,7 @@ from solver.algebra import (
     stfdiv,
     stfsub,
 )
+from math import gcd
 from generator.helpers import pick
 from random import randint, choice
 
@@ -66,6 +68,52 @@ def generate_complete_square(level):
     x = symbols("x")
     eq = nsimplify(Expand(a * (x + h) ** 2 + k))
     return ("Complete the square",) + complete_square(eq)
+
+
+# ---------
+# Fractions
+# ---------
+
+
+def coprime(a, b):
+    return gcd(a, b) == 1
+
+
+def coprime_ordered(a, b):
+    return a < b and gcd(a, b) == 1
+
+
+def fraction_exercise(level, function):
+    (a, b) = pick(
+        {
+            1: ([1, 1], [2, 5]),
+            3: ([1, 1], [2, 9]),
+            4: ([2, 9], [2, 9], coprime_ordered),
+            7: ([2, 13], [2, 13], coprime),
+        },
+        level,
+    )
+    (c, d) = pick(
+        {
+            1: ([1, 1], [2, 5]),
+            2: ([2, 2], [2, 5], coprime),
+            3: ([2, 5], [2, 5], coprime),
+            4: ([2, 9], [2, 9], coprime_ordered),
+            7: ([2, 13], [2, 13], coprime),
+        },
+        level,
+    )
+    return ("Calculate the following",) + function(nsimplify(a / b), nsimplify(c / d))
+
+
+def generate_divfrac(level):
+    """Divide Fractions"""
+    return fraction_exercise(level, div)
+
+
+def generate_multfrac(level):
+    """Multiply Fractions"""
+    return fraction_exercise(level, mult)
 
 
 def generate_equation(level):
