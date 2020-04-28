@@ -74,11 +74,13 @@ def generate_complete_square(level):
 # Fractions
 # ---------
 
-def condition_frac(ascending_order=False):
-    if ascending_order:
-        return lambda a, b: a < b and gcd(a, b) == 1
-    else:
-        return lambda a, b: gcd(a, b) == 1
+
+def coprime(a, b):
+    return gcd(a, b) == 1
+
+
+def coprime_ordered(a, b):
+    return a, b: a < b and gcd(a, b) == 1
 
 
 def fraction_exercise(level, function):
@@ -86,18 +88,18 @@ def fraction_exercise(level, function):
         {
             1: ([1, 1], [2, 5]),
             3: ([1, 1], [2, 9]),
-            4: ([2, 9], [2, 9], condition_frac(True)),
-            7: ([2, 13], [2, 13], condition_frac()),
+            4: ([2, 9], [2, 9], coprime_ordered),
+            7: ([2, 13], [2, 13], coprime),
         },
         level,
     )
     (c, d) = pick(
         {
             1: ([1, 1], [2, 5]),
-            2: ([2, 2], [2, 5], condition_frac()),
-            3: ([2, 5], [2, 5], condition_frac()),
-            4: ([2, 9], [2, 9], condition_frac(True)),
-            7: ([2, 13], [2, 13], condition_frac()),
+            2: ([2, 2], [2, 5], coprime),
+            3: ([2, 5], [2, 5], coprime),
+            4: ([2, 9], [2, 9], coprime_ordered),
+            7: ([2, 13], [2, 13], coprime),
         },
         level,
     )
