@@ -33,7 +33,7 @@ loadLanguages(markdown);
 export default {
     name: 'File',
     data() {
-        var path = this.$route.params.dir + '/' + this.$route.params.filename
+        var path = 'resources/' + this.$route.params.dir + '/' + this.$route.params.filename
         var data = resources.filter(function (res) {
             return res.path === path
         });

@@ -30,7 +30,7 @@ const routes = [
     { path: '/starter', component: Starter },
     { path: '/teaching', component: Teaching },
     { path: '/file', component: File },
-    { path: '/file/:dir/:filename', component: File },
+    { path: '/file/resources/:dir/:filename', component: File },
 ]
 
 const router = new VueRouter({
