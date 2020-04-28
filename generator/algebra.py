@@ -308,8 +308,7 @@ def generate_stf2dec(level):
     return ("Convert to an ordinary number",) + generate_stf(level)[2:0:-1]
 
 
-def generate_multfrac(level):
-    """Multiply Fractions"""
+def fraction_exercise(level, function):
     (a, b) = pick(
         {
             1: ([1, 1], [2, 5]),
@@ -329,27 +328,14 @@ def generate_multfrac(level):
         },
         level,
     )
-    return ("Calculate the following",) + mult(nsimplify(a / b), nsimplify(c / d))
+    return ("Calculate the following",) + function(nsimplify(a / b), nsimplify(c / d))
+
+
+def generate_multfrac(level):
+    """Multiply Fractions"""
+    return fraction_exercise(level, mult)
 
 
 def generate_divfrac(level):
     """Divide Fractions"""
-    (a, b) = pick(
-        {
-            1: ([1, 1], [2, 5]),
-            3: ([1, 1], [2, 9]),
-            4: ([2, 9], [2, 9], condition_frac(True)),
-            7: ([2, 13], [2, 13], condition_frac()),
-        },
-        level,
-    )
-    (c, d) = pick(
-        {
-            1: ([1, 1], [2, 9]),
-            3: ([2, 5], [2, 9], condition_frac()),
-            4: ([2, 9], [2, 9], condition_frac(True)),
-            7: ([2, 13], [2, 13], condition_frac()),
-        },
-        level,
-    )
-    return ("Calculate the following",) + div(nsimplify(a / b), nsimplify(c / d))
+    return fraction_exercise(level, div)
