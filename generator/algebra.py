@@ -1,4 +1,5 @@
 from solver.algebra import (
+    add,
     circle_equation,
     complete_square,
     div,
@@ -10,6 +11,7 @@ from solver.algebra import (
     stfadd,
     stfdiv,
     stfsub,
+    subtract,
 )
 from math import gcd
 from generator.helpers import pick
@@ -104,6 +106,16 @@ def fraction_exercise(level, function):
         level,
     )
     return ("Calculate the following",) + function(nsimplify(a / b), nsimplify(c / d))
+
+
+def generate_addfrac(level):
+    """Add Fractions"""
+    return fraction_exercise(level, add)
+
+
+def generate_subtractfrac(level):
+    """Subtract Fractions"""
+    return fraction_exercise(level, subtract)
 
 
 def generate_divfrac(level):
