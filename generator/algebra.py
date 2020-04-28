@@ -26,13 +26,6 @@ from sympy import (
 )
 
 
-def condition_frac(ascending_order=False):
-    if ascending_order:
-        return lambda a, b: a < b and gcd(a, b) == 1
-    else:
-        return lambda a, b: gcd(a, b) == 1
-
-
 def generate_circle_equation(level):
     """Radius/center from circle equation"""
     # Generating a random equation in canonical form
@@ -75,6 +68,50 @@ def generate_complete_square(level):
     x = symbols("x")
     eq = nsimplify(Expand(a * (x + h) ** 2 + k))
     return ("Complete the square",) + complete_square(eq)
+
+
+# ---------
+# Fractions
+# ---------
+
+def condition_frac(ascending_order=False):
+    if ascending_order:
+        return lambda a, b: a < b and gcd(a, b) == 1
+    else:
+        return lambda a, b: gcd(a, b) == 1
+
+
+def fraction_exercise(level, function):
+    (a, b) = pick(
+        {
+            1: ([1, 1], [2, 5]),
+            3: ([1, 1], [2, 9]),
+            4: ([2, 9], [2, 9], condition_frac(True)),
+            7: ([2, 13], [2, 13], condition_frac()),
+        },
+        level,
+    )
+    (c, d) = pick(
+        {
+            1: ([1, 1], [2, 5]),
+            2: ([2, 2], [2, 5], condition_frac()),
+            3: ([2, 5], [2, 5], condition_frac()),
+            4: ([2, 9], [2, 9], condition_frac(True)),
+            7: ([2, 13], [2, 13], condition_frac()),
+        },
+        level,
+    )
+    return ("Calculate the following",) + function(nsimplify(a / b), nsimplify(c / d))
+
+
+def generate_divfrac(level):
+    """Divide Fractions"""
+    return fraction_exercise(level, div)
+
+
+def generate_multfrac(level):
+    """Multiply Fractions"""
+    return fraction_exercise(level, mult)
 
 
 def generate_equation(level):
@@ -306,36 +343,3 @@ def generate_stfsub(level):
 def generate_stf2dec(level):
     """Standard form to ordinary"""
     return ("Convert to an ordinary number",) + generate_stf(level)[2:0:-1]
-
-
-def fraction_exercise(level, function):
-    (a, b) = pick(
-        {
-            1: ([1, 1], [2, 5]),
-            3: ([1, 1], [2, 9]),
-            4: ([2, 9], [2, 9], condition_frac(True)),
-            7: ([2, 13], [2, 13], condition_frac()),
-        },
-        level,
-    )
-    (c, d) = pick(
-        {
-            1: ([1, 1], [2, 5]),
-            2: ([2, 2], [2, 5], condition_frac()),
-            3: ([2, 5], [2, 5], condition_frac()),
-            4: ([2, 9], [2, 9], condition_frac(True)),
-            7: ([2, 13], [2, 13], condition_frac()),
-        },
-        level,
-    )
-    return ("Calculate the following",) + function(nsimplify(a / b), nsimplify(c / d))
-
-
-def generate_multfrac(level):
-    """Multiply Fractions"""
-    return fraction_exercise(level, mult)
-
-
-def generate_divfrac(level):
-    """Divide Fractions"""
-    return fraction_exercise(level, div)
