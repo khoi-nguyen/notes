@@ -10,6 +10,7 @@ from solver.algebra import (
     stfdiv,
     stfsub,
 )
+from math import gcd
 from generator.helpers import pick
 from random import randint, choice
 
@@ -305,18 +306,18 @@ def generate_multfrac(level):
         {
             1: ([1, 1], [2, 5]),
             3: ([1, 1], [2, 9]),
-            4: ([2, 9], [2, 9], lambda a, b: a < b and (10 * a) % b != 0),
-            7: ([2, 13], [2, 13], lambda a, b: (10 * a) % b != 0),
+            4: ([2, 9], [2, 9], lambda a, b: a < b and gcd(a, b) == 1),
+            7: ([2, 13], [2, 13], lambda a, b: gcd(a, b) == 1),
         },
         level,
     )
     (c, d) = pick(
         {
             1: ([1, 1], [2, 5]),
-            2: ([2, 2], [2, 5], lambda c, d: (2 * c) % d != 0),
-            3: ([2, 5], [2, 5], lambda c, d: (2 * c) % d != 0),
-            4: ([2, 9], [2, 9], lambda c, d: c < d and (10 * c) % d != 0),
-            7: ([2, 13], [2, 13], lambda c, d: (10 * c) % d != 0),
+            2: ([2, 2], [2, 5], lambda c, d: gcd(c, d) == 1),
+            3: ([2, 5], [2, 5], lambda c, d: gcd(c, d) == 1),
+            4: ([2, 9], [2, 9], lambda c, d: c < d and gcd(c, d) == 1),
+            7: ([2, 13], [2, 13], lambda c, d: gcd(c, d) == 1),
         },
         level,
     )
