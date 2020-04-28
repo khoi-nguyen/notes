@@ -1,11 +1,21 @@
 ---
 # Law of Cosines
 - name: Law of cosines to check right triangle has an angle of 90 degrees
-  cmd: cosine_law(3, 4, 5)['solution']
+  cmd: cosine_law(3, 4, 5, 'gamma')[1]
   out: '\gamma = 90'
 - name: Law of cosines to find length
-  cmd: cosine_law(8, 10, 'x', 60*DEG)['solution']
+  cmd: cosine_law(8, 10, 'x', 60*DEG)[1]
   out: 'x = 2 \sqrt{21}'
 - name: Law of cosines to find angle in radians
-  cmd: cosine_law('sqrt(2)', 5, 'sqrt(17)', 'alpha', radians=True)['solution']
+  cmd: cosine_law('sqrt(2)', 5, 'sqrt(17)', 'alpha', radians=True)[1]
   out: '\alpha = \frac{\pi}{4}'
+# Pythagoras
+- name: Get missing length by Pythagoras's Theorem
+  cmd: pythagoras('a', 8, 10)[1]
+  out: 'a = 6'
+- name: Check if right triangle
+  cmd: pythagoras(3, 4, 5)[1]
+  out: 'Right triangle'
+- name: Check if right triangle
+  cmd: pythagoras(4, 4, 5)[1]
+  out: 'Not a right triangle'

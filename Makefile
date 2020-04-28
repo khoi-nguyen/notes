@@ -72,7 +72,7 @@ clean:
 
 %.pdf: %.tex
 	@echo Building $@ with LaTeX...
-	cd $(@D); $(LATEX) $(<F)
+	@cd $(@D); $(LATEX) $(<F)
 
 node_modules: package-lock.json package.json
 	@npm install
@@ -87,10 +87,10 @@ videos: $(VIDEOS)
 env: env/bin/activate
 
 env/bin/activate: requirements.txt
-	test -d env || python3 -m venv env
-	$(START_ENV) pip3 install -Ur requirements.txt
-	touch env/bin/activate
+	@test -d env || python3 -m venv env
+	@$(START_ENV) pip3 install -Ur requirements.txt
+	@touch env/bin/activate
 
 format: $(ENV)
-	$(START_ENV) black .
+	@$(START_ENV) black .
 	@$(START_ENV) python3 -m flake8

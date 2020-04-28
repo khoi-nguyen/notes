@@ -6,7 +6,7 @@ DEG = PI / 180
 RAD = 180 / PI
 
 
-def cosine_law(a, b, c, gamma="gamma", radians=False):
+def cosine_law(a, b, c, gamma, radians=False):
     """Apply the Law of Cosines to find an angle or a length
 
     :param a: first side
@@ -33,11 +33,38 @@ def cosine_law(a, b, c, gamma="gamma", radians=False):
     )
     sol = sols.args[0] * (1 if radians or not solve_for_angle else RAD)
 
-    return {
-        "a": latex(a),
-        "b": latex(b),
-        "c": latex(c),
-        "sol": latex(sol),
-        "solution": f"{latex(symbol)} = {latex(sol)}",
-        "symbol": latex(symbol),
-    }
+    return (
+        {
+            "a": latex(a),
+            "b": latex(b),
+            "c": latex(c),
+            "gamma": latex(gamma),
+            "sol": latex(sol),
+            "symbol": latex(symbol),
+        },
+        f"{latex(symbol)} = {latex(sol)}",
+    )
+
+
+def pythagoras(a, b, c, radians=False):
+    """Checks if right triangle, and compute required lengths
+
+    :param a: first side
+    :param b: second side
+    :param c: third side
+    :param radians: use radians if True, degrees otherwise
+    """
+    is_symbol = [isinstance(sympify(l), Symbol) for l in [a, b, c]]
+    solve_for_angle = is_symbol == 3 * [False]
+
+    if solve_for_angle:
+        (data, solution) = cosine_law(a, b, c, "gamma")
+        if data["sol"] == "90":
+            solution = "Right triangle"
+        else:
+            solution = "Not a right triangle"
+    else:
+        (data, solution) = cosine_law(a, b, c, 90 * DEG, radians=radians)
+        del data["gamma"]
+
+    return (data, solution)
