@@ -297,3 +297,27 @@ def generate_stfsub(level):
 def generate_stf2dec(level):
     """Standard form to ordinary"""
     return ("Convert to an ordinary number",) + generate_stf(level)[2:0:-1]
+
+
+def generate_multfrac(level):
+    """Multiply Fractions"""
+    (a, b) = pick(
+        {
+            1: ([1, 1], [2, 5]),
+            3: ([1, 1], [2, 9]),
+            4: ([2, 9], [2, 9], lambda a, b: a < b and (10 * a) % b != 0),
+            7: ([2, 13], [2, 13], lambda a, b: (10 * a) % b != 0),
+        },
+        level,
+    )
+    (c, d) = pick(
+        {
+            1: ([1, 1], [2, 5]),
+            2: ([2, 2], [2, 5], lambda c, d: (2 * c) % d != 0),
+            3: ([2, 5], [2, 5], lambda c, d: (2 * c) % d != 0),
+            4: ([2, 9], [2, 9], lambda c, d: c < d and (10 * c) % d != 0),
+            7: ([2, 13], [2, 13], lambda c, d: (10 * c) % d != 0),
+        },
+        level,
+    )
+    return ("Calculate the following",) + mult(nsimplify(a / b), nsimplify(c / d))
