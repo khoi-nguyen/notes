@@ -6,7 +6,7 @@ DEG = PI / 180
 RAD = 180 / PI
 
 
-def cosine_law(a, b, c, gamma="gamma", radians=False):
+def cosine_law(a, b, c, gamma, radians=False):
     """Apply the Law of Cosines to find an angle or a length
 
     :param a: first side
@@ -33,11 +33,14 @@ def cosine_law(a, b, c, gamma="gamma", radians=False):
     )
     sol = sols.args[0] * (1 if radians or not solve_for_angle else RAD)
 
-    return {
-        "a": latex(a),
-        "b": latex(b),
-        "c": latex(c),
-        "sol": latex(sol),
-        "solution": f"{latex(symbol)} = {latex(sol)}",
-        "symbol": latex(symbol),
-    }
+    return (
+        {
+            "a": latex(a),
+            "b": latex(b),
+            "c": latex(c),
+            "gamma": latex(gamma),
+            "sol": latex(sol),
+            "symbol": latex(symbol),
+        },
+        f"{latex(symbol)} = {latex(sol)}",
+    )
