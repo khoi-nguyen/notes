@@ -80,7 +80,7 @@ def coprime(a, b):
 
 
 def coprime_ordered(a, b):
-    return a, b: a < b and gcd(a, b) == 1
+    return a < b and gcd(a, b) == 1
 
 
 def fraction_exercise(level, function):
