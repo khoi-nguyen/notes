@@ -73,6 +73,8 @@ mult = lambda *terms, **options: _mult("\\times ", ")*(", terms, options)
 div = lambda *terms, **options: _mult("\\div ", ")/(", terms, options, latex, True)
 frac = lambda *terms, **options: _mult("}{", ")/(", terms, options)
 lcm = lambda *terms: (",".join([str(t) for t in terms]), Lcm(terms))
+add = lambda *terms, **options: _mult(" + ", ")+(", terms, options)
+subtract = lambda *terms, **options: _mult(" - ", ")-(", terms, options)
 
 
 def power(expr, power, **substitutions):
