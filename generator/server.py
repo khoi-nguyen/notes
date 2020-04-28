@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from .algebra import *
 from .analysis import *
+from .geometry import *
 
 app = Flask(__name__)
 CORS(app)
