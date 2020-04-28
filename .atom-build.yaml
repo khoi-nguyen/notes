@@ -3,6 +3,8 @@ name: current
 targets:
   handouts:
     cmd: vagrant ssh -c 'cd /vagrant; make -j 10 handouts'
+  tests:
+    cmd: vagrant ssh -c 'cd /vagrant; make tests'
   all:
     cmd: vagrant ssh -c 'cd /vagrant; make -j 10 all'
   clean:
