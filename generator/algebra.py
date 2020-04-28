@@ -1,6 +1,7 @@
 from solver.algebra import (
     circle_equation,
     complete_square,
+    div,
     equation,
     expindex,
     mult,
@@ -322,3 +323,25 @@ def generate_multfrac(level):
         level,
     )
     return ("Calculate the following",) + mult(nsimplify(a / b), nsimplify(c / d))
+
+def generate_divfrac(level):
+    """Divide Fractions"""
+    (a, b) = pick(
+        {
+            1: ([1, 1], [2, 5]),
+            3: ([1, 1], [2, 9]),
+            4: ([2, 9], [2, 9], lambda a, b: a < b and gcd(a, b) == 1),
+            7: ([2, 13], [2, 13], lambda a, b: gcd(a, b) == 1),
+        },
+        level,
+    )
+    (c, d) = pick(
+        {
+            1: ([1, 1], [2, 9]),
+            3: ([2, 5], [2, 9], lambda c, d: gcd(c, d) == 1),
+            4: ([2, 9], [2, 9], lambda c, d: c < d and gcd(c, d) == 1),
+            7: ([2, 13], [2, 13], lambda c, d: gcd(c, d) == 1),
+        },
+        level,
+    )
+    return ("Calculate the following",) + div(nsimplify(a / b), nsimplify(c / d))
