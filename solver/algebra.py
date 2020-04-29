@@ -10,6 +10,7 @@ from sympy import (
     N,
     Pow,
     powdenest,
+    powsimp,
     simplify as Simplify,
     solve,
     sqrt,
@@ -53,9 +54,9 @@ def _exercise(solve=False, op=False, std_form=False):
             elif op == "-":
                 return Add(terms[0], Mul(-1, terms[1]))
             elif op == "*":
-                return Mul(*terms)
+                return powsimp(Mul(*terms))
             else:
-                return Mul(terms[0], Pow(terms[1], -1))
+                return powsimp(Mul(terms[0], Pow(terms[1], -1)))
 
     else:
 

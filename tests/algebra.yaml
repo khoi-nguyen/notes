@@ -23,6 +23,11 @@
   out:
     - 4^{2} \times 4^{3}
     - 4^{5}
+- name: Index multiplication (letter for base and power)
+  cmd: mult('y^k', 'y^3')
+  out:
+    - y^{k} \times y^{3}
+    - y^{k + 3}
 - name: Exercise overwrite
   cmd: mult('x^3', 'x^4', l='hello')
   out:
@@ -33,6 +38,11 @@
   out:
     - 3^{7} \div 3^{2}
     - 3^{5}
+- name: Index division (letter for base and power)
+  cmd: div('y^k', 'y^3')
+  out:
+    - y^{k} \div y^{3}
+    - y^{k - 3}
 - name: Index division (fraction)
   cmd: frac('a^7', 'a^2', a=3)
   out:
