@@ -19,7 +19,7 @@
     - 3^{2}
     - '9'
 - name: Index multiplication
-  cmd: mult('a^2', 'a^3', a=4)
+  cmd: mult('4^2', '4^3')
   out:
     - 4^{2} \times 4^{3}
     - 4^{5}
@@ -34,7 +34,7 @@
     - hello
     - x^{7}
 - name: Index division
-  cmd: div('a^7', 'a^2', a=3)
+  cmd: div('3^7', '3^2')
   out:
     - 3^{7} \div 3^{2}
     - 3^{5}
@@ -44,7 +44,7 @@
     - y^{k} \div y^{3}
     - y^{k - 3}
 - name: Index division (fraction)
-  cmd: frac('a^7', 'a^2', a=3)
+  cmd: frac('3^7', '3^2')
   out:
     - \frac{3^{7}}{3^{2}}
     - 3^{5}

@@ -14,6 +14,7 @@ from sympy import (
     simplify as Simplify,
     solve,
     sqrt,
+    Symbol,
     symbols,
     sympify,
     UnevaluatedExpr,
@@ -38,11 +39,16 @@ def _exercise(solve=False, op=False, std_form=False):
         }
 
         # Specify which simplifications we allow
-        # e.g. allow multiplications but not powers
-        def pre(term):
-            args = [pre(a) for a in term.args]
+        # e.g. allow multiplications but don't touch power bases
+        def pre(term, level=0):
+            args = [pre(a, level + 1) for a in term.args]
             if term.func == Mul:
                 term = Mul(*args, evaluate=True)
+            if term.func == Pow and not level:
+                [base, power] = args
+                # Ensure this is not a fraction with numerator 1
+                if base.func != Symbol and power != -1:
+                    term = Pow(UnevaluatedExpr(args[0]), args[1])
             return term
 
         def transform_term(term):
@@ -61,6 +67,7 @@ def _exercise(solve=False, op=False, std_form=False):
             return exercise
 
         def _solve(terms):
+            terms = [pre(t) for t in terms]
             if op == "+":
                 return Add(*terms)
             elif op == "-":
@@ -78,16 +85,11 @@ def _exercise(solve=False, op=False, std_form=False):
         def _solve(terms):
             return solve(terms[0])
 
-    def exercise(*terms, **subs):
-        latex_override = subs.pop("l", False)
-        subs = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in subs.items()]
-        terms = [sympify(t, evaluate=False).subs(subs) for t in terms]
+    def exercise(*terms):
+        terms = [sympify(t, evaluate=False) for t in terms]
         exercise = transform(terms)
         solution = _solve(terms)
         solution = stf(solution)[1] if std_form else latex(solution)
-
-        if latex_override:
-            exercise = latex_override
         return (exercise, solution)
 
     return exercise
