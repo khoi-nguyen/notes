@@ -29,20 +29,24 @@ def latex(expr):
     return ltx
 
 
-def exercise(expr, callback_ex, callback_sol, **options):
-    substitutions = [
-        (symbols(t), UnevaluatedExpr(v)) for (t, v) in options.items() if t not in ["l"]
-    ]
-    exercise = (
-        options["l"] if "l" in options.keys() else callback_ex(expr).subs(substitutions)
-    )
-    solution = callback_sol(expr).subs(substitutions)
-    return (latex(exercise), latex(solution))
+def _algebra_exercise(solve):
+    """Template to create simple solvers
+
+    :param solve: Sympy method to solve the exercise
+    """
+
+    def exercise(expr):
+        expr = Sympify(expr, evaluate=False)
+        exercise = expr
+        solution = solve(exercise)
+        return (latex(exercise), latex(solution))
+
+    return exercise
 
 
-simplify = lambda expr, **options: exercise(expr, sympify, Simplify, **options)
-expand = lambda expr, **options: exercise(expr, sympify, Expand, **options)
-factorise = lambda expr, **options: exercise(expr, sympify, factor, **options)
+expand = _algebra_exercise(Expand)
+factorise = _algebra_exercise(factor)
+simplify = _algebra_exercise(Simplify)
 
 
 def expindex(base, power):
