@@ -53,6 +53,11 @@
   out:
     - bonjour
     - x^{5} y^{2}
+- name: Avoid unnecessary bracket around negative numbers
+  cmd: div('-3*x^3', 'x^2')
+  out:
+    - '- 3 x^{3} \div x^{2}'
+    - '- 3 x'
 - name: Raising a power to another power
   cmd: power('a^3', 4, a=2)
   out:

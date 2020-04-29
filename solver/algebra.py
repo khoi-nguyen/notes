@@ -37,10 +37,22 @@ def _exercise(solve=False, op=False, std_form=False):
             "div": " \\div ",
         }
 
-        def transform(terms):
+        # Specify which simplifications we allow
+        # e.g. allow multiplications but not powers
+        def pre(term):
+            args = [pre(a) for a in term.args]
+            if term.func == Mul:
+                term = Mul(*args, evaluate=True)
+            return term
+
+        def transform_term(term):
+            term = pre(term)
             if std_form:
-                terms = [stf(t)[1] for t in terms]
-            terms = [latex(t) for t in terms]
+                term = stf(term)[1]
+            return latex(term)
+
+        def transform(terms):
+            terms = [transform_term(t) for t in terms]
             if op == "div" and " " in terms[1]:
                 terms[1] = f"\\br{{{terms[1]}}}"
             exercise = join_str[op].join(terms)
