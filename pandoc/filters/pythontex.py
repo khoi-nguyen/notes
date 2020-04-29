@@ -6,6 +6,7 @@ from solver.analysis import *
 from solver.stats import *
 from solver.probability import *
 from .tikz import *
+from figures.fractions import *
 
 # Shortcuts
 blatex = lambda x: RawBlock("latex", x)
