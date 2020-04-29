@@ -294,7 +294,10 @@ def generate_stfadd(level):
         },
         level,
     )
-    bound_distance = lambda C: lambda p1, p2: Abs(p1 - p2) <= C
+
+    def bound_distance(C):
+        return lambda p1, p2: Abs(p1 - p2) <= C
+
     powers_constraints = {
         1: ([1, 5], [1, 5], bound_distance(0)),
         3: ([-3, 3], [1, 5], bound_distance(1)),

@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 
-from pandocfilters import toJSONFilter, RawBlock, OrderedList
-
-blatex = lambda x: RawBlock("latex", x)
+from pandocfilters import toJSONFilter, OrderedList
+from .helpers import blatex
 
 
 def main(key, value, fmt, meta):

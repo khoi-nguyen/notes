@@ -144,7 +144,8 @@ def stf(number):
     return (exercise, solution)
 
 
-stf2dec = lambda x: (stf(x)[1], stf(x)[0])
+def stf2dec(number):
+    return stf(number)[::-1]
 
 
 def circle_equation(info, lhs, rhs=0):
