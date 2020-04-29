@@ -28,11 +28,6 @@
   out:
     - y^{k} \times y^{3}
     - y^{k + 3}
-- name: Exercise overwrite
-  cmd: mult('x^3', 'x^4', l='hello')
-  out:
-    - hello
-    - x^{7}
 - name: Index division
   cmd: div('3^7', '3^2')
   out:
@@ -48,11 +43,6 @@
   out:
     - \frac{3^{7}}{3^{2}}
     - 3^{5}
-- name: Exercise overwrite
-  cmd: div('y^2', 'x^-5', l='bonjour')
-  out:
-    - bonjour
-    - x^{5} y^{2}
 - name: Avoid unnecessary bracket around negative numbers
   cmd: div('-3*x^3', 'x^2')
   out:

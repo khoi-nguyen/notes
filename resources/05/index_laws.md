@@ -86,9 +86,9 @@ $${\color{darkred} 2^4} \times {\color{darkblue} 2^3} = \overbrace{{\color{darkr
 # Multiplying Indices
 
 ::: {.Exercise t="Simplify the following:"}
-#) `mult('a^2', 'a^3', a=4)`
-#) `mult('a^4', 'a^2', a=10)`
-#) `mult('a^5', 'a^3', a=6)`
+#) `mult('4^2', '4^3')`
+#) `mult('10^4', '10^2')`
+#) `mult('6^5', '6^3')`
 #) `mult('m^2', 'm^4')`
 #) `mult('n^5', 'n^4')`
 #) `mult('p', 'p^3')`
@@ -107,21 +107,21 @@ $$x^a \times x^b = x^{a + b}$$
 # Multiplying Indices
 
 ::: {.Exercise t="Simplify the following indices:"}
-#) `mult('a^4', 'a^7', a=3)`
-#) `mult('a^2', 'a^6', a=2)`
-#) `mult('a^5', 'a^3', a=6)`
+#) `mult('3^4', '3^7')`
+#) `mult('2^2', '2^6')`
+#) `mult('6^5', '6^3')`
 #) `mult('x^3', 'x^2')`
 #) `mult('y^4', 'y^8')`
-#) `mult('a', 'a^4', a=9)`
+#) `mult('9', '9^4')`
 #) `mult('z^k', 'z^2')`
-#) `mult('a^20', 'a^27', a=32)`
+#) `mult('32^20', '32^27')`
 :::
 
 ::: {.Extension show=1 t="Evaluate the following:"}
 
-#) `mult('a^5', 'a^-3', a=6)`
-#) `mult('x^-2', 'x^7', l='x^{-2} \\times x^7')`
-#) `mult('a^13', 'a^-8', a=5)`
+#) `mult('6^5', '6^-3')`
+#) `mult('x^-2', 'x^7')`
+#) `mult('5^13', '5^-8')`
 :::
 
 # Dividing indices
@@ -144,9 +144,9 @@ Simplify $2^5 \div 2^3$
 
 ::: {.Exercise cols=2 t="Simplify the following"}
 
-#) `frac('a^5', 'a^2', a=4)`
-#) `frac('a^6', 'a^3', a=6)`
-#) `div('a^9', 'a^4', a=2)`
+#) `frac('4^5', '4^2')`
+#) `frac('6^6', '6^3')`
+#) `div('2^9', '2^4')`
 #) `frac('m^6', 'm^2')`
 #) `div('n^4', 'n^3')`
 #) `div('y^k', 'y^3')`
@@ -164,20 +164,20 @@ $$x^a \div x^b = \frac {x^a} {x^b} = x^{a - b}$$
 # Dividing indices
 
 ::: {.Exercise t="Simplify the following:"}
-#) `frac('a^7', 'a^2', a=3)`
-#) `frac('a^6', 'a^4', a=7)`
-#) `div('a^12', 'a^9', a=2)`
+#) `frac('3^7', '3^2')`
+#) `frac('7^6', '7^4')`
+#) `div('2^12', '2^9')`
 #) `div('x^8', 'x^3')`
 #) `frac('y^10', 'y^2')`
 #) `div('z^a', 'z^7')`
-#) `div('a^20', 'a^19', a=13)`
+#) `div('13^20', '13^19')`
 #) `frac('x^45', 'x^27')`
 :::
 
 ::: {.Extension show=1 t="Simplify the following:"}
-#) `div('a^4', 'a^-2', a=7)`
-#) `div('y^2', 'y^-5', l='y^2 \\div y^{-5}')`
-#) `div('a^14', 'a^14', a=23)`
+#) `div('7^4', '7^-2')`
+#) `div('y^2', 'y^-5')`
+#) `div('23^14', '23^14')`
 :::
 
 # Powers of indices

@@ -215,7 +215,7 @@ def generate_multindex(level):
     # Answers for integer or variable base
     if isinstance(base, int):
         return ("Simplify the following",) + mult(
-            f"a^{power_1}", f"a^{power_2}", a=base
+            f"{base}^{power_1}", f"{base}^{power_2}"
         )
     elif level == 9:
         return ("Simplify the following",) + mult(

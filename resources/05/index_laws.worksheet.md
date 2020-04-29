@@ -28,8 +28,8 @@ title: Indices worksheet
 
 ::: {.Exercise t="Simplify the following:"}
 
-#) `mult('a^2', 'a^3', a=5)`
-#) `mult('a^5', 'a^2', a=10)`
+#) `mult('5^2', '5^3')`
+#) `mult('10^5', '10^2')`
 #) `mult('a^6', 'a^5')`
 #) `mult('x^5', 'x^-2')`
 #) `mult('2', '6*x^3')`
@@ -40,7 +40,7 @@ title: Indices worksheet
 
 ::: {.Exercise t="Simplify the following:"}
 
-#) `frac('a^8', 'a^2', a=4)`
+#) `frac('4^8', '4^2')`
 #) `frac('x^7', 'a^3')`
 #) `div('t^15', 't^10')`
 #) `div('t^15', 't^10')`
