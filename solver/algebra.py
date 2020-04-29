@@ -1,52 +1,88 @@
 import re
 from math import floor
 from sympy import (
+    Add,
     expand as Expand,
     factor,
     latex as Latex,
-    lcm as Lcm,
     log,
+    Mul,
     N,
     powdenest,
     simplify as Simplify,
     solve,
     sqrt,
     symbols,
-    sympify as Sympify,
+    sympify,
     UnevaluatedExpr,
 )
 
 
-def sympify(expr):
-    return Sympify(expr, evaluate=False)
-
-
 def latex(expr):
     if isinstance(expr, str):
-        expr = Sympify(expr)
+        expr = sympify(expr)
     ltx = Latex(expr).replace("cdot", "times")
     ltx = re.sub(r"\\left\((\-[0-9]+)\\right\) ", r"\1 ", ltx)
     return ltx
 
 
-def _algebra_exercise(solve):
+def _exercise(solve=False, op=False):
     """Template to create simple solvers
 
     :param solve: Sympy method to solve the exercise
+    :param op: Operation
     """
 
-    def exercise(expr):
-        expr = Sympify(expr, evaluate=False)
-        exercise = expr
-        solution = solve(exercise)
-        return (latex(exercise), latex(solution))
+    # Add, subtract, multiply, divide
+    if op:
+        join_str = {
+            "+": " + ",
+            "-": " - ",
+            "*": " \\times ",
+        }
+
+        def transform(terms):
+            terms = [latex(t) for t in terms]
+            exercise = join_str[op].join(terms)
+            return exercise
+
+        def _solve(terms):
+            if op == "+":
+                return Add(*terms)
+            elif op == "-":
+                return Add(terms[0], Mul(-1, terms[1]))
+            elif op == "*":
+                return Mul(*terms)
+
+    else:
+
+        def transform(terms):
+            return latex(terms[0])
+
+        def _solve(terms):
+            return solve(terms[0])
+
+    def exercise(*terms, **subs):
+        latex_override = subs.pop("l", False)
+        subs = [(symbols(t), UnevaluatedExpr(v)) for (t, v) in subs.items()]
+        terms = [sympify(t, evaluate=False).subs(subs) for t in terms]
+        exercise = transform(terms)
+        solution = _solve(terms)
+
+        if latex_override:
+            exercise = latex_override
+        return (exercise, latex(solution))
 
     return exercise
 
 
-expand = _algebra_exercise(Expand)
-factorise = _algebra_exercise(factor)
-simplify = _algebra_exercise(Simplify)
+expand = _exercise(Expand)
+factorise = _exercise(factor)
+simplify = _exercise(Simplify)
+
+add = _exercise(op="+")
+mult = _exercise(op="*")
+subtract = _exercise(op="-")
 
 
 def expindex(base, power):
@@ -73,12 +109,8 @@ def _mult(join_ex, join_sol, terms, options, cbk=latex, div=False):
     return (exercise, cbk(solution))
 
 
-mult = lambda *terms, **options: _mult("\\times ", ")*(", terms, options)
 div = lambda *terms, **options: _mult("\\div ", ")/(", terms, options, latex, True)
 frac = lambda *terms, **options: _mult("}{", ")/(", terms, options)
-lcm = lambda *terms: (",".join([str(t) for t in terms]), Lcm(terms))
-add = lambda *terms, **options: _mult(" + ", ")+(", terms, options)
-subtract = lambda *terms, **options: _mult(" - ", ")-(", terms, options)
 
 
 def power(expr, power, **substitutions):

@@ -21,7 +21,7 @@
 - name: Index multiplication
   cmd: mult('a^2', 'a^3', a=4)
   out:
-    - 4^{2}\times 4^{3}
+    - 4^{2} \times 4^{3}
     - 4^{5}
 - name: Exercise overwrite
   cmd: mult('x^3', 'x^4', l='hello')
@@ -50,7 +50,7 @@
     - 2^{12}
 - name: Minus signs when raising power to a power
   cmd: question(power('-3*x', 3))
-  out: '\br{-3 x}^{3}'
+  out: '\br{- 3 x}^{3}'
 - name: Expanding index
   cmd: expindex(2, 3)
   out:
