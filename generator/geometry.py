@@ -7,7 +7,9 @@ from sympy import nsimplify
 def generate_pythagoras(level):
     """Pythagoras's Theorem"""
     # Generating a Pythagorean triple using Euclid's formula
-    max_hypothenuse = lambda N: lambda m, n, k: k * (m ** 2 + n ** 2) <= N and m > n
+    def max_hypothenuse(N):
+        return lambda m, n, k: k * (m ** 2 + n ** 2) <= N and m > n
+
     (m, n, k) = pick(
         {
             1: ([1, 9], [1, 9], [1, 9], max_hypothenuse(9)),

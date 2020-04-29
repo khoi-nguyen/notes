@@ -1,19 +1,17 @@
 #!/usr/bin/env python3
 
-from pandocfilters import toJSONFilter, Math, Span, RawInline, RawBlock
+from pandocfilters import toJSONFilter, Span
 from solver.algebra import *
 from solver.analysis import *
 from solver.stats import *
 from solver.probability import *
 from .tikz import *
+from figures.fractions import *
+from .helpers import *
 
-# Shortcuts
-blatex = lambda x: RawBlock("latex", x)
-ilatex = lambda x: RawInline("latex", x)
-imath = lambda x: Math({"t": "InlineMath"}, x)
 
-answer = lambda x: ("", x[1]) if isinstance(x, tuple) else ("", x)
-question = lambda x: x[0]
+def answer(x):
+    return ("", x[1]) if isinstance(x, tuple) else ("", x)
 
 
 def main(key, value, fmt, meta):

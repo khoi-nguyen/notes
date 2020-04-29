@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 
-from pandocfilters import toJSONFilter, RawInline, RawBlock, Div
+from pandocfilters import toJSONFilter, Div
 from .environment_list import environments
-
-blatex = lambda x: RawBlock("latex", x)
-ilatex = lambda x: RawInline("latex", x)
-answer = lambda x: [ilatex("\\answer{")] + x + [ilatex("}")]
+from .helpers import answer, blatex, ilatex
 
 tally = {env: 0 for env in environments}
 
