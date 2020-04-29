@@ -4,7 +4,7 @@ from sympy import (
     Add,
     expand as Expand,
     factor,
-    latex as Latex,
+    latex,
     log,
     Mul,
     N,
@@ -16,14 +16,6 @@ from sympy import (
     sympify,
     UnevaluatedExpr,
 )
-
-
-def latex(expr):
-    if isinstance(expr, str):
-        expr = sympify(expr)
-    ltx = Latex(expr).replace("cdot", "times")
-    ltx = re.sub(r"\\left\((\-[0-9]+)\\right\) ", r"\1 ", ltx)
-    return ltx
 
 
 def _exercise(solve=False, op=False):
@@ -168,7 +160,8 @@ stfsub = lambda *terms, **options: _mult(" - ", ")-(", terms, options, _stf)
 def circle_equation(info, lhs, rhs=0):
     if isinstance(lhs, str) and "=" in lhs:
         lhs, rhs = lhs.split("=")
-    eq = Expand(sympify(lhs) - sympify(rhs))
+    lhs, rhs = sympify(lhs), sympify(rhs)
+    eq = Expand(lhs - rhs)
     exercise = f"{latex(lhs)} = {latex(rhs)}"
 
     # alpha [ (x - v)^2 + (y - w)^2 - r^2 ] = 0
