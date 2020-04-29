@@ -8,6 +8,7 @@ from sympy import (
     log,
     Mul,
     N,
+    Pow,
     powdenest,
     simplify as Simplify,
     solve,
@@ -18,7 +19,7 @@ from sympy import (
 )
 
 
-def _exercise(solve=False, op=False):
+def _exercise(solve=False, op=False, std_form=False):
     """Template to create simple solvers
 
     :param solve: Sympy method to solve the exercise
@@ -31,11 +32,19 @@ def _exercise(solve=False, op=False):
             "+": " + ",
             "-": " - ",
             "*": " \\times ",
+            "frac": "}{",
+            "div": " \\div ",
         }
 
         def transform(terms):
+            if std_form:
+                terms = [stf(t)[1] for t in terms]
             terms = [latex(t) for t in terms]
+            if op == "div" and " " in terms[1]:
+                terms[1] = f"\\br{{{terms[1]}}}"
             exercise = join_str[op].join(terms)
+            if op == "frac":
+                exercise = f"\\frac{{{exercise}}}"
             return exercise
 
         def _solve(terms):
@@ -45,6 +54,8 @@ def _exercise(solve=False, op=False):
                 return Add(terms[0], Mul(-1, terms[1]))
             elif op == "*":
                 return Mul(*terms)
+            else:
+                return Mul(terms[0], Pow(terms[1], -1))
 
     else:
 
@@ -60,10 +71,11 @@ def _exercise(solve=False, op=False):
         terms = [sympify(t, evaluate=False).subs(subs) for t in terms]
         exercise = transform(terms)
         solution = _solve(terms)
+        solution = stf(solution)[1] if std_form else latex(solution)
 
         if latex_override:
             exercise = latex_override
-        return (exercise, latex(solution))
+        return (exercise, solution)
 
     return exercise
 
@@ -73,36 +85,20 @@ factorise = _exercise(factor)
 simplify = _exercise(Simplify)
 
 add = _exercise(op="+")
+div = _exercise(op="div")
+frac = _exercise(op="frac")
 mult = _exercise(op="*")
 subtract = _exercise(op="-")
+
+stfadd = _exercise(op="+", std_form=True)
+stfdiv = _exercise(op="div", std_form=True)
+stffrac = _exercise(op="frac", std_form=True)
+stfmult = _exercise(op="*", std_form=True)
+stfsub = _exercise(op="-", std_form=True)
 
 
 def expindex(base, power):
     return (f"{{{base}}}^{{{power}}}", " \\times ".join([str(base)] * power))
-
-
-def _mult(join_ex, join_sol, terms, options, cbk=latex, div=False):
-    substitutions = [
-        (symbols(t), UnevaluatedExpr(v)) for (t, v) in options.items() if t not in ["l"]
-    ]
-    if "l" in options.keys():
-        exercise = options["l"]
-    else:
-        l_terms = [cbk(sympify(str(t)).subs(substitutions)) for t in terms]
-        # Bracket terms if necessary
-        if div and " " in l_terms[1]:
-            l_terms[1] = f"\\br{{{l_terms[1]}}}"
-        exercise = join_ex.join(l_terms)
-        if join_ex == "}{":
-            exercise = f"\\frac{{{exercise}}}"
-    solution = Simplify(f"({join_sol.join([str(t) for t in terms])})").subs(
-        substitutions
-    )
-    return (exercise, cbk(solution))
-
-
-div = lambda *terms, **options: _mult("\\div ", ")/(", terms, options, latex, True)
-frac = lambda *terms, **options: _mult("}{", ")/(", terms, options)
 
 
 def power(expr, power, **substitutions):
@@ -149,12 +145,6 @@ def stf(number):
 
 
 stf2dec = lambda x: (stf(x)[1], stf(x)[0])
-_stf = lambda t: stf(t)[1]
-stfmult = lambda *terms, **options: _mult(" \\times ", ")*(", terms, options, _stf)
-stfdiv = lambda *terms, **options: _mult(" \\div ", ")/(", terms, options, _stf, True)
-stffrac = lambda *terms, **options: _mult("}{", ")/(", terms, options, _stf)
-stfadd = lambda *terms, **options: _mult(" + ", ")+(", terms, options, _stf)
-stfsub = lambda *terms, **options: _mult(" - ", ")-(", terms, options, _stf)
 
 
 def circle_equation(info, lhs, rhs=0):
