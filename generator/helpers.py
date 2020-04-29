@@ -3,10 +3,26 @@ from random import randint, choice
 
 
 def pick(constraints, level):
-    """Pick random solution of a constraint that depends on level
+    """Pick random numbers satisfying a constraint depending on the level
 
-    :param contraints:
+    A constraint is a tuple consisting of ranges in which the numbers may be chosen,
+    followed by a function which returns True or False depending on whether the numbers
+    satisfy the constraint.
+
+    For example ``([0, 9], [0, 9], lambda: a, b: (a + b) / 2 == 6`` is constraint which
+    will force two random numbers to be between 0 and 9 and have an average of 6.
+
+    If there is no constraint associated with the desired level, the function will have
+    a look at the constraint defined in the closest lower level.
+
+    :param contraints: A dictionary of constraints indexed by level
     :param level: integer in range(0, 10)
+
+    Examples
+    ========
+
+    Pick a pair of numbers whose product is less than 10
+    >>> pick({1: ([0, 9], [0, 9], lambda a, b: a*b < 10)}, 1)
     """
 
     # Select the appropriate contstraint
