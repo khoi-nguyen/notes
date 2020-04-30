@@ -1,11 +1,8 @@
-from solver.exercise import Exercise, latex, OpExercise
+from solver.exercise import Exercise, latex, OpExercise, Stf, StfExercise
 from sympy import (
-    Abs,
     Add,
     expand as Expand,
     factor,
-    floor,
-    log,
     Mul,
     Pow,
     powdenest,
@@ -112,11 +109,11 @@ frac = _exercise(op="frac")
 mult = OpExercise(Mul)
 subtract = OpExercise(Subtract)
 
-stfadd = _exercise(op=Add, std_form=True)
+stfadd = StfExercise(Add)
 stfdiv = _exercise(op="div", std_form=True)
 stffrac = _exercise(op="frac", std_form=True)
-stfmult = _exercise(op=Mul, std_form=True)
-stfsub = _exercise(op=Subtract, std_form=True)
+stfmult = StfExercise(Mul)
+stfsub = StfExercise(Subtract)
 
 
 def expindex(base, power):
@@ -149,16 +146,6 @@ def complete_square(expr):
     exercise = latex(expr)
     solution = latex(solution.subs(dict(zip([alpha, h, k], sols))))
     return (exercise, solution)
-
-
-def Stf(number):
-    """Converts a float to standard notation as a sympy object
-    """
-    power = floor((log(Abs(number)) / log(10)).evalf())
-    x = Mul(number, Pow(10, -power)).evalf()
-    if float(x).is_integer():
-        x = int(x)
-    return Mul(x, Pow(UnevaluatedExpr(10), power, evaluate=False), evaluate=False)
 
 
 def display_float(number):
