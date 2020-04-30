@@ -32,14 +32,11 @@ class Exercise:
         self.solve = solve
         self.transform = transform
 
-    def export(self):
-        def exercise(*terms):
-            terms = [sympify(t, evaluate=False) for t in terms]
-            exercise = self.transform(*terms)
-            solution = self.solve(*terms)
-            return (exercise, latex(solution))
-
-        return exercise
+    def __call__(self, *terms):
+        terms = [sympify(t, evaluate=False) for t in terms]
+        exercise = self.transform(*terms)
+        solution = self.solve(*terms)
+        return (exercise, latex(solution))
 
 
 class OpExercise(Exercise):

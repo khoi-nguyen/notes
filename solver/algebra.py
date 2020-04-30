@@ -93,9 +93,9 @@ def _exercise(solve=False, op=False, std_form=False, transform=False):
     return exercise
 
 
-expand = Exercise(latex, Expand).export()
-factorise = Exercise(latex, factor).export()
-simplify = Exercise(latex, Simplify).export()
+expand = Exercise(latex, Expand)
+factorise = Exercise(latex, factor)
+simplify = Exercise(latex, Simplify)
 
 
 def Div(a, b, **kwargs):
@@ -106,11 +106,11 @@ def Subtract(a, b, **kwargs):
     return Add(a, Mul(-1, b), **kwargs)
 
 
-add = OpExercise(Add).export()
+add = OpExercise(Add)
 div = _exercise(op="div")
 frac = _exercise(op="frac")
-mult = OpExercise(Mul).export()
-subtract = OpExercise(Subtract).export()
+mult = OpExercise(Mul)
+subtract = OpExercise(Subtract)
 
 stfadd = _exercise(op=Add, std_form=True)
 stfdiv = _exercise(op="div", std_form=True)
@@ -165,7 +165,7 @@ def display_float(number):
     return f"{number.evalf():.15f}".rstrip("0").rstrip(".")
 
 
-stf = Exercise(display_float, Stf).export()
+stf = Exercise(display_float, Stf)
 
 
 def stf2dec(number):
