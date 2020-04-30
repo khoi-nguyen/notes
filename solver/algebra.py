@@ -1,10 +1,10 @@
-from solver.exercise import Exercise, latex, OpExercise, Stf, StfExercise
+from solver.helpers import Stf, Subtract
+from solver.exercise import Exercise, latex, OpExercise, StfExercise
 from sympy import (
     Add,
     expand as Expand,
     factor,
     Mul,
-    Pow,
     powdenest,
     simplify as Simplify,
     solve,
@@ -61,14 +61,6 @@ def simplify(expression):
     ('\\frac{x^2}{x}', 'x')
     """
     return Exercise(latex, Simplify)(expression)
-
-
-def Div(a, b, **kwargs):
-    return Mul(a, Pow(b, -1), **kwargs)
-
-
-def Subtract(a, b, **kwargs):
-    return Add(a, Mul(-1, b), **kwargs)
 
 
 def add(*terms):

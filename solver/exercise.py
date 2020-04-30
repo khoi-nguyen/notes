@@ -1,8 +1,6 @@
+from solvers.helpers import Stf
 from sympy import (
-    Abs,
-    floor,
     latex as Latex,
-    log,
     Mul,
     Pow,
     powsimp,
@@ -68,16 +66,6 @@ class OpExercise(Exercise):
             return powsimp(Mul(terms[0], Pow(terms[1], -1)))
         else:
             return powsimp(self.op(*terms))
-
-
-def Stf(number):
-    """Converts a float to standard notation as a sympy object
-    """
-    power = floor((log(Abs(number)) / log(10)).evalf())
-    x = Mul(number, Pow(10, -power)).evalf()
-    if float(x).is_integer():
-        x = int(x)
-    return Mul(x, Pow(UnevaluatedExpr(10), power, evaluate=False), evaluate=False)
 
 
 class StfExercise(OpExercise):
