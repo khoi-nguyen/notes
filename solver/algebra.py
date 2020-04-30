@@ -14,9 +14,53 @@ from sympy import (
     UnevaluatedExpr,
 )
 
-expand = Exercise(latex, Expand)
-factorise = Exercise(latex, factor)
-simplify = Exercise(latex, Simplify)
+
+def expand(expression):
+    """Expand an algebraic expression
+
+    Parameters
+    ----------
+    expression : str
+        Mathematical expression to be expanded
+
+    Examples
+    --------
+    >>> expand('(x - 2) * (x - 3)')
+    ('(x - 2) (x - 3)', 'x^{2} - 5 x + 6')
+    """
+    return Exercise(latex, Expand)(expression)
+
+
+def factorise(expression):
+    """Factorise an algebraic expression
+
+    Parameters
+    ----------
+    expression : str
+        Mathematical expression to be factorised
+
+    Examples
+    --------
+    >>> factorise('x^2 - 5 * x + 6')
+    ('x^{2} - 5 x + 6', '(x - 2) (x - 3)')
+    """
+    return Exercise(latex, factor)(expression)
+
+
+def simplify(expression):
+    r"""Simplify an algebraic expression
+
+    Parameters
+    ----------
+    expression : str
+        Mathematical expression to be simplified
+
+    Examples
+    --------
+    >>> symplify('x^2/x')
+    ('\\frac{x^2}{x}', 'x')
+    """
+    return Exercise(latex, Simplify)(expression)
 
 
 def Div(a, b, **kwargs):
