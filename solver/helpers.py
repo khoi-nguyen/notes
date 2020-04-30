@@ -1,6 +1,10 @@
 from sympy import Abs, Add, floor, latex as Latex, log, Mul, Pow, UnevaluatedExpr
 
 
+def display_float(number):
+    return f"{number.evalf():.15f}".rstrip("0").rstrip(".")
+
+
 def latex(expr, **kwargs):
     return Latex(expr, **kwargs).replace("cdot", "times")
 

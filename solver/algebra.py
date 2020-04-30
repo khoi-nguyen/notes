@@ -1,4 +1,4 @@
-from solver.helpers import Stf, Subtract
+from solver.helpers import display_float, Stf, Subtract
 from solver.exercise import Exercise, latex, OpExercise, StfExercise
 from sympy import (
     Add,
@@ -149,12 +149,8 @@ def subtract(term1, term2):
     return OpExercise(Subtract)(term1, term2)
 
 
-def _display_float(number):
-    return f"{number.evalf():.15f}".rstrip("0").rstrip(".")
-
-
-stf = Exercise(_display_float, Stf)
-stf2dec = Exercise(lambda t: latex(Stf(t)), _display_float)
+stf = Exercise(display_float, Stf)
+stf2dec = Exercise(lambda t: latex(Stf(t)), display_float)
 stfadd = StfExercise(Add)
 stfdiv = StfExercise("div")
 stffrac = StfExercise("frac")
