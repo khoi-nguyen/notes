@@ -58,24 +58,32 @@ def _exercise(solve=False, op=False, std_form=False):
             return latex(term)
 
         def transform(terms):
-            terms = [transform_term(t) for t in terms]
-            if op == "div" and " " in terms[1]:
-                terms[1] = f"\\br{{{terms[1]}}}"
-            exercise = join_str[op].join(terms)
-            if op == "frac":
-                exercise = f"\\frac{{{exercise}}}"
+            if op in join_str.keys():
+                terms = [transform_term(t) for t in terms]
+                if op == "div" and " " in terms[1]:
+                    terms[1] = f"\\br{{{terms[1]}}}"
+                exercise = join_str[op].join(terms)
+                if op == "frac":
+                    exercise = f"\\frac{{{exercise}}}"
+            else:
+                exercise = latex(
+                    op(*terms, evaluate=False), mul_symbol="times", order="none"
+                )
             return exercise
 
         def _solve(terms):
             terms = [pre(t) for t in terms]
-            if op == "+":
-                return Add(*terms)
-            elif op == "-":
-                return Add(terms[0], Mul(-1, terms[1]))
-            elif op == "*":
-                return powsimp(Mul(*terms))
+            if op in join_str:
+                if op == "+":
+                    return Add(*terms)
+                elif op == "-":
+                    return Add(terms[0], Mul(-1, terms[1]))
+                elif op == "*":
+                    return powsimp(Mul(*terms))
+                else:
+                    return powsimp(Mul(terms[0], Pow(terms[1], -1)))
             else:
-                return powsimp(Mul(terms[0], Pow(terms[1], -1)))
+                return powsimp(op(*terms))
 
     else:
 
@@ -99,11 +107,20 @@ expand = _exercise(Expand)
 factorise = _exercise(factor)
 simplify = _exercise(Simplify)
 
-add = _exercise(op="+")
+
+def Div(a, b, **kwargs):
+    return Mul(a, Pow(b, -1), **kwargs)
+
+
+def Subtract(a, b, **kwargs):
+    return Add(a, Mul(-1, b), **kwargs)
+
+
+add = _exercise(op=Add)
 div = _exercise(op="div")
 frac = _exercise(op="frac")
-mult = _exercise(op="*")
-subtract = _exercise(op="-")
+mult = _exercise(op=Mul)
+subtract = _exercise(op=Subtract)
 
 stfadd = _exercise(op="+", std_form=True)
 stfdiv = _exercise(op="div", std_form=True)
