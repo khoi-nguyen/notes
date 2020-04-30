@@ -47,12 +47,27 @@ class OpExercise(Exercise):
         self.op = op
 
     def transform(self, *terms):
-        terms = [pre(t) for t in terms]
-        return latex(self.op(*terms, evaluate=False), mul_symbol="times", order="none")
+        if self.op in ["frac", "div"]:
+            terms = [latex(pre(t)) for t in terms]
+            join_str = "}{" if self.op == "frac" else r" \div "
+            if self.op == "div" and " " in terms[1]:
+                terms[1] = fr"\br{{{terms[1]}}}"
+            exercise = join_str.join(terms)
+            if self.op == "frac":
+                exercise = fr"\frac{{{exercise}}}"
+            return exercise
+        else:
+            terms = [pre(t) for t in terms]
+            return latex(
+                self.op(*terms, evaluate=False), mul_symbol="times", order="none"
+            )
 
     def solve(self, *terms):
         terms = [pre(t) for t in terms]
-        return powsimp(self.op(*terms))
+        if self.op in ["frac", "div"]:
+            return powsimp(Mul(terms[0], Pow(terms[1], -1)))
+        else:
+            return powsimp(self.op(*terms))
 
 
 def Stf(number):
