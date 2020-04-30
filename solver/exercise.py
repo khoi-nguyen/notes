@@ -62,7 +62,12 @@ class OpExercise(Exercise):
             solution = Mul(terms[0], Pow(terms[1], -1))
         else:
             solution = self.op(*terms)
-        return powsimp(ratsimp(solution))
+        # Simplify fractions if possible
+        try:
+            solution = ratsimp(solution)
+        except Exception:
+            pass
+        return powsimp(solution)
 
 
 class StfExercise(OpExercise):
