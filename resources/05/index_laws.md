@@ -193,10 +193,10 @@ $$\br{2^3}^4 = 2^3 \times 2^3 \times 2^3 \times 2^3 = 2^{12}$$
 # Powers of indices
 
 ::: {.Exercise t="Simplify the following:"}
-#) `power('a^2', '2', a=3)`
-#) `power('a^4', '3', a=5)`
-#) `power('a^3', '3', a=7)`
-#) `power('a^10', '2', a=5)`
+#) `power('3^2', '2')`
+#) `power('5^4', '3')`
+#) `power('7^3', '3')`
+#) `power('5^10', '2')`
 #) `power('m^5', '4')`
 #) `power('n^10', '7')`
 #) `power('y^k', '5')`
@@ -214,19 +214,19 @@ $$(x^a)^b = x^{ab}$$
 # Powers of Indices
 
 ::: {.Exercise t="Simplify the following:"}
-#) `power('a^3', 2, a=4)`
-#) `power('a^5', 3, a=10)`
+#) `power('4^3', 2)`
+#) `power('10^5', 3)`
 #) `power('x^7', 4)`
-#) `power('a^8', 6, a=9)`
+#) `power('9^8', 6)`
 #) `power('y^2', 20)`
 #) `power('z^3', 'x')`
-#) `power('a^10', 10, a=10)`
+#) `power('10^10', 10)`
 #) `power('a^y', 'b')`
 :::
 
 ::: {.Extension show=1 t="Simplify the following:"}
-#) `power('a^-2', 4, a=5)`
-#) `power('a^3', -80, a=49)`
+#) `power('5^-2', 4)`
+#) `power('49^3', -80)`
 #) `power('x^-y', '-z')`
 :::
 
