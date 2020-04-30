@@ -13,6 +13,8 @@ from sympy import (
 
 
 def latex(expr, **kwargs):
+    if isinstance(expr, str):
+        expr = sympify(expr)
     return Latex(expr, **kwargs).replace("cdot", "times")
 
 
