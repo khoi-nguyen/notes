@@ -71,11 +71,90 @@ def Subtract(a, b, **kwargs):
     return Add(a, Mul(-1, b), **kwargs)
 
 
-add = OpExercise(Add)
-div = OpExercise("div")
-frac = OpExercise("frac")
-mult = OpExercise(Mul)
-subtract = OpExercise(Subtract)
+def add(*terms):
+    r"""Add terms
+
+    Parameters
+    ----------
+    terms : list
+        List of strings which correspond to the mathematical expressions to add.
+
+    Examples
+    --------
+    >>> add('3/4', '1/2')
+    ('\\frac{3}{4} + \\frac{1}{2}', '\\frac{5}{4}')
+    """
+    return OpExercise(Add)(*terms)
+
+
+def div(dividend, divisor):
+    r"""Divide terms (with \div)
+
+    Parameters
+    ----------
+    dividend : string
+        Mathematical expression to divide.
+    divisor : string
+        What the dividend will be divided by.
+
+    Examples
+    --------
+    >>> div('3/4', '2/3')
+    ('\\frac{3}{4} \\div \\frac{2}{3}', '\\frac{9}{8}')
+    """
+    return OpExercise("div")(dividend, divisor)
+
+
+def frac(numerator, denominator):
+    r"""Divide terms (in fraction form)
+
+    Parameters
+    ----------
+    numerator : string
+        Mathematical expression to divide (numerator).
+    denominator : string
+        What the dividend will be divided by (denominator).
+
+    Examples
+    --------
+    >>> frac('3/4', '2/3')
+    ('\\frac{\\frac{3}{4}}{\\frac{2}{3}}', '\\frac{9}{8}')
+    """
+    return OpExercise("frac")(numerator, denominator)
+
+
+def mult(*terms):
+    r"""Multiply terms
+
+    Parameters
+    ----------
+    terms : list
+        List of strings which correspond to the mathematical expressions to multiply.
+
+    Examples
+    --------
+    >>> mult('3/4', '1/2')
+    ('\\frac{3}{4} \\times \\frac{1}{2}', '\\frac{3}{8}')
+    """
+    return OpExercise(Mul)(*terms)
+
+
+def subtract(term1, term2):
+    r"""Add terms
+
+    Parameters
+    ----------
+    term1 : string
+        Mathematical expression from which we want to subtract
+    term2 : string
+        Mathematical expression to subtract from 'term1'
+
+    Examples
+    --------
+    >>> add('3/4', '1/2')
+    ('\\frac{3}{4} + \\frac{1}{2}', '\\frac{5}{4}')
+    """
+    return OpExercise(Subtract)(term1, term2)
 
 
 def _display_float(number):
