@@ -149,18 +149,45 @@ def subtract(term1, term2):
     return OpExercise(Subtract)(term1, term2)
 
 
-stf = Exercise(display_float, Stf)
-stf2dec = Exercise(lambda t: latex(Stf(t)), display_float)
-stfadd = StfExercise(Add)
-stfdiv = StfExercise("div")
-stffrac = StfExercise("frac")
-stfmult = StfExercise(Mul)
-stfsub = StfExercise(Subtract)
+def stf(number):
+    return Exercise(display_float, Stf)(number)
 
-expindex = Exercise(
-    lambda base, power: f"{{{base}}}^{{{power}}}",
-    lambda base, power: r" \times ".join([str(base)] * power),
-)
+
+def stf2dec(number):
+    def transform(term):
+        return latex(Stf(term))
+
+    return Exercise(transform, display_float)(number)
+
+
+def stfadd(*terms):
+    return StfExercise(Add)(*terms)
+
+
+def stfdiv(dividend, divisor):
+    return StfExercise("div")(dividend, divisor)
+
+
+def stffrac(numerator, denominator):
+    return StfExercise("frac")(numerator, denominator)
+
+
+def stfmult(*terms):
+    return StfExercise(Mul)(*terms)
+
+
+def stfsub(*terms):
+    return StfExercise(Subtract)(*terms)
+
+
+def expindex(base, power):
+    def transform(base, power):
+        return f"{{{base}}}^{{{power}}}"
+
+    def solve(base, power):
+        return r" \times ".join([str(base)] * power)
+
+    return Exercise(transform, solve)(base, power)
 
 
 def power(expr, power, **substitutions):
