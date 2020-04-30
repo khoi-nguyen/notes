@@ -186,9 +186,7 @@ def generate_expindex(level):
     return ("Expand the power",) + expindex(base, power)
 
 
-def generate_multindex(level):
-    """Multiply Indices"""
-    # a**m * a**n where a is an integer
+def index_exercise(level, function):
     variables = ["a", "b", "c", "m", "n", "x", "y", "z"]
     base = pick({1: [2, 5], 3: variables, 7: variables + list(range(2, 10))}, level)
     powers_constraints = {
@@ -199,8 +197,19 @@ def generate_multindex(level):
     }
     power_1 = pick(powers_constraints, level)
     power_2 = pick(powers_constraints, level)
-    # Answers for integer or variable base
-    return ("Simplify the following",) + mult(f"{base}^{power_1}", f"{base}^{power_2}")
+    return ("Simplify the following",) + function(
+        f"{base}^{power_1}", f"{base}^{power_2}"
+    )
+
+
+def generate_multindex(level):
+    """Multiply Indices"""
+    return index_exercise(level, mult)
+
+
+def generate_divindex(level):
+    """Divide Indices"""
+    return index_exercise(level, div)
 
 
 def generate_quadratic_equation(level):
