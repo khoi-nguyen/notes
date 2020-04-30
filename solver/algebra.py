@@ -1,13 +1,12 @@
-import re
-from math import floor
 from sympy import (
+    Abs,
     Add,
     expand as Expand,
     factor,
-    latex,
+    floor,
+    latex as Latex,
     log,
     Mul,
-    N,
     Pow,
     powdenest,
     powsimp,
@@ -21,7 +20,11 @@ from sympy import (
 )
 
 
-def _exercise(solve=False, op=False, std_form=False):
+def latex(expr, **kwargs):
+    return Latex(expr, **kwargs).replace("cdot", "times")
+
+
+def _exercise(solve=False, op=False, std_form=False, transform=False):
     """Template to create simple solvers
 
     :param solve: Sympy method to solve the exercise
@@ -86,9 +89,10 @@ def _exercise(solve=False, op=False, std_form=False):
                 return powsimp(op(*terms))
 
     else:
+        if not transform:
 
-        def transform(terms):
-            return latex(terms[0])
+            def transform(terms):
+                return latex(terms[0])
 
         def _solve(terms):
             return solve(terms[0])
@@ -161,19 +165,21 @@ def complete_square(expr):
     return (exercise, solution)
 
 
-def stf(number):
-    exercise = re.sub(r"([1-9])\.?0*\s*$", r"\1", f"{N(number):.15f}")
-    exercise = re.sub(r"\.0*$", "", exercise)
-    number = sympify(str(number))
-    sign = ""
-    if number < 0:
-        sign = "-"
-        number = -1 * number
-    power = floor(log(number) / log(10))
-    x = number / 10 ** power
-    x = re.sub(r"([1-9])\.?0*$", r"\1", str(x.evalf()))
-    solution = f"{sign}{x} \\times 10^{{{power}}}"
-    return (exercise, solution)
+def Stf(number):
+    """Converts a float to standard notation as a sympy object
+    """
+    power = floor((log(Abs(number)) / log(10)).evalf())
+    x = Mul(number, Pow(10, -power)).evalf()
+    if float(x).is_integer():
+        x = int(x)
+    return Mul(x, Pow(UnevaluatedExpr(10), power, evaluate=False), evaluate=False)
+
+
+def display_float(number):
+    return f"{number.evalf():.15f}".rstrip("0").rstrip(".")
+
+
+stf = _exercise(Stf, transform=lambda t: display_float(t[0]))
 
 
 def stf2dec(number):
