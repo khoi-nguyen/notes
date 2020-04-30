@@ -1,4 +1,4 @@
-from solver.exercise import Exercise, latex
+from solver.exercise import Exercise, latex, OpExercise
 from sympy import (
     Abs,
     Add,
@@ -106,11 +106,11 @@ def Subtract(a, b, **kwargs):
     return Add(a, Mul(-1, b), **kwargs)
 
 
-add = _exercise(op=Add)
+add = OpExercise(Add).export()
 div = _exercise(op="div")
 frac = _exercise(op="frac")
-mult = _exercise(op=Mul)
-subtract = _exercise(op=Subtract)
+mult = OpExercise(Mul).export()
+subtract = OpExercise(Subtract).export()
 
 stfadd = _exercise(op=Add, std_form=True)
 stfdiv = _exercise(op="div", std_form=True)
@@ -165,7 +165,6 @@ def display_float(number):
     return f"{number.evalf():.15f}".rstrip("0").rstrip(".")
 
 
-stf = _exercise(Stf, transform=lambda t: display_float(t[0]))
 stf = Exercise(display_float, Stf).export()
 
 
