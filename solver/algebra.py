@@ -46,9 +46,10 @@ stffrac = StfExercise("frac")
 stfmult = StfExercise(Mul)
 stfsub = StfExercise(Subtract)
 
-
-def expindex(base, power):
-    return (f"{{{base}}}^{{{power}}}", " \\times ".join([str(base)] * power))
+expindex = Exercise(
+    lambda base, power: f"{{{base}}}^{{{power}}}",
+    lambda base, power: r" \times ".join([str(base)] * power),
+)
 
 
 def power(expr, power, **substitutions):
