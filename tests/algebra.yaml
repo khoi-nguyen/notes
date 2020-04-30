@@ -29,6 +29,11 @@
   out:
     - 4^{2} \times 4^{3}
     - 4^{5}
+- name: Index multiplication with power 1
+  cmd: mult('4^2', '4^1')
+  out:
+    - 4^{2} \times 4
+    - 4^{3}
 - name: Index multiplication (letter for base and power)
   cmd: mult('y^k', 'y^3')
   out:
