@@ -51,7 +51,10 @@ def pick(constraints, level):
     else:
         rand = ()
         for range_ in constraint:
-            [a, b], step = range_[:2], 1 if len(range_) < 3 else range_[2]
-            rand += (a + randint(0, int((b - a) // step)) * step,)
+            if len(range_) == 2:
+                [a, b], step = range_[:2], 1 if len(range_) < 3 else range_[2]
+                rand += (a + randint(0, int((b - a) // step)) * step,)
+            else:
+                rand += (choice(range_),)
 
     return rand[0] if len(rand) == 1 else rand

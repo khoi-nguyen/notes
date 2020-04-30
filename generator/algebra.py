@@ -15,7 +15,7 @@ from solver.algebra import (
 )
 from math import gcd
 from generator.helpers import pick
-from random import randint, choice
+from random import randint
 
 from sympy import (
     Abs,
@@ -189,42 +189,18 @@ def generate_expindex(level):
 def generate_multindex(level):
     """Multiply Indices"""
     # a**m * a**n where a is an integer
-    if level <= 2:
-        base = randint(2, 5)
-        power_1 = randint(1, 3 if level == 1 else 5)
-        power_2 = randint(1, 3 if level == 1 else 5)
-    # x**m * x**n
-    elif level <= 6:
-        variables = ["a", "b", "c", "m", "n", "x", "y", "z"]
-        base = choice(variables)
-        power_1 = randint(1 if level <= 4 else -9, 5 if level == 3 else 9)
-        power_2 = randint(1 if level <= 4 else -9, 5 if level == 3 else 9)
-    # y**m * y**n where y can be integer or variable
-    elif level <= 8:
-        base = choice(["a", "b", "c", "m", "n", "x", "y", "z"] + list(range(2, 10)))
-        power_1 = randint(-9, 9)
-        power_2 = randint(-9, 9)
-    # a**m * a**n -5 ≤ a ≤ -2
-    else:
-        variables = ["a", "b", "c", "m", "n", "x", "y", "z"]
-        base = choice(variables)
-        base_1 = f"(-{base})" if randint(0, 1) else base
-        base_2 = f"(-{base})" if randint(0, 1) else base
-        power_1 = randint(-9, 9)
-        power_2 = randint(-9, 9)
+    variables = ["a", "b", "c", "m", "n", "x", "y", "z"]
+    base = pick({1: [2, 5], 3: variables, 7: variables + list(range(2, 10))}, level)
+    powers_constraints = {
+        1: [1, 3],
+        3: [1, 5],
+        4: [1, 9],
+        5: [-9, 9],
+    }
+    power_1 = pick(powers_constraints, level)
+    power_2 = pick(powers_constraints, level)
     # Answers for integer or variable base
-    if isinstance(base, int):
-        return ("Simplify the following",) + mult(
-            f"{base}^{power_1}", f"{base}^{power_2}"
-        )
-    elif level == 9:
-        return ("Simplify the following",) + mult(
-            f"{base_1}^{power_1}", f"{base_2}^{power_2}"
-        )
-    else:
-        return ("Simplify the following",) + mult(
-            f"{base}^{power_1}", f"{base}^{power_2}"
-        )
+    return ("Simplify the following",) + mult(f"{base}^{power_1}", f"{base}^{power_2}")
 
 
 def generate_quadratic_equation(level):
