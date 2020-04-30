@@ -3,6 +3,7 @@ from sympy import (
     Mul,
     Pow,
     powsimp,
+    ratsimp,
     Symbol,
     sympify,
     UnevaluatedExpr,
@@ -58,9 +59,10 @@ class OpExercise(Exercise):
     def solve(self, *terms):
         terms = [pre(t) for t in terms]
         if self.op in ["frac", "div"]:
-            return powsimp(Mul(terms[0], Pow(terms[1], -1)))
+            solution = Mul(terms[0], Pow(terms[1], -1))
         else:
-            return powsimp(self.op(*terms))
+            solution = self.op(*terms)
+        return powsimp(ratsimp(solution))
 
 
 class StfExercise(OpExercise):

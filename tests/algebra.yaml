@@ -9,9 +9,15 @@
 - name: Adding fractions
   cmd: add('1/4', '1/7')
   out: ['\frac{1}{4} + \frac{1}{7}', '\frac{11}{28}']
+- name: Adding algebraic fractions
+  cmd: add('1/x', '1/(x + 1)')
+  out: ['\frac{1}{x} + \frac{1}{x + 1}', '\frac{2 x + 1}{x^{2} + x}']
 - name: Subtracting fractions
   cmd: subtract('1/4', '1/7')
   out: ['\frac{1}{4} - \frac{1}{7}', '\frac{3}{28}']
+- name: Subtract algebraic fractions
+  cmd: subtract('1/x', '1/(x + 1)')
+  out: ['\frac{1}{x} - \frac{1}{x + 1}', '\frac{1}{x^{2} + x}']
 # Indices
 - name: Index evaluation
   cmd: simplify('3^2')
