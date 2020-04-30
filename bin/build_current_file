@@ -2,7 +2,7 @@
 
 cd /vagrant
 
-FILES="$(find * -regex '^[0-9].*\.md' | grep "$1" | tr '\n' ' ' | xargs)"
+FILES="$(find * -regex '^resources/.*\.md' | grep "$1" | tr '\n' ' ' | xargs)"
 
 if [[ "$FILES" = *.md ]]; then
     if [[ "$FILES" = *.worksheet.md ]]; then
