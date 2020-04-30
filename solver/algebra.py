@@ -1,10 +1,10 @@
+from solver.exercise import Exercise, latex
 from sympy import (
     Abs,
     Add,
     expand as Expand,
     factor,
     floor,
-    latex as Latex,
     log,
     Mul,
     Pow,
@@ -18,10 +18,6 @@ from sympy import (
     sympify,
     UnevaluatedExpr,
 )
-
-
-def latex(expr, **kwargs):
-    return Latex(expr, **kwargs).replace("cdot", "times")
 
 
 def _exercise(solve=False, op=False, std_form=False, transform=False):
@@ -97,9 +93,9 @@ def _exercise(solve=False, op=False, std_form=False, transform=False):
     return exercise
 
 
-expand = _exercise(Expand)
-factorise = _exercise(factor)
-simplify = _exercise(Simplify)
+expand = Exercise(latex, Expand).export()
+factorise = Exercise(latex, factor).export()
+simplify = Exercise(latex, Simplify).export()
 
 
 def Div(a, b, **kwargs):
@@ -170,6 +166,7 @@ def display_float(number):
 
 
 stf = _exercise(Stf, transform=lambda t: display_float(t[0]))
+stf = Exercise(display_float, Stf).export()
 
 
 def stf2dec(number):
