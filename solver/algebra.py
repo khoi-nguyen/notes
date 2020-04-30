@@ -34,9 +34,6 @@ def _exercise(solve=False, op=False, std_form=False, transform=False):
     # Add, subtract, multiply, divide
     if op:
         join_str = {
-            "+": " + ",
-            "-": " - ",
-            "*": " \\times ",
             "frac": "}{",
             "div": " \\div ",
         }
@@ -56,8 +53,7 @@ def _exercise(solve=False, op=False, std_form=False, transform=False):
 
         def transform_term(term):
             term = pre(term)
-            if std_form:
-                term = stf(term)[1]
+            term = Stf(term) if std_form else term
             return latex(term)
 
         def transform(terms):
@@ -69,6 +65,7 @@ def _exercise(solve=False, op=False, std_form=False, transform=False):
                 if op == "frac":
                     exercise = f"\\frac{{{exercise}}}"
             else:
+                terms = [Stf(t) for t in terms] if std_form else terms
                 exercise = latex(
                     op(*terms, evaluate=False), mul_symbol="times", order="none"
                 )
@@ -77,14 +74,7 @@ def _exercise(solve=False, op=False, std_form=False, transform=False):
         def _solve(terms):
             terms = [pre(t) for t in terms]
             if op in join_str:
-                if op == "+":
-                    return Add(*terms)
-                elif op == "-":
-                    return Add(terms[0], Mul(-1, terms[1]))
-                elif op == "*":
-                    return powsimp(Mul(*terms))
-                else:
-                    return powsimp(Mul(terms[0], Pow(terms[1], -1)))
+                return powsimp(Mul(terms[0], Pow(terms[1], -1)))
             else:
                 return powsimp(op(*terms))
 
@@ -101,8 +91,8 @@ def _exercise(solve=False, op=False, std_form=False, transform=False):
         terms = [sympify(t, evaluate=False) for t in terms]
         exercise = transform(terms)
         solution = _solve(terms)
-        solution = stf(solution)[1] if std_form else latex(solution)
-        return (exercise, solution)
+        solution = Stf(solution) if std_form else solution
+        return (exercise, latex(solution))
 
     return exercise
 
@@ -126,11 +116,11 @@ frac = _exercise(op="frac")
 mult = _exercise(op=Mul)
 subtract = _exercise(op=Subtract)
 
-stfadd = _exercise(op="+", std_form=True)
+stfadd = _exercise(op=Add, std_form=True)
 stfdiv = _exercise(op="div", std_form=True)
 stffrac = _exercise(op="frac", std_form=True)
-stfmult = _exercise(op="*", std_form=True)
-stfsub = _exercise(op="-", std_form=True)
+stfmult = _exercise(op=Mul, std_form=True)
+stfsub = _exercise(op=Subtract, std_form=True)
 
 
 def expindex(base, power):
