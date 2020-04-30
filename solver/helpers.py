@@ -1,4 +1,14 @@
-from sympy import Abs, Add, floor, latex as Latex, log, Mul, Pow, UnevaluatedExpr
+from sympy import (
+    Abs,
+    Add,
+    floor,
+    latex as Latex,
+    log,
+    Mul,
+    Pow,
+    Symbol,
+    UnevaluatedExpr,
+)
 
 
 def display_float(number):
@@ -7,6 +17,20 @@ def display_float(number):
 
 def latex(expr, **kwargs):
     return Latex(expr, **kwargs).replace("cdot", "times")
+
+
+# Specify which simplifications we allow
+# e.g. allow multiplications but don't touch power bases
+def pre(term, level=0):
+    args = [pre(a, level + 1) for a in term.args]
+    if term.func == Mul:
+        term = Mul(*args, evaluate=True)
+    if term.func == Pow and not level:
+        [base, power] = args
+        # Ensure this is not a fraction with numerator 1
+        if base.func != Symbol and power != -1:
+            term = Pow(UnevaluatedExpr(args[0]), args[1])
+    return term
 
 
 def Subtract(a, b, **kwargs):

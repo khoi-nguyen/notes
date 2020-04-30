@@ -1,27 +1,11 @@
-from solver.helpers import latex, Stf
+from solver.helpers import latex, pre, Stf
 from sympy import (
     Mul,
     Pow,
     powsimp,
     ratsimp,
-    Symbol,
     sympify,
-    UnevaluatedExpr,
 )
-
-
-# Specify which simplifications we allow
-# e.g. allow multiplications but don't touch power bases
-def pre(term, level=0):
-    args = [pre(a, level + 1) for a in term.args]
-    if term.func == Mul:
-        term = Mul(*args, evaluate=True)
-    if term.func == Pow and not level:
-        [base, power] = args
-        # Ensure this is not a fraction with numerator 1
-        if base.func != Symbol and power != -1:
-            term = Pow(UnevaluatedExpr(args[0]), args[1])
-    return term
 
 
 class Exercise:

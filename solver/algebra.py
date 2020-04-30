@@ -1,4 +1,4 @@
-from solver.helpers import display_float, Stf, Subtract
+from solver.helpers import display_float, pre, Stf, Subtract
 from solver.exercise import Exercise, latex, OpExercise, StfExercise
 from sympy import (
     Add,
@@ -11,7 +11,6 @@ from sympy import (
     sqrt,
     symbols,
     sympify,
-    UnevaluatedExpr,
 )
 
 
@@ -181,23 +180,24 @@ def stfsub(*terms):
 
 
 def expindex(base, power):
-    def transform(base, power):
+    def exercise(base, power):
         return f"{{{base}}}^{{{power}}}"
 
-    def solve(base, power):
+    def solution(base, power):
         return r" \times ".join([str(base)] * power)
 
-    return Exercise(transform, solve)(base, power)
+    return Exercise(exercise, solution)(base, power)
 
 
-def power(expr, power, **substitutions):
-    substitutions = [
-        (symbols(t), UnevaluatedExpr(v)) for (t, v) in substitutions.items()
-    ]
-    exercise = f"\\br{{{latex(sympify(expr).subs(substitutions))}}}^{{{power}}}"
-    expr = f"({expr})^({power})"
-    solution = latex(powdenest(expr, force=True).subs(substitutions))
-    return (exercise, solution)
+def power(expr, power):
+    def exercise(expr, power):
+        base = latex(pre(expr))
+        return fr"\br{{{base}}}^{{{power}}}"
+
+    def solution(expr, power):
+        return powdenest(pow(pre(expr), power), force=True)
+
+    return Exercise(exercise, solution)(expr, power)
 
 
 def equation(lhs, rhs="0"):

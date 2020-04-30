@@ -60,7 +60,7 @@
     - '- 3 x^{3} \div x^{2}'
     - '- 3 x'
 - name: Raising a power to another power
-  cmd: power('a^3', 4, a=2)
+  cmd: power('2^3', 4)
   out:
     - \br{2^{3}}^{4}
     - 2^{12}
