@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app)
 
 exercises = [
-    {"title": globals()[f].__doc__, "name": f}
+    {"title": globals()[f].__doc__.partition("\n")[0], "name": f}
     for f in dir()
     if f.startswith("generate_")
 ]
