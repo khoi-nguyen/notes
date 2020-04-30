@@ -6,6 +6,7 @@ from solver.algebra import (
     equation,
     expindex,
     mult,
+    power,
     stf,
     stfmult,
     stfadd,
@@ -210,6 +211,18 @@ def generate_multindex(level):
 def generate_divindex(level):
     """Divide Indices"""
     return index_exercise(level, div)
+
+
+def generate_powindex(level):
+    """Index to power"""
+    variables = list(symbols("a b c m n x y z"))
+    base_1 = pick({1: [1, 3], 3: variables + list(range(2, 4))}, level)
+    base_2 = pick({1: variables}, level)
+    exponent = pick({1: [2, 3], 3: [2, 4], 5: [-2, 4], 7: [-4, 4]}, level)
+    expr = base_1 ** (
+        1 if isinstance(base_1, int) else randint(1, 3)
+    ) * base_2 ** randint(1, 5)
+    return ("Simplify the following",) + power(expr, exponent)
 
 
 def generate_quadratic_equation(level):
