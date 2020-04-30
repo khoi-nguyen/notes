@@ -1,5 +1,5 @@
 from solver.helpers import display_float, pre, Stf, Subtract
-from solver.exercise import Exercise, latex, OpExercise, StfExercise
+from solver.exercise import Exercise, EqExercise, latex, OpExercise, StfExercise
 from sympy import (
     Add,
     expand as Expand,
@@ -201,12 +201,10 @@ def power(expr, power):
 
 
 def equation(lhs, rhs="0"):
-    if isinstance(lhs, str) and "=" in lhs:
-        lhs, rhs = lhs.split("=")
-    lhs, rhs = sympify(lhs), sympify(rhs)
-    exercise = f"{latex(lhs)} = {latex(rhs)}"
-    solution = ", ".join([latex(sol) for sol in solve(lhs - rhs)])
-    return (exercise, solution)
+    def solution(lhs, rhs):
+        return ", ".join([latex(sol) for sol in solve(lhs - rhs)])
+
+    return EqExercise(solution)(lhs, rhs)
 
 
 def complete_square(expr):

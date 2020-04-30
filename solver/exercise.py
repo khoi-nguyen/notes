@@ -20,6 +20,19 @@ class Exercise:
         return (exercise, latex(solution))
 
 
+class EqExercise(Exercise):
+    def __init__(self, solve):
+        self.solve = solve
+
+    def transform(self, lhs, rhs):
+        return f"{latex(lhs)} = {latex(rhs)}"
+
+    def __call__(self, lhs, rhs=0):
+        if isinstance(lhs, str) and "=" in lhs:
+            lhs, rhs = lhs.split("=")
+        return super().__call__(lhs, rhs)
+
+
 class OpExercise(Exercise):
     def __init__(self, op):
         self.op = op
