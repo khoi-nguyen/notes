@@ -1,12 +1,8 @@
-from sympy import (
-    Abs,
-    Add,
-    floor,
-    log,
-    Mul,
-    Pow,
-    UnevaluatedExpr
-)
+from sympy import Abs, Add, floor, latex as Latex, log, Mul, Pow, UnevaluatedExpr
+
+
+def latex(expr, **kwargs):
+    return Latex(expr, **kwargs).replace("cdot", "times")
 
 
 def Subtract(a, b, **kwargs):

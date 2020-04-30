@@ -1,6 +1,5 @@
-from solvers.helpers import Stf
+from solver.helpers import latex, Stf
 from sympy import (
-    latex as Latex,
     Mul,
     Pow,
     powsimp,
@@ -8,10 +7,6 @@ from sympy import (
     sympify,
     UnevaluatedExpr,
 )
-
-
-def latex(expr, **kwargs):
-    return Latex(expr, **kwargs).replace("cdot", "times")
 
 
 # Specify which simplifications we allow
