@@ -17,3 +17,22 @@ def test_add():
     #     r"\left(3 x + 2\right) + \left(2 x + 6\right)",
     #     "5 x + 8",
     # )
+
+
+def test_mult():
+    from solver.algebra import mult
+
+    assert mult("4^2", "4^3") == (
+        r"4^{2} \times 4^{3}",
+        "4^{5}",
+    ), "Index multiplication"
+
+    assert mult("4^2", "4^1") == (
+        r"4^{2} \times 4",
+        "4^{3}",
+    ), "Index multiplication with power 1"
+
+    assert mult("y^k", "y^3") == (
+        r"y^{k} \times y^{3}",
+        "y^{k + 3}",
+    ), "Index multiplication (letter for base and power)"
