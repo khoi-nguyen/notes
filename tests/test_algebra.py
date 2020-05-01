@@ -36,3 +36,22 @@ def test_mult():
         r"y^{k} \times y^{3}",
         "y^{k + 3}",
     ), "Index multiplication (letter for base and power)"
+
+
+def test_div():
+    from solver.algebra import div
+
+    assert div("3^7", "3^2") == (
+        r"3^{7} \div 3^{2}",
+        "3^{5}",
+    ), "Index division with integers"
+
+    assert div("y^k", "y^3") == (
+        r"y^{k} \div y^{3}",
+        "y^{k - 3}",
+    ), "Index division (letter for base and power)"
+
+    assert div('-3*x^3', 'x^2') == (
+        r"- 3 x^{3} \div x^{2}",
+        "- 3 x",
+    ), "Avoid unnecessary bracket around negative numbers"
