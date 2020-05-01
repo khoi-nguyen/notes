@@ -15,7 +15,7 @@ from solver.stats import *
 from solver.probability import *
 from .tikz import *
 from figures.fractions import *
-from pandoc.helpers import *
+from pandoc.filters.helpers import *
 
 
 def eval_code(element, document):
