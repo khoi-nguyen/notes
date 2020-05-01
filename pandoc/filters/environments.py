@@ -1,39 +1,39 @@
 #!/usr/bin/env python3
 
-from pandocfilters import toJSONFilter, Div
-from .environment_list import environments
-from .helpers import answer, blatex, ilatex
+from panflute import Div, run_filter, RawBlock, RawInline, Span, stringify
+from pandoc.filters.environment_list import environments
 
 tally = {env: 0 for env in environments}
 
 
-def environment(env, value, keyvals, fmt):
+def environment(env, element, fmt):
     global tally
     tally[env] += 1
     data = environments[env]
-    title = keyvals["t"] if "t" in keyvals else ""
-    pause = "\\onslide<+->{" if fmt == "beamer" and env != "Code" else "{"
-    begin = f"\\begin{{colorenv}}[{data['bgcolor']}]{{{data['tcolor']}}}"
-    begin += f"{{{data['prefix']}\\  {data['title']} "
-    begin += f"{tally[env] if fmt == 'latex' else ''}}}{{{title}}}"
-    end = "\\end{colorenv}}"
-    value[0][1].remove(env)
-    return [blatex(pause + begin)] + [Div(*value)] + [blatex(end)]
+    title = element.attributes["t"] if "t" in element.attributes else ""
+    pause = r"\onslide<+->{" if fmt == "beamer" and env != "Code" else "{"
+    begin = fr"""
+        \begin{{colorenv}}[{data['bgcolor']}]{{{data['tcolor']}}}
+        {{{data['prefix']}\  {data['title']} {tally[env] if fmt == 'latex' else ''}}}
+        {{{title}}}
+    """
+    end = r"\end{colorenv}}"
+    element.classes.remove(env)
+    return [
+        RawBlock(pause + begin, "latex"),
+        element,
+        RawBlock(end, "latex"),
+    ]
 
 
-def main(key, value, fmt, meta):
-    if key == "Span":
-        [[ident, classes, keyvals], contents] = value
-        if "gap" in classes:
-            return ilatex(f"\\vspace{{{contents[0]['c']}}}")
-        elif "answer" in classes:
-            return answer(contents)
-    elif key == "Div":
-        [[ident, classes, keyvals], contents] = value
-        env = list(set(classes) & set(environments.keys()))
+def main(element, document):
+    if isinstance(element, Span):
+        if "gap" in element.classes:
+            return RawInline(fr"\vspace{{{stringify(element)}}}", "latex")
+    elif isinstance(element, Div):
+        env = list(set(element.classes) & set(environments.keys()))
         if len(env) > 0:
-            return environment(env[0], value, dict(keyvals), fmt)
+            return environment(env[0], element, document.format)
 
 
-if __name__ == "__main__":
-    toJSONFilter(main)
+run_filter(main)
