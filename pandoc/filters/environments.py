@@ -30,8 +30,6 @@ def main(key, value, fmt, meta):
         [[ident, classes, keyvals], contents] = value
         if "gap" in classes:
             return ilatex(f"\\vspace{{{contents[0]['c']}}}")
-        elif "answer" in classes:
-            return answer(contents)
     elif key == "Div":
         [[ident, classes, keyvals], contents] = value
         env = list(set(classes) & set(environments.keys()))

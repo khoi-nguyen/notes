@@ -16,6 +16,7 @@ from solver.stats import *
 from solver.probability import *
 from .tikz import *
 from figures.fractions import *
+from pandoc.helpers import answer
 
 
 def eval_code(element, document):
@@ -27,7 +28,9 @@ def eval_code(element, document):
             exercise, solution = str(result[0]), str(result[1])
             return [
                 Math(exercise, "InlineMath"),
-                Span(Math(solution, "InlineMath"), classes=["answer"]),
+                RawInline(r"\answer{", "latex"),
+                Math(solution, "InlineMath"),
+                RawInline("}", "latex"),
             ]
     if isinstance(element, CodeBlock):
         if "graph" in element.classes:
