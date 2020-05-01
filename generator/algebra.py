@@ -6,6 +6,7 @@ from solver.algebra import (
     equation,
     expindex,
     mult,
+    power,
     stf,
     stfmult,
     stfadd,
@@ -186,9 +187,7 @@ def generate_expindex(level):
     return ("Expand the power",) + expindex(base, power)
 
 
-def generate_multindex(level):
-    """Multiply Indices"""
-    # a**m * a**n where a is an integer
+def index_exercise(level, function):
     variables = ["a", "b", "c", "m", "n", "x", "y", "z"]
     base = pick({1: [2, 5], 3: variables, 7: variables + list(range(2, 10))}, level)
     powers_constraints = {
@@ -199,8 +198,31 @@ def generate_multindex(level):
     }
     power_1 = pick(powers_constraints, level)
     power_2 = pick(powers_constraints, level)
-    # Answers for integer or variable base
-    return ("Simplify the following",) + mult(f"{base}^{power_1}", f"{base}^{power_2}")
+    return ("Simplify the following",) + function(
+        f"{base}^{power_1}", f"{base}^{power_2}"
+    )
+
+
+def generate_multindex(level):
+    """Multiply Indices"""
+    return index_exercise(level, mult)
+
+
+def generate_divindex(level):
+    """Divide Indices"""
+    return index_exercise(level, div)
+
+
+def generate_powindex(level):
+    """Index to power"""
+    variables = list(symbols("a b c m n x y z"))
+    base_1 = pick({1: [1, 3], 3: variables + list(range(2, 4))}, level)
+    base_2 = pick({1: variables}, level)
+    exponent = pick({1: [2, 3], 3: [2, 4], 5: [-2, 4], 7: [-4, 4]}, level)
+    expr = base_1 ** (
+        1 if isinstance(base_1, int) else randint(1, 3)
+    ) * base_2 ** randint(1, 5)
+    return ("Simplify the following",) + power(expr, exponent)
 
 
 def generate_quadratic_equation(level):
