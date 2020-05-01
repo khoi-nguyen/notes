@@ -126,3 +126,37 @@ def test_stf():
         "0.000000147",
         r"1.47 \times 10^{-7}",
     ), "Standard form with Sympy expression"
+
+
+def test_circle_equation():
+    from solver.algebra import circle_equation, Expand
+
+    assert circle_equation("radius", "x^2 + y^2 - 16 = 9") == (
+        "x^{2} + y^{2} - 16 = 9",
+        "5",
+    ), "Radius of a circle with RHS"
+
+    assert circle_equation("radius", "(x - 3)^2 + (y + 5)^2 = 16") == (
+        r"\left(x - 3\right)^{2} + \left(y + 5\right)^{2} = 16",
+        "4",
+    ), "Radius of a circle with canonical LHS"
+
+    assert circle_equation("radius", Expand("3*((x - 2)**2 + (y + 1)**2 - 4)")) == (
+        "3 x^{2} - 12 x + 3 y^{2} + 6 y + 3 = 0",
+        "2",
+    ), "Radius of a circle without rhs"
+
+    assert circle_equation("center", Expand("(x - 3)**2 + (y - 1)**2 - 16")) == (
+        "x^{2} - 6 x + y^{2} - 2 y - 6 = 0",
+        r"\br{3, 1}",
+    ), "Center of a circle with rhs"
+
+    assert circle_equation("center", "(x - 3)^2 + (y + 5)^2 = 16") == (
+        r"\left(x - 3\right)^{2} + \left(y + 5\right)^{2} = 16",
+        r"\br{3, -5}",
+    ), "Center of a circle with factorised lhs"
+
+    assert circle_equation("center", Expand("3*((x - 2)**2 + (y + 1)**2 - 4)")) == (
+        "3 x^{2} - 12 x + 3 y^{2} + 6 y + 3 = 0",
+        r"\br{2, -1}",
+    ), "Center of a circle without rhs"
