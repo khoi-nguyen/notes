@@ -65,7 +65,23 @@ def test_div():
         "y^{k - 3}",
     ), "Index division (letter for base and power)"
 
-    assert div('-3*x^3', 'x^2') == (
+    assert div("-3*x^3", "x^2") == (
         r"- 3 x^{3} \div x^{2}",
         "- 3 x",
     ), "Avoid unnecessary bracket around negative numbers"
+
+
+def test_equation():
+    from solver.algebra import equation, Expand
+
+    assert equation("3*x + 4 = 10") == ("3 x + 4 = 10", "2"), "Solving linear equation"
+
+    assert equation("x^2 - 5*x + 6") == (
+        "x^{2} - 5 x + 6 = 0",
+        "2, 3",
+    ), "Quadratic equation equals 0 by default"
+
+    assert equation(Expand("(x - 4)*(x + 3)")) == (
+        "x^{2} - x - 12 = 0",
+        "-3, 4",
+    ), "Quadratic equation from factorised form"

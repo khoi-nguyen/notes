@@ -29,22 +29,6 @@
   out:
     - '{2}^{3}'
     - 2 \times 2 \times 2
-# Equations
-- name: Solving linear equation
-  cmd: equation('3*x + 4 = 10')
-  out:
-    - '3 x + 4 = 10'
-    - '2'
-- name: Quadratic equation equals 0 by default
-  cmd: equation('x^2 - 5*x + 6')
-  out:
-    - x^{2} - 5 x + 6 = 0
-    - 2, 3
-- name: Quadratic equation from factorised form
-  cmd: equation(Expand('(x - 4)*(x + 3)'))
-  out:
-    - 'x^{2} - x - 12 = 0'
-    - '-3, 4'
 - name: Factorising
   cmd: factorise(Expand('(x - 2)*(x + 3)'))
   out:
