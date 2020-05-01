@@ -13,7 +13,7 @@ from solver.algebra import *
 from solver.analysis import *
 from solver.stats import *
 from solver.probability import *
-from .tikz import *
+from pandoc.filters.tikz import *
 from figures.fractions import *
 from pandoc.filters.helpers import *
 
