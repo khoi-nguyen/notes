@@ -1,37 +1,46 @@
 #!/usr/bin/env python3
 
-from pandocfilters import toJSONFilter, Span
+from panflute import (
+    Code,
+    CodeBlock,
+    Math,
+    RawBlock,
+    RawInline,
+    run_filter,
+    Span,
+    stringify,
+)
 from solver.algebra import *
 from solver.analysis import *
 from solver.stats import *
 from solver.probability import *
 from .tikz import *
 from figures.fractions import *
-from .helpers import *
 
 
 def answer(x):
     return ("", x[1]) if isinstance(x, tuple) else ("", x)
 
 
-def main(key, value, fmt, meta):
-    if key == "Code":
-        [[ident, classes, keyvals], contents] = value
-        result = eval(contents)
+def eval_code(element, document):
+    if isinstance(element, Code):
+        result = eval(element.text)
         if isinstance(result, (str, int, float)):
-            return [ilatex(str(result))]
+            return RawInline(str(result), "latex")
         elif isinstance(result, tuple):
+            exercise, solution = str(result[0]), str(result[1])
             return [
-                imath(result[0]),
-                Span(["", ["answer"], []], [imath(str(result[1]))]),
+                Math(exercise, "InlineMath"),
+                Span(Math(solution, "InlineMath"), classes=["answer"]),
             ]
-    if key == "CodeBlock":
-        [[ident, classes, keyvals], contents] = value
-        if "graph" in classes:
-            return blatex(tikz_plot(contents, dict(keyvals), fmt))
-        if "picture" in classes:
-            return blatex(tikz_picture(contents, dict(keyvals)))
+    if isinstance(element, CodeBlock):
+        if "graph" in element.classes:
+            return RawBlock(
+                tikz_plot(stringify(element), element.attributes, document.format),
+                "latex",
+            )
+        if "picture" in element.classes:
+            return RawBlock(tikz_picture(element.text, element.attributes), "latex")
 
 
-if __name__ == "__main__":
-    toJSONFilter(main)
+run_filter(eval_code)
