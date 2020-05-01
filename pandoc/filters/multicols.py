@@ -1,29 +1,26 @@
 #!/usr/bin/env python3
 
-from pandocfilters import toJSONFilter, OrderedList
-from .helpers import blatex
+from panflute import Div, OrderedList, RawBlock, run_filter
 
 
-def main(key, value, fmt, meta):
-    if key == "OrderedList":
-        contents = value[1]
-        if len(contents) > 5:
-            return (
-                [blatex("\\begin{multicols}{2}")]
-                + [OrderedList(*value)]
-                + [blatex("\\end{multicols}")]
-            )
-    if key == "Div":
-        [[ident, classes, keyvals], contents] = value
-        keyvals = dict(keyvals)
-        if "n" in keyvals or "cols" in keyvals:
-            n = keyvals["n"] if "n" in keyvals else keyvals["cols"]
-            return (
-                [blatex("\\begin{multicols}{" + n + "}")]
-                + contents
-                + [blatex("\\end{multicols}")]
-            )
+def multicols(element, document):
+    if isinstance(element, OrderedList):
+        if len(element.content) > 5:
+            return [
+                RawBlock(r"\begin{multicols}{2}", "latex"),
+                element,
+                RawBlock(r"\end{multicols}", "latex"),
+            ]
+    if isinstance(element, Div):
+        attrs = element.attributes
+        return element
+        if "n" in attrs or "cols" in attrs:
+            n = attrs["n"] if "n" in attrs else attrs["cols"]
+            return [
+                RawBlock(fr"\begin{{multicols}}{{{n}}}", "latex"),
+                element,
+                RawBlock(r"\end{multicols}", "latex"),
+            ]
 
 
-if __name__ == "__main__":
-    toJSONFilter(main)
+run_filter(multicols)
