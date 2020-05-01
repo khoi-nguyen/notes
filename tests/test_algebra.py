@@ -85,3 +85,44 @@ def test_equation():
         "x^{2} - x - 12 = 0",
         "-3, 4",
     ), "Quadratic equation from factorised form"
+
+
+def test_stf():
+    from solver.algebra import stf
+
+    assert stf(485) == ("485", r"4.85 \times 10^{2}"), "Standard form (bigger than 1)"
+
+    assert stf(0.0032) == (
+        "0.0032",
+        r"3.2 \times 10^{-3}",
+    ), "Standard form (less than 1)"
+
+    assert stf(0.00312) == (
+        "0.00312",
+        r"3.12 \times 10^{-3}",
+    ), "Standard form (rounding)"
+
+    assert stf(0.002) == (
+        "0.002",
+        r"2 \times 10^{-3}",
+    ), "Standard form (one significant figure)"
+
+    assert stf(-0.00352) == (
+        "-0.00352",
+        r"- 3.52 \times 10^{-3}",
+    ), "Standard form (negative number)"
+
+    assert stf(5.4 * 10 ** 4) == (
+        "54000",
+        r"5.4 \times 10^{4}",
+    ), "Standard form with standard form notation"
+
+    assert stf(1.47 * 10 ** -7) == (
+        "0.000000147",
+        "1.47 \times 10^{-7}",
+    ), "Standard form with standard form notation"
+
+    assert stf('1.47 * 10^-7') == (
+        "0.000000147",
+        "1.47 \times 10^{-7}",
+    ), "Standard form with Sympy expression"
