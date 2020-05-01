@@ -119,10 +119,10 @@ def test_stf():
 
     assert stf(1.47 * 10 ** -7) == (
         "0.000000147",
-        "1.47 \times 10^{-7}",
+        r"1.47 \times 10^{-7}",
     ), "Standard form with standard form notation"
 
-    assert stf('1.47 * 10^-7') == (
+    assert stf("1.47 * 10^-7") == (
         "0.000000147",
-        "1.47 \times 10^{-7}",
+        r"1.47 \times 10^{-7}",
     ), "Standard form with Sympy expression"
