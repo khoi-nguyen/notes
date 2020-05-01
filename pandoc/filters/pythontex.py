@@ -18,10 +18,6 @@ from .tikz import *
 from figures.fractions import *
 
 
-def answer(x):
-    return ("", x[1]) if isinstance(x, tuple) else ("", x)
-
-
 def eval_code(element, document):
     if isinstance(element, Code):
         result = eval(element.text)

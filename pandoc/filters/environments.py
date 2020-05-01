@@ -2,9 +2,13 @@
 
 from pandocfilters import toJSONFilter, Div
 from .environment_list import environments
-from .helpers import answer, blatex, ilatex
+from .helpers import blatex, ilatex
 
 tally = {env: 0 for env in environments}
+
+
+def answer(tex):
+    return [ilatex("\\answer{")] + tex + [ilatex("}")]
 
 
 def environment(env, value, keyvals, fmt):

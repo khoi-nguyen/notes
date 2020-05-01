@@ -6,7 +6,8 @@ from solver.analysis import *
 from solver.geometry import *
 from solver.stats import *
 from solver.probability import *
-from pandoc.filters.pythontex import *
+from pandoc.filters.helpers import answer, question
+
 
 for path in glob("./tests/*.yaml"):
     with open(path) as file:
