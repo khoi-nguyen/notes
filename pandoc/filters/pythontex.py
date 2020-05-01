@@ -7,7 +7,6 @@ from panflute import (
     RawBlock,
     RawInline,
     run_filter,
-    Span,
     stringify,
 )
 from solver.algebra import *
@@ -16,7 +15,7 @@ from solver.stats import *
 from solver.probability import *
 from .tikz import *
 from figures.fractions import *
-from pandoc.helpers import answer
+from pandoc.helpers import *
 
 
 def eval_code(element, document):
