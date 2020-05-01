@@ -2,7 +2,6 @@ black
 flake8
 flask
 flask_cors
-pandocfilters
 panflute
 sympy
 pyyaml
