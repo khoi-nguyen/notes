@@ -5,13 +5,6 @@
 - name: algebra.simplify must not be overriden
   cmd: simplify('(x^2 - 1)/(x - 1)')
   out: ['\frac{x^{2} - 1}{x - 1}', 'x + 1']
-# Fractions
-- name: Subtracting fractions
-  cmd: subtract('1/4', '1/7')
-  out: ['\frac{1}{4} - \frac{1}{7}', '\frac{3}{28}']
-- name: Subtract algebraic fractions
-  cmd: subtract('1/x', '1/(x + 1)')
-  out: ['\frac{1}{x} - \frac{1}{x + 1}', '\frac{1}{x \left(x + 1\right)}']
 # Indices
 - name: Index evaluation
   cmd: simplify('3^2')

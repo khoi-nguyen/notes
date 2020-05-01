@@ -19,6 +19,20 @@ def test_add():
     # )
 
 
+def test_subtract():
+    from solver.algebra import subtract
+
+    assert subtract("1/4", "1/7") == (
+        r"\frac{1}{4} - \frac{1}{7}",
+        r"\frac{3}{28}",
+    ), "Subtracting fractions"
+
+    assert subtract("1/x", "1/(x + 1)") == (
+        r"\frac{1}{x} - \frac{1}{x + 1}",
+        r"\frac{1}{x^{2} + x}",
+    ), "Subtracting algebraic fractions"
+
+
 def test_mult():
     from solver.algebra import mult
 
