@@ -1,11 +1,17 @@
 from solver.algebra import (
     add,
     circle_equation,
+    complete_square,
     div,
     equation,
+    expand,
+    expindex,
+    factorise,
+    frac,
     mult,
+    power,
     round,
-    subtract,
+    simplify,
     stf,
     stfadd,
     stf2dec,
@@ -13,6 +19,7 @@ from solver.algebra import (
     stffrac,
     stfmult,
     stfsub,
+    subtract,
 )
 from sympy import expand as Expand
 
@@ -25,6 +32,25 @@ from sympy import expand as Expand
 # )
 
 tests = [
+    (
+        expand("(x - 1)*(x - 3)"),
+        r"\left(x - 1\right) \left(x - 3\right)",
+        "x^{2} - 4 x + 3",
+        "algebra.expand must not be overriden",
+    ),
+    (
+        factorise(Expand("(x - 2)*(x + 3)")),
+        "x^{2} + x - 6",
+        r"\left(x - 2\right) \left(x + 3\right)",
+        "Factorising",
+    ),
+    (
+        simplify("(x^2 - 1)/(x - 1)"),
+        r"\frac{x^{2} - 1}{x - 1}",
+        "x + 1",
+        "algebra.simplify must not be overriden",
+    ),
+    (simplify("3^2"), "3^{2}", "9", "Index evaluation",),
     (
         add("1/4", "1/7"),
         r"\frac{1}{4} + \frac{1}{7}",
@@ -62,6 +88,7 @@ tests = [
         "y^{k + 3}",
         "Index multiplication (letter for base and power)",
     ),
+    (frac("3^7", "3^2"), r"\frac{3^{7}}{3^{2}}", "3^{5}", "Index division (fraction)",),
     (div("3^7", "3^2"), r"3^{7} \div 3^{2}", "3^{5}", "Index division with integers",),
     (
         div("y^k", "y^3"),
@@ -88,6 +115,14 @@ tests = [
         "-3, 4",
         "Quadratic equation from factorised form",
     ),
+    (
+        power("-3*x", 3),
+        r"\br{- 3 x}^{3}",
+        "- 27 x^{3}",
+        "Minus signs when raising power to a power",
+    ),
+    (power("2^3", 4), r"\br{2^{3}}^{4}", "2^{12}", "Raising a power to another power",),
+    (expindex(2, 3), "{2}^{3}", r"2 \times 2 \times 2", "Expanding index",),
     (round(1.73666, 2), "1.73666", "1.74", "Rounding to 2 dp",),
     (round(3456, sf=2), "3456", "3500", "Rounding to 2 sf",),
     (round(9999, sf=1), "9999", "10000", "Rounding to 1 sf with nines",),
@@ -195,5 +230,11 @@ tests = [
         "3 x^{2} - 12 x + 3 y^{2} + 6 y + 3 = 0",
         r"\br{2, -1}",
         "Center of a circle without rhs",
+    ),
+    (
+        complete_square(Expand("2*(x + 2)^2 + 3")),
+        "2 x^{2} + 8 x + 11",
+        r"2 \left(x + 2\right)^{2} + 3",
+        "Completing the square",
     ),
 ]
