@@ -6,10 +6,10 @@ FILES="$(find * -regex '^resources/.*\.md' | grep "$1" | tr '\n' ' ' | xargs)"
 
 if [[ "$FILES" = *.md ]]; then
     if [[ "$FILES" = *.worksheet.md ]]; then
-        make -j 10 $(echo "$FILES" | sed 's/\.md$/.answers.pdf/g')
+        make -j 10 $(echo "$FILES" | sed 's/\.md$/.answers.pdf/g') NOENV=1
     else
-        make -j 10 $(echo "$FILES" | sed 's/\.md$/.handout.pdf/g')
+        make -j 10 $(echo "$FILES" | sed 's/\.md$/.handout.pdf/g') NOENV=1
     fi
 else
-    make all
+    make all NOENV=1
 fi

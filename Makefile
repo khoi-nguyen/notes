@@ -1,4 +1,4 @@
-ifeq ($(GITHUB), 1)
+ifeq ($(NOENV), 1)
 START_ENV :=
 ENV :=
 else
