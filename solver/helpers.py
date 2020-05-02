@@ -37,11 +37,25 @@ def Subtract(a, b, **kwargs):
     return Add(a, Mul(-1, b), **kwargs)
 
 
-def Stf(number):
+def Round(number, dp=2, sf=False):
+    if sf:
+        number = Stf(number, sf).doit().evalf(sf)
+        if float(number).is_integer():
+            number = int(f"{number:.0f}")
+        return number
+    else:
+        return number.evalf().round(dp)
+
+
+def Stf(number, precision=False):
     """Converts a float to standard notation as a sympy object
     """
     power = floor((log(Abs(number)) / log(10)).evalf())
-    x = Mul(number, Pow(10, -power)).evalf()
+    x = Mul(number, Pow(10, -power))
+    if precision:
+        x = Mul(Mul(x, Pow(10, -1)).round(precision), 10).evalf(precision)
+    else:
+        x = x.evalf()
     if float(x).is_integer():
         x = int(x)
     return Mul(x, Pow(UnevaluatedExpr(10), power, evaluate=False), evaluate=False)
