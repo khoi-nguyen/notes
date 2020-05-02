@@ -23,7 +23,7 @@ PANDOC := pandoc -s --filter ./bin/filter
 BEAMER := $(PANDOC) -t beamer --template=./pandoc/templates/beamer.tex
 WORKSHEET := $(PANDOC) -t latex --template=./pandoc/templates/worksheet.tex
 
-.PHONY: tests handouts all deploy clean www artifacts slides videos env format
+.PHONY: tests handouts all deploy clean www artifacts slides videos env format docker
 .PRECIOUS: $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.handout.tex) $(WORKSHEETS:.pdf=.tex) $(ANSWERS:.pdf=.tex)
 
 handouts: $(HANDOUTS) $(ANSWERS)
@@ -40,6 +40,11 @@ frontend: node_modules
 
 backend: $(ENV)
 	@$(START_ENV) python3 -m generator.server
+
+docker:
+	docker build -t teaching .
+	docker tag teaching bknguyen/teaching
+	docker push bknguyen/teaching
 
 www: node_modules $(ENV)
 	@$(START_ENV) python3 ./bin/data.py
