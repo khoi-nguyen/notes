@@ -12,6 +12,7 @@ from sympy import (
     symbols,
     sympify,
 )
+from sympy.parsing.latex import parse_latex
 
 
 def expand(expression):
@@ -60,6 +61,13 @@ def simplify(expression):
     ('\\frac{x^2}{x}', 'x')
     """
     return Exercise(latex, Simplify)(expression)
+
+
+def leval(expr, solve=Simplify):
+    r"""Transform a latex expression in Sympy, then calculates it
+    """
+    solution = latex(solve(parse_latex(expr).doit()))
+    return (expr, solution)
 
 
 def add(*terms):
