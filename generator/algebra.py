@@ -5,9 +5,9 @@ from solver.algebra import (
     div,
     equation,
     expindex,
-    frac,
     mult,
     power,
+    simplify,
     stf,
     stfmult,
     stfadd,
@@ -361,6 +361,10 @@ def generate_stf2dec(level):
     return ("Convert to an ordinary number",) + generate_stf(level)[2:0:-1]
 
 
+def equal(a, b):
+    return a == b
+
+
 def multiple(a, b):
     return a % b == 0
 
@@ -375,30 +379,28 @@ def generate_divsurd(level):
 
     Level
     -----
-    1: Small surds
-    3: Medium surds
-    5: Medium surds with coefficients
-    7: Large surds
-    9: Large surds with coefficients
+    1: Whole number result
+    3: Simple surd result
+    5: Simple coefficient * surd
+    7: Fractional coefficitent * surd
     """
-    (x, y) = pick(
+    (b, d) = pick(
         {
-            1: ([2, 20], [2, 10], multiple),
-            3: ([20, 50], [2, 25], multiple),
+            1: ([2, 25], [2, 25], equal),
+            3: ([2, 25], [2, 25], multiple),
             5: ([20, 50], [2, 25], multiple),
             7: ([50, 200], [2, 100], multiple),
         },
         level,
     )
-    (a, b) = pick(
+    (a, c) = pick(
         {
-            1: ([1, 1], [1, 1]),
+            1: ([2, 5], [1, 1]),
+            3: ([1, 1], [1, 1]),
             5: ([2, 10], [2, 10], multiple),
-            7: ([1, 1], [1, 1]),
-            9: ([2, 50], [2, 25], multiple),
+            7: ([2, 10], [2, 10]),
         },
         level,
     )
-    expr_1 = a * sqrt(x)
-    expr_2 = b * sqrt(y)
-    return ("Simplify the following",) + frac(expr_1, expr_2)
+    expr = (sqrt(a ** 2 * b)) / (sqrt(c ** 2 * d))
+    return ("Simplify the following",) + simplify(expr)
