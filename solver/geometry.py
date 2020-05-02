@@ -1,3 +1,4 @@
+from solver.exercise import Exercise
 from sympy import cos, latex, oo, pi, solveset, sympify
 from sympy import Interval, Symbol
 
@@ -80,3 +81,22 @@ def pythagoras(a, b, c, radians=False):
         del data["gamma"]
 
     return (data, solution)
+
+
+def convert(angle, radians=True):
+    def solution (angle):
+        return angle*(DEG if radians else RAD)
+
+    return Exercise(latex, solution)(angle)
+
+
+def arclength(radius, angle, length, radians=false):
+    " Formula : L = PI * r * alpha(radian)"
+    def solution(radius, angle, length):
+        data = [radius, angle, length]
+        position = [isinstance(d, Symbol) for d in data].find(True)
+        symbol = data[position]
+        dom = Interval(0, oo)
+        sols = solveset(length - PI * radius * angle, symbol, domain=dom)
+        return sols.args[0]
+    return Exercise(latex, solution)(radius, angle, length)
