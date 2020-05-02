@@ -1,34 +1,39 @@
 ---
 - name: algebra.expand must not be overriden
   cmd: expand('(x - 1)*(x - 3)')
-  out: ['\left(x - 1\right) \left(x - 3\right)', 'x^{2} - 4 x + 3']
+  out:
+    - '\left(x - 1\right) \left(x - 3\right)'
+    - 'x^{2} - 4 x + 3'
 - name: algebra.simplify must not be overriden
   cmd: simplify('(x^2 - 1)/(x - 1)')
-  out: ['\frac{x^{2} - 1}{x - 1}', 'x + 1']
-# Indices
+  out:
+    - '\frac{x^{2} - 1}{x - 1}'
+    - 'x + 1'
+- name: Minus signs when raising power to a power
+  cmd: power('-3*x', 3)
+  out:
+    - '\br{- 3 x}^{3}'
+    - 'todo'
 - name: Index evaluation
   cmd: simplify('3^2')
   out:
-    - 3^{2}
-    - '9'
+    - '3^{2}'
+    - '- 27 x^{3}'
 - name: Index division (fraction)
   cmd: frac('3^7', '3^2')
   out:
-    - \frac{3^{7}}{3^{2}}
-    - 3^{5}
+    - '\frac{3^{7}}{3^{2}}'
+    - '3^{5}'
 - name: Raising a power to another power
   cmd: power('2^3', 4)
   out:
-    - \br{2^{3}}^{4}
-    - 2^{12}
-- name: Minus signs when raising power to a power
-  cmd: question(power('-3*x', 3))
-  out: '\br{- 3 x}^{3}'
+    - '\br{2^{3}}^{4}'
+    - '2^{12}'
 - name: Expanding index
   cmd: expindex(2, 3)
   out:
     - '{2}^{3}'
-    - 2 \times 2 \times 2
+    - '2 \times 2 \times 2'
 - name: Factorising
   cmd: factorise(Expand('(x - 2)*(x + 3)'))
   out:
