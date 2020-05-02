@@ -84,19 +84,23 @@ def pythagoras(a, b, c, radians=False):
 
 
 def convert(angle, radians=True):
-    def solution (angle):
-        return angle*(DEG if radians else RAD)
+    def solution(angle):
+        return angle * (DEG if radians else RAD)
 
     return Exercise(latex, solution)(angle)
 
 
-def arclength(radius, angle, length, radians=false):
-    " Formula : L = PI * r * alpha(radian)"
+def arclength(radius, angle, length, radians=False):
+    def exercise(radius, angle, length):
+        return f"{latex(radius)}, {latex(angle)}, {latex(length)}"
+
     def solution(radius, angle, length):
         data = [radius, angle, length]
-        position = [isinstance(d, Symbol) for d in data].find(True)
+        position = [isinstance(d, Symbol) for d in data].index(True)
         symbol = data[position]
         dom = Interval(0, oo)
-        sols = solveset(length - PI * radius * angle, symbol, domain=dom)
-        return sols.args[0]
-    return Exercise(latex, solution)(radius, angle, length)
+        sol = solveset(length - radius * angle, symbol, domain=dom).args[0]
+        sol *= RAD if position == 1 and not radians else 1
+        return f"{latex(symbol)} = {latex(sol)}"
+
+    return Exercise(exercise, solution)(radius, angle, length)
