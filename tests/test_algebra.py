@@ -1,3 +1,19 @@
+import pytest
+from solver.algebra import round
+
+
+@pytest.mark.parametrize(
+    "cmd, exercise, solution, title",
+    [
+        (round(1.73666, 2), "1.73666", "1.74", "Rounding to 2 dp"),
+        (round(3456, sf=2), "3456", "3500", "Rounding to 2 sf"),
+        (round(9999, sf=1), "9999", "10000", "Rounding to 1 sf with nines"),
+    ],
+)
+def test_command(cmd, exercise, solution, title):
+    assert cmd == (exercise, solution), title
+
+
 def test_add():
     from solver.algebra import add
 
