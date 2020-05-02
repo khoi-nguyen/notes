@@ -43,3 +43,13 @@ def test_environments():
     markdown = "[1cm]{.gap}"
     doc = apply_filter(div_to_env, markdown)
     assert "vspace" in stringify(doc), "Gap classes become vspaces"
+
+
+def test_pythontex():
+    from pandoc.filters.pythontex import eval_code
+
+    markdown = "`equation('x^2 - 5*x + 6')`"
+    doc = apply_filter(eval_code, markdown)
+    assert stringify(doc).startswith(
+        r"x^{2} - 5 x + 6 = 0\answer{2, 3}"
+    ), "Solve exercises"
