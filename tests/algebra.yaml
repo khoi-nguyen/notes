@@ -70,3 +70,23 @@
   out:
     - '10^{4} - 2 \times 10^{3}'
     - '8 \times 10^{3}'
+- name: Rounding (2 dp)
+  cmd: round(1.73666, 2)
+  out:
+    - '1.73666'
+    - '1.74'
+- name: Rounding (1 sf)
+  cmd: round(3456, sf=2)
+  out:
+    - '3456'
+    - '3500'
+- name: Rounding (1 sf)
+  cmd: round(9999, sf=1)
+  out:
+    - '9999'
+    - '10000'
+- name: Rounding (2 sf)
+  cmd: round(9933, sf=2)
+  out:
+    - '9933'
+    - '9900'

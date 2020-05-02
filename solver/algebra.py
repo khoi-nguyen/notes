@@ -1,4 +1,4 @@
-from solver.helpers import display_float, pre, Stf, Subtract
+from solver.helpers import display_float, pre, Round, Stf, Subtract
 from solver.exercise import Exercise, EqExercise, latex, OpExercise, StfExercise
 from sympy import (
     Add,
@@ -12,6 +12,7 @@ from sympy import (
     symbols,
     sympify,
 )
+from sympy.parsing.latex import parse_latex
 
 
 def expand(expression):
@@ -60,6 +61,13 @@ def simplify(expression):
     ('\\frac{x^2}{x}', 'x')
     """
     return Exercise(latex, Simplify)(expression)
+
+
+def leval(expr, solve=Simplify):
+    r"""Transform a latex expression in Sympy, then calculates it
+    """
+    solution = latex(solve(parse_latex(expr).doit()))
+    return (expr, solution)
 
 
 def add(*terms):
@@ -146,6 +154,13 @@ def subtract(term1, term2):
     ('\\frac{3}{4} + \\frac{1}{2}', '\\frac{5}{4}')
     """
     return OpExercise(Subtract)(term1, term2)
+
+
+def round(number, dp=2, sf=False):
+    def solution(number):
+        return Round(number, dp, sf)
+
+    return Exercise(display_float, solution)(number)
 
 
 def stf(number):
