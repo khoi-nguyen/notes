@@ -9,11 +9,23 @@ RAD = 180 / PI
 def cosine_law(a, b, c, gamma, radians=False):
     """Apply the Law of Cosines to find an angle or a length
 
-    :param a: first side
-    :param b: second side
-    :param c: third side
-    :param gamma: angle contained between the first two sides
-    :param radians: use radians if True, degrees otherwise
+    Parameters
+    ----------
+    a : int, float, str
+        First side
+    b : int, float, str
+        Second side
+    c : int, float, str
+        Third side
+    gamma: int, float, str
+        Angle between the first two sides in radians
+    radians: bool
+        Whether to use radians for the output
+
+    Examples
+    --------
+    >>> cosine_law(3, 4, "c", 90*DEG)
+    (..., "c = 5")
     """
     lengths = [sympify(l) for l in [a, b, c]]
     [a, b, c] = lengths
