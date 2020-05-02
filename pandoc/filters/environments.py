@@ -26,7 +26,7 @@ def environment(env, element, fmt):
     ]
 
 
-def main(element, document):
+def div_to_env(element, document):
     if isinstance(element, Span):
         if "gap" in element.classes:
             return RawInline(fr"\vspace{{{stringify(element)}}}", "latex")
@@ -36,4 +36,5 @@ def main(element, document):
             return environment(env[0], element, document.format)
 
 
-run_filter(main)
+if __name__ == "__main__":
+    run_filter(div_to_env)
