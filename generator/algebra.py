@@ -5,6 +5,7 @@ from solver.algebra import (
     div,
     equation,
     expindex,
+    frac,
     mult,
     power,
     stf,
@@ -358,3 +359,46 @@ def generate_stfsub(level):
 def generate_stf2dec(level):
     """Standard form to ordinary"""
     return ("Convert to an ordinary number",) + generate_stf(level)[2:0:-1]
+
+
+def multiple(a, b):
+    return a % b == 0
+
+
+def generate_divsurd(level):
+    """Divide surds
+
+    Parameters
+    ----------
+    level : int
+        Difficulty level between 1 and 9
+
+    Level
+    -----
+    1: Small surds
+    3: Medium surds
+    5: Medium surds with coefficients
+    7: Large surds
+    9: Large surds with coefficients
+    """
+    (x, y) = pick(
+        {
+            1: ([2, 20], [2, 10], multiple),
+            3: ([20, 50], [2, 25], multiple),
+            5: ([20, 50], [2, 25], multiple),
+            7: ([50, 200], [2, 100], multiple),
+        },
+        level,
+    )
+    (a, b) = pick(
+        {
+            1: ([1, 1], [1, 1]),
+            5: ([2, 10], [2, 10], multiple),
+            7: ([1, 1], [1, 1]),
+            9: ([2, 50], [2, 25], multiple),
+        },
+        level,
+    )
+    expr_1 = a * sqrt(x)
+    expr_2 = b * sqrt(y)
+    return ("Simplify the following",) + frac(expr_1, expr_2)
