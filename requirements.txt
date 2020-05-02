@@ -6,14 +6,3 @@ flask_cors
 panflute
 sympy
 pyyaml
-
-manimlib
-argparse
-colour
-numpy
-Pillow
-progressbar
-scipy
-tqdm
-opencv-python
-pycairo
