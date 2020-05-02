@@ -31,7 +31,7 @@ handouts: $(HANDOUTS) $(ANSWERS)
 slides: $(SLIDES) $(WORKSHEETS)
 
 tests: $(ENV) format
-	@$(START_ENV) python3 -m pytest
+	@$(START_ENV) python3 -m pytest tests/
 
 all: handouts slides
 
