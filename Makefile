@@ -59,7 +59,7 @@ artifacts:
 clean:
 	@echo Removing all temporary files
 	@find resources -type f | grep -v 'md$$' | xargs rm -f
-	@rm -fR tmp/
+	@rm -fR tmp/ node_modules/ env/ dist/
 
 tmp/%.worksheet.tex: %.worksheet.md $(ENV) $(DEPENDENCIES)
 	@mkdir -p $(@D)
