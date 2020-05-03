@@ -1,3 +1,4 @@
+from solver.exercise import Exercise
 from sympy import cos, latex, oo, pi, solveset, sympify
 from sympy import Interval, Symbol
 
@@ -9,11 +10,23 @@ RAD = 180 / PI
 def cosine_law(a, b, c, gamma, radians=False):
     """Apply the Law of Cosines to find an angle or a length
 
-    :param a: first side
-    :param b: second side
-    :param c: third side
-    :param gamma: angle contained between the first two sides
-    :param radians: use radians if True, degrees otherwise
+    Parameters
+    ----------
+    a : int, float, str
+        First side
+    b : int, float, str
+        Second side
+    c : int, float, str
+        Third side
+    gamma: int, float, str
+        Angle between the first two sides in radians
+    radians: bool
+        Whether to use radians for the output
+
+    Examples
+    --------
+    >>> cosine_law(3, 4, "c", 90*DEG)
+    (..., "c = 5")
     """
     lengths = [sympify(l) for l in [a, b, c]]
     [a, b, c] = lengths
@@ -68,3 +81,26 @@ def pythagoras(a, b, c, radians=False):
         del data["gamma"]
 
     return (data, solution)
+
+
+def convert(angle, radians=True):
+    def solution(angle):
+        return angle * (DEG if radians else RAD)
+
+    return Exercise(latex, solution)(angle)
+
+
+def arclength(radius, angle, length, radians=False):
+    def exercise(radius, angle, length):
+        return f"{latex(radius)}, {latex(angle)}, {latex(length)}"
+
+    def solution(radius, angle, length):
+        data = [radius, angle, length]
+        position = [isinstance(d, Symbol) for d in data].index(True)
+        symbol = data[position]
+        dom = Interval(0, oo)
+        sol = solveset(length - radius * angle, symbol, domain=dom).args[0]
+        sol *= RAD if position == 1 and not radians else 1
+        return f"{latex(symbol)} = {latex(sol)}"
+
+    return Exercise(exercise, solution)(radius, angle, length)

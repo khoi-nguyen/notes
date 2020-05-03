@@ -9,14 +9,14 @@ jobs:
       - uses: actions/checkout@v2
       - uses: docker://bknguyen/teaching:latest
         with:
-          args: "tests GITHUB=1"
+          args: "tests NOENV=1"
   handouts:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
       - uses: docker://bknguyen/teaching:latest
         with:
-          args: "handouts GITHUB=1"
+          args: "handouts NOENV=1"
       - run: mkdir -p artifacts
       - run: rsync -am --include '*/' --include '*.pdf' --exclude '*' . artifacts
       - uses: actions/upload-artifact@master
@@ -29,7 +29,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: docker://bknguyen/teaching:latest
         with:
-          args: "slides GITHUB=1"
+          args: "slides NOENV=1"
       - run: mkdir -p artifacts
       - run: rsync -am --include '*/' --include '*.pdf' --exclude '*' . artifacts
       - uses: actions/upload-artifact@master
@@ -42,7 +42,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: docker://bknguyen/teaching:latest
         with:
-          args: "www GITHUB=1"
+          args: "www NOENV=1"
       - uses: actions/upload-artifact@master
         with:
           name: www

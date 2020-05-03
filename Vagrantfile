@@ -44,13 +44,7 @@ Vagrant.configure("2") do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  if Vagrant::Util::Platform.windows? then
-    unless Vagrant.has_plugin?("vagrant-winnfsd")
-      raise  Vagrant::Errors::VagrantError.new, "In Atom, F7 > nfs_for_windows and restart the VM"
-    end
-    config.vm.network "private_network", type: "192.168.50.10"
-    config.vm.synced_folder './', "/vagrant", type:"nfs", mount_options: ['rw', 'vers=3', 'tcp']
-  end
+  config.vm.synced_folder './', "/vagrant"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -77,5 +71,6 @@ Vagrant.configure("2") do |config|
     if ! grep -qF "cd /vagrant" /home/vagrant/.bashrc;
     then echo "cd /vagrant" >> /home/vagrant/.bashrc ; fi
     chown vagrant. /home/vagrant/.bashrc
+    pip install -r /vagrant/requirements.txt
   SHELL
 end

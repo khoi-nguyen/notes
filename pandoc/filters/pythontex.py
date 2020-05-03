@@ -11,6 +11,7 @@ from panflute import (
 )
 from solver.algebra import *
 from solver.analysis import *
+from solver.geometry import *
 from solver.stats import *
 from solver.probability import *
 from pandoc.filters.tikz import *
@@ -41,4 +42,5 @@ def eval_code(element, document):
             return RawBlock(tikz_picture(element.text, element.attributes), "latex")
 
 
-run_filter(eval_code)
+if __name__ == "__main__":
+    run_filter(eval_code)

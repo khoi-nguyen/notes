@@ -1,9 +1,9 @@
-ifeq ($(GITHUB), 1)
+ifeq ($(NOENV), 1)
 START_ENV :=
 ENV :=
 else
 START_ENV := . env/bin/activate;
-ENV := env
+ENV := env/bin/activate
 endif
 
 # Files
@@ -16,6 +16,8 @@ ANSWERS := $(WORKSHEET_MARKDOWN:.md=.answers.pdf)
 DEPENDENCIES := Makefile $(shell find pandoc/*)
 MANIM := $(shell ls videos/*.py | grep -v 'base\|manim')
 VIDEOS := $(MANIM:.py=)
+TEX := $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.handout.tex) $(WORKSHEETS:.pdf=.tex) $(ANSWERS:.pdf=.tex)
+PDF := $(TEX:.tex=.pdf)
 
 # Commands
 LATEX := pdflatex -interaction=batchmode
@@ -24,15 +26,14 @@ BEAMER := $(PANDOC) -t beamer --template=./pandoc/templates/beamer.tex
 WORKSHEET := $(PANDOC) -t latex --template=./pandoc/templates/worksheet.tex
 
 .PHONY: tests handouts all deploy clean www artifacts slides videos env format docker
-.PRECIOUS: $(MARKDOWN:.md=.tex) $(MARKDOWN:.md=.handout.tex) $(WORKSHEETS:.pdf=.tex) $(ANSWERS:.pdf=.tex)
+.PRECIOUS: $(addprefix tmp/, $(TEX) $(PDF))
 
 handouts: $(HANDOUTS) $(ANSWERS)
 
 slides: $(SLIDES) $(WORKSHEETS)
 
 tests: $(ENV) format
-	@$(START_ENV) python3 -m tests.run
-	@$(START_ENV) python3 -m tests.generator
+	@$(START_ENV) python3 -m pytest tests/
 
 all: handouts slides
 
@@ -58,26 +59,34 @@ artifacts:
 clean:
 	@echo Removing all temporary files
 	@find resources -type f | grep -v 'md$$' | xargs rm -f
+	@rm -fR tmp/ node_modules/ env/ dist/
 
-%.worksheet.tex: %.worksheet.md $(DEPENDENCIES) $(ENV)
+tmp/%.worksheet.tex: %.worksheet.md $(ENV) $(DEPENDENCIES)
+	@mkdir -p $(@D)
 	@echo Generating worksheet for $@...
 	@$(WORKSHEET) -s $< -o $@
 
-%.worksheet.answers.tex: %.worksheet.md $(DEPENDENCIES) $(ENV)
+tmp/%.worksheet.answers.tex: %.worksheet.md $(ENV) $(DEPENDENCIES)
+	@mkdir -p $(@D)
 	@echo Generating answer sheet for $@...
 	@$(WORKSHEET) -V answers=1 -s $< -o $@
 
-%.tex: %.md $(DEPENDENCIES) $(ENV)
+tmp/%.tex: %.md $(ENV) $(DEPENDENCIES)
+	@mkdir -p $(@D)
 	@echo Generating $@...
 	@$(BEAMER) -s $< -o $@
 
-%.handout.tex: %.md $(DEPENDENCIES) $(ENV)
-	@echo Building $@...
+tmp/%.handout.tex: %.md $(ENV) $(DEPENDENCIES)
+	@mkdir -p $(@D)
+	@echo Generating $@...
 	@$(BEAMER) -s $< -o $@ -V handout=true
+
+resources/%.pdf: tmp/resources/%.pdf
+	@cp $< $@
 
 %.pdf: %.tex
 	@echo Building $@ with LaTeX...
-	@cd $(@D); $(LATEX) $(<F)
+	@cd $(<D); $(LATEX) $(<F)
 
 node_modules: package-lock.json package.json
 	@npm install

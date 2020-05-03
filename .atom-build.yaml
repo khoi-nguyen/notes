@@ -2,20 +2,20 @@ cmd: vagrant ssh -c 'cd /vagrant; ./bin/build_current_file {FILE_ACTIVE_NAME}'
 name: current
 targets:
   handouts:
-    cmd: vagrant ssh -c 'cd /vagrant; make -j 10 handouts'
+    cmd: vagrant ssh -c 'cd /vagrant; make -j 10 handouts NOENV=1'
   tests:
-    cmd: vagrant ssh -c 'cd /vagrant; make tests'
+    cmd: vagrant ssh -c 'cd /vagrant; make tests NOENV=1'
   all:
-    cmd: vagrant ssh -c 'cd /vagrant; make -j 10 all'
+    cmd: vagrant ssh -c 'cd /vagrant; make -j 10 all NOENV=1'
   clean:
-    cmd: vagrant ssh -c 'cd /vagrant; make -j 10 clean'
+    cmd: vagrant ssh -c 'cd /vagrant; make -j 10 clean NOENV=1'
   start_vm:
     cmd: vagrant up
   stop_vm:
     cmd: vagrant halt -f
+  reload_vm:
+    cmd: vagrant reload
   update_software_vm:
     cmd: vagrant provision
   remove_vm:
-    cmd: vagrant destroy
-  nfs_for_windows:
-    cmd: vagrant plugin install vagrant-winnfsd
+    cmd: vagrant destroy -f

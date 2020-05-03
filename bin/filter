@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-test -d env && . env/bin/activate
+if [[ -d "env" ]]; then
+    . env/bin/activate
+fi
 
 cat - \
     | python3 -m pandoc.filters.pythontex \

@@ -13,7 +13,6 @@ def multicols(element, document):
             ]
     if isinstance(element, Div):
         attrs = element.attributes
-        return element
         if "n" in attrs or "cols" in attrs:
             n = attrs["n"] if "n" in attrs else attrs["cols"]
             return [
@@ -23,4 +22,5 @@ def multicols(element, document):
             ]
 
 
-run_filter(multicols)
+if __name__ == "__main__":
+    run_filter(multicols)
