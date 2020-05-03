@@ -13,6 +13,8 @@ targets:
     cmd: vagrant up
   stop_vm:
     cmd: vagrant halt -f
+  reload_vm:
+    cmd: vagrant reload
   update_software_vm:
     cmd: vagrant provision
   remove_vm:
