@@ -219,6 +219,10 @@ def equation(equation):
     return EqExercise()(equation)
 
 
+def equations(*equations):
+    return EqExercise()(*equations)
+
+
 def complete_square(expr):
     alpha, h, k, x = symbols("alpha h k x")
     solution = alpha * (x + h) ** 2 + k

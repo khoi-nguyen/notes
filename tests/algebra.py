@@ -4,6 +4,7 @@ from solver.algebra import (
     complete_square,
     div,
     equation,
+    equations,
     expand,
     expindex,
     factorise,
@@ -114,6 +115,12 @@ tests = [
         "x^{2} - x - 12 = 0",
         "-3, 4",
         "Quadratic equation from factorised form",
+    ),
+    (
+        equations("x + y = 4", "4*x - 2*y = 10"),
+        r"\begin{cases}x + y = 4\\ 4 x - 2 y = 10\end{cases}",
+        r"\left( 3, \  1\right)",
+        "Simultaneous equations",
     ),
     (
         power("-3*x", 3),

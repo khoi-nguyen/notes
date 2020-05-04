@@ -27,14 +27,22 @@ class EqExercise(Exercise):
             self.solve = solve
 
     def transform(self, *equations):
+        latex_equations = []
+        for eq in equations:
+            latex_equations.append(f"{latex(eq[0])} = {latex(eq[1])}")
+        latex_equations = "\\\\ ".join(latex_equations)
         if len(equations) == 1:
-            lhs, rhs = equations[0]
-            return f"{latex(lhs)} = {latex(rhs)}"
+            return latex_equations
+        return fr"\begin{{cases}}{latex_equations}\end{{cases}}"
 
     def solve(self, *equations):
+        system = [eq[0] - eq[1] for eq in equations]
+        system = system[0] if len(system) == 1 else system
+        solutions = solve(system, set=True)[1]
         if len(equations) == 1:
-            system = equations[0][0] - equations[0][1]
-        return ", ".join([latex(sol) for sol in solve(system)])
+            return ", ".join([latex(sol[0]) for sol in solutions])
+        else:
+            return ", ".join([latex(sol) for sol in solutions])
 
     def __call__(self, *equations):
         args = []
@@ -43,7 +51,7 @@ class EqExercise(Exercise):
                 lhs, rhs = eq.split("=")
             else:
                 lhs, rhs = eq, 0
-            args.append((lhs, rhs))
+            args.append([lhs, rhs])
         return super().__call__(*args)
 
 
