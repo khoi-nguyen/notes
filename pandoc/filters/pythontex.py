@@ -9,6 +9,7 @@ from panflute import (
     run_filter,
     stringify,
 )
+from sympy import *
 from solver.algebra import *
 from solver.analysis import *
 from solver.geometry import *
