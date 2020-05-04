@@ -17,13 +17,18 @@ class Exercise:
     def __call__(self, *terms):
         terms = [sympify(t, evaluate=False) for t in terms]
         exercise = self.transform(*terms)
-        solution = self.solve(*terms)
+        solution = self.display_solution(self.solve(*terms))
+        return (exercise, solution)
+
+    def display_solution(self, solution):
         if isinstance(solution, dict):
             lines = [f"{latex(key)} = {latex(val)}" for (key, val) in solution.items()]
             solution = ", ".join(lines)
+        elif isinstance(solution, list):
+            solution = r"\\ ".join([self.display_solution(sol) for sol in solution])
         else:
             solution = latex(solution)
-        return (exercise, solution)
+        return solution
 
 
 class Problem(Exercise):
