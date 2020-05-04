@@ -4,6 +4,7 @@ from sympy import (
     Pow,
     powsimp,
     ratsimp,
+    solve,
     sympify,
 )
 
@@ -21,16 +22,29 @@ class Exercise:
 
 
 class EqExercise(Exercise):
-    def __init__(self, solve):
-        self.solve = solve
+    def __init__(self, solve=False):
+        if solve:
+            self.solve = solve
 
-    def transform(self, lhs, rhs):
-        return f"{latex(lhs)} = {latex(rhs)}"
+    def transform(self, *equations):
+        if len(equations) == 1:
+            lhs, rhs = equations[0]
+            return f"{latex(lhs)} = {latex(rhs)}"
 
-    def __call__(self, lhs, rhs=0):
-        if isinstance(lhs, str) and "=" in lhs:
-            lhs, rhs = lhs.split("=")
-        return super().__call__(lhs, rhs)
+    def solve(self, *equations):
+        if len(equations) == 1:
+            system = equations[0][0] - equations[0][1]
+        return ", ".join([latex(sol) for sol in solve(system)])
+
+    def __call__(self, *equations):
+        args = []
+        for eq in equations:
+            if isinstance(eq, str) and "=" in eq:
+                lhs, rhs = eq.split("=")
+            else:
+                lhs, rhs = eq, 0
+            args.append((lhs, rhs))
+        return super().__call__(*args)
 
 
 class OpExercise(Exercise):

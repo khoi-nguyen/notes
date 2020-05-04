@@ -215,11 +215,8 @@ def power(expr, power):
     return Exercise(exercise, solution)(expr, power)
 
 
-def equation(lhs, rhs="0"):
-    def solution(lhs, rhs):
-        return ", ".join([latex(sol) for sol in solve(lhs - rhs)])
-
-    return EqExercise(solution)(lhs, rhs)
+def equation(equation):
+    return EqExercise()(equation)
 
 
 def complete_square(expr):
