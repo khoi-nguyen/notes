@@ -1,4 +1,4 @@
-from solver.exercise import Exercise
+from solver.exercise import Exercise, Problem
 from sympy import cos, latex, oo, pi, solveset, sympify
 from sympy import Interval, Symbol
 
@@ -91,9 +91,6 @@ def convert(angle, radians=True):
 
 
 def arclength(radius, angle, length, radians=False):
-    def exercise(radius, angle, length):
-        return f"{latex(radius)}, {latex(angle)}, {latex(length)}"
-
     def solution(radius, angle, length):
         data = [radius, angle, length]
         position = [isinstance(d, Symbol) for d in data].index(True)
@@ -103,4 +100,4 @@ def arclength(radius, angle, length, radians=False):
         sol *= RAD if position == 1 and not radians else 1
         return f"{latex(symbol)} = {latex(sol)}"
 
-    return Exercise(exercise, solution)(radius, angle, length)
+    return Problem(solution)(radius, angle, length)
