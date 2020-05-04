@@ -25,20 +25,18 @@
 - ~~C: Pythagoras' Theorem~~
 - C: Differential equations
 - C: Areas/lengths of triangles
-- C: Algebraic fractions
+- ~~C: Algebraic fractions~~
 
 # Videos
 
-- Derivatives & tangents
+- Derivatives and tangents
 
-# Virtual VMs and docker
+# Docker/Vagrant
 
-- ~~VM dependencies for manimblib~~
-
-# Technical
-
-- Test starter generator
+- ~~VM dependencies for manimlib~~
+- Use temp folder to minimise I/O use
 
 # Features
 
 - Group different questions with same text (question/instruction) on starter generator 
+- Test starter generator
