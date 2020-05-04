@@ -13,6 +13,7 @@ from sympy import *
 from solver.algebra import *
 from solver.analysis import *
 from solver.geometry import *
+from solver.mechanics import *
 from solver.stats import *
 from solver.probability import *
 from pandoc.filters.tikz import *
