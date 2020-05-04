@@ -18,7 +18,12 @@ class Exercise:
         terms = [sympify(t, evaluate=False) for t in terms]
         exercise = self.transform(*terms)
         solution = self.solve(*terms)
-        return (exercise, latex(solution))
+        if isinstance(solution, dict):
+            lines = [f"{latex(key)} = {latex(val)}" for (key, val) in solution.items()]
+            solution = ", ".join(lines)
+        else:
+            solution = latex(solution)
+        return (exercise, solution)
 
 
 class EqExercise(Exercise):

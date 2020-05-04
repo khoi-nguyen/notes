@@ -2,9 +2,10 @@ import pytest
 from tests.algebra import tests as algebra_tests
 from tests.analysis import tests as analysis_tests
 from tests.geometry import tests as geometry_tests
+from tests.mechanics import tests as mechanics_tests
 
 
-tests = algebra_tests + analysis_tests + geometry_tests
+tests = algebra_tests + analysis_tests + geometry_tests + mechanics_tests
 
 
 def filter_by_len(tests, n):
