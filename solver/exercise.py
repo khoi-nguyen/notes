@@ -26,6 +26,12 @@ class Exercise:
         return (exercise, solution)
 
 
+class Problem(Exercise):
+    def __init__(self, solve):
+        self.solve = solve
+        self.transform = lambda *params: locals()
+
+
 class EqExercise(Exercise):
     def __init__(self, solve=False):
         if solve:
