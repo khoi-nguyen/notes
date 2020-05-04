@@ -38,5 +38,9 @@
 
 # Features
 
-- Group different questions with same text (question/instruction) on starter generator 
+- Group different questions with same text (question/instruction) on starter generator
 - Test starter generator
+- CSV to markdown tables
+- Switch graphs to matplotlib
+- Web interface that builds slides?
+- Switch to html back end for speed
