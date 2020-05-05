@@ -9,6 +9,7 @@ from solver.algebra import (
     expindex,
     factorise,
     frac,
+    leval,
     mult,
     power,
     round,
@@ -52,6 +53,12 @@ tests = [
         "algebra.simplify must not be overriden",
     ),
     (simplify("3^2"), "3^{2}", "9", "Index evaluation",),
+    (
+        leval(r"\frac{1}{2} + \frac{2}{3} \frac{2}{4}"),
+        r"\frac{1}{2} + \frac{2}{3} \frac{2}{4}",
+        r"\frac{5}{6}",
+        "Latex parsing",
+    ),
     (
         add("1/4", "1/7"),
         r"\frac{1}{4} + \frac{1}{7}",
