@@ -1,6 +1,8 @@
-from solver.geometry import cosine_law, DEG, pythagoras
+from solver.geometry import cosine_law, convert, DEG, pythagoras
 
 tests = [
+    (convert(90), "90", r"\frac{\pi}{2}", "Convert an angle from degrees to radians",),
+    (convert("pi", "deg"), r"\pi", r"180", "Convert an angle from radians to degrees",),
     (
         cosine_law(3, 4, 5, "gamma")[1],
         r"\gamma = 90",

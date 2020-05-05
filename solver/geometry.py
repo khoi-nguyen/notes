@@ -83,9 +83,9 @@ def pythagoras(a, b, c, radians=False):
     return (data, solution)
 
 
-def convert(angle, radians=True):
+def convert(angle, to="rad"):
     def solution(angle):
-        return angle * (DEG if radians else RAD)
+        return angle * (DEG if to == "rad" else RAD)
 
     return Exercise(latex, solution)(angle)
 
