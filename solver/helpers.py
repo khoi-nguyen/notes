@@ -38,7 +38,7 @@ def Subtract(a, b, **kwargs):
     return Add(a, Mul(-1, b), **kwargs)
 
 
-def Round(number, dp=2, sf=False):
+def Round(number, dp=0, sf=False):
     x, power, n = number, 0, dp
     if sf:
         (x, power) = Stf(number, True)
