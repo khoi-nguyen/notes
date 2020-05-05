@@ -6,6 +6,8 @@ from solver.analysis import (
     maximum,
     minimum,
     plot,
+    showsecant,
+    showtangent,
     stationary,
     tangent,
     taylor,
@@ -43,6 +45,16 @@ tests = [
         plot("sin(cos(x))"),
         r"\plotfunction[darkblue]{-9:9}{sin((cos(((\x))r))r)}",
         "Radians in nested trig functions for plots",
+    ),
+    (
+        showtangent("sin(x)", 0),
+        r"\plotfunction[darkgreen]{-9:9}{(\x)}",
+        "Show tangent of a function at a point",
+    ),
+    (
+        showsecant("x^2", 0, 1),
+        r"\plotfunction[darkred]{-9:9}{(\x)}",
+        "Show secant of a function at a point",
     ),
     (gradient(0, 0, 1, 2)[1], "2", "Gradient from two points",),
     (
