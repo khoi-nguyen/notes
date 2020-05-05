@@ -53,3 +53,7 @@ def test_pythontex():
     assert stringify(doc).startswith(
         r"x^{2} - 5 x + 6 = 0\answer{2, 3}"
     ), "Solve exercises"
+
+    markdown = "`2*3`"
+    doc = apply_filter(eval_code, markdown)
+    assert stringify(doc).startswith(r"6"), "Python evaluation"
