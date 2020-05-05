@@ -1,6 +1,7 @@
 from solver.analysis import (
     diff,
     gradient,
+    integrate,
     line_equation,
     maximum,
     minimum,
@@ -68,6 +69,19 @@ tests = [
         diff("sin(x)^2")[1],
         r"2 \sin{\left(x \right)} \cos{\left(x \right)}",
         "Don't factorise trig functions",
+    ),
+    # Integration
+    (
+        integrate("x^2", 0, 1),
+        r"\int\limits_{0}^{1} x^{2}\, dx",
+        r"\frac{1}{3}",
+        "Integrate with bounds",
+    ),
+    (
+        integrate("x^2"),
+        r"\int x^{2}\, dx",
+        r"\frac{x^{3}}{3}",
+        "Integrate without bounds",
     ),
     # Taylor
     (str(taylor("exp(x)", 0, 3)), "x**3/6 + x**2/2 + x + 1", "Taylor development",),
