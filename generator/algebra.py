@@ -23,7 +23,9 @@ from sympy import (
     Abs,
     expand as Expand,
     simplify as Simplify,
+    Mul,
     nsimplify,
+    Pow,
     sign,
     sqrt,
     symbols,
@@ -370,7 +372,7 @@ def multiple(a, b):
 
 
 def generate_divsurd(level):
-    """Divide surds
+    """Divide Surds
 
     Parameters
     ----------
@@ -380,27 +382,78 @@ def generate_divsurd(level):
     Level
     -----
     1: Whole number result
+    2: Fractional result
     3: Simple surd result
-    5: Simple coefficient * surd
-    7: Fractional coefficitent * surd
+    5: Fractional coefficient * surd
+    7: One variable surd
+    8: Two variable surd
     """
-    (b, d) = pick(
+    (p1, p2, p3, p4) = pick(
         {
-            1: ([2, 25], [2, 25], equal),
-            3: ([2, 25], [2, 25], multiple),
-            5: ([20, 50], [2, 25], multiple),
-            7: ([50, 200], [2, 100], multiple),
+            1: ([2, 2], [1, 1], [2, 2], [1, 1]),
+            7: ([1, 1], [0, 3], [1, 1], [0, 3], lambda p1, p2, p3, p4: p2 != p4),
+            8: (
+                [1, 4],
+                [0, 4],
+                [1, 4],
+                [0, 4],
+                lambda p1, p2, p3, p4: p2 != p4 and p1 != p3,
+            ),
         },
         level,
     )
-    (a, c) = pick(
+    variables = list(symbols("a b c m n x y z"))
+    (a, b, c, d) = pick(
         {
-            1: ([2, 5], [1, 1]),
-            3: ([1, 1], [1, 1]),
-            5: ([2, 10], [2, 10], multiple),
-            7: ([2, 10], [2, 10]),
+            1: (
+                [2, 12],
+                [1, 1],
+                [2, 12],
+                [1, 1],
+                lambda a, b, c, d: b == d and a != c and a % c == 0,
+            ),
+            2: ([2, 12], [1, 1], [2, 12], [1, 1], lambda a, b, c, d: b == d and a != c),
+            3: (
+                [1, 1],
+                [2, 15],
+                [1, 1],
+                [2, 15],
+                lambda a, b, c, d: b % d == 0
+                and b != d
+                and a ** p1 * b ** p2 != c ** p3 * d ** p4,
+            ),
+            5: (
+                [2, 12],
+                [2, 12],
+                [2, 12],
+                [2, 12],
+                lambda a, b, c, d: b % d == 0
+                and a != c
+                and b != d
+                and a ** p1 * b ** p2 <= 144
+                and c ** p3 * d ** p4 <= 144
+                and a ** p1 * b ** p2 != c ** p3 * d ** p4,
+            ),
+            7: (
+                variables,
+                variables,
+                variables,
+                variables,
+                lambda a, b, c, d: a == b == c == d,
+            ),
+            8: (
+                variables,
+                variables,
+                variables,
+                variables,
+                lambda a, b, c, d: a == c and b == d,
+            ),
         },
         level,
     )
-    expr = (sqrt(a ** 2 * b)) / (sqrt(c ** 2 * d))
+    expr = Mul(
+        sqrt(a ** p1 * b ** p2, evaluate=False),
+        Pow(sqrt(c ** p3 * d ** p4, evaluate=False), -1, evaluate=False),
+        evaluate=False,
+    )
     return ("Simplify the following",) + simplify(expr)
