@@ -363,14 +363,6 @@ def generate_stf2dec(level):
     return ("Convert to an ordinary number",) + generate_stf(level)[2:0:-1]
 
 
-def equal(a, b):
-    return a == b
-
-
-def multiple(a, b):
-    return a % b == 0
-
-
 def generate_divsurd(level):
     """Divide Surds
 
@@ -381,8 +373,8 @@ def generate_divsurd(level):
 
     Level
     -----
-    1: Whole number result
-    2: Fractional result
+    1: Integer result and square number surds
+    2: Fractional result and square number surds
     3: Simple surd result
     5: Fractional coefficient * surd
     7: One variable surd
