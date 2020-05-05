@@ -140,6 +140,7 @@ tests = [
     (round(1.73666, 2), "1.73666", "1.74", "Rounding to 2 dp",),
     (round(3456, sf=2), "3456", "3500", "Rounding to 2 sf",),
     (round(9999, sf=1), "9999", "10000", "Rounding to 1 sf with nines",),
+    (round(10.5, 0), "10.5", "11", "Check it doesn't apply Bankers' rounding",),
     (stf(485), "485", r"4.85 \times 10^{2}", "Standard form (bigger than 1)",),
     (stf(0.0032), "0.0032", r"3.2 \times 10^{-3}", "Standard form (less than 1)",),
     (stf(0.00312), "0.00312", r"3.12 \times 10^{-3}", "Standard form (rounding)",),

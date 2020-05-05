@@ -1,3 +1,4 @@
+from decimal import Decimal, ROUND_HALF_UP
 from sympy import (
     Abs,
     Add,
@@ -38,24 +39,24 @@ def Subtract(a, b, **kwargs):
 
 
 def Round(number, dp=2, sf=False):
+    x, power, n = number, 0, dp
     if sf:
-        number = Stf(number, sf).doit().evalf(sf)
-        if float(number).is_integer():
-            number = int(f"{number:.0f}")
-        return number
-    else:
-        return number.evalf().round(dp)
+        (x, power) = Stf(number, True)
+        n = sf - 1
+    x = Decimal(str(x)).quantize(Decimal("0.1") ** n, rounding=ROUND_HALF_UP)
+    x = Mul(x, Pow(10, power)).evalf()
+    if float(x).is_integer():
+        x = int(x)
+    return x
 
 
-def Stf(number, precision=False):
+def Stf(number, return_tuple=False):
     """Converts a float to standard notation as a sympy object
     """
     power = floor((log(Abs(number)) / log(10)).evalf())
-    x = Mul(number, Pow(10, -power))
-    if precision:
-        x = Mul(Mul(x, Pow(10, -1)).round(precision), 10).evalf(precision)
-    else:
-        x = x.evalf()
+    x = Mul(number, Pow(10, -power)).evalf()
     if float(x).is_integer():
         x = int(x)
+    if return_tuple:
+        return (x, power)
     return Mul(x, Pow(UnevaluatedExpr(10), power, evaluate=False), evaluate=False)
