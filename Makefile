@@ -33,7 +33,8 @@ handouts: $(HANDOUTS) $(ANSWERS)
 slides: $(SLIDES) $(WORKSHEETS)
 
 tests: $(ENV) format
-	@$(START_ENV) python3 -m pytest -v tests/
+	@$(START_ENV) coverage run -m pytest tests/
+	@$(START_ENV) coverage xml
 
 all: handouts slides
 

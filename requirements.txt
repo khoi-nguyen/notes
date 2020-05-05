@@ -1,5 +1,6 @@
 antlr4-python3-runtime==4.7.1
 black
+coverage
 flake8
 flask
 flask_cors
