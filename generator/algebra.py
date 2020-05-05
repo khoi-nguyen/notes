@@ -180,7 +180,7 @@ def generate_equation(level):
         sign_3 = (-1) ** randint(0, 1)
         a = sign_1 * sign_3 * c + (-1) ** randint(0, 1) * randint(1, 9)
         lhs, rhs = sign_1 * a * x + sign_2 * b, sign_3 * c * x + d
-    return ("Solve",) + equation(str(Simplify(lhs)), str(Simplify(rhs)))
+    return ("Solve",) + equation(str(Simplify(lhs)) + "=" + str(Simplify(rhs)))
 
 
 def generate_expindex(level):
@@ -251,7 +251,7 @@ def generate_quadratic_equation(level):
 
     x = symbols("x")
     lhs, rhs = Expand(a * (x - u) * (x - v)) + d * x + e, d * x + e
-    return ("Solve",) + equation(str(lhs), str(rhs))
+    return ("Solve",) + equation(str(lhs) + "=" + str(rhs))
 
 
 def generate_stf(level):
