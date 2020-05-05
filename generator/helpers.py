@@ -41,8 +41,11 @@ def pick(constraints, level):
         callback = constraint[-1]
         sets = []
         for range_ in constraint[:-1]:
-            [a, b], step = range_[:2], 1 if len(range_) <= 2 else range_[2]
-            sets.append([a + n * step for n in range(0, int((b - a) // step) + 1)])
+            if len(range_) <= 3:
+                [a, b], step = range_[:2], 1 if len(range_) <= 2 else range_[2]
+                sets.append([a + n * step for n in range(0, int((b - a) // step) + 1)])
+            else:
+                sets.append(range_)
         solutions = [x for x in product(*sets) if callback(*x)]
         rand = choice(solutions)
 
