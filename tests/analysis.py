@@ -7,7 +7,9 @@ from solver.analysis import (
     minimum,
     plot,
     stationary,
+    tangent,
     taylor,
+    taylor_poly,
 )
 
 tests = [
@@ -70,6 +72,13 @@ tests = [
         r"2 \sin{\left(x \right)} \cos{\left(x \right)}",
         "Don't factorise trig functions",
     ),
+    # Tangents
+    (
+        tangent("x^2", 1),
+        r"y = x^{2} \text{ at } x = 1",
+        "y = 2 x - 1",
+        "Tangent of a function at a point",
+    ),
     # Integration
     (
         integrate("x^2", 0, 1),
@@ -84,7 +93,16 @@ tests = [
         "Integrate without bounds",
     ),
     # Taylor
-    (str(taylor("exp(x)", 0, 3)), "x**3/6 + x**2/2 + x + 1", "Taylor development",),
+    (
+        str(taylor("exp(x)", 0, 3)),
+        "x**3/6 + x**2/2 + x + 1",
+        "Taylor development at a point in symbolic form",
+    ),
+    (
+        taylor_poly("sin(x)", 0, 3),
+        r"- \frac{x^{3}}{6} + x",
+        "Taylor polynomial of a function at a point",
+    ),
     # Stationary points
     (
         stationary("x^2 - 6*x + 4"),
