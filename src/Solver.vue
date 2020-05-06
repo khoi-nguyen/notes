@@ -12,10 +12,8 @@ div
                     dd(v-html="element[2]")
             span.badge.badge-danger(v-on:click="remove_command(index)" v-if="!show_answers") x
     form(v-on:submit="execute_command")
-        .form-group.row
-            label.col-3.col-form-label Command
-            .col-9
-                input.form-control.text-monospace(v-model='command')
+        .form-group
+            input.form-control.text-monospace(v-model='command' placeholder="Command")
 </template>
 
 <script>
@@ -34,7 +32,7 @@ export default {
         return {
             backend: backend,
             history: [],
-            command: 'equation("x^2 - 5*x + 6")',
+            command: '',
         };
     },
     methods: {
