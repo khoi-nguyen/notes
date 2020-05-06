@@ -44,3 +44,4 @@
 - Switch graphs to matplotlib
 - Web interface that builds slides?
 - Switch to html back end for speed
+- Change sympify so that * is unnecessary
