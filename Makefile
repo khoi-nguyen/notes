@@ -39,6 +39,7 @@ tests: $(ENV) format
 all: handouts slides
 
 frontend: node_modules
+	@$(START_ENV) python3 ./bin/data.py
 	@npm run-script start
 
 backend: $(ENV)
