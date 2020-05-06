@@ -1,10 +1,15 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
-from .algebra import *
-from .analysis import *
-from .geometry import *
+from generator.algebra import *
+from generator.analysis import *
+from generator.geometry import *
+from solver.algebra import *
+from solver.analysis import *
+from solver.geometry import *
+from solver.mechanics import *
 
 app = Flask(__name__)
+app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app)
 
 exercises = [
@@ -31,6 +36,12 @@ def add_question(name, n, level):
         if q not in questions:
             questions.append(q)
     return jsonify(questions)
+
+
+@app.route("/solver", methods=["POST"])
+def solver():
+    command = request.form["command"]
+    return jsonify(eval(command))
 
 
 if __name__ == "__main__":

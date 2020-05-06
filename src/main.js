@@ -5,6 +5,7 @@ import App from './App';
 import About from './About';
 import Home from './Home';
 import Project from './Project';
+import Solver from './Solver';
 import Starter from './Starter';
 import Teaching from './Teaching';
 import File from './File';
@@ -27,6 +28,7 @@ const routes = [
     { path: '/', component: Home },
     { path: '/about', component: About },
     { path: '/project', component: Project },
+    { path: '/solver', component: Solver },
     { path: '/starter', component: Starter },
     { path: '/teaching', component: Teaching },
     { path: '/file', component: File },
