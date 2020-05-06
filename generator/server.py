@@ -7,13 +7,26 @@ from solver.algebra import *
 from solver.analysis import *
 from solver.geometry import *
 from solver.mechanics import *
+import re
 
 app = Flask(__name__)
-app.config['CORS_HEADERS'] = 'Content-Type'
+app.config["CORS_HEADERS"] = "Content-Type"
 CORS(app)
 
+
+def get_description(function):
+    docstring = globals()[function].__doc__
+    levels = re.findall(r"^\s*([1-9]):\s*(.*)$", docstring, re.MULTILINE)
+    levels = {int(l[0]): l[1] for l in levels}
+    return levels
+
+
 exercises = [
-    {"title": globals()[f].__doc__.partition("\n")[0], "name": f}
+    {
+        "title": globals()[f].__doc__.partition("\n")[0],
+        "name": f,
+        "levels": get_description(f),
+    }
     for f in dir()
     if f.startswith("generate_")
 ]
