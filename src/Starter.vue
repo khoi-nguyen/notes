@@ -41,17 +41,24 @@ div
     hr
     h2 Add questions
     form(v-on:submit="add_question")
-        .from-group.row
+        .form-group.row
             label.col-sm-2.col-form-label.col-form-label-sm How many
             .col-sm-10
                 select.custom-select(v-model="n")
                     option(v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :value="i") {{i}}
-        .from-group.row
+        .form-group.row
             label.col-sm-2.col-form-label.col-form-label-sm Exercise
             .col-sm-10
-                select.custom-select(v-model="question")
+                select.custom-select(v-model="question" @change="load_question")
                     option(v-for="ex in exerciseList" :value="ex.name") {{ex.title}}
-        .from-group.row
+        .form-group.row(v-if="exerciseData.levels && exerciseData.levels.hasOwnProperty(1)")
+            label.col-sm-2.col-form-label.col-form-label-sm Description
+            .col-sm-10
+                dl.list-unstyled(v-for="(desc, level) in exerciseData.levels")
+                    div.row
+                        dt.col-sm-2 Level {{level}}
+                        dd.col-sm-10 {{desc}}
+        .form-group.row
             label.col-sm-2.col-form-label.col-form-label-sm Level
             .col-sm-10
                 select.custom-select(v-model="level")
@@ -82,6 +89,7 @@ export default {
             backend: backend,
             date: new Date(),
             exerciseList: [],
+            exerciseData: {},
             level: 5,
             question: '',
             questions: [],
@@ -113,6 +121,11 @@ export default {
                 }, data);
                 self.questions = self.questions.concat(data);
             });
+        },
+        load_question: function(name) {
+            var self = this;
+            this.exerciseData = {};
+            this.exerciseData = this.exerciseList.filter(ex => ex.name == self.question)[0];
         },
         remove_question: function(index) {
             this.questions.splice(index, 1);
