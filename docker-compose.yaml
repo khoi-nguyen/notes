@@ -4,6 +4,9 @@ services:
     image: bknguyen/teaching:latest
     build: .
     user: ${ID}
+    ports:
+      - "1234:1234"
+      - "5000:5000"
     volumes:
       - .:/teaching:delegated
   manim:
