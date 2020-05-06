@@ -227,7 +227,7 @@ def complete_square(expr):
     alpha, h, k, x = symbols("alpha h k x")
     solution = alpha * (x + h) ** 2 + k
     sols = [y for y in solve(solution - sympify(expr), [alpha, h, k])[0]]
-    exercise = latex(expr)
+    exercise = latex(sympify(expr, evaluate=False))
     solution = latex(solution.subs(dict(zip([alpha, h, k], sols))))
     return (exercise, solution)
 
