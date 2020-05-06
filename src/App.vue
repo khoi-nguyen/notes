@@ -41,6 +41,7 @@ export default {
                 {text: 'Resources', icon: 'chalkboard-teacher', to: '/teaching'},
                 {text: 'About', icon: 'address-card', to: '/about'},
                 {text: 'Starter Generator', icon: 'tv', to: '/starter'},
+                {text: 'Solver', icon: 'calculator', to: '/solver'},
             ],
         }
     },
