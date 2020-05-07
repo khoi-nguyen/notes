@@ -96,14 +96,6 @@ def simplify_surds(expression):
         return expression
 
     def solution(expression):
-        """
-        Simplify a surd
-
-        Step 1: Make symbols positive (posify)
-        Step 2: Remove fractions from denominator (radsimp)
-        Step 3: Remove fractional powers (surdify)
-        Step 4: Group surds (group)
-        """
         expr = posify(expression)[0].doit()
         return group(surdify(radsimp(expr)))
 
