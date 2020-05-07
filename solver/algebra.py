@@ -68,41 +68,41 @@ def simplify_surds(expression):
     ('\\sqrt{x^{2}}', 'x')
     """
 
-    def positify(term):
-        args = [positify(a) for a in term.args]
-        if term.func == Symbol:
-            term = Symbol(term.name, *args, positive=True)
-        elif term.func in [Pow, Add, Mul]:
-            term = term.func(*args)
-        return term
+    def positify(expression):
+        args = [positify(a) for a in expression.args]
+        if expression.func == Symbol:
+            expression = Symbol(expression.name, *args, positive=True)
+        elif expression.func in [Pow, Add, Mul]:
+            expression = expression.func(*args)
+        return expression
 
-    def surdify(term):
-        args = [surdify(a) for a in term.args]
-        if term.func == Pow:
+    def surdify(expression):
+        args = [surdify(a) for a in expression.args]
+        if expression.func == Pow:
             [base, power] = args
             if power.func == Rational and power.q == 2 and power.p not in [-1, 1]:
-                term = Pow(UnevaluatedExpr(Pow(base, power.p)), Rational(1, 2))
-        elif term.func in [Pow, Add, Mul]:
-            term = term.func(*args)
-        return term
+                expression = sqrt(UnevaluatedExpr(Pow(base, power.p)))
+        elif expression.func in [Pow, Add, Mul]:
+            expression = expression.func(*args)
+        return expression
 
-    def group_surds(term):
-        args = [group_surds(a) for a in term.args]
-        if term.func == Mul:
-            surds = [t for t in term.args if t.func == Pow and t.args[1] == 1 / 2]
+    def group(expression):
+        args = [group(a) for a in expression.args]
+        if expression.func == Mul:
+            surds = [t for t in expression.args if t.func == Pow and t.args[1] == 1 / 2]
             if surds:
-                grouped_surds = sqrt(Mul(*[t.args[0] for t in surds]), evaluate=False)
-                term = Mul(
-                    grouped_surds,
-                    *[a for a in term.args if a not in surds],
+                grouped = sqrt(Mul(*[t.args[0] for t in surds]), evaluate=False)
+                expression = Mul(
+                    grouped,
+                    *[a for a in expression.args if a not in surds],
                     evaluate=False,
                 )
-        elif term.func in [Pow, Add, Mul]:
-            term = term.func(*args)
-        return term
+        elif expression.func in [Pow, Add, Mul]:
+            expression = expression.func(*args)
+        return expression
 
     def solution(expression):
-        return group_surds(radsimp(surdify(radsimp(positify(expression)))))
+        return group(radsimp(surdify(radsimp(positify(expression)))))
 
     return Exercise(latex, solution)(expression)
 
