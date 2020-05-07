@@ -456,7 +456,7 @@ def generate_divsurd(level):
         },
         level,
     )
-    variables = list(symbols("a b c m n x y z", positive=True))
+    variables = list(symbols("a b c m n x y z"))
     (a, b, c, d) = pick(
         {
             1: (
