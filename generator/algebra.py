@@ -7,7 +7,7 @@ from solver.algebra import (
     expindex,
     mult,
     power,
-    simplify,
+    simplify_surds,
     stf,
     stfmult,
     stfadd,
@@ -510,4 +510,4 @@ def generate_divsurd(level):
         Pow(sqrt(c ** p3 * d ** p4, evaluate=False), -1, evaluate=False),
         evaluate=False,
     )
-    return ("Simplify the following",) + simplify(expr)
+    return ("Simplify the following",) + simplify_surds(expr)

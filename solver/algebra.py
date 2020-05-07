@@ -5,12 +5,17 @@ from sympy import (
     expand as Expand,
     factor,
     Mul,
+    posify,
     powdenest,
+    radsimp,
+    Pow,
+    Rational,
     simplify as Simplify,
     solve,
     sqrt,
     symbols,
     sympify,
+    UnevaluatedExpr,
 )
 from sympy.parsing.latex import parse_latex
 
@@ -45,6 +50,56 @@ def factorise(expression):
     ('x^{2} - 5 x + 6', '(x - 2) (x - 3)')
     """
     return Exercise(latex, factor)(expression)
+
+
+def simplify_surds(expression):
+    r"""Simplify surds an algebraic expression
+
+    All symbols are assumed to be positive.
+
+    Parameters
+    ----------
+    expression : str
+        Mathematical expression to be simplified
+
+    Examples
+    --------
+    >>> simplify_surds('sqrt(x^2)')
+    ('\\sqrt{x^{2}}', 'x')
+    """
+
+    def surdify(expression):
+        """Transform x^(p/2) to sqrt(x^p)"""
+        args = [surdify(a) for a in expression.args]
+        if expression.func == Pow:
+            [base, power] = args
+            if power.func == Rational and power.q == 2 and power.p not in [-1, 1]:
+                expression = sqrt(UnevaluatedExpr(Pow(base, power.p)))
+        elif expression.func in [Pow, Add, Mul]:
+            expression = expression.func(*args, evaluate=False)
+        return expression
+
+    def group(expression):
+        """Transform sqrt(x)*sqrt(y) to sqrt(x*y)"""
+        args = [group(a) for a in expression.args]
+        if expression.func == Mul:
+            surds = [t for t in expression.args if t.func == Pow and t.args[1] == 1 / 2]
+            if surds:
+                grouped = sqrt(Mul(*[t.args[0] for t in surds]), evaluate=False)
+                expression = Mul(
+                    grouped,
+                    *[a for a in expression.args if a not in surds],
+                    evaluate=False,
+                )
+        elif expression.func in [Pow, Add, Mul]:
+            expression = expression.func(*args, evaluate=False)
+        return expression
+
+    def solution(expression):
+        expr = posify(expression)[0].doit()
+        return group(surdify(radsimp(expr)))
+
+    return Exercise(latex, solution)(expression)
 
 
 def simplify(expression):

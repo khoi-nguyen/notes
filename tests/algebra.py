@@ -14,6 +14,7 @@ from solver.algebra import (
     power,
     round,
     simplify,
+    simplify_surds,
     stf,
     stfadd,
     stf2dec,
@@ -53,6 +54,49 @@ tests = [
         "algebra.simplify must not be overriden",
     ),
     (simplify("3^2"), "3^{2}", "9", "Index evaluation",),
+    # Surds simplification
+    (
+        simplify_surds("sqrt(x^2)"),
+        r"\sqrt{x^{2}}",
+        r"x",
+        "Symbols are assumed to be positive",
+    ),
+    (
+        simplify_surds("1 / sqrt(x)"),
+        r"\frac{1}{\sqrt{x}}",
+        r"\frac{\sqrt{x}}{x}",
+        "Rationalise the numerator",
+    ),
+    (
+        simplify_surds("x^(3/2)"),
+        r"x^{\frac{3}{2}}",
+        r"\sqrt{x^{3}}",
+        "Avoid fractional fractions if possible",
+    ),
+    (
+        simplify_surds("sqrt(c) / sqrt(c^4 * z)"),
+        r"\frac{\sqrt{c}}{\sqrt{c^{4} z}}",
+        r"\frac{\sqrt{z c^{3}}}{c^{3} z}",
+        "Rationalise denominator and avoid fract powers must be done recursively",
+    ),
+    (
+        simplify_surds("sqrt(x) * sqrt(y)"),
+        r"\sqrt{x} \sqrt{y}",
+        r"\sqrt{x y}",
+        "Group surds",
+    ),
+    (
+        simplify_surds("sqrt(a) * sqrt(b) + sqrt(x) * sqrt(y)"),
+        r"\sqrt{a} \sqrt{b} + \sqrt{x} \sqrt{y}",
+        r"\sqrt{a b} + \sqrt{x y}",
+        "Group surds recursively in Sympy tree",
+    ),
+    (
+        simplify_surds("(sqrt(x) * sqrt(y))^3"),
+        r"\left(\sqrt{x} \sqrt{y}\right)^{3}",
+        r"\sqrt{x^{3} y^{3}}",
+        "Group surds recursively in Sympy tree",
+    ),
     (
         leval(r"\frac{1}{2} + \frac{2}{3} \frac{2}{4}"),
         r"\frac{1}{2} + \frac{2}{3} \frac{2}{4}",
