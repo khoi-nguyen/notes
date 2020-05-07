@@ -236,6 +236,7 @@ def complete_square(expr):
     >>> complete_square("x^2 - 7*x + 2")
     ('x^{2} - 7 x + 2', '\\left(x - \\frac{7}{2}\\right)^{2} - \\frac{41}{4}')
     """
+
     def solution(expr):
         alpha, h, k, x = symbols("alpha h k x")
         equation = alpha * (x + h) ** 2 + k

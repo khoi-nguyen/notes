@@ -20,3 +20,16 @@ def test_command(cmd, exercise, solution, title):
 @pytest.mark.parametrize("cmd, solution, title", filter_by_len(tests, 3))
 def test_geometry(cmd, solution, title):
     assert cmd == solution, title
+
+
+def test_conflicts():
+    count = {"expand": 0, "integrate": 0, "simplify": 0}
+    modules = ["algebra", "analysis", "geometry", "mechanics"]
+    for module in modules:
+        exec(f"import solver.{module}")
+        for function in count:
+            if eval(f"hasattr(solver.{module}, '{function}')"):
+                count[function] += 1
+
+    for function, count in count.items():
+        assert count == 1, f"Potential conflict with {function}"
