@@ -224,12 +224,25 @@ def equations(*equations):
 
 
 def complete_square(expr):
-    alpha, h, k, x = symbols("alpha h k x")
-    solution = alpha * (x + h) ** 2 + k
-    sols = [y for y in solve(solution - sympify(expr), [alpha, h, k])[0]]
-    exercise = latex(sympify(expr, evaluate=False))
-    solution = latex(solution.subs(dict(zip([alpha, h, k], sols))))
-    return (exercise, solution)
+    r"""Complete the square
+
+    Parameters
+    ----------
+    expression : str
+        Algebraic expression
+
+    Examples
+    --------
+    >>> complete_square("x^2 - 7*x + 2")
+    ('x^{2} - 7 x + 2', '\\left(x - \\frac{7}{2}\\right)^{2} - \\frac{41}{4}')
+    """
+    def solution(expr):
+        alpha, h, k, x = symbols("alpha h k x")
+        equation = alpha * (x + h) ** 2 + k
+        sols = solve(equation - expr, [alpha, h, k], dict=True)[0]
+        return latex(equation.subs(sols))
+
+    return Exercise(latex, solution)(expr)
 
 
 def circle_equation(info, lhs, rhs=0):
