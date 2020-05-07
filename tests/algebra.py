@@ -76,8 +76,26 @@ tests = [
     (
         simplify_surds("sqrt(c) / sqrt(c^4 * z)"),
         r"\frac{\sqrt{c}}{\sqrt{c^{4} z}}",
-        r"\frac{\sqrt{z} \sqrt{c^{3}}}{c^{3} z}",
+        r"\frac{\sqrt{z c^{3}}}{c^{3} z}",
         "Rationalise denominator and avoid fract powers must be done recursively",
+    ),
+    (
+        simplify_surds("sqrt(x) * sqrt(y)"),
+        r"\sqrt{x} \sqrt{y}",
+        r"\sqrt{x y}",
+        "Group surds",
+    ),
+    (
+        simplify_surds("sqrt(a) * sqrt(b) + sqrt(x) * sqrt(y)"),
+        r"\sqrt{a} \sqrt{b} + \sqrt{x} \sqrt{y}",
+        r"\sqrt{a b} + \sqrt{x y}",
+        "Group surds recursively in Sympy tree",
+    ),
+    (
+        simplify_surds("(sqrt(x) * sqrt(y))^3"),
+        r"\left(\sqrt{x} \sqrt{y}\right)^{3}",
+        r"\sqrt{x^{3} y^{3}}",
+        "Group surds recursively in Sympy tree",
     ),
     (
         leval(r"\frac{1}{2} + \frac{2}{3} \frac{2}{4}"),

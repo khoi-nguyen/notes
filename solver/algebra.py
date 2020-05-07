@@ -86,8 +86,23 @@ def simplify_surds(expression):
             term = term.func(*args)
         return term
 
+    def group_surds(term):
+        args = [group_surds(a) for a in term.args]
+        if term.func == Mul:
+            surds = [t for t in term.args if t.func == Pow and t.args[1] == 1 / 2]
+            if surds:
+                grouped_surds = sqrt(Mul(*[t.args[0] for t in surds]), evaluate=False)
+                term = Mul(
+                    grouped_surds,
+                    *[a for a in term.args if a not in surds],
+                    evaluate=False,
+                )
+        elif term.func in [Pow, Add, Mul]:
+            term = term.func(*args)
+        return term
+
     def solution(expression):
-        return radsimp(surdify(radsimp(positify(expression))))
+        return group_surds(radsimp(surdify(radsimp(positify(expression)))))
 
     return Exercise(latex, solution)(expression)
 
