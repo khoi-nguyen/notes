@@ -6,11 +6,16 @@ from sympy import (
     factor,
     Mul,
     powdenest,
+    radsimp,
+    Pow,
+    Rational,
     simplify as Simplify,
+    Symbol,
     solve,
     sqrt,
     symbols,
     sympify,
+    UnevaluatedExpr,
 )
 from sympy.parsing.latex import parse_latex
 
@@ -45,6 +50,46 @@ def factorise(expression):
     ('x^{2} - 5 x + 6', '(x - 2) (x - 3)')
     """
     return Exercise(latex, factor)(expression)
+
+
+def simplify_surds(expression):
+    r"""Simplify surds an algebraic expression
+
+    All symbols are assumed to be positive.
+
+    Parameters
+    ----------
+    expression : str
+        Mathematical expression to be simplified
+
+    Examples
+    --------
+    >>> simplify_surds('sqrt(x^2)')
+    ('\\sqrt{x^{2}}', 'x')
+    """
+
+    def positify(term):
+        args = [positify(a) for a in term.args]
+        if term.func == Symbol:
+            term = Symbol(term.name, *args, positive=True)
+        elif term.func in [Pow, Add, Mul]:
+            term = term.func(*args)
+        return term
+
+    def surdify(term):
+        args = [surdify(a) for a in term.args]
+        if term.func == Pow:
+            [base, power] = args
+            if power.func == Rational and power.q == 2 and power.p not in [-1, 1]:
+                term = Pow(UnevaluatedExpr(Pow(base, power.p)), Rational(1, 2))
+        elif term.func in [Pow, Add, Mul]:
+            term = term.func(*args)
+        return term
+
+    def solution(expression):
+        return radsimp(surdify(radsimp(positify(expression))))
+
+    return Exercise(latex, solution)(expression)
 
 
 def simplify(expression):
