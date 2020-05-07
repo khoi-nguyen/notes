@@ -5,12 +5,12 @@ from sympy import (
     expand as Expand,
     factor,
     Mul,
+    posify,
     powdenest,
     radsimp,
     Pow,
     Rational,
     simplify as Simplify,
-    Symbol,
     solve,
     sqrt,
     symbols,
@@ -68,18 +68,6 @@ def simplify_surds(expression):
     ('\\sqrt{x^{2}}', 'x')
     """
 
-    def positify(expression):
-        """Make all symbols represent **positive** quantities
-
-        This is necessary so that sqrt(x**2) gets simplified to x.
-        """
-        args = [positify(a) for a in expression.args]
-        if expression.func == Symbol:
-            expression = Symbol(expression.name, *args, positive=True)
-        elif expression.func in [Pow, Add, Mul]:
-            expression = expression.func(*args)
-        return expression
-
     def surdify(expression):
         """Transform x^(p/2) to sqrt(x^p)"""
         args = [surdify(a) for a in expression.args]
@@ -104,19 +92,20 @@ def simplify_surds(expression):
                     evaluate=False,
                 )
         elif expression.func in [Pow, Add, Mul]:
-            expression = expression.func(*args)
+            expression = expression.func(*args, evaluate=False)
         return expression
 
     def solution(expression):
         """
         Simplify a surd
 
-        Step 1: Make symbols positive (obvious first step)
-        Step 2: Remove fractions from denominator -> create fractional powers
-        Step 3: Remove fractional powers
-        Step 4: Group surds (obvious last step)
+        Step 1: Make symbols positive (posify)
+        Step 2: Remove fractions from denominator (radsimp)
+        Step 3: Remove fractional powers (surdify)
+        Step 4: Group surds (group)
         """
-        return group(surdify(radsimp(positify(expression))))
+        expr = posify(expression)[0].doit()
+        return group(surdify(radsimp(expr)))
 
     return Exercise(latex, solution)(expression)
 
