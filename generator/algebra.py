@@ -17,12 +17,11 @@ from solver.algebra import (
 )
 from math import gcd
 from generator.helpers import pick
-from random import randint
+from random import choice, randint
 
 from sympy import (
     Abs,
     expand as Expand,
-    simplify as Simplify,
     Mul,
     nsimplify,
     Pow,
@@ -133,54 +132,117 @@ def generate_multfrac(level):
 
 
 def generate_equation(level):
-    """Linear equation"""
-    x = symbols("x")
-    # a*x = b or x + a = b or x/a = b
-    if level <= 3:
-        a = randint(2, 5)
-        b = randint(0, 9)
-        cointoss = randint(0, 2)
-        # Level 1 1,1, level 2 at most 1 negative, level 3 can have -1,-1
-        sign_1 = (-1) ** randint(0, 1) if level >= 2 else 1
-        sign_2 = (-1) ** randint(0, 1) if level >= 2 else 1
-        if sign_1 == -1 and level == 2:
-            sign_2 = 1
+    """Linear equation
 
-        if cointoss == 1:
-            lhs, rhs = sign_1 * a * x, sign_2 * randint(0, 4) * a
-        elif cointoss == 2:
-            lhs, rhs = sign_1 / a * x, sign_2 * randint(0, 4)
-        else:
-            lhs, rhs = x + sign_1 * a, sign_2 * b + sign_1 * a
-    # a*x + b = c
-    elif level <= 5:
-        a = randint(2, 5)
-        b = randint(1, 9)
-        sign_1 = (-1) ** randint(0, 1) if level == 5 else 1
-        sign_2 = (-1) ** randint(0, 1) if level == 5 else 1
-        c = sign_2 * b + randint(-9, 9) * a
-        lhs, rhs = sign_1 * a * x + sign_2 * b, c
-    # a*x + b = c*x + d (int solution)
-    elif level <= 7:
-        b = randint(1, 9)
-        c = randint(1, 9)
-        sign_1 = (-1) ** randint(0, 1) if level == 7 else 1
-        sign_2 = (-1) ** randint(0, 1) if level == 7 else 1
-        sign_3 = (-1) ** randint(0, 1) if level == 7 else 1
-        a = sign_1 * sign_3 * c + (-1) ** randint(0, 1) * randint(1, 9)
-        d = sign_2 * b + randint(-9, 9) * (sign_1 * a - sign_3 * c)
-        lhs, rhs = sign_1 * a * x + sign_2 * b, sign_3 * c * x + d
-    # a*x + b = c*x + d
-    elif level <= 9:
-        b = (-1) ** randint(0, 1) * randint(1, 9)
-        c = (-1) ** randint(0, 1) * randint(1, 9)
-        d = (-1) ** randint(0, 1) * randint(1, 9)
-        sign_1 = (-1) ** randint(0, 1)
-        sign_2 = (-1) ** randint(0, 1)
-        sign_3 = (-1) ** randint(0, 1)
-        a = sign_1 * sign_3 * c + (-1) ** randint(0, 1) * randint(1, 9)
-        lhs, rhs = sign_1 * a * x + sign_2 * b, sign_3 * c * x + d
-    return ("Solve",) + equation(str(Simplify(lhs)) + "=" + str(Simplify(rhs)))
+    Parameters
+    ----------
+    level : int
+        Difficulty level between 1 and 9
+
+    Level
+    -----
+    1: 1-step, unknown on one side, positive coefficients, positive integer result
+    2: 1-step, unknown on either side, positive/negative coefficients, integer result
+    3: 1-step, unknown on either side, positive/negative coefficients, fractional result
+    4: 2-step, unknown on either side, positive coefficients, positive integer result
+    5: 2-step, unknown on either side, positive/negative coefficients, integer result
+    6: 2-step, unknown on either side, positive/negative coefficients, fractional result
+    7: Unknown on both sides, positive coefficients, positive integer result
+    8: Unknown on both sides, positive/negative coefficients, integer result
+    9: Unknown on both sides, positive/negative coefficients, fractional result
+    """
+    x = symbols("x")
+    p_1, p_2 = choice([-1, 1]), choice([-1, 1])
+
+    def p(x, p_y):
+        return x ** p_y if x != 0 and level != 7 else x
+
+    (a, b, c, d) = pick(
+        {
+            1: (
+                [1, 5],
+                [0, 4],
+                [0, 0],
+                [1, 20],
+                lambda a, b, c, d: (
+                    (a == 1 and b != 0 and d - b > 0)
+                    or ((a - 1) * d != 0 and b == 0 and d % a)
+                ),
+            ),
+            2: (
+                [-5, 5],
+                [-6, 4],
+                [0, 0],
+                [-9, 9],
+                lambda a, b, c, d: (
+                    (a == 1 and b * (b - d) != 0)
+                    or ((a - 1) * a * d != 0 and b == 0 and d % p(a, p_1) == 0)
+                ),
+            ),
+            3: (
+                [-5, 5],
+                [-6, 4],
+                [0, 0],
+                [-9, 9],
+                lambda a, b, c, d: (
+                    (a == 1 and b * (b - d) != 0) or (b == 0 and (a - 1) * a * d != 0)
+                ),
+            ),
+            4: (
+                [2, 5],
+                [2, 5],
+                [0, 0],
+                [1, 20],
+                lambda a, b, c, d: (d - b) % p(a, p_1) == 0 and d - b > 0,
+            ),
+            5: (
+                [-5, 5],
+                [-6, 4],
+                [0, 0],
+                [-9, 9],
+                lambda a, b, c, d: a * (1 - a) * (b - d) != 0
+                and (d - b) % p(a, p_1) == 0,
+            ),
+            6: (
+                [-5, 5],
+                [-6, 4],
+                [0, 0],
+                [-9, 9],
+                lambda a, b, c, d: a * (1 - a) * (b - d) != 0,
+            ),
+            7: (
+                [1, 10],
+                [1, 10],
+                [1, 10],
+                [1, 10],
+                lambda a, b, c, d: a > c
+                and (d - b) % (p(a, p_1) - p(c, p_2)) == 0
+                and d - b > 0,
+            ),
+            8: (
+                [-10, 10],
+                [-10, 10],
+                [-10, 10],
+                [-10, 10],
+                lambda a, b, c, d: a * b * c * d * (b - d) * (p(a, p_1) - p(c, p_2))
+                != 0,
+            ),
+            9: (
+                [-9, 9],
+                [-9, 9],
+                [-9, 9],
+                [-9, 9],
+                lambda a, b, c, d: a * b * c * d * (b - d) * (p(a, p_1) - p(c, p_2))
+                != 0,
+            ),
+        },
+        level,
+    )
+    lhs = nsimplify(p(a, p_1) * x + b)
+    rhs = nsimplify(p(c, p_2) * x + d)
+    if level >= 2 and randint(0, 1):
+        lhs, rhs = rhs, lhs
+    return ("Solve",) + equation(f"{lhs} = {rhs}")
 
 
 def generate_expindex(level):
