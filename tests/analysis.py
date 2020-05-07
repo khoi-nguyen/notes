@@ -1,5 +1,6 @@
 from solver.analysis import (
     diff,
+    fourier,
     gradient,
     integrate,
     line_equation,
@@ -152,5 +153,11 @@ tests = [
         r"\left(x - 2\right)^{2} \left(x + 3\right)^{2}",
         "-3, 2",
         "Find function max",
+    ),
+    # Fourier transform
+    (
+        fourier("exp(-x^2)")[1],
+        r"\sqrt{\pi} e^{- \pi^{2} \xi^{2}}",
+        "Fourier transform of Gaussian",
     ),
 ]

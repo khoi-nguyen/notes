@@ -1,7 +1,9 @@
+from solver.exercise import Exercise
 from sympy import (
     Derivative,
     expand_trig,
     factorial,
+    FourierTransform,
     Integral,
     Interval,
     latex,
@@ -9,6 +11,7 @@ from sympy import (
     oo,
     solve,
     stationary_points,
+    Symbol,
     symbols,
     sympify,
     simplify as Simplify,
@@ -185,3 +188,13 @@ def minimum(expr, a=-oo, b=oo):
 
 def maximum(expr, a=-oo, b=oo):
     return minimum(f"-({expr})", a, b)
+
+
+def fourier(expr, xi="xi"):
+    def exercise(expr, xi):
+        return latex(FourierTransform(expr, Symbol("x"), xi))
+
+    def solution(expr, xi):
+        return latex(FourierTransform(expr, Symbol("x"), xi).doit())
+
+    return Exercise(exercise, solution)(expr, xi)
