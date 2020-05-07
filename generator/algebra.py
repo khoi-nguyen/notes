@@ -7,7 +7,7 @@ from solver.algebra import (
     expindex,
     mult,
     power,
-    simplify,
+    simplify_surds,
     stf,
     stfmult,
     stfadd,
@@ -456,7 +456,7 @@ def generate_divsurd(level):
         },
         level,
     )
-    variables = list(symbols("a b c m n x y z"))
+    variables = list(symbols("a b c m n x y z", positive=True))
     (a, b, c, d) = pick(
         {
             1: (
@@ -510,4 +510,4 @@ def generate_divsurd(level):
         Pow(sqrt(c ** p3 * d ** p4, evaluate=False), -1, evaluate=False),
         evaluate=False,
     )
-    return ("Simplify the following",) + simplify(expr)
+    return ("Simplify the following",) + simplify_surds(expr)
