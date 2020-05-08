@@ -321,9 +321,6 @@ def change_subject(expr, subj):
 
 
 def nth_term(*terms):
-    def exercise(*terms):
-        return ", ".join([latex(t) for t in terms])
-
     def solution(*terms):
         u_n, n, a, b, c = symbols("u_n n a b c")
         formula = a * n ** 2 + b * n + c
@@ -331,4 +328,4 @@ def nth_term(*terms):
         replacements = solve(equations, dict=True)[0]
         return Eq(u_n, Simplify(formula.subs(replacements)))
 
-    return Exercise(exercise, solution)(*terms)
+    return Exercise(solve=solution)(*terms)
