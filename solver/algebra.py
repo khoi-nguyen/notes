@@ -33,7 +33,7 @@ def expand(expression):
     >>> expand('(x - 2) * (x - 3)')
     ('(x - 2) (x - 3)', 'x^{2} - 5 x + 6')
     """
-    return Exercise(latex, Expand)(expression)
+    return Exercise(solve=Expand)(expression)
 
 
 def factorise(expression):
@@ -49,7 +49,7 @@ def factorise(expression):
     >>> factorise('x^2 - 5 * x + 6')
     ('x^{2} - 5 x + 6', '(x - 2) (x - 3)')
     """
-    return Exercise(latex, factor)(expression)
+    return Exercise(solve=factor)(expression)
 
 
 def simplify_surds(expression):
@@ -99,7 +99,7 @@ def simplify_surds(expression):
         expr = posify(expression)[0].doit()
         return group(surdify(radsimp(expr)))
 
-    return Exercise(latex, solution)(expression)
+    return Exercise(solve=solution)(expression)
 
 
 def simplify(expression):
@@ -115,7 +115,7 @@ def simplify(expression):
     >>> symplify('x^2/x')
     ('\\frac{x^2}{x}', 'x')
     """
-    return Exercise(latex, Simplify)(expression)
+    return Exercise(solve=Simplify)(expression)
 
 
 def leval(expr, solve=Simplify):
@@ -224,7 +224,7 @@ def stf(number):
 
 def stf2dec(number):
     def transform(term):
-        return latex(Stf(term))
+        return Stf(term)
 
     return Exercise(transform, display_float)(number)
 
@@ -298,7 +298,7 @@ def complete_square(expr):
         sols = solve(equation - expr, [alpha, h, k], dict=True)[0]
         return equation.subs(sols)
 
-    return Exercise(latex, solution)(expr)
+    return Exercise(solve=solution)(expr)
 
 
 def circle_equation(info, expr):

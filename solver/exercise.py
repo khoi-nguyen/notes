@@ -11,13 +11,17 @@ from sympy import (
 
 
 class Exercise:
-    def __init__(self, transform, solve):
+    join = ", "
+    join2 = r"\\ "
+
+    def __init__(self, transform=False, solve=False):
         self.solve = solve
-        self.transform = transform
+        if transform:
+            self.transform = transform
 
     def __call__(self, *terms):
         terms = [sympify(t, evaluate=False) for t in terms]
-        exercise = self.transform(*terms)
+        exercise = latex(self.transform(*terms))
         terms = self.presolve(*terms)
         solution = self.display_solution(self.solve(*terms))
         return (exercise, solution)
@@ -28,12 +32,17 @@ class Exercise:
     def display_solution(self, solution):
         if isinstance(solution, dict):
             lines = [latex(Eq(key, val)) for (key, val) in solution.items()]
-            solution = ", ".join(lines)
+            solution = self.join.join(lines)
         elif isinstance(solution, list):
-            solution = r"\\ ".join([self.display_solution(sol) for sol in solution])
+            use_newline = True in [isinstance(s, (list, dict)) for s in solution]
+            join_char = self.join2 if use_newline else self.join
+            solution = join_char.join([self.display_solution(sol) for sol in solution])
         else:
             solution = latex(solution)
         return solution
+
+    def transform(self, *terms):
+        return terms[0]
 
 
 class Problem(Exercise):
@@ -62,9 +71,9 @@ class EqExercise(Exercise):
     def solve(self, *equations):
         solutions = solve(equations, set=True)[1]
         if len(equations) == 1:
-            return ", ".join([latex(sol[0]) for sol in solutions])
+            return self.join.join([latex(sol[0]) for sol in solutions])
         else:
-            return ", ".join([latex(sol) for sol in solutions])
+            return self.join.join([latex(sol) for sol in solutions])
 
     def __call__(self, *equations):
         args = []
