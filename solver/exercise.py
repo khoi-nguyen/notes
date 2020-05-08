@@ -6,7 +6,10 @@ from sympy import (
     powsimp,
     ratsimp,
     solve,
+    Symbol,
+    symbols,
     sympify,
+    Tuple,
 )
 
 
