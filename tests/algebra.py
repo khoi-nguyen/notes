@@ -180,7 +180,12 @@ tests = [
         "- 27 x^{3}",
         "Minus signs when raising power to a power",
     ),
-    (power("2^3", 4), r"\left(2^{3}\right)^{4}", "2^{12}", "Raising a power to another power",),
+    (
+        power("2^3", 4),
+        r"\left(2^{3}\right)^{4}",
+        "2^{12}",
+        "Raising a power to another power",
+    ),
     (expindex(2, 3), "2^{3}", r"2 \times 2 \times 2", "Expanding index",),
     (round(1.73666, 2), "1.73666", "1.74", "Rounding to 2 dp",),
     (round(3456, sf=2), "3456", "3500", "Rounding to 2 sf",),

@@ -57,6 +57,42 @@ class Problem(Exercise):
         self.transform = lambda *params: locals()
 
 
+class VectorProblem(Problem):
+    mappings = {}
+
+    def __init__(self, solve, dim=1, vectors=[]):
+        self.dim = dim
+        self._solve = solve
+        self.vectors = vectors
+
+    def __call__(self, *terms):
+        terms = list(terms)
+        for i in self.vectors:
+            term = sympify(terms[i], evaluate=False)
+            if isinstance(term, Symbol):
+                if self.dim > 1:
+                    old_symbol = term
+                    term = symbols(f"{term.name}(:{self.dim})")
+                    self.mappings[old_symbol] = term
+                else:
+                    term = (term,)
+            elif not isinstance(term, (tuple, Tuple)):
+                term = Tuple(term)
+            terms[i] = tuple(term)
+        return super().__call__(*terms)
+
+    def solve(self, *terms, first_call=True):
+        sol = self._solve(*terms) if first_call else terms[0]
+        if isinstance(sol, list):
+            sol = [self.solve(s, first_call=False) for s in sol]
+        if isinstance(sol, dict):
+            for symbol, coordinates in self.mappings.items():
+                sol[symbol] = tuple([sol[c] for c in coordinates])
+                for c in coordinates:
+                    del sol[c]
+        return sol
+
+
 class EqExercise(Exercise):
     def __init__(self, solve=False):
         if solve:
