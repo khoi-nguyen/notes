@@ -1,5 +1,6 @@
 from solver.algebra import (
     add,
+    change_subject,
     circle_equation,
     complete_square,
     div,
@@ -296,5 +297,18 @@ tests = [
         "2 x^{2} + 8 x + 11",
         r"2 \left(x + 2\right)^{2} + 3",
         "Completing the square",
+    ),
+    # Changing the subject
+    (
+        change_subject("2*x + 3*y = 4*x", "x"),
+        "2 x + 3 y = 4 x",
+        r"x = \frac{3 y}{2}",
+        "Change of subject",
+    ),
+    (
+        change_subject("x^2 + y^2 = 1", "x"),
+        "x^{2} + y^{2} = 1",
+        r"x = - \sqrt{1 - y^{2}}\\ x = \sqrt{1 - y^{2}}",
+        "Change of subject with two solutions",
     ),
 ]

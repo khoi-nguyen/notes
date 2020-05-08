@@ -320,3 +320,10 @@ def circle_equation(info, lhs, rhs=0):
     else:
         solution = f"\\br{{{latex(v)}, {latex(w)}}}"
     return (exercise, solution)
+
+
+def change_subject(expr, subj):
+    def solution(expr):
+        return solve(expr[0] - expr[1], subj, dict=True)
+
+    return EqExercise(solution)(expr)
