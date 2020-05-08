@@ -338,6 +338,6 @@ def nth_term(*terms):
         u_n, n = symbols("u_n n")
         a = terms[1] - terms[0]
         b = terms[0] - a
-        return latex(Eq(u_n, a * n + b))
+        return latex(Eq(u_n, Simplify(a * n + b)))
 
     return Exercise(exercise, solution)(*terms)

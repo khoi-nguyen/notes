@@ -12,6 +12,7 @@ from solver.algebra import (
     frac,
     leval,
     mult,
+    nth_term,
     power,
     round,
     simplify,
@@ -310,5 +311,12 @@ tests = [
         "x^{2} + y^{2} = 1",
         r"x = - \sqrt{1 - y^{2}}\\ x = \sqrt{1 - y^{2}}",
         "Change of subject with two solutions",
+    ),
+    (nth_term(2, 4, 6), "2, 4, 6", r"u_{n} = 2 n", "Expression for nth term",),
+    (
+        nth_term("1/2", "1", "3/2"),
+        r"\frac{1}{2}, 1, \frac{3}{2}",
+        r"u_{n} = \frac{n}{2}",
+        "Expression for nth term",
     ),
 ]
