@@ -1,14 +1,6 @@
 from pkgutil import iter_modules
 
 
-def answer(exercise):
-    return ("", exercise[1]) if isinstance(exercise, tuple) else ("", exercise)
-
-
-def question(exercise):
-    return exercise[0]
-
-
 def context_from_pkg(package):
     context = {}
     for module_name in [name for _, name, _ in iter_modules([package])]:

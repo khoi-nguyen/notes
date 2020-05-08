@@ -1,6 +1,7 @@
 from pandoc.filters.helpers import context_from_pkg
 
 context = context_from_pkg("solver")
+context.update(context_from_pkg("figures"))
 
 
 def tikz_picture(contents, keyvals):
