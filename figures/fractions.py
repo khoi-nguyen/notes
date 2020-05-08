@@ -1,6 +1,14 @@
 from sympy import lcm as Lcm
 
 
+def text(label, text, x, y, options=""):
+    return f"\\node[{options}] ({label}) at ({x}, {y}) {{{text}}};"
+
+
+def arrow(node1, node2, options=""):
+    return f"\\draw[->,{options}] ({node1}) -- ({node2});"
+
+
 def showfrac(num, den, op=False, num2=1, den2=1):
     lines = ["\\begin{tikzpicture}"]
     lines.append("\\draw[thick] (0, 0) circle (1cm);")

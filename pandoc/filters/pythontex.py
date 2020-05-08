@@ -9,19 +9,19 @@ from panflute import (
     run_filter,
     stringify,
 )
-from sympy import *
-from solver.algebra import *
-from solver.analysis import *
-from solver.geometry import *
-from solver.mechanics import *
-from pandoc.filters.tikz import *
-from figures.fractions import *
-from pandoc.filters.helpers import *
+from pandoc.filters.tikz import tikz_picture
+from solver.analysis import tikz_plot
+from pandoc.filters.helpers import context_from_pkg
+
+context = context_from_pkg("sympy")
+context.update(context_from_pkg("solver"))
+context.update(context_from_pkg("figures"))
 
 
 def eval_code(element, document):
+    global context
     if isinstance(element, Code):
-        result = eval(element.text)
+        result = eval(element.text, globals(), context)
         if isinstance(result, (str, int, float)):
             return RawInline(str(result), "latex")
         elif isinstance(result, tuple):
