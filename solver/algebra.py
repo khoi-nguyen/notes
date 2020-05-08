@@ -251,21 +251,20 @@ def stfsub(*terms):
 
 def expindex(base, power):
     def exercise(base, power):
-        return f"{{{base}}}^{{{power}}}"
+        return Pow(base, power, evaluate=False)
 
     def solution(base, power):
-        return r" \times ".join([str(base)] * power)
+        return [str(base)] * power
 
-    return Exercise(exercise, solution)(base, power)
+    return Exercise(exercise, solution, join=r" \times ")(base, power)
 
 
 def power(expr, power):
     def exercise(expr, power):
-        base = latex(pre(expr))
-        return fr"\br{{{base}}}^{{{power}}}"
+        return Pow(pre(expr), power, evaluate=False)
 
     def solution(expr, power):
-        return powdenest(pow(pre(expr), power), force=True)
+        return powdenest(Pow(pre(expr), power), force=True)
 
     return Exercise(exercise, solution)(expr, power)
 

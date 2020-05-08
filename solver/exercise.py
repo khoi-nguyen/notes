@@ -16,10 +16,12 @@ class Exercise:
 
     show_exercise = True
 
-    def __init__(self, transform=False, solve=False):
+    def __init__(self, transform=False, solve=False, join=False):
         self.solve = solve
         if transform:
             self.transform = transform
+        if join:
+            self.join = join
 
     def __call__(self, *terms):
         terms = [sympify(t, evaluate=False) for t in terms]
