@@ -319,4 +319,5 @@ tests = [
         r"u_{n} = \frac{n}{2}",
         "Expression for nth term",
     ),
+    (nth_term(1, 4, 9), "1, 4, 9", r"u_{n} = n^{2}", "Quadratic sequence",),
 ]

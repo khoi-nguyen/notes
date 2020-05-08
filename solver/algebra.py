@@ -335,9 +335,10 @@ def nth_term(*terms):
         return ", ".join([latex(t) for t in terms])
 
     def solution(*terms):
-        u_n, n = symbols("u_n n")
-        a = terms[1] - terms[0]
-        b = terms[0] - a
-        return latex(Eq(u_n, Simplify(a * n + b)))
+        u_n, n, a, b, c = symbols("u_n n a b c")
+        formula = a * n ** 2 + b * n + c
+        equations = [formula.subs(n, i + 1) - terms[i] for i in range(len(terms))]
+        replacements = solve(equations, dict=True)[0]
+        return latex(Eq(u_n, Simplify(formula.subs(replacements))))
 
     return Exercise(exercise, solution)(*terms)
