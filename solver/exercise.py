@@ -14,6 +14,8 @@ class Exercise:
     join = ", "
     join2 = r"\\ "
 
+    show_exercise = True
+
     def __init__(self, transform=False, solve=False):
         self.solve = solve
         if transform:
@@ -21,22 +23,22 @@ class Exercise:
 
     def __call__(self, *terms):
         terms = [sympify(t, evaluate=False) for t in terms]
-        exercise = latex(self.transform(*terms))
+        exercise = self.display(self.transform(*terms)) if self.show_exercise else ""
         terms = self.presolve(*terms)
-        solution = self.display_solution(self.solve(*terms))
+        solution = self.display(self.solve(*terms))
         return (exercise, solution)
 
     def presolve(self, *terms):
         return terms
 
-    def display_solution(self, solution):
+    def display(self, solution):
         if isinstance(solution, dict):
             lines = [latex(Eq(key, val)) for (key, val) in solution.items()]
             solution = self.join.join(lines)
         elif isinstance(solution, list):
             use_newline = True in [isinstance(s, (list, dict)) for s in solution]
             join_char = self.join2 if use_newline else self.join
-            solution = join_char.join([self.display_solution(sol) for sol in solution])
+            solution = join_char.join([self.display(sol) for sol in solution])
         else:
             solution = latex(solution)
         return solution
@@ -46,6 +48,8 @@ class Exercise:
 
 
 class Problem(Exercise):
+    show_exercise = False
+
     def __init__(self, solve):
         self.solve = solve
         self.transform = lambda *params: locals()
