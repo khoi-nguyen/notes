@@ -14,7 +14,6 @@ from sympy import (
     solve,
     sqrt,
     symbols,
-    sympify,
     UnevaluatedExpr,
 )
 from sympy.parsing.latex import parse_latex
@@ -301,25 +300,19 @@ def complete_square(expr):
     return Exercise(latex, solution)(expr)
 
 
-def circle_equation(info, lhs, rhs=0):
-    if isinstance(lhs, str) and "=" in lhs:
-        lhs, rhs = lhs.split("=")
-    lhs, rhs = sympify(lhs), sympify(rhs)
-    eq = Expand(lhs - rhs)
-    exercise = f"{latex(lhs)} = {latex(rhs)}"
+def circle_equation(info, expr):
+    def solution(expr):
+        eq = Expand(expr[0] - expr[1])
+        x, y = symbols("x y")
 
-    # alpha [ (x - v)^2 + (y - w)^2 - r^2 ] = 0
-    x, y = symbols("x y")
-    alpha = eq.coeff(x, 2)
-    v = -eq.coeff(x, 1) / (2 * alpha)
-    w = -eq.coeff(y, 1) / (2 * alpha)
-    r = sqrt(v ** 2 + w ** 2 - eq.subs([(x, 0), (y, 0)]) / alpha)
+        alpha = eq.coeff(x, 2)
+        v = -eq.coeff(x, 1) / (2 * alpha)
+        w = -eq.coeff(y, 1) / (2 * alpha)
+        r = sqrt(v ** 2 + w ** 2 - eq.subs([(x, 0), (y, 0)]) / alpha)
 
-    if info == "radius":
-        solution = latex(r)
-    else:
-        solution = f"\\br{{{latex(v)}, {latex(w)}}}"
-    return (exercise, solution)
+        return r if info == "radius" else (v, w)
+
+    return EqExercise(solution)(expr)
 
 
 def change_subject(expr, subj):
