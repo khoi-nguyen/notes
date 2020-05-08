@@ -302,7 +302,7 @@ def complete_square(expr):
 
 def circle_equation(info, expr):
     def solution(expr):
-        eq = Expand(expr[0] - expr[1])
+        eq = Expand(expr)
         x, y = symbols("x y")
 
         alpha = eq.coeff(x, 2)
@@ -317,6 +317,6 @@ def circle_equation(info, expr):
 
 def change_subject(expr, subj):
     def solution(expr):
-        return solve(expr[0] - expr[1], subj, dict=True)
+        return solve(expr, subj, dict=True)
 
     return EqExercise(solution)(expr)

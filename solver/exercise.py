@@ -18,8 +18,12 @@ class Exercise:
     def __call__(self, *terms):
         terms = [sympify(t, evaluate=False) for t in terms]
         exercise = self.transform(*terms)
+        terms = self.presolve(*terms)
         solution = self.display_solution(self.solve(*terms))
         return (exercise, solution)
+
+    def presolve(self, *terms):
+        return terms
 
     def display_solution(self, solution):
         if isinstance(solution, dict):
@@ -52,10 +56,11 @@ class EqExercise(Exercise):
             return latex_equations
         return fr"\begin{{cases}}{latex_equations}\end{{cases}}"
 
+    def presolve(self, *equations):
+        return [eq[0] - eq[1] for eq in equations]
+
     def solve(self, *equations):
-        system = [eq[0] - eq[1] for eq in equations]
-        system = system[0] if len(system) == 1 else system
-        solutions = solve(system, set=True)[1]
+        solutions = solve(equations, set=True)[1]
         if len(equations) == 1:
             return ", ".join([latex(sol[0]) for sol in solutions])
         else:
