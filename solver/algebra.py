@@ -296,7 +296,7 @@ def complete_square(expr):
         alpha, h, k, x = symbols("alpha h k x")
         equation = alpha * (x + h) ** 2 + k
         sols = solve(equation - expr, [alpha, h, k], dict=True)[0]
-        return latex(equation.subs(sols))
+        return equation.subs(sols)
 
     return Exercise(latex, solution)(expr)
 
