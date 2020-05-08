@@ -278,19 +278,19 @@ tests = [
     (
         circle_equation("center", Expand("(x - 3)**2 + (y - 1)**2 - 16")),
         "x^{2} - 6 x + y^{2} - 2 y - 6 = 0",
-        r"\br{3, 1}",
+        r"\left( 3, \  1\right)",
         "Center of a circle with rhs",
     ),
     (
         circle_equation("center", "(x - 3)^2 + (y + 5)^2 = 16"),
         r"\left(x - 3\right)^{2} + \left(y + 5\right)^{2} = 16",
-        r"\br{3, -5}",
+        r"\left( 3, \  -5\right)",
         "Center of a circle with factorised lhs",
     ),
     (
         circle_equation("center", Expand("3*((x - 2)**2 + (y + 1)**2 - 4)")),
         "3 x^{2} - 12 x + 3 y^{2} + 6 y + 3 = 0",
-        r"\br{2, -1}",
+        r"\left( 2, \  -1\right)",
         "Center of a circle without rhs",
     ),
     (

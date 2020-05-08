@@ -14,8 +14,8 @@ from sympy import (
     simplify as Simplify,
     solve,
     sqrt,
+    Symbol,
     symbols,
-    sympify,
     UnevaluatedExpr,
 )
 from sympy.parsing.latex import parse_latex
@@ -297,35 +297,25 @@ def complete_square(expr):
         alpha, h, k, x = symbols("alpha h k x")
         equation = alpha * (x + h) ** 2 + k
         sols = solve(equation - expr, [alpha, h, k], dict=True)[0]
-        return latex(equation.subs(sols))
+        return equation.subs(sols)
 
     return Exercise(latex, solution)(expr)
 
 
-def circle_equation(info, lhs, rhs=0):
-    if isinstance(lhs, str) and "=" in lhs:
-        lhs, rhs = lhs.split("=")
-    lhs, rhs = sympify(lhs), sympify(rhs)
-    eq = Expand(lhs - rhs)
-    exercise = f"{latex(lhs)} = {latex(rhs)}"
+def circle_equation(info, expr):
+    def solution(expr):
+        (alpha, h, k, x, y), r = symbols("alpha h k x y"), Symbol("r", positive=True)
+        equation = Expand(expr - alpha * ((x - h) ** 2 + (y - k) ** 2 - r ** 2))
+        system = [equation.coeff(*t) for t in [(x, 2), (y, 2), (x, 1), (y, 1), (x, 0)]]
+        values = solve(system, (alpha, r, h, k), dict=True)[0]
+        return values[r] if info == "radius" else (values[h], values[k])
 
-    # alpha [ (x - v)^2 + (y - w)^2 - r^2 ] = 0
-    x, y = symbols("x y")
-    alpha = eq.coeff(x, 2)
-    v = -eq.coeff(x, 1) / (2 * alpha)
-    w = -eq.coeff(y, 1) / (2 * alpha)
-    r = sqrt(v ** 2 + w ** 2 - eq.subs([(x, 0), (y, 0)]) / alpha)
-
-    if info == "radius":
-        solution = latex(r)
-    else:
-        solution = f"\\br{{{latex(v)}, {latex(w)}}}"
-    return (exercise, solution)
+    return EqExercise(solution)(expr)
 
 
 def change_subject(expr, subj):
     def solution(expr):
-        return solve(expr[0] - expr[1], subj, dict=True)
+        return solve(expr, subj, dict=True)
 
     return EqExercise(solution)(expr)
 

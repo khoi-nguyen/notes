@@ -52,7 +52,7 @@ def generate_circle_equation(level):
 
     info = "center" if randint(0, 1) else "radius"
     return (f"Find the {info} of the circle whose equation is",) + circle_equation(
-        info, lhs, rhs
+        info, f"{lhs} = {rhs}"
     )
 
 
