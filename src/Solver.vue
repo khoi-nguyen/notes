@@ -9,7 +9,7 @@ div#solver
                     .input-group-append
                         button.btn.btn-danger(v-on:click="remove_command(index)") x
                 p.text-danger(v-if="element[1] == 'Error'")
-                    span Error when excecuting:&nbsp;&nbsp;
+                    span Error:&nbsp;&nbsp;
                     code {{element[2]}}
                 dl(v-if="element[1] != 'Error'")
                     dt Exercise

@@ -51,16 +51,6 @@ For each example: which number is the base? Which is the exponent?
 
 Complete the table by evaluating, keeping your answers as a fraction where necessary.[1cm]{.gap}
 
- Power $k$    $2^k$                      $3^k$                      $10^k$                       $x^k$
-----------  -------------------------  -------------------------  -------------------------   --------------
- 3          `answer(2**3)`             `answer(3**3)`             `answer(10**3)`             `answer(latex('x^3'))`
- 2          `answer(2**2)`             `answer(3**2)`             `answer(10**2)`             `answer(latex('x^2'))`
- 1          `answer(2**1)`             `answer(3**1)`             `answer(10**1)`             `answer(latex('x^1'))`
- ?          `answer(2**0)`             `answer(3**0)`             `answer(10**0)`             `answer(latex('x^0'))`
- -1         `answer(latex('2^-1'))`    `answer(latex('3^-1'))`    `answer(latex('10^-1'))`    `answer(latex('x^-1'))`
- -2         `answer(latex('2^-2'))`    `answer(latex('3^-2'))`    `answer(latex('10^-2'))`    `answer(latex('x^-2'))`
- -3         `answer(latex('2^-3'))`    `answer(latex('3^-3'))`    `answer(latex('10^-3'))`    `answer(latex('x^-3'))`
-
 :::
 
 # Negative indices
