@@ -331,11 +331,13 @@ def change_subject(expr, subj):
 
 
 def nth_term(*terms):
-    terms = [sympify(t) for t in terms]
-    a = terms[1] - terms[0]
-    b = terms[0] - a
-    u_n, n = symbols('u_n n')
-    terms = [latex(t) for t in terms]
-    exercise = ', '.join(terms)
-    solution = latex(Eq(u_n, a * n + b))
-    return (exercise, solution)
+    def exercise(*terms):
+        return ", ".join([latex(t) for t in terms])
+
+    def solution(*terms):
+        u_n, n = symbols("u_n n")
+        a = terms[1] - terms[0]
+        b = terms[0] - a
+        return latex(Eq(u_n, a * n + b))
+
+    return Exercise(exercise, solution)(*terms)
