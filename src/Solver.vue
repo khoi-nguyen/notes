@@ -8,7 +8,10 @@ div#solver
                     input.form-control.text-monospace(:value="element[0]" v-on:keyup.enter="execute_command(index, $event)")
                     .input-group-append
                         button.btn.btn-danger(v-on:click="remove_command(index)") x
-                dl
+                p.text-danger(v-if="element[1] == 'Error'")
+                    span Error when excecuting:&nbsp;&nbsp;
+                    code {{element[2]}}
+                dl(v-if="element[1] != 'Error'")
                     dt Exercise
                     dd(v-html="element[1]")
                     dt Solution
@@ -50,8 +53,8 @@ export default {
             axios.post(url, formData).then(function (response) {
                 var data = response.data;
                 var options = {displayMode: true, macros: {'\\br': '\\left(#1\\right)'}};
-                var exercise = katex.renderToString(data[0], options)
-                var solution = katex.renderToString(data[1], options)
+                var exercise = (data[0] != "Error") ? katex.renderToString(data[0], options) : data[0]
+                var solution = (data[0] != "Error") ? katex.renderToString(data[1], options) : data[1]
                 if(index === false) {
                     self.history.push([command, exercise, solution]);
                     self.command = '';

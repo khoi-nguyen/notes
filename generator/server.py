@@ -3,10 +3,10 @@ from flask_cors import CORS
 from generator.algebra import *
 from generator.analysis import *
 from generator.geometry import *
-from solver.algebra import *
-from solver.analysis import *
-from solver.geometry import *
-from solver.mechanics import *
+import solver.algebra
+import solver.analysis
+import solver.geometry
+import solver.mechanics
 import re
 
 app = Flask(__name__)
@@ -52,9 +52,20 @@ def add_question(name, n, level):
 
 
 @app.route("/solver", methods=["POST"])
-def solver():
+def solver_route():
+    context = {
+        f: getattr(getattr(globals()["solver"], m), f)
+        for m in ["algebra", "analysis", "geometry", "mechanics"]
+        for f in eval(f"dir(solver.{m})")
+        if not f.startswith("_")
+    }
+
     command = request.form["command"]
-    return jsonify(eval(command))
+    try:
+        result = eval(command, globals(), context)
+    except (NameError, SyntaxError):
+        result = ("Error", command)
+    return jsonify(result)
 
 
 if __name__ == "__main__":
