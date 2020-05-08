@@ -53,8 +53,18 @@ def solver_route():
     command = request.form["command"]
     try:
         result = eval(command, globals(), context)
-    except (NameError, SyntaxError):
-        result = ("Error", command)
+    except (
+        IndentationError,
+        IndexError,
+        KeyError,
+        NameError,
+        SyntaxError,
+        TabError,
+        TypeError,
+        ValueError,
+        ZeroDivisionError,
+    ) as detail:
+        result = ("Error", str(detail))
     return jsonify(result)
 
 
