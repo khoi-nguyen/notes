@@ -13,6 +13,7 @@ from sympy import (
     simplify as Simplify,
     solve,
     sqrt,
+    Symbol,
     symbols,
     UnevaluatedExpr,
 )
@@ -302,15 +303,11 @@ def complete_square(expr):
 
 def circle_equation(info, expr):
     def solution(expr):
-        eq = Expand(expr)
-        x, y = symbols("x y")
-
-        alpha = eq.coeff(x, 2)
-        v = -eq.coeff(x, 1) / (2 * alpha)
-        w = -eq.coeff(y, 1) / (2 * alpha)
-        r = sqrt(v ** 2 + w ** 2 - eq.subs([(x, 0), (y, 0)]) / alpha)
-
-        return r if info == "radius" else (v, w)
+        (alpha, h, k, x, y), r = symbols("alpha h k x y"), Symbol("r", positive=True)
+        equation = Expand(expr - alpha * ((x - h) ** 2 + (y - k) ** 2 - r ** 2))
+        system = [equation.coeff(*t) for t in [(x, 2), (y, 2), (x, 1), (y, 1), (x, 0)]]
+        values = solve(system, (alpha, r, h, k), dict=True)[0]
+        return values[r] if info == "radius" else (values[h], values[k])
 
     return EqExercise(solution)(expr)
 
