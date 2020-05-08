@@ -2,6 +2,7 @@ from solver.helpers import display_float, pre, Round, Stf, Subtract
 from solver.exercise import Exercise, EqExercise, latex, OpExercise, StfExercise
 from sympy import (
     Add,
+    Eq,
     expand as Expand,
     factor,
     Mul,
@@ -327,3 +328,14 @@ def change_subject(expr, subj):
         return solve(expr[0] - expr[1], subj, dict=True)
 
     return EqExercise(solution)(expr)
+
+
+def nth_term(*terms):
+    terms = [sympify(t) for t in terms]
+    a = terms[1] - terms[0]
+    b = terms[0] - a
+    u_n, n = symbols('u_n n')
+    terms = [latex(t) for t in terms]
+    exercise = ', '.join(terms)
+    solution = latex(Eq(u_n, a * n + b))
+    return (exercise, solution)
