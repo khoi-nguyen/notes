@@ -21,10 +21,9 @@ from random import choice, randint
 
 from sympy import (
     Abs,
+    evaluate,
     expand as Expand,
-    Mul,
     nsimplify,
-    Pow,
     sign,
     sqrt,
     symbols,
@@ -80,15 +79,13 @@ def generate_complete_square(level):
 # ---------
 
 
-def coprime(a, b):
-    return gcd(a, b) == 1
-
-
-def coprime_ordered(a, b):
-    return a < b and gcd(a, b) == 1
-
-
 def fraction_exercise(level, function):
+    def coprime(a, b):
+        return gcd(a, b) == 1
+
+    def coprime_ordered(a, b):
+        return a < b and gcd(a, b) == 1
+
     (a, b) = pick(
         {
             1: ([1, 1], [2, 5]),
@@ -505,9 +502,6 @@ def generate_divsurd(level):
         },
         level,
     )
-    expr = Mul(
-        sqrt(a ** p1 * b ** p2, evaluate=False),
-        Pow(sqrt(c ** p3 * d ** p4, evaluate=False), -1, evaluate=False),
-        evaluate=False,
-    )
+    with evaluate(False):
+        expr = sqrt(a ** p1 * b ** p2) / sqrt(c ** p3 * d ** p4)
     return ("Simplify the following",) + simplify_surds(expr)
