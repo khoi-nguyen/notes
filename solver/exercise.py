@@ -1,5 +1,6 @@
 from solver.helpers import latex, pre, Stf
 from sympy import (
+    Eq,
     Mul,
     Pow,
     powsimp,
@@ -22,7 +23,7 @@ class Exercise:
 
     def display_solution(self, solution):
         if isinstance(solution, dict):
-            lines = [f"{latex(key)} = {latex(val)}" for (key, val) in solution.items()]
+            lines = [latex(Eq(key, val)) for (key, val) in solution.items()]
             solution = ", ".join(lines)
         elif isinstance(solution, list):
             solution = r"\\ ".join([self.display_solution(sol) for sol in solution])
@@ -45,7 +46,7 @@ class EqExercise(Exercise):
     def transform(self, *equations):
         latex_equations = []
         for eq in equations:
-            latex_equations.append(f"{latex(eq[0])} = {latex(eq[1])}")
+            latex_equations.append(latex(Eq(eq[0], eq[1])))
         latex_equations = "\\\\ ".join(latex_equations)
         if len(equations) == 1:
             return latex_equations
