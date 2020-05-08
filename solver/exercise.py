@@ -42,7 +42,7 @@ class Exercise:
         return solution
 
     def transform(self, *terms):
-        return terms[0]
+        return self.join.join([latex(t) for t in terms])
 
 
 class Problem(Exercise):
