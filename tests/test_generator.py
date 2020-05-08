@@ -1,17 +1,16 @@
-from generator.algebra import *
-from generator.analysis import *
-from generator.geometry import *
 from generator.helpers import pick
+from pandoc.filters.helpers import context_from_pkg
 import pytest
 
-exercises = [f for f in dir() if f.startswith("generate_")]
+context = context_from_pkg("generator")
+exercises = [f for name, f in context.items() if name.startswith("generate_")]
 
 
-@pytest.mark.parametrize("question", exercises)
-def test_generator(question):
+@pytest.mark.parametrize("function", exercises)
+def test_generator(function):
     for level in range(1, 10):
         for i in range(0, 5):
-            assert isinstance(globals()[question](level), tuple)
+            assert isinstance(function(level), tuple)
 
 
 def test_pick():
