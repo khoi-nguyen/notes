@@ -73,3 +73,9 @@ def test_pythontex():
     assert stringify(doc).startswith(
         "\\begin{align*}\ny = x^{2}\n\\end{align*}"
     ), "Honour pre.equation"
+
+    markdown = "~~~ {.graph l=-2 r=2}\nf = 'x'\nplot(f)\n~~~"
+    doc = apply_filter(eval_code, markdown)
+    assert stringify(doc).startswith(
+        "\\begin{plot}\n{0.5}{-2}{-6}{2}{6}\n\\plotfunction[darkblue]{-2:2}{(\\x)}"
+    ), "Check domain is set properly"

@@ -1,4 +1,5 @@
 from solver.exercise import Exercise
+import figures.config as config
 from sympy import (
     Derivative,
     expand_trig,
@@ -18,8 +19,6 @@ from sympy import (
     simplify as Simplify,
 )
 import re
-
-domain = "-9:9"
 
 
 def sympy2tikz(function):
@@ -64,12 +63,10 @@ def line_equation(*args):
 
 
 def plot(function, color="darkblue", dom=False):
-    global domain
     if not isinstance(function, str):
         function = str(function)
-    return (
-        f"\\plotfunction[{color}]{{{dom if dom else domain}}}{{{sympy2tikz(function)}}}"
-    )
+    dom = dom if dom else config.domain
+    return f"\\plotfunction[{color}]{{{dom}}}{{{sympy2tikz(function)}}}"
 
 
 def showsecant(function, a, b, color="darkred", dom=False):
@@ -110,29 +107,6 @@ def showcoordinates(function, a, x_text, y_text):
     """.replace(
         "\n", ""
     )
-
-
-def tikz_plot(contents, opt, fmt):
-    options = {"size": 0.5, "b": -6, "l": -9, "r": 9, "t": 6}
-    options.update(opt)
-    global domain
-    domain = f"{options['l']}:{options['r']}"
-
-    lines = [
-        "\\onslide<+->{" if fmt == "beamer" else "{",
-        f"\\begin{{plot}}{{{options['size']}}}"
-        + f"{{{options['l']}}}{{{options['b']}}}{{{options['r']}}}{{{options['t']}}}",
-    ]
-    for l in contents.split("\n"):
-        if re.match(r"^[a-zA-z_,\s]*=", l):
-            exec(l)
-        else:
-            line = eval(l)
-            if fmt == "beamer" and options.get("transitions"):
-                line = f"\\onslide<+->{{{line}}}"
-            lines.append(line)
-    lines.append("\\end{plot}}")
-    return "\n".join(lines)
 
 
 def integrate(expr, a=False, b=False):
@@ -190,8 +164,8 @@ def stationary(expr):
 def minimum(expr, a=-oo, b=oo):
     f = sympify(expr)
     x = symbols("x")
-    domain = Interval(a, b)
-    y_min = Minimum(f, x, domain)
+    dom = Interval(a, b)
+    y_min = Minimum(f, x, dom)
     x_min = solve(f - y_min, x)
     exercise = latex(f)
     solution = ", ".join([latex(i) for i in x_min])

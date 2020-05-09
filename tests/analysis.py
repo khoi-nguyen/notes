@@ -14,7 +14,6 @@ from solver.analysis import (
     tangent,
     taylor,
     taylor_poly,
-    tikz_plot,
 )
 
 tests = [
@@ -58,21 +57,6 @@ tests = [
         showsecant("x^2", 0, 1),
         r"\plotfunction[darkred]{-9:9}{(\x)}",
         "Show secant of a function at a point",
-    ),
-    # Tikz
-    (
-        tikz_plot("plot('x')", {"l": -2, "r": 2, "b": -3, "t": 4}, 0).replace("\n", ""),
-        r"{\begin{plot}{0.5}{-2}{-3}{2}{4}"
-        + r"\plotfunction[darkblue]{-2:2}{(\x)}\end{plot}}",
-        "Tikz grid",
-    ),
-    (
-        tikz_plot("f = 0\nplot(f)", {"l": -2, "r": 2, "b": -3, "t": 4}, 0).replace(
-            "\n", ""
-        ),
-        r"{\begin{plot}{0.5}{-2}{-3}{2}{4}"
-        + r"\plotfunction[darkblue]{-2:2}{0}\end{plot}}",
-        "Tikz grid",
     ),
     (gradient(0, 0, 1, 2)[1], "2", "Gradient from two points",),
     (

@@ -7,10 +7,10 @@ from panflute import (
     RawBlock,
     RawInline,
     run_filter,
-    stringify,
 )
 from pandoc.filters.helpers import context_from_pkg
-from solver.analysis import tikz_plot
+from re import match
+import figures.config as config
 import sympy
 
 context = {f: getattr(sympy, f) for f in dir(sympy) if not f.startswith("_")}
@@ -37,7 +37,6 @@ def surround(lines, environments):
 
 
 def eval_code(element, document):
-    global context
     if isinstance(element, Code):
         result = eval(element.text, globals(), context)
         if isinstance(result, (str, int, float)):
@@ -53,16 +52,19 @@ def eval_code(element, document):
                 RawInline("}", "latex"),
             ]
     if isinstance(element, CodeBlock):
-        if "graph" in element.classes:
-            return RawBlock(
-                tikz_plot(stringify(element), element.attributes, document.format),
-                "latex",
-            )
-
-        # Evaluate
         lines = []
+
+        if "graph" in element.classes:
+            options = {"size": 0.5, "b": -6, "l": -9, "r": 9, "t": 6}
+            options.update(element.attributes)
+            lines.append("{{{size}}}{{{l}}}{{{b}}}{{{r}}}{{{t}}}".format(**options))
+            config.domain = "{l}:{r}".format(**options)
+
         for l in element.text.split("\n"):
-            lines.append(eval(l, globals(), context))
+            if match(r"^[a-zA-z_,\s]*=", l):
+                exec(l, globals(), context)
+            else:
+                lines.append(eval(l, globals(), context))
 
         # Surround by the appropriate environments
         extra_environments = {
