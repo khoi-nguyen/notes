@@ -10,7 +10,6 @@ from panflute import (
     stringify,
 )
 from pandoc.filters.helpers import context_from_pkg
-from pandoc.filters.tikz import tikz_picture
 from solver.analysis import tikz_plot
 import sympy
 
@@ -45,19 +44,27 @@ def eval_code(element, document):
                 RawInline("}", "latex"),
             ]
     if isinstance(element, CodeBlock):
+        lines = []
+        for l in element.text.split("\n"):
+            lines.append(eval(l, globals(), context))
         if "graph" in element.classes:
             return RawBlock(
                 tikz_plot(stringify(element), element.attributes, document.format),
                 "latex",
             )
         if "picture" in element.classes:
-            return RawBlock(tikz_picture(element.text, element.attributes), "latex")
+            lines = (
+                ["\\begin{center}", "\\begin{tikzpicture}"]
+                + lines
+                + ["\\end{tikzpicture}", "\\end{center}"]
+            )
         if "equation" in element.classes:
-            lines = [r"\begin{align*}"]
-            for l in element.text.split("\n"):
-                lines.append(sympy.latex(eval(l, globals(), context)))
-            lines.append(r"\end{align*}")
-            return RawBlock("\n".join(lines), "latex")
+            lines = (
+                [r"\begin{align*}"]
+                + [sympy.latex(l) for l in lines]
+                + [r"\end{align*}"]
+            )
+        return RawBlock("\n".join(lines), "latex")
 
 
 if __name__ == "__main__":
