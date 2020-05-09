@@ -27,6 +27,15 @@ context.update(
 )
 
 
+def surround(lines, environments):
+    for env in reversed(environments):
+        if isinstance(env, tuple):
+            lines = [env[1](l) for l in lines]
+            env = env[0]
+        lines = [fr"\begin{{{env}}}", *lines, fr"\end{{{env}}}"]
+    return lines
+
+
 def eval_code(element, document):
     global context
     if isinstance(element, Code):
@@ -44,26 +53,27 @@ def eval_code(element, document):
                 RawInline("}", "latex"),
             ]
     if isinstance(element, CodeBlock):
-        lines = []
-        for l in element.text.split("\n"):
-            lines.append(eval(l, globals(), context))
         if "graph" in element.classes:
             return RawBlock(
                 tikz_plot(stringify(element), element.attributes, document.format),
                 "latex",
             )
-        if "picture" in element.classes:
-            lines = (
-                ["\\begin{center}", "\\begin{tikzpicture}"]
-                + lines
-                + ["\\end{tikzpicture}", "\\end{center}"]
-            )
-        if "equation" in element.classes:
-            lines = (
-                [r"\begin{align*}"]
-                + [sympy.latex(l) for l in lines]
-                + [r"\end{align*}"]
-            )
+
+        # Evaluate
+        lines = []
+        for l in element.text.split("\n"):
+            lines.append(eval(l, globals(), context))
+
+        # Surround by the appropriate environments
+        extra_environments = {
+            "graph": ["plot"],
+            "picture": ["center", "tikzpicture"],
+            "equation": [("align*", sympy.latex)],
+        }
+        for code_class in element.classes:
+            if code_class in extra_environments:
+                lines = surround(lines, extra_environments[code_class])
+
         return RawBlock("\n".join(lines), "latex")
 
 
