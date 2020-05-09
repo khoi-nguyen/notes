@@ -67,3 +67,9 @@ def test_pythontex():
     markdown = "`2*3`"
     doc = apply_filter(eval_code, markdown)
     assert stringify(doc).startswith(r"6"), "Python evaluation"
+
+    markdown = "~~~ equation\nEq(y, x**2)\n~~~"
+    doc = apply_filter(eval_code, markdown)
+    assert stringify(doc).startswith(
+        "\\begin{align*}\ny = x^{2}\n\\end{align*}"
+    ), "Honour pre.equation"

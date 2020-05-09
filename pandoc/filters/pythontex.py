@@ -19,7 +19,9 @@ context.update(context_from_pkg("solver"))
 context.update(context_from_pkg("figures"))
 context.update(
     {
+        "h": sympy.Symbol("h", real=True),
         "n": sympy.Symbol("n", integer=True, nonnegative=True),
+        "t": sympy.Symbol("t", real=True),
         "x": sympy.Symbol("x", real=True),
         "y": sympy.Symbol("y", real=True),
     }
@@ -50,6 +52,12 @@ def eval_code(element, document):
             )
         if "picture" in element.classes:
             return RawBlock(tikz_picture(element.text, element.attributes), "latex")
+        if "equation" in element.classes:
+            lines = [r"\begin{align*}"]
+            for l in element.text.split("\n"):
+                lines.append(sympy.latex(eval(l, globals(), context)))
+            lines.append(r"\end{align*}")
+            return RawBlock("\n".join(lines), "latex")
 
 
 if __name__ == "__main__":
