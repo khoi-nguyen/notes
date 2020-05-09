@@ -52,7 +52,7 @@ def solver_route():
     context = context_from_pkg("solver")
     command = request.form["command"]
     try:
-        result = eval(command, globals(), context)
+        result = eval(command, {"__builtins__": None}, context)
     except (
         AttributeError,
         IndentationError,

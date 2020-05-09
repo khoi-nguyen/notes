@@ -25,6 +25,7 @@ context.update(
         "y": sympy.Symbol("y", real=True),
     }
 )
+gl_context = {"__builtins__": None}
 
 
 def surround(lines, environments):
@@ -62,9 +63,9 @@ def eval_code(element, document):
 
         for l in element.text.split("\n"):
             if match(r"^[a-zA-z_,\s]*=", l):
-                exec(l, globals(), context)
+                exec(l, gl_context, context)
             else:
-                lines.append(eval(l, globals(), context))
+                lines.append(eval(l, gl_context, context))
 
         # Surround by the appropriate environments
         extra_environments = {
