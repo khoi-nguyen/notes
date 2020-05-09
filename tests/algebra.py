@@ -325,4 +325,11 @@ tests = [
         "Linear sequence",
     ),
     (general_term(1, 4, 9), "1, 4, 9", r"u_{n} = n^{2}", "Quadratic sequence",),
+    (general_term(1, 2, 3, n=5), "1, 2, 3", r"u_{5} = 5", "Linear sequence input n",),
+    (
+        general_term(1, 4, 9, n=5),
+        "1, 4, 9",
+        r"u_{5} = 25",
+        "Quadratic sequence input n",
+    ),
 ]

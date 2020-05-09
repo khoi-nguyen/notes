@@ -319,12 +319,13 @@ def change_subject(expr, subj):
     return EqExercise(solution)(expr)
 
 
-def general_term(*terms):
+def general_term(*terms, n="n"):
     def solution(*terms):
-        u_n, n, a, b, c = symbols("u_n n a b c")
-        formula = a * n ** 2 + b * n + c
-        equations = [formula.subs(n, i + 1) - terms[i] for i in range(len(terms))]
+        u_m, m, a, b, c = symbols("u_m m a b c")
+        formula = a * m ** 2 + b * m + c
+        equations = [formula.subs(m, i + 1) - terms[i] for i in range(len(terms))]
         replacements = solve(equations, dict=True)[0]
-        return Eq(u_n, Simplify(formula.subs(replacements)))
+        replacements[m] = n
+        return Eq(Symbol(f"u_{n}"), Simplify(formula.subs(replacements)))
 
     return Exercise(solve=solution)(*terms)
