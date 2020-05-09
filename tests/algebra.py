@@ -9,6 +9,7 @@ from solver.algebra import (
     expand,
     expindex,
     factorise,
+    find_position,
     frac,
     general_term,
     leval,
@@ -332,4 +333,5 @@ tests = [
         r"u_{5} = 25",
         "Quadratic sequence input n",
     ),
+    (find_position("2*n", 10), "u_{n} = 10", r"n = 5", "Position of term in sequence",),
 ]

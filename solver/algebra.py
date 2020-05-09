@@ -329,3 +329,14 @@ def general_term(*terms, n="n"):
         return Eq(Symbol(f"u_{n}"), Simplify(formula.subs(replacements)))
 
     return Exercise(solve=solution)(*terms)
+
+
+def find_position(expr, term):
+    def exercise(expr):
+        return Eq(Symbol("u_n"), term)
+
+    def solution(expr):
+        n = solve(expr - term)[0]
+        return Eq(Symbol("n"), n)
+
+    return Exercise(exercise, solution)(expr)
