@@ -5,6 +5,7 @@ from sympy import (
     factorial,
     FourierTransform,
     Integral,
+    integrate as Integrate,
     Interval,
     latex,
     minimum as Minimum,
@@ -142,6 +143,17 @@ def integrate(expr, a=False, b=False):
     exercise = latex(expr)
     solution = latex(expr.doit())
     return (exercise, solution)
+
+
+def average(expr, a, b):
+    def exercise(expr, a, b):
+        expr, interval = latex(expr), latex(Interval(a, b))
+        return f"{expr} on {interval}"
+
+    def solution(expr, a, b):
+        return Integrate(expr, ("x", a, b)) / (b - a)
+
+    return Exercise(exercise, solution)(expr, a, b)
 
 
 def diff(*args, **options):

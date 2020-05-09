@@ -1,4 +1,5 @@
 from solver.analysis import (
+    average,
     diff,
     fourier,
     gradient,
@@ -120,6 +121,13 @@ tests = [
         r"\int x^{2}\, dx",
         r"\frac{x^{3}}{3}",
         "Integrate without bounds",
+    ),
+    # Average value
+    (
+        average("exp(2*I*pi*x)", 0, 1),
+        r"e^{2 i \pi x} on \left[0, 1\right]",
+        "0",
+        "Average value of complex exponential with integer frequency",
     ),
     # Taylor
     (
