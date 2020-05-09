@@ -9,13 +9,21 @@ from panflute import (
     run_filter,
     stringify,
 )
+from pandoc.filters.helpers import context_from_pkg
 from pandoc.filters.tikz import tikz_picture
 from solver.analysis import tikz_plot
-from pandoc.filters.helpers import context_from_pkg
+import sympy
 
-context = context_from_pkg("sympy")
+context = {f: getattr(sympy, f) for f in dir(sympy) if not f.startswith("_")}
 context.update(context_from_pkg("solver"))
 context.update(context_from_pkg("figures"))
+context.update(
+    {
+        "n": sympy.Symbol("n", integer=True, nonnegative=True),
+        "x": sympy.Symbol("x", real=True),
+        "y": sympy.Symbol("y", real=True),
+    }
+)
 
 
 def eval_code(element, document):
@@ -24,6 +32,8 @@ def eval_code(element, document):
         result = eval(element.text, globals(), context)
         if isinstance(result, (str, int, float)):
             return RawInline(str(result), "latex")
+        elif isinstance(result, sympy.Basic):
+            return RawInline(sympy.latex(result), "latex")
         elif isinstance(result, tuple):
             exercise, solution = str(result[0]), str(result[1])
             return [

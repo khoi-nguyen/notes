@@ -48,6 +48,16 @@ def test_environments():
 def test_pythontex():
     from pandoc.filters.pythontex import eval_code
 
+    markdown = "`Eq(y, Limit(sin(x)/x, x, 0, dir='+-'))`"
+    doc = apply_filter(eval_code, markdown)
+    assert stringify(doc).startswith(
+        r"y = \lim_{x \to 0}\left(\frac{\sin{\left(x \right)}}{x}\right)"
+    ), "Print sympy object as LaTeX"
+
+    markdown = "`Expand((x - 2)*(x + 3))`"
+    doc = apply_filter(eval_code, markdown)
+    assert stringify(doc).startswith(r"x^{2} + x - 6"), "Print sympy object as LaTeX"
+
     markdown = "`equation('x^2 - 5*x + 6')`"
     doc = apply_filter(eval_code, markdown)
     assert stringify(doc).startswith(
