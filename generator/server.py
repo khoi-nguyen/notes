@@ -54,6 +54,7 @@ def solver_route():
     try:
         result = eval(command, globals(), context)
     except (
+        AttributeError,
         IndentationError,
         IndexError,
         KeyError,

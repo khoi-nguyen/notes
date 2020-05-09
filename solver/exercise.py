@@ -6,7 +6,10 @@ from sympy import (
     powsimp,
     ratsimp,
     solve,
+    Symbol,
+    symbols,
     sympify,
+    Tuple,
 )
 
 
@@ -14,29 +17,33 @@ class Exercise:
     join = ", "
     join2 = r"\\ "
 
-    def __init__(self, transform=False, solve=False):
+    show_exercise = True
+
+    def __init__(self, transform=False, solve=False, join=False):
         self.solve = solve
         if transform:
             self.transform = transform
+        if join:
+            self.join = join
 
     def __call__(self, *terms):
         terms = [sympify(t, evaluate=False) for t in terms]
-        exercise = latex(self.transform(*terms))
+        exercise = self.display(self.transform(*terms)) if self.show_exercise else ""
         terms = self.presolve(*terms)
-        solution = self.display_solution(self.solve(*terms))
+        solution = self.display(self.solve(*terms))
         return (exercise, solution)
 
     def presolve(self, *terms):
         return terms
 
-    def display_solution(self, solution):
+    def display(self, solution):
         if isinstance(solution, dict):
             lines = [latex(Eq(key, val)) for (key, val) in solution.items()]
             solution = self.join.join(lines)
         elif isinstance(solution, list):
             use_newline = True in [isinstance(s, (list, dict)) for s in solution]
             join_char = self.join2 if use_newline else self.join
-            solution = join_char.join([self.display_solution(sol) for sol in solution])
+            solution = join_char.join([self.display(sol) for sol in solution])
         else:
             solution = latex(solution)
         return solution
@@ -46,9 +53,47 @@ class Exercise:
 
 
 class Problem(Exercise):
+    show_exercise = False
+
     def __init__(self, solve):
         self.solve = solve
         self.transform = lambda *params: locals()
+
+
+class VectorProblem(Problem):
+    mappings = {}
+
+    def __init__(self, solve, dim=1, vectors=[]):
+        self.dim = dim
+        self._solve = solve
+        self.vectors = vectors
+
+    def __call__(self, *terms):
+        terms = list(terms)
+        for i in self.vectors:
+            term = sympify(terms[i], evaluate=False)
+            if isinstance(term, Symbol):
+                if self.dim > 1:
+                    old_symbol = term
+                    term = symbols(f"{term.name}(:{self.dim})")
+                    self.mappings[old_symbol] = term
+                else:
+                    term = (term,)
+            elif not isinstance(term, (tuple, Tuple)):
+                term = Tuple(term)
+            terms[i] = tuple(term)
+        return super().__call__(*terms)
+
+    def solve(self, *terms, first_call=True):
+        sol = self._solve(*terms) if first_call else terms[0]
+        if isinstance(sol, list):
+            sol = [self.solve(s, first_call=False) for s in sol]
+        if isinstance(sol, dict):
+            for symbol, coordinates in self.mappings.items():
+                sol[symbol] = tuple([sol[c] for c in coordinates])
+                for c in coordinates:
+                    del sol[c]
+        return sol
 
 
 class EqExercise(Exercise):
