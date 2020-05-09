@@ -317,12 +317,12 @@ tests = [
         r"x = - \sqrt{1 - y^{2}}\\ x = \sqrt{1 - y^{2}}",
         "Change of subject with two solutions",
     ),
-    (nth_term(2, 4, 6), "2, 4, 6", r"u_{n} = 2 n", "Expression for nth term",),
+    (general_term(2, 4, 6), "2, 4, 6", r"u_{n} = 2 n", "Linear sequence",),
     (
-        nth_term("1/2", "1", "3/2"),
+        general_term("1/2", "1", "3/2"),
         r"\frac{1}{2}, 1, \frac{3}{2}",
         r"u_{n} = \frac{n}{2}",
-        "Expression for nth term",
+        "Linear sequence",
     ),
-    (nth_term(1, 4, 9), "1, 4, 9", r"u_{n} = n^{2}", "Quadratic sequence",),
+    (general_term(1, 4, 9), "1, 4, 9", r"u_{n} = n^{2}", "Quadratic sequence",),
 ]

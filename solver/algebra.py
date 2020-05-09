@@ -319,7 +319,7 @@ def change_subject(expr, subj):
     return EqExercise(solution)(expr)
 
 
-def nth_term(*terms):
+def general_term(*terms):
     def solution(*terms):
         u_n, n, a, b, c = symbols("u_n n a b c")
         formula = a * n ** 2 + b * n + c
